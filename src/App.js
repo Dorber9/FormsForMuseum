@@ -1,24 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import AddForm from "./AddForm";
+import { Route, BrowserRouter, Routes } from "react-router-dom";
+import GameForm from "./GameForm";
+import DemoPage from "./DemoPage";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <BrowserRouter>
+        <Routes>
+          <Route exact path="/AddForm" element={<AddForm />}></Route>
+          <Route exact path="/" element={<GameForm />}></Route>
+          <Route exact path="/DemoPage" element={<DemoPage />}></Route>
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 }
 

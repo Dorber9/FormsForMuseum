@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function AddForm() {
+function AddItem() {
   const classes = useStyles();
   const [inputFields, setInputFields] = useState([
     { id: uuidv4(), firstName: "", lastName: "" },
@@ -258,4 +258,4 @@ function AddForm() {
   );
 }
 
-export default AddForm;
+export default AddItem;

@@ -6,14 +6,13 @@ import IconButton from "@material-ui/core/IconButton";
 import RemoveIcon from "@material-ui/icons/Remove";
 import AddIcon from "@material-ui/icons/Add";
 import { v4 as uuidv4 } from "uuid";
-import "./App.css";
+import "../App.css";
 import { makeStyles } from "@material-ui/core/styles";
 import Modal from "react-modal";
-import List from "./Components/List";
+import List from "./List";
 import reactDom from "react-dom";
-import { itemsList } from "./Items/Info";
+import { itemsList } from "../Items/Info";
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 
 const customStyles = {
   content: {
@@ -274,14 +273,6 @@ const GameForm = () => {
         </form>
         <button onClick={closeModal}>close</button>
       </Modal>
-      <ul>
-        <li>
-          <Link to="/AddForm">Add Form</Link>
-        </li>
-        <li>
-          <Link to="/DemoPage">Demo Page</Link>
-        </li>
-      </ul>
     </Container>
   );
 };

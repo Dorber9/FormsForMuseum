@@ -28,9 +28,12 @@ CREATE TABLE `building` (
   `BuildingID` int NOT NULL AUTO_INCREMENT,
   `Name` varchar(45) NOT NULL,
   `City` varchar(45) NOT NULL,
-  `Adress` varchar(255) NOT NULL,
-  PRIMARY KEY (`BuildingID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `Address` varchar(255) NOT NULL,
+  `MuseumID` int NOT NULL,
+  PRIMARY KEY (`BuildingID`),
+  KEY `id_idx` (`MuseumID`),
+  CONSTRAINT `` FOREIGN KEY (`MuseumID`) REFERENCES `museum` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,6 +42,7 @@ CREATE TABLE `building` (
 
 LOCK TABLES `building` WRITE;
 /*!40000 ALTER TABLE `building` DISABLE KEYS */;
+INSERT INTO `building` VALUES (1,'as','as','as',1),(2,'asd','as','as',1),(3,'asd','asd','asd',1),(4,'sdf','sdf','sdf',6);
 /*!40000 ALTER TABLE `building` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -113,7 +117,7 @@ CREATE TABLE `museum` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -122,6 +126,7 @@ CREATE TABLE `museum` (
 
 LOCK TABLES `museum` WRITE;
 /*!40000 ALTER TABLE `museum` DISABLE KEYS */;
+INSERT INTO `museum` VALUES (1,'Museum of Pre-Historic Man'),(4,''),(5,'asd'),(6,'asd');
 /*!40000 ALTER TABLE `museum` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -136,8 +141,11 @@ CREATE TABLE `section` (
   `idSection` int NOT NULL AUTO_INCREMENT,
   `Name` varchar(45) NOT NULL,
   `Description` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`idSection`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `BuildingID` int NOT NULL,
+  PRIMARY KEY (`idSection`),
+  KEY `building_idx` (`BuildingID`),
+  CONSTRAINT `building` FOREIGN KEY (`BuildingID`) REFERENCES `building` (`BuildingID`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -146,6 +154,7 @@ CREATE TABLE `section` (
 
 LOCK TABLES `section` WRITE;
 /*!40000 ALTER TABLE `section` DISABLE KEYS */;
+INSERT INTO `section` VALUES (1,'asd','asd',2),(2,'asd','asd',2);
 /*!40000 ALTER TABLE `section` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -186,4 +195,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-27 18:00:42
+-- Dump completed on 2021-12-29 20:49:03

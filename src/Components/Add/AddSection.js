@@ -2,10 +2,13 @@ import React from "react";
 import { TextField } from "@material-ui/core";
 import { useState, useEffect } from "react";
 import Axios from "axios";
+import "../../App.css";
 
 const contentContainerStyle = {
   display: "block",
-  marginLeft: "150px",
+  marginLeft: "50px",
+  marginTop: "15px",
+  marginBottom: "15px",
   justifyContent: "center", //Centered vertically
   alignItems: "center", // Centered horizontally
   flex: 1,
@@ -67,32 +70,30 @@ const AddSection = () => {
         );
       })}
       <div>
-        <label>
-          <br></br>
-          Name:
-          <TextField
-            onChange={(event) => {
-              setName(event.target.value);
-            }}
-            variant="filled"
-            style={contentContainerStyle}
-            type="text"
-            name="name"
-          />
-        </label>
-        <label>
-          <br></br>
-          Description:
-          <TextField
-            onChange={(event) => {
-              setDescription(event.target.value);
-            }}
-            variant="filled"
-            style={contentContainerStyle}
-            type="text"
-            name="Description"
-          />
-        </label>
+        <TextField
+          onChange={(event) => {
+            setName(event.target.value);
+          }}
+          style={contentContainerStyle}
+          variant="outlined"
+          type="text"
+          name="name"
+          label="Building Name"
+          helperText={name === "" ? "Field cannot be empty" : ""}
+          error={name === ""}
+        />
+        <TextField
+          onChange={(event) => {
+            setDescription(event.target.value);
+          }}
+          style={contentContainerStyle}
+          variant="outlined"
+          type="text"
+          name="Description"
+          label="Description"
+          helperText={description === "" ? "Field cannot be empty" : ""}
+          error={description === ""}
+        />
         Building:
         <select
           onChange={(event) => {

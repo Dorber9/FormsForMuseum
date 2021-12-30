@@ -5,7 +5,9 @@ import Axios from "axios";
 
 const contentContainerStyle = {
   display: "block",
-  marginLeft: "150px",
+  marginLeft: "50px",
+  marginTop: "15px",
+  marginBottom: "15px",
   justifyContent: "center", //Centered vertically
   alignItems: "center", // Centered horizontally
   flex: 1,
@@ -47,21 +49,20 @@ const AddMuseum = () => {
         );
       })}
       <div>
-        <label>
-          <br></br>
-          Name:
-          <TextField
-            onChange={(event) => {
-              setName(event.target.value);
-            }}
-            variant="filled"
-            style={contentContainerStyle}
-            type="text"
-            name="name"
-          />
-        </label>
-        <button onClick={postMuseum}>Add Museum</button>
+        <TextField
+          onChange={(event) => {
+            setName(event.target.value);
+          }}
+          variant="outlined"
+          style={contentContainerStyle}
+          type="text"
+          name="name"
+          label="Museum Name"
+          helperText={name === "" ? "Field cannot be empty" : ""}
+          error={name === ""}
+        />
       </div>
+      <button onClick={postMuseum}>Add Museum</button>
     </>
   );
 };

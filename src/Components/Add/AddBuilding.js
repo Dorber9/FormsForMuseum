@@ -5,7 +5,9 @@ import Axios from "axios";
 
 const contentContainerStyle = {
   display: "block",
-  marginLeft: "150px",
+  marginLeft: "50px",
+  marginTop: "15px",
+  marginBottom: "15px",
   justifyContent: "center", //Centered vertically
   alignItems: "center", // Centered horizontally
   flex: 1,
@@ -70,65 +72,62 @@ const AddBuilding = () => {
         );
       })}
       <div>
-        <label>
-          <br></br>
-          Name:
-          <TextField
-            onChange={(event) => {
-              setName(event.target.value);
-            }}
-            variant="filled"
-            style={contentContainerStyle}
-            type="text"
-            name="name"
-          />
-        </label>
-        <label>
-          <br></br>
-          City:
-          <TextField
-            onChange={(event) => {
-              setCity(event.target.value);
-            }}
-            variant="filled"
-            style={contentContainerStyle}
-            type="text"
-            name="City"
-          />
-        </label>
-        <label>
-          <br></br>
-          Address:
-          <TextField
-            onChange={(event) => {
-              setAddress(event.target.value);
-            }}
-            variant="filled"
-            style={contentContainerStyle}
-            type="text"
-            name="Address"
-          />
-        </label>
-        <label>
-          <br></br>
-          Museum:
-          <select
-            onChange={(event) => {
-              console.log(event.target.value);
-              setSelectedValue(event.target.value);
-            }}
-          >
-            {museumList.map((val, key) => {
-              return (
-                <option className="museum" value={val.id}>
-                  {val.name}
-                </option>
-              );
-            })}
-          </select>
-        </label>
-        <br></br>
-        <br></br>
+        <TextField
+          onChange={(event) => {
+            setName(event.target.value);
+          }}
+          variant="outlined"
+          style={contentContainerStyle}
+          type="text"
+          name="name"
+          label="Building Name"
+          helperText={name === "" ? "Field cannot be empty" : ""}
+          error={name === ""}
+        />
+        <TextField
+          onChange={(event) => {
+            setCity(event.target.value);
+          }}
+          variant="outlined"
+          style={contentContainerStyle}
+          type="text"
+          name="City"
+          label="City"
+          helperText={city === "" ? "Field cannot be empty" : ""}
+          error={city === ""}
+        />
+        <TextField
+          onChange={(event) => {
+            setAddress(event.target.value);
+          }}
+          variant="outlined"
+          style={contentContainerStyle}
+          type="text"
+          name="Address"
+          label="Address"
+          helperText={address === "" ? "Field cannot be empty" : ""}
+          error={address === ""}
+        />
+        <div style={{ marginLeft: "50px", marginBottom: "20px" }}>
+          <label>
+            Museum:
+            <select
+              style={{ marginLeft: "10px" }}
+              onChange={(event) => {
+                console.log(event.target.value);
+                setSelectedValue(event.target.value);
+              }}
+            >
+              {museumList.map((val, key) => {
+                return (
+                  <option className="museum" value={val.id}>
+                    {val.name}
+                  </option>
+                );
+              })}
+            </select>
+          </label>
+        </div>
         <button onClick={postBuilding}>Add Building</button>
       </div>
     </>

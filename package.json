@@ -15,6 +15,7 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-modal": "^3.14.4",
+    "react-script": "^2.0.5",
     "react-scripts": "4.0.3",
     "react-selectlist": "^3.0.6",
     "react-tabs": "^3.2.3",

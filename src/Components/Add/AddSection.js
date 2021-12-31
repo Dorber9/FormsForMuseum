@@ -78,7 +78,7 @@ const AddSection = () => {
           variant="outlined"
           type="text"
           name="name"
-          label="Building Name"
+          label="Name"
           helperText={name === "" ? "Field cannot be empty" : ""}
           error={name === ""}
         />

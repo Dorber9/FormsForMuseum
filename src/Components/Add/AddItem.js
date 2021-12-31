@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import Container from "@material-ui/core/Container";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
@@ -8,6 +7,10 @@ import AddIcon from "@material-ui/icons/Add";
 import { v4 as uuidv4 } from "uuid";
 import { makeStyles } from "@material-ui/core/styles";
 import Select from "react-select";
+
+import { useState, useEffect } from "react";
+import Axios from "axios";
+import "../../App.css";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -83,6 +86,21 @@ function AddItem() {
   const [display, setDisplay] = useState("");
   const [showcase, setShowcase] = useState("");
   const [displayLabel, setDisplayLabel] = useState("Display");
+  const [displayList, setDisplayList] = useState([]);
+  const [selectedValue, setSelectedValue] = useState("");
+  useEffect(() => {
+    getDisplay();
+    // eslint-disable-next-line
+  }, []);
+
+  const getDisplay = () => {
+    Axios.get("http://localhost:3001/display").then((response) => {
+      setDisplayList(response.data);
+    });
+    console.log(displayList);
+    displayOptions();
+    console.log(displayList);
+  };
 
   const selectStyle = {
     width: "220px",
@@ -92,6 +110,14 @@ function AddItem() {
     { value: "1", label: "In Storage" },
     { value: "0", label: "In Museum" },
   ];
+
+  const displayOptions = () => {
+    const temp = displayList.map((display) => ({
+      value: display.idDisplay,
+      label: display.Name,
+    }));
+    setDisplayList(temp);
+  };
 
   return (
     <Container>
@@ -152,7 +178,6 @@ function AddItem() {
               <Select
                 onClick={() => {
                   setDisplayLabel("");
-                  console.log("ASD");
                 }}
                 options={options}
                 onChange={(e) => {
@@ -164,18 +189,14 @@ function AddItem() {
             {storage === "1" ? (
               ""
             ) : (
-              <TextField
-                onChange={(e) => {
-                  setDisplay(e.target.value);
+              <Select
+                onClick={() => {
+                  setDisplayLabel("");
                 }}
-                variant="outlined"
-                style={contentContainerStyle}
-                type="text"
-                name="Display"
-                placeholder={displayLabel}
-                helperText={display === "" && storage === "0" ? "Display" : ""}
-                error={display === "" && storage === "0"}
-                disabled={storage === "1"}
+                options={displayList}
+                onChange={(e) => {
+                  setStorage(e.value);
+                }}
               />
             )}
 

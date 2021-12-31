@@ -89,6 +89,84 @@ app.get("/Section", (req, res) => {
   });
 });
 
+// add and get Display
+app.post("/addDisplay", (req, res) => {
+  const name = req.body.Name;
+  const theme = req.body.Theme;
+  const permanent = req.body.permanent;
+  const startDate = req.body.StartDate == "" ? null : req.body.startDate;
+  const endDate = req.body.EndDate == "" ? null : req.body.endDate;
+  const curator = req.body.Curator;
+  const designer = req.body.Designer;
+  const shortDescription = req.body.ShortDesc;
+  const reason = req.body.Reason;
+  const sectionID = req.body.SectionID;
+  db.query(
+    "INSERT INTO display (Name, Theme,permanent,StartDate,EndDate,Curator,Designer, ShortDesc, Reason,SectionID) VALUES (?,?,?,?,?,?,?,?,?,?)",
+    [
+      name,
+      theme,
+      permanent,
+      startDate,
+      endDate,
+      curator,
+      designer,
+      shortDescription,
+      reason,
+      sectionID,
+    ],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send("Values Inserted");
+      }
+    }
+  );
+});
+
+app.get("/Display", (req, res) => {
+  db.query("SELECT * FROM display", (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(result);
+    }
+  });
+});
+
+// add and get Showcase
+app.post("/addShowcase", (req, res) => {
+  const Number = req.body.Number;
+  const Name = req.body.Name;
+  const Descr = req.body.Desc;
+  const Type = req.body.Type;
+  const SpecialCare = req.body.SpecialCare;
+  const DisplayID = req.body.DisplayID;
+
+  db.query(
+    "INSERT INTO showcase (Number,Name,Descr,Type,SpecialCare,DisplayID) VALUES (?,?,?,?,?,?)",
+    [Number, Name, Descr, NumOfItems, Type, SpecialCare, DisplayID],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send("Values Inserted");
+      }
+    }
+  );
+});
+
+app.get("/Showcase", (req, res) => {
+  db.query("SELECT * FROM showcase", (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(result);
+    }
+  });
+});
+
 app.get("/employees", (req, res) => {
   db.query("SELECT * FROM employees", (err, result) => {
     if (err) {

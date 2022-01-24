@@ -17,7 +17,7 @@ const AddBuilding = () => {
   const [address, setAddress] = useState("");
   const [city, setCity] = useState("");
   const [name, setName] = useState("");
-  const [selectedValue, setSelectedValue] = useState("");
+  const [selectedValue, setSelectedValue] = useState("Please Select Museum");
   const [buildingList, setBuildingList] = useState([]);
   const [museumList, setMuseumList] = useState([]);
   useEffect(() => {
@@ -26,22 +26,26 @@ const AddBuilding = () => {
   }, []);
 
   const postBuilding = () => {
-    Axios.post("http://localhost:3001/addBuilding", {
-      name: name,
-      city: city,
-      address: address,
-      MuseumID: selectedValue,
-    }).then(() => {
-      setBuildingList([
-        ...buildingList,
-        {
-          name: name,
-          city: city,
-          address: address,
-          MuseumID: selectedValue,
-        },
-      ]);
-    });
+    if (selectedValue === "Please Select Museum") {
+      alert("Please Select a Museum");
+    } else {
+      Axios.post("http://localhost:3001/addBuilding", {
+        name: name,
+        city: city,
+        address: address,
+        MuseumID: selectedValue,
+      }).then(() => {
+        setBuildingList([
+          ...buildingList,
+          {
+            name: name,
+            city: city,
+            address: address,
+            MuseumID: selectedValue,
+          },
+        ]);
+      });
+    }
   };
 
   const getBuilding = () => {
@@ -118,6 +122,9 @@ const AddBuilding = () => {
                 setSelectedValue(event.target.value);
               }}
             >
+              <option disabled selected value>
+                Please Select Museum
+              </option>
               {museumList.map((val, key) => {
                 return (
                   <option className="museum" value={val.id}>

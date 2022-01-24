@@ -36,41 +36,45 @@ const AddDisplay = () => {
   const [reason, setReason] = useState("");
   const [sectionList, setSectionList] = useState([]);
   const [displayList, setDisplayList] = useState([]);
-  const [selectedValue, setSelectedValue] = useState("");
+  const [selectedValue, setSelectedValue] = useState("Please Select Section");
   useEffect(() => {
     getSection();
     // eslint-disable-next-line
   }, []);
 
   const postDisplay = () => {
-    Axios.post("http://localhost:3001/addDisplay", {
-      Name: name,
-      Theme: theme,
-      permanent: permanent,
-      StartDate: startDate,
-      EndDate: endDate,
-      Curator: curator,
-      Designer: designer,
-      ShortDesc: description,
-      Reason: reason,
-      SectionID: selectedValue,
-    }).then(() => {
-      setDisplayList([
-        ...displayList,
-        {
-          Name: name,
-          Theme: theme,
-          permanent: permanent,
-          StartDate: startDate,
-          EndDate: endDate,
-          Curator: curator,
-          Designer: designer,
-          ShortDesc: description,
-          Reason: reason,
-          SectionID: selectedValue,
-        },
-      ]);
-    });
+    if (selectedValue === "Please Select Section") {
+      alert("Please Select a Section");
+    } else {
+      Axios.post("http://localhost:3001/addDisplay", {
+        Name: name,
+        Theme: theme,
+        permanent: permanent,
+        StartDate: startDate,
+        EndDate: endDate,
+        Curator: curator,
+        Designer: designer,
+        ShortDesc: description,
+        Reason: reason,
+        SectionID: selectedValue,
+      }).then(() => {
+        setDisplayList([
+          ...displayList,
+          {
+            Name: name,
+            Theme: theme,
+            permanent: permanent,
+            StartDate: startDate,
+            EndDate: endDate,
+            Curator: curator,
+            Designer: designer,
+            ShortDesc: description,
+            Reason: reason,
+            SectionID: selectedValue,
+          },
+        ]);
+      });
+    }
   };
 
   const getSection = () => {
@@ -216,8 +220,12 @@ const AddDisplay = () => {
         <select
           onChange={(event) => {
             setSelectedValue(event.target.value);
+            console.log("HI");
           }}
         >
+          <option disabled selected value>
+            Please Select Section
+          </option>
           {sectionList.map((val, key) => {
             return (
               <option className="section" value={val.idSection}>

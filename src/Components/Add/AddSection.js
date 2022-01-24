@@ -17,7 +17,7 @@ const contentContainerStyle = {
 const AddSection = () => {
   const [description, setDescription] = useState("");
   const [name, setName] = useState("");
-  const [selectedValue, setSelectedValue] = useState("");
+  const [selectedValue, setSelectedValue] = useState("Please Select Building");
   const [sectionList, setSectionList] = useState([]);
   const [buildingList, setBuildingList] = useState([]);
   useEffect(() => {
@@ -26,20 +26,24 @@ const AddSection = () => {
   }, []);
 
   const postSection = () => {
-    Axios.post("http://localhost:3001/addSection", {
-      Name: name,
-      Description: description,
-      BuildingID: selectedValue,
-    }).then(() => {
-      setSectionList([
-        ...sectionList,
-        {
-          Name: name,
-          Description: description,
-          BuildingID: selectedValue,
-        },
-      ]);
-    });
+    if (selectedValue === "Please Select Building") {
+      alert("Please Select a Building");
+    } else {
+      Axios.post("http://localhost:3001/addSection", {
+        Name: name,
+        Description: description,
+        BuildingID: selectedValue,
+      }).then(() => {
+        setSectionList([
+          ...sectionList,
+          {
+            Name: name,
+            Description: description,
+            BuildingID: selectedValue,
+          },
+        ]);
+      });
+    }
   };
 
   const getSection = () => {
@@ -101,6 +105,9 @@ const AddSection = () => {
             setSelectedValue(event.target.value);
           }}
         >
+          <option disabled selected value>
+            Please Select Building
+          </option>
           {buildingList.map((val, key) => {
             return (
               <option className="building" value={val.BuildingID}>

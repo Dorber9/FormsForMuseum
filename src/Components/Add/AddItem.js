@@ -26,12 +26,13 @@ const useStyles = makeStyles((theme) => ({
 function AddItem() {
   const classes = useStyles();
   const [inputFields, setInputFields] = useState([
-    { id: uuidv4(), firstName: "", lastName: "" },
+    { id: uuidv4(), category: "", categoryDescr: "" },
   ]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("InputFields", inputFields);
+    setItemData(inputFields);
+    postItem();
   };
 
   const handleChangeInput = (id, event) => {
@@ -48,7 +49,7 @@ function AddItem() {
   const handleAddFields = () => {
     setInputFields([
       ...inputFields,
-      { id: uuidv4(), firstName: "", lastName: "" },
+      { id: uuidv4(), category: "", categoryDescr: "" },
     ]);
   };
 
@@ -81,25 +82,85 @@ function AddItem() {
   const [material, setMaterial] = useState("");
   const [website, setWebsite] = useState("");
   const [size, setSize] = useState("");
-  const [refrences, setRefrences] = useState("");
-  const [storage, setStorage] = useState("");
+  const [storage, setStorage] = useState("1");
   const [display, setDisplay] = useState("");
   const [showcase, setShowcase] = useState("");
-  const [displayLabel, setDisplayLabel] = useState("Display");
+  const [references, setReferences] = useState("");
+  const [itemData, setItemData] = useState("");
   const [displayList, setDisplayList] = useState([]);
-  const [selectedValue, setSelectedValue] = useState("");
+  const [showcaseList, setShowcaseList] = useState([]);
+  const [itemsList, setItemsList] = useState([]);
+
   useEffect(() => {
     getDisplay();
+    getShowcase();
     // eslint-disable-next-line
   }, []);
 
+  const postItem = () => {
+    if (storage === "0" && display === "") {
+      alert("Please Select a Display");
+    } else {
+      console.log(itemData);
+      Axios.post("http://localhost:3001/addItem", {
+        ID: itemId,
+        name: name,
+        descr: descr,
+        shortDescr: shortDescr,
+        storage: storage,
+        displayID: display,
+        showcaseID: showcase,
+        site: site,
+        period: period,
+        age: age,
+        material: material,
+        website: website,
+        size: size,
+        references: references,
+        itemData: itemData,
+      }).then(() => {
+        setItemsList([
+          ...itemsList,
+          {
+            ID: itemId,
+            name: name,
+            descr: descr,
+            shortDescr: shortDescr,
+            storage: storage,
+            displayID: display,
+            showcaseID: showcase,
+            site: site,
+            period: period,
+            age: age,
+            material: material,
+            website: website,
+            size: size,
+            references: references,
+            itemData: itemData,
+          },
+        ]);
+      });
+    }
+  };
+
   const getDisplay = () => {
-    Axios.get("http://localhost:3001/display").then((response) => {
+    Axios.get("http://localhost:3001/Display").then((response) => {
       setDisplayList(response.data);
     });
-    console.log(displayList);
     displayOptions();
-    console.log(displayList);
+  };
+
+  const getShowcase = () => {
+    Axios.get("http://localhost:3001/Showcase").then((response) => {
+      setShowcaseList(response.data);
+    });
+    showcaseOptions();
+  };
+
+  const getItems = () => {
+    Axios.get("http://localhost:3001/Item").then((response) => {
+      setItemsList(response.data);
+    });
   };
 
   const selectStyle = {
@@ -117,6 +178,14 @@ function AddItem() {
       label: display.Name,
     }));
     setDisplayList(temp);
+  };
+
+  const showcaseOptions = () => {
+    const temp = showcaseList.map((showcase) => ({
+      value: showcase.idShowcase,
+      label: showcase.Name,
+    }));
+    setShowcaseList(temp);
   };
 
   return (
@@ -176,9 +245,6 @@ function AddItem() {
 
             <div style={selectStyle}>
               <Select
-                onClick={() => {
-                  setDisplayLabel("");
-                }}
                 options={options}
                 onChange={(e) => {
                   setStorage(e.value);
@@ -189,35 +255,31 @@ function AddItem() {
             {storage === "1" ? (
               ""
             ) : (
-              <Select
-                onClick={() => {
-                  setDisplayLabel("");
-                }}
-                options={displayList}
-                onChange={(e) => {
-                  setStorage(e.value);
-                }}
-              />
+              <div style={selectStyle}>
+                <Select
+                  options={displayList.map((val, key) => {
+                    return { value: val.idDisplay, label: val.Name };
+                  })}
+                  onChange={(e) => {
+                    setDisplay(e.value);
+                  }}
+                />
+              </div>
             )}
 
             {storage == "1" ? (
               ""
             ) : (
-              <TextField
-                onChange={(e) => {
-                  setShowcase(e.target.value);
-                }}
-                variant="outlined"
-                style={contentContainerStyle}
-                type="text"
-                name="Showcase"
-                placeholder="Showcase"
-                helperText={
-                  showcase === "" && storage === "0" ? "Showcase" : ""
-                }
-                error={showcase === "" && storage === "0"}
-                disabled={storage === "1"}
-              />
+              <div style={selectStyle}>
+                <Select
+                  options={showcaseList.map((val, key) => {
+                    return { value: val.idShowcase, label: val.Name };
+                  })}
+                  onChange={(e) => {
+                    setShowcase(e.value);
+                  }}
+                />
+              </div>
             )}
 
             <TextField
@@ -294,15 +356,15 @@ function AddItem() {
             />
             <TextField
               onChange={(e) => {
-                setRefrences(e.target.value);
+                setReferences(e.target.value);
               }}
               variant="outlined"
               style={contentContainerStyle}
               type="text"
-              name="Refrences"
-              placeholder="Refrences"
-              helperText={refrences === "" ? "Field cannot be empty" : ""}
-              error={refrences === ""}
+              name="References"
+              placeholder="References"
+              helperText={references === "" ? "Field cannot be empty" : ""}
+              error={references === ""}
             />
           </form>
         </div>
@@ -312,19 +374,19 @@ function AddItem() {
         {inputFields.map((inputField) => (
           <div key={inputField.id}>
             <TextField
-              name="firstName"
+              name="category"
               label="Category"
               variant="filled"
-              value={inputField.firstName}
+              value={inputField.category}
               onChange={(event) => handleChangeInput(inputField.id, event)}
             />
             <TextField
-              name="lastName"
+              name="categoryDescr"
               label="Description"
               variant="filled"
               multiline
               fullWidth
-              value={inputField.lastName}
+              value={inputField.categoryDescr}
               onChange={(event) => handleChangeInput(inputField.id, event)}
               rows="8"
             />
@@ -348,7 +410,30 @@ function AddItem() {
         >
           Send
         </Button>
+
+        <Button
+          className={classes.button}
+          variant="contained"
+          color="primary"
+          onClick={() => console.log(inputFields)}
+        >
+          LESH
+        </Button>
       </form>
+
+      <button onClick={getItems}>Show Items</button>
+      {itemsList.map((val, key) => {
+        return (
+          <div className="desplay">
+            <div>
+              <h3>ID: {val.ItemID}</h3>
+              <h3>Name: {val.ItemName}</h3>
+              <h3>descr: {val.Descr}</h3>
+              <h3>Item Data: {val.ItemData}</h3>
+            </div>
+          </div>
+        );
+      })}
     </Container>
   );
 }

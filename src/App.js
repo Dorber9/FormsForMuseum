@@ -6,6 +6,7 @@ import CourseWizard from "./Components/CourseWizard";
 import Footer from "./Components/Footer";
 import HomePage from "./Components/HomePage";
 import Add from "./Components/Add";
+import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   return (

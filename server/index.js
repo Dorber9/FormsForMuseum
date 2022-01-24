@@ -3,13 +3,16 @@ const app = express();
 const mysql = require("mysql");
 const cors = require("cors");
 
+const multer = require("multer");
+const path = require("path");
+
 app.use(cors());
 app.use(express.json());
 
 const db = mysql.createConnection({
-  user: "root",
-  host: "localhost",
-  password: "11qq22ww",
+  user: "yuval",
+  host: "35.224.215.248",
+  password: "R113p8#2",
   database: "museum",
 });
 
@@ -40,6 +43,7 @@ app.post("/addBuilding", (req, res) => {
   const city = req.body.city;
   const address = req.body.address;
   const MuseumID = req.body.MuseumID;
+  console.log(MuseumID);
   db.query(
     "INSERT INTO building (name,city,address,MuseumID) VALUES (?,?,?,?)",
     [name, city, address, MuseumID],
@@ -222,6 +226,36 @@ app.post("/create", (req, res) => {
       }
     }
   );
+});
+
+// test
+app.post("/upload", (req, res) => {
+  console.log("here i am");
+});
+
+const storage = multer.diskStorage({
+  destination: "./public/uploads/",
+  filename: function (req, file, cb) {
+    cb(null, "IMAGE-" + Date.now() + path.extname(file.originalname));
+  },
+});
+
+const upload = multer({
+  storage: storage,
+  limits: { fileSize: 1000000 },
+}).single("myImage");
+
+const router = express.Router();
+
+router.post("/upload", function (req, res) {
+  upload(req, res, function (err) {
+    iconsole.log("Request ---", req.body);
+    console.log("Request file ---", req.file); //Here you get file.
+    /*Now do where ever you want to do*/
+    if (!err) {
+      return res.send(200).end();
+    }
+  });
 });
 
 app.listen(3001, () => {

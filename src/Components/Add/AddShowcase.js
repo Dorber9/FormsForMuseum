@@ -33,7 +33,7 @@ const AddShowcase = () => {
     if (selectedValue === "Please Select Display") {
       alert("Please Select a Display");
     } else {
-      Axios.post("http://localhost:3001/addShowcase", {
+      Axios.post("http://concise-decker-339115.oa.r.appspot.com/addShowcase", {
         Number: number,
         Name: name,
         Desc: description,
@@ -57,13 +57,13 @@ const AddShowcase = () => {
   };
 
   const getShowcase = () => {
-    Axios.get("http://localhost:3001/Showcase").then((response) => {
+    Axios.get("http://concise-decker-339115.oa.r.appspot.com/Showcase").then((response) => {
       setShowcaseList(response.data);
     });
   };
 
   const getDisplay = () => {
-    Axios.get("http://localhost:3001/Display").then((response) => {
+    Axios.get("http://concise-decker-339115.oa.r.appspot.com/Display").then((response) => {
       setDisplayList(response.data);
     });
   };

@@ -29,7 +29,7 @@ const AddSection = () => {
     if (selectedValue === "Please Select Building") {
       alert("Please Select a Building");
     } else {
-      Axios.post("http://localhost:3001/addSection", {
+      Axios.post("http://concise-decker-339115.oa.r.appspot.com/addSection", {
         Name: name,
         Description: description,
         BuildingID: selectedValue,
@@ -47,13 +47,13 @@ const AddSection = () => {
   };
 
   const getSection = () => {
-    Axios.get("http://localhost:3001/section").then((response) => {
+    Axios.get("http://concise-decker-339115.oa.r.appspot.com/section").then((response) => {
       setSectionList(response.data);
     });
   };
 
   const getBuilding = () => {
-    Axios.get("http://localhost:3001/building").then((response) => {
+    Axios.get("http://concise-decker-339115.oa.r.appspot.com/building").then((response) => {
       setBuildingList(response.data);
     });
   };

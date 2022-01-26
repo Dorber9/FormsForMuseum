@@ -30,7 +30,7 @@ const AddMuseum = () => {
   };
 
   const getMuseum = () => {
-    Axios.get("http://concise-decker-339115.oa.r.appspot.com/museum").then((response) => {
+    Axios.get("https://concise-decker-339115.oa.r.appspot.com/museum").then((response) => {
       setMuseumList(response.data);
     });
   };

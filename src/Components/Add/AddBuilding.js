@@ -49,13 +49,13 @@ const AddBuilding = () => {
   };
 
   const getBuilding = () => {
-    Axios.get("http://localhost:3001/building").then((response) => {
+    Axios.get("http://concise-decker-339115.oa.r.appspot.com//building").then((response) => {
       setBuildingList(response.data);
     });
   };
 
   const getMuseum = () => {
-    Axios.get("http://localhost:3001/museum").then((response) => {
+    Axios.get("http://concise-decker-339115.oa.r.appspot.com//museum").then((response) => {
       setMuseumList(response.data);
     });
   };

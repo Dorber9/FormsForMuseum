@@ -17,7 +17,7 @@ const AddMuseum = () => {
   const [name, setName] = useState("");
   const [museumList, setMuseumList] = useState([]);
   const postMuseum = () => {
-    Axios.post("http://localhost:3001/addMuseum", {
+    Axios.post("http://concise-decker-339115.oa.r.appspot.com/addMuseum", {
       name: name,
     }).then(() => {
       setMuseumList([
@@ -30,7 +30,7 @@ const AddMuseum = () => {
   };
 
   const getMuseum = () => {
-    Axios.get("http://localhost:3001/museum").then((response) => {
+    Axios.get("http://concise-decker-339115.oa.r.appspot.com/museum").then((response) => {
       setMuseumList(response.data);
     });
   };

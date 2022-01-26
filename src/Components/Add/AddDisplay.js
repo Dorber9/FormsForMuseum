@@ -46,7 +46,7 @@ const AddDisplay = () => {
     if (selectedValue === "Please Select Section") {
       alert("Please Select a Section");
     } else {
-      Axios.post("http://localhost:3001/addDisplay", {
+      Axios.post("http://concise-decker-339115.oa.r.appspot.com/addDisplay", {
         Name: name,
         Theme: theme,
         permanent: permanent,
@@ -78,13 +78,13 @@ const AddDisplay = () => {
   };
 
   const getSection = () => {
-    Axios.get("http://localhost:3001/section").then((response) => {
+    Axios.get("http://concise-decker-339115.oa.r.appspot.com/section").then((response) => {
       setSectionList(response.data);
     });
   };
 
   const getDisplay = () => {
-    Axios.get("http://localhost:3001/display").then((response) => {
+    Axios.get("http://concise-decker-339115.oa.r.appspot.com/display").then((response) => {
       setDisplayList(response.data);
     });
   };

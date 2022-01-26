@@ -49,13 +49,13 @@ const AddBuilding = () => {
   };
 
   const getBuilding = () => {
-    Axios.get("http://concise-decker-339115.oa.r.appspot.com/building").then((response) => {
+    Axios.get("https://concise-decker-339115.oa.r.appspot.com/building").then((response) => {
       setBuildingList(response.data);
     });
   };
 
   const getMuseum = () => {
-    Axios.get("http://concise-decker-339115.oa.r.appspot.com/museum").then((response) => {
+    Axios.get("https://concise-decker-339115.oa.r.appspot.com/museum").then((response) => {
       setMuseumList(response.data);
     });
   };

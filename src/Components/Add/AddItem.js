@@ -102,7 +102,7 @@ function AddItem() {
       alert("Please Select a Display");
     } else {
       console.log(itemData);
-      Axios.post("http://concise-decker-339115.oa.r.appspot.com/addItem", {
+      Axios.post("https://concise-decker-339115.oa.r.appspot.com/addItem", {
         ID: itemId,
         name: name,
         descr: descr,
@@ -144,21 +144,21 @@ function AddItem() {
   };
 
   const getDisplay = () => {
-    Axios.get("http://concise-decker-339115.oa.r.appspot.com/Display").then((response) => {
+    Axios.get("https://concise-decker-339115.oa.r.appspot.com/Display").then((response) => {
       setDisplayList(response.data);
     });
     displayOptions();
   };
 
   const getShowcase = () => {
-    Axios.get("http://concise-decker-339115.oa.r.appspot.com/Showcase").then((response) => {
+    Axios.get("https://concise-decker-339115.oa.r.appspot.com/Showcase").then((response) => {
       setShowcaseList(response.data);
     });
     showcaseOptions();
   };
 
   const getItems = () => {
-    Axios.get("http://concise-decker-339115.oa.r.appspot.com/Item").then((response) => {
+    Axios.get("https://concise-decker-339115.oa.r.appspot.com/Item").then((response) => {
       setItemsList(response.data);
     });
   };

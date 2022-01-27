@@ -32,7 +32,9 @@ const AddBuilding = () => {
     if (selectedValue === "Please Select Museum") {
       alert("Please Select a Museum");
     } else {
-      Axios.post("http://concise-decker-339115.oa.r.appspot.com/addBuilding", {
+
+      Axios.post("https://concise-decker-339115.oa.r.appspot.com/addBuilding", {
+
         name: name,
         city: city,
         address: address,
@@ -52,13 +54,17 @@ const AddBuilding = () => {
   };
 
   const getBuilding = () => {
-    Axios.get("http://concise-decker-339115.oa.r.appspot.com/building").then((response) => {
+
+    Axios.get("https://concise-decker-339115.oa.r.appspot.com/building").then((response) => {
+
       setBuildingList(response.data);
     });
   };
 
   const getMuseum = () => {
-    Axios.get("http://concise-decker-339115.oa.r.appspot.com/museum").then((response) => {
+
+    Axios.get("https://concise-decker-339115.oa.r.appspot.com/museum").then((response) => {
+
       setMuseumList(response.data);
     });
   };

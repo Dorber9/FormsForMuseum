@@ -3,10 +3,12 @@ import { TextField } from "@material-ui/core";
 import { useState, useEffect } from "react";
 import Axios from "axios";
 import "../../App.css";
+import Button from "@material-ui/core/Button";
+import IconButton from "@material-ui/core/IconButton";
 
 const contentContainerStyle = {
   display: "block",
-  marginLeft: "50px",
+  marginLeft: "5%",
   marginTop: "15px",
   marginBottom: "15px",
   justifyContent: "center", //Centered vertically
@@ -85,7 +87,7 @@ const AddShowcase = () => {
           </div>
         );
       })}
-      <div>
+      <div className="txtJ">
         <TextField
           onChange={(event) => {
             setNumber(event.target.value);
@@ -164,8 +166,15 @@ const AddShowcase = () => {
             );
           })}
         </select>
-        <button onClick={postShowcase}>Add Display</button>
       </div>
+      <Button
+        variant="contained"
+        color="primary"
+        type="submit"
+        onClick={postShowcase}
+      >
+        Add Showcase
+      </Button>
     </>
   );
 };

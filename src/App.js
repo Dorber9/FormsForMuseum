@@ -7,10 +7,15 @@ import Footer from "./Components/Footer";
 import HomePage from "./Components/HomePage";
 import Add from "./Components/Add";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+import background from "./muse2.jpg";
+import "./App.css";
 
 function App() {
   return (
     <>
+      <div
+        style={{ backgroundImage: `url(${background})`, width: "100%" }}
+      ></div>
       <BrowserRouter>
         <Routes>
           <Route exact path="/Add" element={<Add />}></Route>

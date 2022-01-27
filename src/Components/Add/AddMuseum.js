@@ -2,15 +2,20 @@ import React from "react";
 import { TextField } from "@material-ui/core";
 import { useState } from "react";
 import Axios from "axios";
+import Container from "@material-ui/core/Container";
+import Button from "@material-ui/core/Button";
+import IconButton from "@material-ui/core/IconButton";
+import RemoveIcon from "@material-ui/icons/Remove";
+import AddIcon from "@material-ui/icons/Add";
 
 const contentContainerStyle = {
-  display: "block",
-  marginLeft: "50px",
-  marginTop: "15px",
-  marginBottom: "15px",
-  justifyContent: "center", //Centered vertically
-  alignItems: "center", // Centered horizontally
-  flex: 1,
+  // display: "block",
+  // marginLeft: "50px",
+  // marginTop: "15px",
+  // marginBottom: "15px",
+  // justifyContent: "center", //Centered vertically
+  // alignItems: "center", // Centered horizontally
+  // flex: 1,
 };
 
 const AddMuseum = () => {
@@ -36,7 +41,11 @@ const AddMuseum = () => {
   };
   return (
     <>
-      <button onClick={getMuseum}>Show Museums</button>
+      {/* <div>
+        <button onClick={getMuseum}>Show Museums</button>
+      </div> */}
+      <br></br>
+      <br></br>
 
       {museumList.map((val, key) => {
         return (
@@ -48,7 +57,7 @@ const AddMuseum = () => {
           </div>
         );
       })}
-      <div>
+      <div className="txtF">
         <TextField
           onChange={(event) => {
             setName(event.target.value);
@@ -62,7 +71,25 @@ const AddMuseum = () => {
           error={name === ""}
         />
       </div>
-      <button onClick={postMuseum}>Add Museum</button>
+      <br></br>
+      <br></br>
+      <Button
+        variant="contained"
+        color="primary"
+        type="submit"
+        onClick={postMuseum}
+      >
+        Add Museum
+      </Button>
+      <div>
+        
+
+        <button id="check" onClick={getMuseum}>
+          Show Museums
+        </button>
+      </div>
+      <br></br>
+      <br></br>
     </>
   );
 };

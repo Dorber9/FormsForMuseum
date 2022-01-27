@@ -64,7 +64,7 @@ function AddItem() {
 
   const contentContainerStyle = {
     display: "block",
-    marginLeft: "50px",
+    marginLeft: "5%",
     marginTop: "15px",
     marginBottom: "15px",
     justifyContent: "center", //Centered vertically
@@ -189,185 +189,180 @@ function AddItem() {
   };
 
   return (
-    <Container>
-      <div>
-        <h1>Add New Item</h1>
-        <div className="Form">
-          <form>
-            <TextField
-              onChange={(e) => {
-                setItemId(e.target.value);
-              }}
-              variant="outlined"
-              style={contentContainerStyle}
-              type="text"
-              name="itemId"
-              placeholder="ID"
-              helperText={itemId === "" ? "Field cannot be empty" : ""}
-              error={itemId === ""}
-            />
-            <TextField
-              onChange={(e) => {
-                setName(e.target.value);
-              }}
-              variant="outlined"
-              style={contentContainerStyle}
-              type="text"
-              name="name"
-              placeholder="name"
-              helperText={name === "" ? "Field cannot be empty" : ""}
-              error={name === ""}
-            />
-            <TextField
-              onChange={(e) => {
-                setDescr(e.target.value);
-              }}
-              variant="outlined"
-              style={contentContainerStyle}
-              type="text"
-              name="Description"
-              placeholder="Description"
-              helperText={descr === "" ? "Field cannot be empty" : ""}
-              error={descr === ""}
-            />
-            <TextField
-              onChange={(e) => {
-                setShortDescr(e.target.value);
-              }}
-              variant="outlined"
-              style={contentContainerStyle}
-              type="text"
-              name="Short Description"
-              placeholder="Short Description"
-              helperText={shortDescr === "" ? "Field cannot be empty" : ""}
-              error={shortDescr === ""}
-            />
+    <>
+      <div className="txtJ">
+        <TextField
+          onChange={(e) => {
+            setItemId(e.target.value);
+          }}
+          variant="outlined"
+          style={contentContainerStyle}
+          type="text"
+          name="itemId"
+          placeholder="ID"
+          helperText={itemId === "" ? "Field cannot be empty" : ""}
+          error={itemId === ""}
+        />
+        <TextField
+          onChange={(e) => {
+            setName(e.target.value);
+          }}
+          variant="outlined"
+          style={contentContainerStyle}
+          type="text"
+          name="name"
+          placeholder="name"
+          helperText={name === "" ? "Field cannot be empty" : ""}
+          error={name === ""}
+        />
+        <TextField
+          onChange={(e) => {
+            setDescr(e.target.value);
+          }}
+          variant="outlined"
+          style={contentContainerStyle}
+          type="text"
+          name="Description"
+          placeholder="Description"
+          helperText={descr === "" ? "Field cannot be empty" : ""}
+          error={descr === ""}
+        />
+        <TextField
+          onChange={(e) => {
+            setShortDescr(e.target.value);
+          }}
+          variant="outlined"
+          style={contentContainerStyle}
+          type="text"
+          name="Short Description"
+          placeholder="Short Description"
+          helperText={shortDescr === "" ? "Field cannot be empty" : ""}
+          error={shortDescr === ""}
+        />
 
-            <div style={selectStyle}>
-              <Select
-                options={options}
-                onChange={(e) => {
-                  setStorage(e.value);
-                }}
-              />
-            </div>
-
-            {storage === "1" ? (
-              ""
-            ) : (
-              <div style={selectStyle}>
-                <Select
-                  options={displayList.map((val, key) => {
-                    return { value: val.idDisplay, label: val.Name };
-                  })}
-                  onChange={(e) => {
-                    setDisplay(e.value);
-                  }}
-                />
-              </div>
-            )}
-
-            {storage == "1" ? (
-              ""
-            ) : (
-              <div style={selectStyle}>
-                <Select
-                  options={showcaseList.map((val, key) => {
-                    return { value: val.idShowcase, label: val.Name };
-                  })}
-                  onChange={(e) => {
-                    setShowcase(e.value);
-                  }}
-                />
-              </div>
-            )}
-
-            <TextField
-              onChange={(e) => {
-                setSite(e.target.value);
-              }}
-              variant="outlined"
-              style={contentContainerStyle}
-              type="text"
-              name="Site"
-              placeholder="Site"
-              helperText={site === "" ? "Field cannot be empty" : ""}
-              error={site === ""}
-            />
-            <TextField
-              onChange={(e) => {
-                setPeriod(e.target.value);
-              }}
-              variant="outlined"
-              style={contentContainerStyle}
-              type="text"
-              name="Period"
-              placeholder="Period"
-              helperText={period === "" ? "Field cannot be empty" : ""}
-              error={period === ""}
-            />
-            <TextField
-              onChange={(e) => {
-                setAge(e.target.value);
-              }}
-              variant="outlined"
-              style={contentContainerStyle}
-              type="text"
-              name="Age"
-              placeholder="Age"
-              helperText={age === "" ? "Field cannot be empty" : ""}
-              error={age === ""}
-            />
-            <TextField
-              onChange={(e) => {
-                setMaterial(e.target.value);
-              }}
-              variant="outlined"
-              style={contentContainerStyle}
-              type="text"
-              name="Material"
-              placeholder="Material"
-              helperText={material === "" ? "Field cannot be empty" : ""}
-              error={material === ""}
-            />
-            <TextField
-              onChange={(e) => {
-                setWebsite(e.target.value);
-              }}
-              variant="outlined"
-              style={contentContainerStyle}
-              type="text"
-              name="Website"
-              placeholder="Website"
-              helperText={website === "" ? "Field cannot be empty" : ""}
-              error={website === ""}
-            />
-            <TextField
-              onChange={(e) => {
-                setSize(e.target.value);
-              }}
-              variant="outlined"
-              style={contentContainerStyle}
-              type="text"
-              name="Size"
-              placeholder="Size(h X w X d )"
-              helperText={size === "" ? "Field cannot be empty" : ""}
-              error={size === ""}
-            />
-            <TextField
-              onChange={(e) => {
-                setReferences(e.target.value);
-              }}
-              variant="outlined"
-              style={contentContainerStyle}
-              type="text"
-              name="References"
-              placeholder="References"
-              helperText={references === "" ? "Field cannot be empty" : ""}
-              error={references === ""}
-            />
-          </form>
+        <div style={contentContainerStyle}>
+          <Select
+            options={options}
+            onChange={(e) => {
+              setStorage(e.value);
+            }}
+          />
         </div>
+
+        {storage === "1" ? (
+          ""
+        ) : (
+          <div style={contentContainerStyle}>
+            <Select
+              options={displayList.map((val, key) => {
+                return { value: val.idDisplay, label: val.Name };
+              })}
+              onChange={(e) => {
+                setDisplay(e.value);
+              }}
+            />
+          </div>
+        )}
+
+        {storage == "1" ? (
+          ""
+        ) : (
+          <div style={selectStyle}>
+            <Select
+              options={showcaseList.map((val, key) => {
+                return { value: val.idShowcase, label: val.Name };
+              })}
+              onChange={(e) => {
+                setShowcase(e.value);
+              }}
+            />
+          </div>
+        )}
+
+        <TextField
+          onChange={(e) => {
+            setSite(e.target.value);
+          }}
+          variant="outlined"
+          style={contentContainerStyle}
+          type="text"
+          name="Site"
+          placeholder="Site"
+          helperText={site === "" ? "Field cannot be empty" : ""}
+          error={site === ""}
+        />
+        <TextField
+          onChange={(e) => {
+            setPeriod(e.target.value);
+          }}
+          variant="outlined"
+          style={contentContainerStyle}
+          type="text"
+          name="Period"
+          placeholder="Period"
+          helperText={period === "" ? "Field cannot be empty" : ""}
+          error={period === ""}
+        />
+        <TextField
+          onChange={(e) => {
+            setAge(e.target.value);
+          }}
+          variant="outlined"
+          style={contentContainerStyle}
+          type="text"
+          name="Age"
+          placeholder="Age"
+          helperText={age === "" ? "Field cannot be empty" : ""}
+          error={age === ""}
+        />
+        <TextField
+          onChange={(e) => {
+            setMaterial(e.target.value);
+          }}
+          variant="outlined"
+          style={contentContainerStyle}
+          type="text"
+          name="Material"
+          placeholder="Material"
+          helperText={material === "" ? "Field cannot be empty" : ""}
+          error={material === ""}
+        />
+        <TextField
+          onChange={(e) => {
+            setWebsite(e.target.value);
+          }}
+          variant="outlined"
+          style={contentContainerStyle}
+          type="text"
+          name="Website"
+          placeholder="Website"
+          helperText={website === "" ? "Field cannot be empty" : ""}
+          error={website === ""}
+        />
+        <TextField
+          onChange={(e) => {
+            setSize(e.target.value);
+          }}
+          variant="outlined"
+          style={contentContainerStyle}
+          type="text"
+          name="Size"
+          placeholder="Size(h X w X d )"
+          helperText={size === "" ? "Field cannot be empty" : ""}
+          error={size === ""}
+        />
+        <TextField
+          onChange={(e) => {
+            setReferences(e.target.value);
+          }}
+          variant="outlined"
+          style={contentContainerStyle}
+          type="text"
+          name="References"
+          placeholder="References"
+          helperText={references === "" ? "Field cannot be empty" : ""}
+          error={references === ""}
+        />
       </div>
 
       <form className={classes.root} onSubmit={handleSubmit}>
@@ -380,25 +375,27 @@ function AddItem() {
               value={inputField.category}
               onChange={(event) => handleChangeInput(inputField.id, event)}
             />
-            <TextField
-              name="categoryDescr"
-              label="Description"
-              variant="filled"
-              multiline
-              fullWidth
-              value={inputField.categoryDescr}
-              onChange={(event) => handleChangeInput(inputField.id, event)}
-              rows="8"
-            />
-            <IconButton
-              disabled={inputFields.length === 1}
-              onClick={() => handleRemoveFields(inputField.id)}
-            >
-              <RemoveIcon />
-            </IconButton>
-            <IconButton onClick={handleAddFields}>
-              <AddIcon />
-            </IconButton>
+            <div style={{ marginRight: "10%", marginLeft: "10%" }}>
+              <TextField
+                name="categoryDescr"
+                label="Description"
+                variant="filled"
+                multiline
+                fullWidth
+                value={inputField.categoryDescr}
+                onChange={(event) => handleChangeInput(inputField.id, event)}
+                rows="8"
+              />
+              <IconButton
+                disabled={inputFields.length === 1}
+                onClick={() => handleRemoveFields(inputField.id)}
+              >
+                <RemoveIcon />
+              </IconButton>
+              <IconButton onClick={handleAddFields}>
+                <AddIcon />
+              </IconButton>
+            </div>
           </div>
         ))}
         <Button
@@ -408,16 +405,7 @@ function AddItem() {
           type="submit"
           onClick={handleSubmit}
         >
-          Send
-        </Button>
-
-        <Button
-          className={classes.button}
-          variant="contained"
-          color="primary"
-          onClick={() => console.log(inputFields)}
-        >
-          LESH
+          Add Item
         </Button>
       </form>
 
@@ -434,8 +422,9 @@ function AddItem() {
           </div>
         );
       })}
-    </Container>
+    </>
   );
-}
+};
+
 
 export default AddItem;

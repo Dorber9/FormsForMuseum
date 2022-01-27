@@ -4,10 +4,17 @@ import { useState, useEffect } from "react";
 import Axios from "axios";
 import "../../App.css";
 import Select from "react-select";
+import Button from "@material-ui/core/Button";
+import IconButton from "@material-ui/core/IconButton";
 
 const selectStyle = {
-  width: "220px",
-  marginLeft: "50px",
+  display: "block",
+  marginLeft: "5%",
+  marginTop: "15px",
+  marginBottom: "15px",
+  justifyContent: "center", //Centered vertically
+  alignItems: "center", // Centered horizontally
+  flex: 1,
 };
 const options = [
   { value: "1", label: "Permanent" },
@@ -16,7 +23,7 @@ const options = [
 
 const contentContainerStyle = {
   display: "block",
-  marginLeft: "50px",
+  marginLeft: "5%",
   marginTop: "15px",
   marginBottom: "15px",
   justifyContent: "center", //Centered vertically
@@ -110,7 +117,7 @@ const AddDisplay = () => {
           </div>
         );
       })}
-      <div>
+      <div className="txtJ">
         <TextField
           onChange={(e) => {
             setName(e.target.value);
@@ -234,8 +241,15 @@ const AddDisplay = () => {
             );
           })}
         </select>
-        <button onClick={postDisplay}>Add Display</button>
       </div>
+      <Button
+        variant="contained"
+        color="primary"
+        type="submit"
+        onClick={postDisplay}
+      >
+        Add Display
+      </Button>
     </>
   );
 };

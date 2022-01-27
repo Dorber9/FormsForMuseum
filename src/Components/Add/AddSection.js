@@ -4,9 +4,12 @@ import { useState, useEffect } from "react";
 import Axios from "axios";
 import "../../App.css";
 
+import Button from "@material-ui/core/Button";
+import IconButton from "@material-ui/core/IconButton";
+
 const contentContainerStyle = {
   display: "block",
-  marginLeft: "50px",
+  marginLeft: "5%",
   marginTop: "15px",
   marginBottom: "15px",
   justifyContent: "center", //Centered vertically
@@ -73,7 +76,7 @@ const AddSection = () => {
           </div>
         );
       })}
-      <div>
+      <div className="txtJ">
         <TextField
           onChange={(event) => {
             setName(event.target.value);
@@ -98,26 +101,37 @@ const AddSection = () => {
           helperText={description === "" ? "Field cannot be empty" : ""}
           error={description === ""}
         />
-        Building:
-        <select
-          onChange={(event) => {
-            console.log(event.target.value);
-            setSelectedValue(event.target.value);
-          }}
-        >
-          <option disabled selected value>
-            Please Select Building
-          </option>
-          {buildingList.map((val, key) => {
-            return (
-              <option className="building" value={val.BuildingID}>
-                {val.Name}
+        <div style={{ contentContainerStyle }}>
+          <label>
+            Building:
+            <select
+              onChange={(event) => {
+                console.log(event.target.value);
+                setSelectedValue(event.target.value);
+              }}
+            >
+              <option disabled selected value>
+                Please Select Building
               </option>
-            );
-          })}
-        </select>
-        <button onClick={postSection}>Add Section</button>
+              {buildingList.map((val, key) => {
+                return (
+                  <option className="building" value={val.BuildingID}>
+                    {val.Name}
+                  </option>
+                );
+              })}
+            </select>
+          </label>
+        </div>
       </div>
+      <Button
+        variant="contained"
+        color="primary"
+        type="submit"
+        onClick={postSection}
+      >
+        Add Section
+      </Button>
     </>
   );
 };

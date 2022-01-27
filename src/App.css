@@ -1,5 +1,70 @@
 .App {
   text-align: center;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.site-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
+}
+
+#check {
+   margin-left :15px
+}
+
+
+/* 
+* {
+ box-sizing: border-box;
+ padding: 0;
+ margin: 0;
+} */
+
+
+/* .footer{
+  margin-top: 1rem;
+  padding: 1rem;
+  background-color: rgb(235, 195, 64);
+  position: -webkit-sticky;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+} */
+
+.tb {
+  text-align: center;
+  background-color: rgb(253, 253, 253);
+  min-height: calc(100vh - 70px);
+}
+
+.txtF {
+  margin-right: 20%;
+  
+}
+
+.txtJ {
+  margin-right: 60%;
+  margin-left: 30%;
+}
+
+.addM {
+  margin-right: 0%;
+}
+
+.addJ {
+  margin-right: 0%;
+ align-content: center;
+ background-color: color;
 }
 
 .App-logo {
@@ -36,3 +101,4 @@
     transform: rotate(360deg);
   }
 }
+

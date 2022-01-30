@@ -19,9 +19,8 @@ main {
 }
 
 #check {
-   margin-left :15px
+  margin-left: 15px;
 }
-
 
 /* 
 * {
@@ -29,7 +28,6 @@ main {
  padding: 0;
  margin: 0;
 } */
-
 
 /* .footer{
   margin-top: 1rem;
@@ -49,7 +47,6 @@ main {
 
 .txtF {
   margin-right: 20%;
-  
 }
 
 .txtJ {
@@ -63,8 +60,18 @@ main {
 
 .addJ {
   margin-right: 0%;
- align-content: center;
- background-color: color;
+  align-content: center;
+  background-color: color;
+}
+
+.rowC {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 2%;
+}
+
+.rS {
+  margin-right: 1%;
 }
 
 .App-logo {
@@ -101,4 +108,3 @@ main {
     transform: rotate(360deg);
   }
 }
-

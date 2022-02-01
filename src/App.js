@@ -9,6 +9,8 @@ import Add from "./Components/Add";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import background from "./muse2.jpg";
 import "./App.css";
+import ModifyData from "./Components/Modify/ModifyData";
+import Reports from "./Components/Reports";
 
 function App() {
   return (
@@ -22,6 +24,8 @@ function App() {
           <Route exact path="/" element={<HomePage />}></Route>
           <Route exact path="/DemoPage" element={<DemoPage />}></Route>
           <Route exact path="/CourseWizard" element={<CourseWizard />}></Route>
+          <Route exact path="/ModifyData" element={<ModifyData />}></Route>
+          <Route exact path="/Reports" element={<Reports />}></Route>
         </Routes>
         <Footer />
       </BrowserRouter>

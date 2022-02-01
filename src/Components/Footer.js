@@ -40,24 +40,25 @@ const Footer = () => {
       <Container>
         <Row>
           <Column>
-            <Heading>Adding Data</Heading>
+            <Heading>Manage Data</Heading>
             <br></br>
             <FooterLink href="/Add">Add</FooterLink>
+            <FooterLink href="/ModifyData">Modify</FooterLink>
           </Column>
           <Column>
             <Heading>Example</Heading>
             <br></br>
             <FooterLink href="/DemoPage">Demo Page</FooterLink>
+            <FooterLink href="/Reports">Reports</FooterLink>
           </Column>
           <Column>
-            <Heading>Contact Us</Heading>
+            <Heading>Course Wizard</Heading>
             <br></br>
-            <FooterLink href="/CourseWizard">Hi</FooterLink>
+            <FooterLink href="/CourseWizard">Manage Courses</FooterLink>
           </Column>
           <Column>
             <Heading>Home Page</Heading>
             <br></br>
-            
             <FooterLink href="/">
               <i className="fab fa-facebook-f">
                 <span style={{ marginLeft: "10px" }}>Home</span>

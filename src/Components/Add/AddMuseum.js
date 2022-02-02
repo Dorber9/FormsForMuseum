@@ -1,6 +1,6 @@
 import React from "react";
 import { TextField } from "@material-ui/core";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Axios from "axios";
 import Container from "@material-ui/core/Container";
 import Button from "@material-ui/core/Button";
@@ -18,9 +18,24 @@ const contentContainerStyle = {
   // flex: 1,
 };
 
-const AddMuseum = () => {
+const AddMuseum = (props) => {
   const [name, setName] = useState("");
   const [museumList, setMuseumList] = useState([]);
+  const [flag, setFlag] = useState("");
+  const [value, setValue] = useState(
+    props.object === flag ? "" : props.object.name
+  );
+
+  useEffect(() => {
+    {
+      setFlag(props.object.name);
+      setValue(props.object === flag ? "" : props.object.name);
+      console.log(props);
+    }
+
+    // eslint-disable-next-line
+  }, [props.object.name]);
+
   const postMuseum = () => {
     Axios.post("https://concise-decker-339115.oa.r.appspot.com/addMuseum", {
       name: name,
@@ -35,10 +50,13 @@ const AddMuseum = () => {
   };
 
   const getMuseum = () => {
-    Axios.get("https://concise-decker-339115.oa.r.appspot.com/museum").then((response) => {
-      setMuseumList(response.data);
-    });
+    Axios.get("https://concise-decker-339115.oa.r.appspot.com/museum").then(
+      (response) => {
+        setMuseumList(response.data);
+      }
+    );
   };
+
   return (
     <>
       {/* <div>
@@ -57,10 +75,13 @@ const AddMuseum = () => {
           </div>
         );
       })}
+
       <div className="txtF">
         <TextField
+          value={value}
           onChange={(event) => {
             setName(event.target.value);
+            setValue(event.target.value);
           }}
           variant="outlined"
           style={contentContainerStyle}
@@ -82,8 +103,6 @@ const AddMuseum = () => {
         Add Museum
       </Button>
       <div>
-        
-
         <button id="check" onClick={getMuseum}>
           Show Museums
         </button>

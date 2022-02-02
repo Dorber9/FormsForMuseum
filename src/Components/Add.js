@@ -33,27 +33,27 @@ const Add = () => {
 
         <TabPanel>
           <h2 style={{ textAlign: "left" }}>Add Museum</h2>
-          <AddMuseum />
+          <AddMuseum object={null} />
         </TabPanel>
         <TabPanel>
           <h2 style={{ textAlign: "left" }}>Add Building</h2>
-          <AddBuilding />
+          <AddBuilding object={null} />
         </TabPanel>
         <TabPanel>
           <h2 style={{ textAlign: "left" }}>Add Section</h2>
-          <AddSection />
+          <AddSection object={null} />
         </TabPanel>
         <TabPanel>
           <h2 style={{ textAlign: "left" }}>Add Display</h2>
-          <AddDisplay />
+          <AddDisplay object={null} />
         </TabPanel>
         <TabPanel>
           <h2 style={{ textAlign: "left" }}>Add Showcase</h2>
-          <AddShowcase />
+          <AddShowcase object={null} />
         </TabPanel>
         <TabPanel>
           <h2 style={{ textAlign: "left" }}>Add New Item</h2>
-          <AddItem />
+          <AddItem object={null} />
         </TabPanel>
       </Tabs>
     </div>

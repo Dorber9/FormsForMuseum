@@ -22,6 +22,8 @@
     "react-select": "^5.2.1",
     "react-selectlist": "^3.0.6",
     "react-tabs": "^3.2.3",
+    "reactdom": "^2.0.0",
+    "reload": "^3.2.0",
     "styled-components": "^5.3.3",
     "web-vitals": "^1.1.2"
   },

@@ -2,6 +2,14 @@ import React from "react";
 import { useState, useEffect } from "react";
 import Select from "react-select";
 import Axios from "axios";
+import AddMuseum from "../Add/AddMuseum";
+import AddBuilding from "../Add/AddBuilding";
+import AddSection from "../Add/AddSection";
+import AddDisplay from "../Add/AddDisplay";
+import AddShowcase from "../Add/AddShowcase";
+import AddItem from "../Add/AddItem";
+
+import { render } from "react-dom";
 
 const contentContainerStyle = {
   display: "block",
@@ -11,7 +19,7 @@ const contentContainerStyle = {
   justifyContent: "center", //Centered vertically
   alignItems: "center", // Centered horizontally
   flex: 1,
-  width: "20%",
+  width: "40%",
 };
 
 const ModifyData = () => {
@@ -23,6 +31,8 @@ const ModifyData = () => {
   const [museumList, setMuseumList] = useState([]);
   const [buildingList, setBuildingList] = useState([]);
   const [sectionList, setSectionList] = useState([]);
+
+  const [objectName, setObjectName] = useState("");
 
   const getDisplay = () => {
     Axios.get("https://concise-decker-339115.oa.r.appspot.com/Display").then(
@@ -72,6 +82,18 @@ const ModifyData = () => {
     );
   };
 
+  const getWantedList = (id, type) => {
+    var wanted = "";
+
+    const wantedItem = museumList.map((i) => {
+      if (id === i.id) {
+        wanted = i;
+      }
+    });
+
+    return wanted;
+  };
+
   useEffect(() => {
     getDisplay();
     getShowcase();
@@ -80,7 +102,34 @@ const ModifyData = () => {
     getBuilding();
     getSection();
     // eslint-disable-next-line
-  }, []);
+  }, [selectedObject]);
+
+  const mapOptions = () => {
+    return selectedObject === "Museum"
+      ? museumList.map((val, key) => {
+          return { value: val.id, label: val.name };
+        })
+      : selectedObject === "Building"
+      ? buildingList.map((val, key) => {
+          return { value: val.BuildingID, label: val.Name };
+        })
+      : selectedObject === "Section"
+      ? sectionList.map((val, key) => {
+          return { value: val.idSection, label: val.Name };
+        })
+      : selectedObject === "Display"
+      ? displayList.map((val, key) => {
+          console.log(val);
+          return { value: val.idDisplay, label: val.Name };
+        })
+      : selectedObject === "Showcase"
+      ? showcaseList.map((val, key) => {
+          return { value: val.idShowcase, label: val.Name };
+        })
+      : itemsList.map((val, key) => {
+          return { value: val.ItemID, label: val.ItemName };
+        });
+  };
 
   const typeOptions = [
     { value: "Museum", label: "Museum" },
@@ -98,6 +147,8 @@ const ModifyData = () => {
           options={typeOptions}
           onChange={(e) => {
             setSelectedObject(e.value);
+            setObjectName("");
+            setWantedObject("");
           }}
         />
       </div>
@@ -105,36 +156,38 @@ const ModifyData = () => {
         ""
       ) : (
         <div style={contentContainerStyle}>
-          <Select
-            options={
-              selectedObject === "Museum"
-                ? museumList.map((val, key) => {
-                    return { value: val.id, label: val.name };
-                  })
-                : selectedObject === "Building"
-                ? buildingList.map((val, key) => {
-                    return { value: val.BuildingID, label: val.Name };
-                  })
-                : selectedObject === "Section"
-                ? sectionList.map((val, key) => {
-                    return { value: val.idSection, label: val.Name };
-                  })
-                : selectedObject === "Display"
-                ? displayList.map((val, key) => {
-                    return { value: val.idDisplay, label: val.Name };
-                  })
-                : selectedObject === "Showcase"
-                ? showcaseList.map((val, key) => {
-                    return { value: val.idShowcase, label: val.Name };
-                  })
-                : itemsList.map((val, key) => {
-                    return { value: val.ItemID, label: val.ItemName };
-                  })
-            }
-            onChange={(e) => {
-              setWantedObject(e.value);
-            }}
-          />
+          {selectedObject == "" ? (
+            ""
+          ) : (
+            <Select
+              value={{ value: wantedObject, label: objectName }}
+              options={mapOptions()}
+              onChange={(e) => {
+                setWantedObject(e.value);
+                setObjectName(e.label);
+                getWantedList(wantedObject, selectedObject);
+              }}
+            />
+          )}
+        </div>
+      )}
+      {wantedObject == "" ? (
+        ""
+      ) : (
+        <div>
+          {selectedObject === "Museum" ? (
+            <AddMuseum object={getWantedList(wantedObject, "Museum")} />
+          ) : selectedObject === "Building" ? (
+            <AddBuilding object={getWantedList(wantedObject, "Building")} />
+          ) : selectedObject === "Section" ? (
+            <AddSection object={getWantedList(wantedObject, "Section")} />
+          ) : selectedObject === "Display" ? (
+            <AddDisplay object={getWantedList(wantedObject, "Display")} />
+          ) : selectedObject === "Showcase" ? (
+            <AddShowcase object={getWantedList(wantedObject, "Showcase")} />
+          ) : (
+            <AddItem object={getWantedList(wantedObject, "Item")} />
+          )}
         </div>
       )}
     </div>

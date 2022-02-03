@@ -84,13 +84,56 @@ const ModifyData = () => {
 
   const getWantedList = (id, type) => {
     var wanted = "";
+    var wantedItem = {};
+    switch (type) {
+      case "Museum":
+        wantedItem = museumList.map((i) => {
+          if (id === i.id) {
+            wanted = i;
+          }
+        });
+        break;
 
-    const wantedItem = museumList.map((i) => {
-      if (id === i.id) {
-        wanted = i;
-      }
-    });
+      case "Building":
+        wantedItem = buildingList.map((i) => {
+          if (id === i.BuildingID) {
+            wanted = i;
+          }
+        });
+        break;
 
+      case "Section":
+        wantedItem = sectionList.map((i) => {
+          if (id === i.idSection) {
+            wanted = i;
+          }
+        });
+        break;
+
+      case "Showcase":
+        wantedItem = showcaseList.map((i) => {
+          if (id === i.idShowcase) {
+            wanted = i;
+          }
+        });
+        break;
+
+      case "Display":
+        wantedItem = displayList.map((i) => {
+          if (id === i.idDisplay) {
+            wanted = i;
+          }
+        });
+        break;
+
+      case "Item":
+        wantedItem = itemsList.map((i) => {
+          if (id === i.ItemID) {
+            wanted = i;
+          }
+        });
+        break;
+    }
     return wanted;
   };
 
@@ -160,7 +203,11 @@ const ModifyData = () => {
             ""
           ) : (
             <Select
-              value={{ value: wantedObject, label: objectName }}
+              value={{
+                value: wantedObject,
+                label:
+                  objectName === "" ? "Select " + selectedObject : objectName,
+              }}
               options={mapOptions()}
               onChange={(e) => {
                 setWantedObject(e.value);

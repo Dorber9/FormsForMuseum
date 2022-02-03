@@ -17,7 +17,7 @@ const contentContainerStyle = {
   flex: 1,
 };
 
-const AddSection = () => {
+const AddSection = (props) => {
   const [description, setDescription] = useState("");
   const [name, setName] = useState("");
   const [selectedValue, setSelectedValue] = useState("Please Select Building");
@@ -25,8 +25,13 @@ const AddSection = () => {
   const [buildingList, setBuildingList] = useState([]);
   useEffect(() => {
     getBuilding();
+    setName(props.object.Name);
+    setDescription(props.object.Description);
+    setSelectedValue(
+      buildingList.filter((b) => b.BuildingID == props.object.BuildingID)
+    );
     // eslint-disable-next-line
-  }, []);
+  }, [props.object]);
 
   const postSection = () => {
     if (selectedValue === "Please Select Building") {
@@ -50,15 +55,19 @@ const AddSection = () => {
   };
 
   const getSection = () => {
-    Axios.get("https://concise-decker-339115.oa.r.appspot.com/section").then((response) => {
-      setSectionList(response.data);
-    });
+    Axios.get("https://concise-decker-339115.oa.r.appspot.com/section").then(
+      (response) => {
+        setSectionList(response.data);
+      }
+    );
   };
 
   const getBuilding = () => {
-    Axios.get("https://concise-decker-339115.oa.r.appspot.com/building").then((response) => {
-      setBuildingList(response.data);
-    });
+    Axios.get("https://concise-decker-339115.oa.r.appspot.com/building").then(
+      (response) => {
+        setBuildingList(response.data);
+      }
+    );
   };
 
   return (
@@ -78,6 +87,7 @@ const AddSection = () => {
       })}
       <div className="txtJ">
         <TextField
+          value={name}
           onChange={(event) => {
             setName(event.target.value);
           }}
@@ -90,6 +100,7 @@ const AddSection = () => {
           error={name === ""}
         />
         <TextField
+          value={description}
           onChange={(event) => {
             setDescription(event.target.value);
           }}
@@ -105,6 +116,10 @@ const AddSection = () => {
           <label>
             Building:
             <select
+              value={{
+                value: selectedValue.BuildingID,
+                label: selectedValue.Name,
+              }}
               onChange={(event) => {
                 console.log(event.target.value);
                 setSelectedValue(event.target.value);

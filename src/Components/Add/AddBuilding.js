@@ -16,25 +16,28 @@ const contentContainerStyle = {
   flex: 1,
 };
 
-const AddBuilding = () => {
+const AddBuilding = (props) => {
   const [address, setAddress] = useState("");
   const [city, setCity] = useState("");
   const [name, setName] = useState("");
   const [selectedValue, setSelectedValue] = useState("Please Select Museum");
   const [buildingList, setBuildingList] = useState([]);
   const [museumList, setMuseumList] = useState([]);
+  const [building, setBuilding] = useState({});
   useEffect(() => {
     getMuseum();
+    setName(props.object.Name);
+    setCity(props.object.City);
+    setAddress(props.object.Address);
+    setSelectedValue(museumList.filter((m) => m.id == props.object.MuseumID));
     // eslint-disable-next-line
-  }, []);
+  }, [props.object]);
 
   const postBuilding = () => {
     if (selectedValue === "Please Select Museum") {
       alert("Please Select a Museum");
     } else {
-
       Axios.post("https://concise-decker-339115.oa.r.appspot.com/addBuilding", {
-
         name: name,
         city: city,
         address: address,
@@ -54,19 +57,19 @@ const AddBuilding = () => {
   };
 
   const getBuilding = () => {
-
-    Axios.get("https://concise-decker-339115.oa.r.appspot.com/building").then((response) => {
-
-      setBuildingList(response.data);
-    });
+    Axios.get("https://concise-decker-339115.oa.r.appspot.com/building").then(
+      (response) => {
+        setBuildingList(response.data);
+      }
+    );
   };
 
   const getMuseum = () => {
-
-    Axios.get("https://concise-decker-339115.oa.r.appspot.com/museum").then((response) => {
-
-      setMuseumList(response.data);
-    });
+    Axios.get("https://concise-decker-339115.oa.r.appspot.com/museum").then(
+      (response) => {
+        setMuseumList(response.data);
+      }
+    );
   };
 
   return (
@@ -86,6 +89,7 @@ const AddBuilding = () => {
       })}
       <div className="txtJ">
         <TextField
+          value={name}
           onChange={(event) => {
             setName(event.target.value);
           }}
@@ -99,6 +103,7 @@ const AddBuilding = () => {
         />
 
         <TextField
+          value={city}
           onChange={(event) => {
             setCity(event.target.value);
           }}
@@ -111,6 +116,7 @@ const AddBuilding = () => {
           error={city === ""}
         />
         <TextField
+          value={address}
           onChange={(event) => {
             setAddress(event.target.value);
           }}
@@ -126,9 +132,9 @@ const AddBuilding = () => {
           <label>
             Museum:
             <select
+              value={{ value: selectedValue.id, label: selectedValue.name }}
               style={{ marginLeft: "10px" }}
               onChange={(event) => {
-                console.log(event.target.value);
                 setSelectedValue(event.target.value);
               }}
             >
@@ -155,10 +161,8 @@ const AddBuilding = () => {
       >
         Add Building
       </Button>
-      
     </>
   );
-  
 };
 
 export default AddBuilding;

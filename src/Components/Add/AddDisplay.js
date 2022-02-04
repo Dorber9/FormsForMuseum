@@ -31,10 +31,10 @@ const contentContainerStyle = {
   flex: 1,
 };
 
-const AddDisplay = () => {
+const AddDisplay = (props) => {
   const [name, setName] = useState("");
   const [theme, setTheme] = useState("");
-  const [permanent, setPermanent] = useState("");
+  const [permanent, setPermanent] = useState("1");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [curator, setCurator] = useState("");
@@ -46,8 +46,21 @@ const AddDisplay = () => {
   const [selectedValue, setSelectedValue] = useState("Please Select Section");
   useEffect(() => {
     getSection();
-    // eslint-disable-next-line
-  }, []);
+    if (props.object != null) {
+      setName(props.object.Name);
+      setTheme(props.object.Theme);
+      setPermanent("" + props.object.permanent);
+      if (permanent !== "1") {
+        setStartDate(props.object.StartDate);
+        setEndDate(props.object.EndDate);
+      }
+      setCurator(props.object.Curator);
+      setDesigner(props.object.Designer);
+      setDescription(props.object.ShortDesc);
+      setReason(props.object.Reason);
+      setSelectedValue(props.object.SectionID);
+    }
+  }, [props.object != null ? props.object : ""]);
 
   const postDisplay = () => {
     if (selectedValue === "Please Select Section") {
@@ -85,15 +98,19 @@ const AddDisplay = () => {
   };
 
   const getSection = () => {
-    Axios.get("https://concise-decker-339115.oa.r.appspot.com/section").then((response) => {
-      setSectionList(response.data);
-    });
+    Axios.get("https://concise-decker-339115.oa.r.appspot.com/section").then(
+      (response) => {
+        setSectionList(response.data);
+      }
+    );
   };
 
   const getDisplay = () => {
-    Axios.get("https://concise-decker-339115.oa.r.appspot.com/display").then((response) => {
-      setDisplayList(response.data);
-    });
+    Axios.get("https://concise-decker-339115.oa.r.appspot.com/display").then(
+      (response) => {
+        setDisplayList(response.data);
+      }
+    );
   };
 
   return (
@@ -119,6 +136,7 @@ const AddDisplay = () => {
       })}
       <div className="txtJ">
         <TextField
+          value={name}
           onChange={(e) => {
             setName(e.target.value);
           }}
@@ -131,6 +149,7 @@ const AddDisplay = () => {
           error={name === ""}
         />
         <TextField
+          value={theme}
           onChange={(e) => {
             setTheme(e.target.value);
           }}
@@ -144,6 +163,10 @@ const AddDisplay = () => {
         />
         <div style={selectStyle}>
           <Select
+            value={{
+              value: "" + permanent,
+              label: permanent == 1 ? "Permanent" : "Non permanent",
+            }}
             options={options}
             onChange={(e) => {
               setPermanent(e.value);
@@ -151,31 +174,40 @@ const AddDisplay = () => {
             }}
           />
         </div>
+        {permanent === "1" ? (
+          ""
+        ) : (
+          <>
+            <TextField
+              value={startDate}
+              onChange={(e) => {
+                setStartDate(e.target.value);
+              }}
+              variant="outlined"
+              style={contentContainerStyle}
+              type="date"
+              name="StartDate"
+              helperText="Start Date"
+              error={startDate === ""}
+              disabled={permanent === "1"}
+            />
+            <TextField
+              value={endDate}
+              onChange={(e) => {
+                setEndDate(e.target.value);
+              }}
+              variant="outlined"
+              style={contentContainerStyle}
+              type="date"
+              name="EndDate"
+              helperText="End Date"
+              error={endDate === ""}
+              disabled={permanent === "1"}
+            />
+          </>
+        )}
         <TextField
-          onChange={(e) => {
-            setStartDate(e.target.value);
-          }}
-          variant="outlined"
-          style={contentContainerStyle}
-          type="date"
-          name="StartDate"
-          helperText="Start Date"
-          error={startDate === ""}
-          disabled={permanent === "1"}
-        />
-        <TextField
-          onChange={(e) => {
-            setEndDate(e.target.value);
-          }}
-          variant="outlined"
-          style={contentContainerStyle}
-          type="date"
-          name="EndDate"
-          helperText="End Date"
-          error={endDate === ""}
-          disabled={permanent === "1"}
-        />
-        <TextField
+          value={curator}
           onChange={(e) => {
             setCurator(e.target.value);
           }}
@@ -188,6 +220,7 @@ const AddDisplay = () => {
           error={curator === ""}
         />
         <TextField
+          value={designer}
           onChange={(e) => {
             setDesigner(e.target.value);
           }}
@@ -200,6 +233,7 @@ const AddDisplay = () => {
           error={designer === ""}
         />
         <TextField
+          value={description}
           onChange={(e) => {
             setDescription(e.target.value);
           }}
@@ -212,6 +246,7 @@ const AddDisplay = () => {
           error={description === ""}
         />
         <TextField
+          value={reason}
           onChange={(e) => {
             setReason(e.target.value);
           }}
@@ -225,6 +260,7 @@ const AddDisplay = () => {
         />
         Section:
         <select
+          value={{ value: selectedValue.id, label: selectedValue.Name }}
           onChange={(event) => {
             setSelectedValue(event.target.value);
             console.log("HI");

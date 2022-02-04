@@ -21,25 +21,48 @@ const contentContainerStyle = {
 const AddMuseum = (props) => {
   const [name, setName] = useState("");
   const [museumList, setMuseumList] = useState([]);
-  const [flag, setFlag] = useState("");
-  const [value, setValue] = useState(
-    props.object === flag ? "" : props.object.name
-  );
 
   useEffect(() => {
     {
-      setFlag(props.object.name);
-      setValue(props.object === flag ? "" : props.object.name);
+      setName(props.object != null ? props.object.name : "");
       console.log(props);
     }
 
     // eslint-disable-next-line
-  }, [props.object.name]);
+  }, [props.object != null ? props.object : ""]);
 
   const postMuseum = () => {
     Axios.post("https://concise-decker-339115.oa.r.appspot.com/addMuseum", {
       name: name,
     }).then(() => {
+      setMuseumList([
+        ...museumList,
+        {
+          name: name,
+        },
+      ]);
+    });
+  };
+
+  const updateMuseum = () => {
+    Axios.put("http://localhost:3001/updateMuseum", {
+      id: props.object.id,
+      name: name,
+    }).then(() => {
+      setMuseumList([
+        ...museumList,
+        {
+          name: name,
+        },
+      ]);
+    });
+  };
+
+  const deleteMuseum = () => {
+    Axios.delete(
+      `http://localhost:3001/deleteMuseum/${props.object.id}`,
+      {}
+    ).then(() => {
       setMuseumList([
         ...museumList,
         {
@@ -78,10 +101,9 @@ const AddMuseum = (props) => {
 
       <div className="txtF">
         <TextField
-          value={value}
+          value={name}
           onChange={(event) => {
             setName(event.target.value);
-            setValue(event.target.value);
           }}
           variant="outlined"
           style={contentContainerStyle}
@@ -98,10 +120,22 @@ const AddMuseum = (props) => {
         variant="contained"
         color="primary"
         type="submit"
-        onClick={postMuseum}
+        onClick={props.object == null ? postMuseum : updateMuseum}
       >
-        Add Museum
+        Submit
       </Button>
+      {props.object == null ? (
+        ""
+      ) : (
+        <Button
+          variant="contained"
+          color="primary"
+          type="submit"
+          onClick={deleteMuseum}
+        >
+          Delete Museum
+        </Button>
+      )}
       <div>
         <button id="check" onClick={getMuseum}>
           Show Museums

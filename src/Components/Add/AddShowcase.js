@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Axios from "axios";
 import "../../App.css";
 import Button from "@material-ui/core/Button";
-import IconButton from "@material-ui/core/IconButton";
+import Select from "react-select";
 
 const contentContainerStyle = {
   display: "block",
@@ -16,20 +16,28 @@ const contentContainerStyle = {
   flex: 1,
 };
 
-const AddShowcase = () => {
+const AddShowcase = (props) => {
   const [number, setNumber] = useState("");
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
 
   const [type, setType] = useState("");
-  const [specialCare, setSpecialCare] = useState("");
+  const [specialCare, setSpecialCare] = useState("0");
   const [showcaseList, setShowcaseList] = useState([]);
   const [displayList, setDisplayList] = useState([]);
   const [selectedValue, setSelectedValue] = useState("Please Select Display");
+
   useEffect(() => {
     getDisplay();
-    // eslint-disable-next-line
-  }, []);
+    if (props.object != null) {
+      setName(props.object.Name);
+      setNumber(props.object.Number);
+      setDescription(props.object.Descr);
+      setType(props.object.Type);
+      setSpecialCare("" + props.object.SpecialCare);
+      setSelectedValue(props.object.DisplayID);
+    }
+  }, [props.object != null ? props.object : ""]);
 
   const postShowcase = () => {
     if (selectedValue === "Please Select Display") {
@@ -58,16 +66,25 @@ const AddShowcase = () => {
     }
   };
 
+  const trueFalse = [
+    { value: "1", label: "Yes" },
+    { value: "0", label: "No" },
+  ];
+
   const getShowcase = () => {
-    Axios.get("https://concise-decker-339115.oa.r.appspot.com/Showcase").then((response) => {
-      setShowcaseList(response.data);
-    });
+    Axios.get("https://concise-decker-339115.oa.r.appspot.com/Showcase").then(
+      (response) => {
+        setShowcaseList(response.data);
+      }
+    );
   };
 
   const getDisplay = () => {
-    Axios.get("https://concise-decker-339115.oa.r.appspot.com/Display").then((response) => {
-      setDisplayList(response.data);
-    });
+    Axios.get("https://concise-decker-339115.oa.r.appspot.com/Display").then(
+      (response) => {
+        setDisplayList(response.data);
+      }
+    );
   };
 
   return (
@@ -89,6 +106,7 @@ const AddShowcase = () => {
       })}
       <div className="txtJ">
         <TextField
+          value={number}
           onChange={(event) => {
             setNumber(event.target.value);
           }}
@@ -101,6 +119,7 @@ const AddShowcase = () => {
           error={number === ""}
         />
         <TextField
+          value={name}
           onChange={(event) => {
             setName(event.target.value);
           }}
@@ -113,6 +132,7 @@ const AddShowcase = () => {
           error={name === ""}
         />
         <TextField
+          value={description}
           onChange={(event) => {
             setDescription(event.target.value);
           }}
@@ -125,6 +145,7 @@ const AddShowcase = () => {
           error={description === ""}
         />
         <TextField
+          value={type}
           onChange={(event) => {
             setType(event.target.value);
           }}
@@ -136,20 +157,21 @@ const AddShowcase = () => {
           helperText={type === "" ? "Field cannot be empty" : ""}
           error={type === ""}
         />
-        <TextField
-          onChange={(event) => {
-            setSpecialCare(event.target.value);
-          }}
-          variant="outlined"
-          style={contentContainerStyle}
-          type="text"
-          name="SpecialCare"
-          label="Special Care?"
-          helperText={specialCare === "" ? "Field cannot be empty" : ""}
-          error={specialCare === ""}
-        />
+        <div style={contentContainerStyle}>
+          <Select
+            value={{
+              value: specialCare,
+              label: specialCare === "1" ? "Yes" : "No",
+            }}
+            options={trueFalse}
+            onChange={(e) => {
+              setSpecialCare(e.value);
+            }}
+          />
+        </div>
         Display:
         <select
+          value={{ value: selectedValue.id, label: selectedValue.Name }}
           onChange={(event) => {
             setSelectedValue(event.target.value);
             console.log(event.target.value);
@@ -161,7 +183,7 @@ const AddShowcase = () => {
           {displayList.map((val, key) => {
             return (
               <option className="display" value={val.idDisplay}>
-                {val.idDisplay}
+                {val.Name}
               </option>
             );
           })}

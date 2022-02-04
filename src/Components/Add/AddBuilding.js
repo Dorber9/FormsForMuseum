@@ -26,12 +26,13 @@ const AddBuilding = (props) => {
   const [building, setBuilding] = useState({});
   useEffect(() => {
     getMuseum();
-    setName(props.object.Name);
-    setCity(props.object.City);
-    setAddress(props.object.Address);
-    setSelectedValue(museumList.filter((m) => m.id == props.object.MuseumID));
-    // eslint-disable-next-line
-  }, [props.object]);
+    if (props.object != null) {
+      setName(props.object.Name);
+      setCity(props.object.City);
+      setAddress(props.object.Address);
+      setSelectedValue(museumList.filter((m) => m.id == props.object.MuseumID));
+    }
+  }, [props.object != null ? props.object : ""]);
 
   const postBuilding = () => {
     if (selectedValue === "Please Select Museum") {

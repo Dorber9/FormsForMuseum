@@ -23,14 +23,17 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function AddItem() {
+function AddItem(props) {
   const classes = useStyles();
-  const [inputFields, setInputFields] = useState([
-    { id: uuidv4(), category: "", categoryDescr: "" },
-  ]);
+  const [inputFields, setInputFields] = useState(
+    props.object == null
+      ? [{ id: uuidv4(), category: "", categoryDescr: "" }]
+      : []
+  );
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     setItemData(inputFields);
     postItem();
   };
@@ -86,7 +89,9 @@ function AddItem() {
   const [display, setDisplay] = useState("");
   const [showcase, setShowcase] = useState("");
   const [references, setReferences] = useState("");
-  const [itemData, setItemData] = useState("");
+  const [itemData, setItemData] = useState([
+    { id: uuidv4(), category: "", categoryDescr: "" },
+  ]);
   const [displayList, setDisplayList] = useState([]);
   const [showcaseList, setShowcaseList] = useState([]);
   const [itemsList, setItemsList] = useState([]);
@@ -94,15 +99,46 @@ function AddItem() {
   useEffect(() => {
     getDisplay();
     getShowcase();
-    // eslint-disable-next-line
-  }, []);
+    if (props.object != null) {
+      setItemId(props.object.ItemID);
+      setName(props.object.ItemName);
+      setShortDescr(props.object.ShortDescr);
+      setDescr(props.object.Descr);
+      setMaterial(props.object.Material);
+      setPeriod(props.object.Period);
+      setSite(props.object.Site);
+      setStorage("" + props.object.InStorage);
+      if (storage !== "1") {
+        setDisplay(props.object.DisplayID);
+        setShowcase(props.object.ShowcaeID);
+      }
+      setAge(props.object.Age);
+      setWebsite(props.object.Website);
+      setSize(props.object.Size);
+      setReferences(props.object.Refs);
+      setInputFields([]);
+      const data = props.object.ItemData.split("^%^");
+      data.pop();
+      var temp = [];
+
+      data.forEach((element) => {
+        const d = element.split("=>");
+        temp.push({
+          id: uuidv4(),
+          category: d[1].split("&&&")[0],
+          categoryDescr: d[2],
+        });
+      });
+      setInputFields(temp);
+    }
+  }, [props.object != null ? props.object : ""]);
 
   const postItem = () => {
     if (storage === "0" && display === "") {
       alert("Please Select a Display");
     } else {
       console.log(itemData);
-      Axios.post("https://concise-decker-339115.oa.r.appspot.com/addItem", {
+      Axios.post("http://localhost:3001/addItem", {
         ID: itemId,
         name: name,
         descr: descr,
@@ -117,7 +153,7 @@ function AddItem() {
         website: website,
         size: size,
         references: references,
-        itemData: itemData,
+        itemData: inputFields,
       }).then(() => {
         setItemsList([
           ...itemsList,
@@ -144,23 +180,29 @@ function AddItem() {
   };
 
   const getDisplay = () => {
-    Axios.get("https://concise-decker-339115.oa.r.appspot.com/Display").then((response) => {
-      setDisplayList(response.data);
-    });
+    Axios.get("https://concise-decker-339115.oa.r.appspot.com/Display").then(
+      (response) => {
+        setDisplayList(response.data);
+      }
+    );
     displayOptions();
   };
 
   const getShowcase = () => {
-    Axios.get("https://concise-decker-339115.oa.r.appspot.com/Showcase").then((response) => {
-      setShowcaseList(response.data);
-    });
+    Axios.get("https://concise-decker-339115.oa.r.appspot.com/Showcase").then(
+      (response) => {
+        setShowcaseList(response.data);
+      }
+    );
     showcaseOptions();
   };
 
   const getItems = () => {
-    Axios.get("https://concise-decker-339115.oa.r.appspot.com/Item").then((response) => {
-      setItemsList(response.data);
-    });
+    Axios.get("https://concise-decker-339115.oa.r.appspot.com/Item").then(
+      (response) => {
+        setItemsList(response.data);
+      }
+    );
   };
 
   const selectStyle = {
@@ -192,6 +234,7 @@ function AddItem() {
     <>
       <div className="txtJ">
         <TextField
+          value={itemId}
           onChange={(e) => {
             setItemId(e.target.value);
           }}
@@ -204,6 +247,7 @@ function AddItem() {
           error={itemId === ""}
         />
         <TextField
+          value={name}
           onChange={(e) => {
             setName(e.target.value);
           }}
@@ -216,6 +260,7 @@ function AddItem() {
           error={name === ""}
         />
         <TextField
+          value={descr}
           onChange={(e) => {
             setDescr(e.target.value);
           }}
@@ -228,6 +273,7 @@ function AddItem() {
           error={descr === ""}
         />
         <TextField
+          value={shortDescr}
           onChange={(e) => {
             setShortDescr(e.target.value);
           }}
@@ -242,6 +288,10 @@ function AddItem() {
 
         <div style={contentContainerStyle}>
           <Select
+            value={{
+              value: storage,
+              label: storage === "1" ? "In Storage" : "In Museum",
+            }}
             options={options}
             onChange={(e) => {
               setStorage(e.value);
@@ -254,6 +304,10 @@ function AddItem() {
         ) : (
           <div style={contentContainerStyle}>
             <Select
+              value={{
+                value: display.DisplayID,
+                label: display.name,
+              }}
               options={displayList.map((val, key) => {
                 return { value: val.idDisplay, label: val.Name };
               })}
@@ -269,6 +323,10 @@ function AddItem() {
         ) : (
           <div style={selectStyle}>
             <Select
+              value={{
+                value: showcase.idSowcase,
+                label: showcase.Name,
+              }}
               options={showcaseList.map((val, key) => {
                 return { value: val.idShowcase, label: val.Name };
               })}
@@ -280,6 +338,7 @@ function AddItem() {
         )}
 
         <TextField
+          value={site}
           onChange={(e) => {
             setSite(e.target.value);
           }}
@@ -292,6 +351,7 @@ function AddItem() {
           error={site === ""}
         />
         <TextField
+          value={period}
           onChange={(e) => {
             setPeriod(e.target.value);
           }}
@@ -304,6 +364,7 @@ function AddItem() {
           error={period === ""}
         />
         <TextField
+          value={age}
           onChange={(e) => {
             setAge(e.target.value);
           }}
@@ -316,6 +377,7 @@ function AddItem() {
           error={age === ""}
         />
         <TextField
+          value={material}
           onChange={(e) => {
             setMaterial(e.target.value);
           }}
@@ -328,6 +390,7 @@ function AddItem() {
           error={material === ""}
         />
         <TextField
+          value={website}
           onChange={(e) => {
             setWebsite(e.target.value);
           }}
@@ -340,6 +403,7 @@ function AddItem() {
           error={website === ""}
         />
         <TextField
+          value={size}
           onChange={(e) => {
             setSize(e.target.value);
           }}
@@ -352,6 +416,7 @@ function AddItem() {
           error={size === ""}
         />
         <TextField
+          value={references}
           onChange={(e) => {
             setReferences(e.target.value);
           }}
@@ -424,7 +489,6 @@ function AddItem() {
       })}
     </>
   );
-};
-
+}
 
 export default AddItem;

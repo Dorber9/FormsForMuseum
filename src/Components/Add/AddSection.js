@@ -25,13 +25,14 @@ const AddSection = (props) => {
   const [buildingList, setBuildingList] = useState([]);
   useEffect(() => {
     getBuilding();
-    setName(props.object.Name);
-    setDescription(props.object.Description);
-    setSelectedValue(
-      buildingList.filter((b) => b.BuildingID == props.object.BuildingID)
-    );
-    // eslint-disable-next-line
-  }, [props.object]);
+    if (props.object != null) {
+      setName(props.object.Name);
+      setDescription(props.object.Description);
+      setSelectedValue(
+        buildingList.filter((b) => b.BuildingID == props.object.BuildingID)
+      );
+    }
+  }, [props.object != null ? props.object : ""]);
 
   const postSection = () => {
     if (selectedValue === "Please Select Building") {

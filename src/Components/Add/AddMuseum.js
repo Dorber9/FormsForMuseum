@@ -32,7 +32,7 @@ const AddMuseum = (props) => {
   }, [props.object != null ? props.object : ""]);
 
   const postMuseum = () => {
-    Axios.post("https://concise-decker-339115.oa.r.appspot.com/addMuseum", {
+    Axios.post("http://34.65.174.141:3001/addMuseum", {
       name: name,
     }).then(() => {
       setMuseumList([
@@ -45,7 +45,7 @@ const AddMuseum = (props) => {
   };
 
   const updateMuseum = () => {
-    Axios.put("http://localhost:3001/updateMuseum", {
+    Axios.put("http://34.65.174.141:3001/updateMuseum", {
       id: props.object.id,
       name: name,
     }).then(() => {
@@ -60,7 +60,7 @@ const AddMuseum = (props) => {
 
   const deleteMuseum = () => {
     Axios.delete(
-      `http://localhost:3001/deleteMuseum/${props.object.id}`,
+      `http://34.65.174.141:3001/deleteMuseum/${props.object.id}`,
       {}
     ).then(() => {
       setMuseumList([
@@ -73,7 +73,7 @@ const AddMuseum = (props) => {
   };
 
   const getMuseum = () => {
-    Axios.get("https://concise-decker-339115.oa.r.appspot.com/museum").then(
+    Axios.get("http://34.65.174.141:3001/museum").then(
       (response) => {
         setMuseumList(response.data);
       }

@@ -180,7 +180,7 @@ function AddItem(props) {
   };
 
   const getDisplay = () => {
-    Axios.get("https://concise-decker-339115.oa.r.appspot.com/Display").then(
+    Axios.get("http://34.65.174.141:3001/Display").then(
       (response) => {
         setDisplayList(response.data);
       }
@@ -189,7 +189,7 @@ function AddItem(props) {
   };
 
   const getShowcase = () => {
-    Axios.get("https://concise-decker-339115.oa.r.appspot.com/Showcase").then(
+    Axios.get("http://34.65.174.141:3001/Showcase").then(
       (response) => {
         setShowcaseList(response.data);
       }
@@ -198,7 +198,7 @@ function AddItem(props) {
   };
 
   const getItems = () => {
-    Axios.get("https://concise-decker-339115.oa.r.appspot.com/Item").then(
+    Axios.get("http://34.65.174.141:3001/Item").then(
       (response) => {
         setItemsList(response.data);
       }

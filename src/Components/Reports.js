@@ -24,7 +24,7 @@ const Reports = () => {
   const [sectionList, setSectionList] = useState([]);
 
   const getDisplay = () => {
-    Axios.get("https://concise-decker-339115.oa.r.appspot.com/Display").then(
+    Axios.get("http://34.65.174.141:3001/Display").then(
       (response) => {
         setDisplayList(response.data);
       }
@@ -32,7 +32,7 @@ const Reports = () => {
   };
 
   const getShowcase = () => {
-    Axios.get("https://concise-decker-339115.oa.r.appspot.com/Showcase").then(
+    Axios.get("http://34.65.174.141:3001/Showcase").then(
       (response) => {
         setShowcaseList(response.data);
       }
@@ -40,7 +40,7 @@ const Reports = () => {
   };
 
   const getItems = () => {
-    Axios.get("https://concise-decker-339115.oa.r.appspot.com/Item").then(
+    Axios.get("http://34.65.174.141:3001/Item").then(
       (response) => {
         setItemsList(response.data);
       }
@@ -48,7 +48,7 @@ const Reports = () => {
   };
 
   const getMuseum = () => {
-    Axios.get("https://concise-decker-339115.oa.r.appspot.com/museum").then(
+    Axios.get("http://34.65.174.141:3001/museum").then(
       (response) => {
         setMuseumList(response.data);
       }
@@ -56,7 +56,7 @@ const Reports = () => {
   };
 
   const getBuilding = () => {
-    Axios.get("https://concise-decker-339115.oa.r.appspot.com/building").then(
+    Axios.get("http://34.65.174.141:3001/building").then(
       (response) => {
         setBuildingList(response.data);
       }
@@ -64,7 +64,7 @@ const Reports = () => {
   };
 
   const getSection = () => {
-    Axios.get("https://concise-decker-339115.oa.r.appspot.com/section").then(
+    Axios.get("http://34.65.174.141:3001/section").then(
       (response) => {
         setSectionList(response.data);
       }

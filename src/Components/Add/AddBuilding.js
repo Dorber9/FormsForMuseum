@@ -38,7 +38,7 @@ const AddBuilding = (props) => {
     if (selectedValue === "Please Select Museum") {
       alert("Please Select a Museum");
     } else {
-      Axios.post("https://concise-decker-339115.oa.r.appspot.com/addBuilding", {
+      Axios.post("http://34.65.174.141:3001/addBuilding", {
         name: name,
         city: city,
         address: address,
@@ -58,7 +58,7 @@ const AddBuilding = (props) => {
   };
 
   const getBuilding = () => {
-    Axios.get("https://concise-decker-339115.oa.r.appspot.com/building").then(
+    Axios.get("http://34.65.174.141:3001/building").then(
       (response) => {
         setBuildingList(response.data);
       }
@@ -66,7 +66,7 @@ const AddBuilding = (props) => {
   };
 
   const getMuseum = () => {
-    Axios.get("https://concise-decker-339115.oa.r.appspot.com/museum").then(
+    Axios.get("http://34.65.174.141:3001/museum").then(
       (response) => {
         setMuseumList(response.data);
       }

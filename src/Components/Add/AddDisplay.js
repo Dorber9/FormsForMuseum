@@ -66,7 +66,7 @@ const AddDisplay = (props) => {
     if (selectedValue === "Please Select Section") {
       alert("Please Select a Section");
     } else {
-      Axios.post("https://concise-decker-339115.oa.r.appspot.com/addDisplay", {
+      Axios.post("http://34.65.174.141:3001/addDisplay", {
         Name: name,
         Theme: theme,
         permanent: permanent,
@@ -98,7 +98,7 @@ const AddDisplay = (props) => {
   };
 
   const getSection = () => {
-    Axios.get("https://concise-decker-339115.oa.r.appspot.com/section").then(
+    Axios.get("http://34.65.174.141:3001/section").then(
       (response) => {
         setSectionList(response.data);
       }
@@ -106,7 +106,7 @@ const AddDisplay = (props) => {
   };
 
   const getDisplay = () => {
-    Axios.get("https://concise-decker-339115.oa.r.appspot.com/display").then(
+    Axios.get("http://34.65.174.141:3001/display").then(
       (response) => {
         setDisplayList(response.data);
       }

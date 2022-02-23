@@ -58,24 +58,19 @@ const AddBuilding = (props) => {
   };
 
   const getBuilding = () => {
-    Axios.get("http://34.65.174.141:3001/building").then(
-      (response) => {
-        setBuildingList(response.data);
-      }
-    );
+    Axios.get("http://34.65.174.141:3001/building").then((response) => {
+      setBuildingList(response.data);
+    });
   };
 
   const getMuseum = () => {
-    Axios.get("http://34.65.174.141:3001/museum").then(
-      (response) => {
-        setMuseumList(response.data);
-      }
-    );
+    Axios.get("http://34.65.174.141:3001/museum").then((response) => {
+      setMuseumList(response.data);
+    });
   };
 
   return (
     <>
-      <button onClick={getBuilding}>Show Buildings</button>
       {buildingList.map((val, key) => {
         return (
           <div className="building">
@@ -88,80 +83,81 @@ const AddBuilding = (props) => {
           </div>
         );
       })}
-      <div className="txtJ">
+      <div className="txtf">
         <TextField
           value={name}
           onChange={(event) => {
             setName(event.target.value);
           }}
           variant="outlined"
-          style={contentContainerStyle}
           type="text"
           name="name"
           label="Building Name"
           helperText={name === "" ? "Field cannot be empty" : ""}
           error={name === ""}
         />
-
+        <br />
         <TextField
           value={city}
           onChange={(event) => {
             setCity(event.target.value);
           }}
           variant="outlined"
-          style={contentContainerStyle}
           type="text"
           name="City"
           label="City"
           helperText={city === "" ? "Field cannot be empty" : ""}
           error={city === ""}
         />
+        <br />
         <TextField
           value={address}
           onChange={(event) => {
             setAddress(event.target.value);
           }}
           variant="outlined"
-          style={contentContainerStyle}
           type="text"
           name="Address"
           label="Address"
           helperText={address === "" ? "Field cannot be empty" : ""}
           error={address === ""}
         />
-        <div style={{ contentContainerStyle }}>
-          <label>
-            Museum:
-            <select
-              value={{ value: selectedValue.id, label: selectedValue.name }}
-              style={{ marginLeft: "10px" }}
-              onChange={(event) => {
-                setSelectedValue(event.target.value);
-              }}
-            >
-              <option disabled selected value>
-                Please Select Museum
-              </option>
-              {museumList.map((val, key) => {
-                return (
-                  <option className="museum" value={val.id}>
-                    {val.name}
-                  </option>
-                );
-              })}
-            </select>
-          </label>
-        </div>
-        <div style={{}}></div>
+        <br />
+        <label>
+          Museum:
+          <select
+            value={{ value: selectedValue.id, label: selectedValue.name }}
+            style={{ marginLeft: "10px" }}
+            onChange={(event) => {
+              setSelectedValue(event.target.value);
+            }}
+          >
+            <option disabled selected value>
+              Please Select Museum
+            </option>
+            {museumList.map((val, key) => {
+              return (
+                <option className="museum" value={val.id}>
+                  {val.name}
+                </option>
+              );
+            })}
+          </select>
+        </label>
+        <br />
+        <br />
+        <Button
+          variant="contained"
+          color="primary"
+          type="submit"
+          onClick={postBuilding}
+        >
+          Add Building
+        </Button>
+        <button onClick={getBuilding} id="check">
+          Show Buildings
+        </button>
       </div>
-      <Button
-        variant="contained"
-        color="primary"
-        type="submit"
-        onClick={postBuilding}
-      >
-        Add Building
-      </Button>
     </>
   );
 };

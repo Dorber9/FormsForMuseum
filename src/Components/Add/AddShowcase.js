@@ -6,16 +6,6 @@ import "../../App.css";
 import Button from "@material-ui/core/Button";
 import Select from "react-select";
 
-const contentContainerStyle = {
-  display: "block",
-  marginLeft: "5%",
-  marginTop: "15px",
-  marginBottom: "15px",
-  justifyContent: "center", //Centered vertically
-  alignItems: "center", // Centered horizontally
-  flex: 1,
-};
-
 const AddShowcase = (props) => {
   const [number, setNumber] = useState("");
   const [name, setName] = useState("");
@@ -72,24 +62,19 @@ const AddShowcase = (props) => {
   ];
 
   const getShowcase = () => {
-    Axios.get("http://34.65.174.141:3001/Showcase").then(
-      (response) => {
-        setShowcaseList(response.data);
-      }
-    );
+    Axios.get("http://34.65.174.141:3001/Showcase").then((response) => {
+      setShowcaseList(response.data);
+    });
   };
 
   const getDisplay = () => {
-    Axios.get("http://34.65.174.141:3001/Display").then(
-      (response) => {
-        setDisplayList(response.data);
-      }
-    );
+    Axios.get("http://34.65.174.141:3001/Display").then((response) => {
+      setDisplayList(response.data);
+    });
   };
 
   return (
     <>
-      <button onClick={getShowcase}>Show Showcase</button>
       {showcaseList.map((val, key) => {
         return (
           <div className="showcase">
@@ -104,60 +89,73 @@ const AddShowcase = (props) => {
           </div>
         );
       })}
-      <div className="txtJ">
+      <div className="txtf">
         <TextField
           value={number}
           onChange={(event) => {
             setNumber(event.target.value);
           }}
           variant="outlined"
-          style={contentContainerStyle}
           type="text"
           name="Number"
           label="Number"
           helperText={number === "" ? "Field cannot be empty" : ""}
           error={number === ""}
         />
+        <br />
+        <br />
         <TextField
           value={name}
           onChange={(event) => {
             setName(event.target.value);
           }}
           variant="outlined"
-          style={contentContainerStyle}
           type="text"
           name="Name"
           label="Name"
           helperText={name === "" ? "Field cannot be empty" : ""}
           error={name === ""}
         />
+        <br />
+        <br />
         <TextField
           value={description}
           onChange={(event) => {
             setDescription(event.target.value);
           }}
           variant="outlined"
-          style={contentContainerStyle}
           type="text"
           name="Description"
           label="Description"
           helperText={description === "" ? "Field cannot be empty" : ""}
           error={description === ""}
         />
+        <br />
+        <br />
         <TextField
           value={type}
           onChange={(event) => {
             setType(event.target.value);
           }}
           variant="outlined"
-          style={contentContainerStyle}
           type="text"
           name="Type"
           label="Type"
           helperText={type === "" ? "Field cannot be empty" : ""}
           error={type === ""}
         />
-        <div style={contentContainerStyle}>
+        <br />
+        <br />
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <label htmlFor="">Special Care</label>
+          <br />
+          <br />
           <Select
             value={{
               value: specialCare,
@@ -169,6 +167,8 @@ const AddShowcase = (props) => {
             }}
           />
         </div>
+        <br />
+        <br />
         Display:
         <select
           value={{ value: selectedValue.id, label: selectedValue.Name }}
@@ -188,15 +188,20 @@ const AddShowcase = (props) => {
             );
           })}
         </select>
+        <br />
+        <br />
+        <Button
+          variant="contained"
+          color="primary"
+          type="submit"
+          onClick={postShowcase}
+        >
+          Add Showcase
+        </Button>
+        <button id="check" onClick={getShowcase}>
+          Show Showcase
+        </button>
       </div>
-      <Button
-        variant="contained"
-        color="primary"
-        type="submit"
-        onClick={postShowcase}
-      >
-        Add Showcase
-      </Button>
     </>
   );
 };

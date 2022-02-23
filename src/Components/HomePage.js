@@ -1,20 +1,75 @@
 import React from "react";
 import "../App.css";
-import ReactUploadImage from "./ReactUploadImage.js";
+import {
+  Container,
+  CardGroup,
+  Card,
+  ListGroupItem,
+  ListGroup,
+  Button,
+} from "react-bootstrap";
+import Data from "../Images/Data.jpg";
+import Reports from "../Images/Reports.png";
+import Course from "../Images/Course.jpg";
+
 const HomePage = () => {
   return (
     <div>
-      <div>
-        <h1 style={{ textAlign: "center" }}>Welcome To Museum</h1>
-        {/* <ReactUploadImage /> */}
-        <div style={{ textAlign: "center" }}>
-          <img
-            alt="fautly"
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Tel_Hai_128.jpg/2560px-Tel_Hai_128.jpg"
-            style={{ width: "1000px", height: "652px", textAlign: "center" }}
-          ></img>
-        </div>
-      </div>
+      <Container>
+        <CardGroup style={{ padding: "10px" }}>
+          <Card className="card" border="primary">
+            <Card.Img className="cardImage" variant="top" src={Data} />
+            <Card.Body>
+              <Card.Title>Manage Data</Card.Title>
+              <Card.Text>
+                Here you can add, modify or delete items from the museum
+                database.
+              </Card.Text>
+              <ListGroup className="list-group-flush">
+                <ListGroupItem>
+                  <Button variant="primary" href="/Add">
+                    Add Data
+                  </Button>
+                </ListGroupItem>
+                <ListGroupItem>
+                  <Button variant="primary">Manage Data</Button>
+                </ListGroupItem>
+              </ListGroup>
+            </Card.Body>
+          </Card>
+          <Card className="card" border="primary">
+            <Card.Img className="cardImage" variant="top" src={Reports} />
+            <Card.Body>
+              <Card.Title>Reports</Card.Title>
+              <Card.Text>Generate Reports from the museum database</Card.Text>
+              <ListGroup className="list-group-flush">
+                <ListGroupItem>
+                  <Button variant="primary" href="/Add">
+                    Reports
+                  </Button>
+                </ListGroupItem>
+              </ListGroup>
+            </Card.Body>
+          </Card>
+          <Card className="card" border="primary">
+            <Card.Img className="cardImage" variant="top" src={Course} />
+            <Card.Body>
+              <Card.Title>Course Wizard</Card.Title>
+              <Card.Text>
+                Here you can add, modify or delete courses from treasure hunt's
+                games.
+              </Card.Text>
+              <ListGroup className="list-group-flush">
+                <ListGroupItem>
+                  <Button variant="primary" href="/CourseWizard">
+                    Course Wizard
+                  </Button>
+                </ListGroupItem>
+              </ListGroup>
+            </Card.Body>
+          </Card>
+        </CardGroup>
+      </Container>
     </div>
   );
 };

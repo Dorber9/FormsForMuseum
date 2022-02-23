@@ -7,6 +7,7 @@ import AddDisplay from "./Add/AddDisplay";
 import AddItem from "./Add/AddItem";
 import AddShowcase from "./Add/AddShowcase";
 import AddSection from "./Add/AddSection";
+import Header from "./Header";
 import "../App.css";
 <head>
   <link
@@ -32,27 +33,27 @@ const Add = () => {
         </TabList>
 
         <TabPanel>
-          <h2 style={{ textAlign: "left" }}>Add Museum</h2>
+          <h2 style={{ textAlign: "center" }}>Add Museum</h2>
           <AddMuseum object={null} />
         </TabPanel>
         <TabPanel>
-          <h2 style={{ textAlign: "left" }}>Add Building</h2>
+          <h2 style={{ textAlign: "center" }}>Add Building</h2>
           <AddBuilding object={null} />
         </TabPanel>
         <TabPanel>
-          <h2 style={{ textAlign: "left" }}>Add Section</h2>
+          <h2 style={{ textAlign: "center" }}>Add Section</h2>
           <AddSection object={null} />
         </TabPanel>
         <TabPanel>
-          <h2 style={{ textAlign: "left" }}>Add Display</h2>
+          <h2 style={{ textAlign: "center" }}>Add Display</h2>
           <AddDisplay object={null} />
         </TabPanel>
         <TabPanel>
-          <h2 style={{ textAlign: "left" }}>Add Showcase</h2>
+          <h2 style={{ textAlign: "center" }}>Add Showcase</h2>
           <AddShowcase object={null} />
         </TabPanel>
         <TabPanel>
-          <h2 style={{ textAlign: "left" }}>Add New Item</h2>
+          <h2 style={{ textAlign: "center" }}>Add New Item</h2>
           <AddItem object={null} />
         </TabPanel>
       </Tabs>

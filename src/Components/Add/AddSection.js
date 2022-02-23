@@ -7,16 +7,6 @@ import "../../App.css";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 
-const contentContainerStyle = {
-  display: "block",
-  marginLeft: "5%",
-  marginTop: "15px",
-  marginBottom: "15px",
-  justifyContent: "center", //Centered vertically
-  alignItems: "center", // Centered horizontally
-  flex: 1,
-};
-
 const AddSection = (props) => {
   const [description, setDescription] = useState("");
   const [name, setName] = useState("");
@@ -56,24 +46,19 @@ const AddSection = (props) => {
   };
 
   const getSection = () => {
-    Axios.get("http://34.65.174.141:3001/section").then(
-      (response) => {
-        setSectionList(response.data);
-      }
-    );
+    Axios.get("http://34.65.174.141:3001/section").then((response) => {
+      setSectionList(response.data);
+    });
   };
 
   const getBuilding = () => {
-    Axios.get("http://34.65.174.141:3001/building").then(
-      (response) => {
-        setBuildingList(response.data);
-      }
-    );
+    Axios.get("http://34.65.174.141:3001/building").then((response) => {
+      setBuildingList(response.data);
+    });
   };
 
   return (
     <>
-      <button onClick={getSection}>Show Sections</button>
       {sectionList.map((val, key) => {
         return (
           <div className="section">
@@ -86,13 +71,12 @@ const AddSection = (props) => {
           </div>
         );
       })}
-      <div className="txtJ">
+      <div className="txtf">
         <TextField
           value={name}
           onChange={(event) => {
             setName(event.target.value);
           }}
-          style={contentContainerStyle}
           variant="outlined"
           type="text"
           name="name"
@@ -100,12 +84,13 @@ const AddSection = (props) => {
           helperText={name === "" ? "Field cannot be empty" : ""}
           error={name === ""}
         />
+        <br />
+        <br />
         <TextField
           value={description}
           onChange={(event) => {
             setDescription(event.target.value);
           }}
-          style={contentContainerStyle}
           variant="outlined"
           type="text"
           name="Description"
@@ -113,7 +98,9 @@ const AddSection = (props) => {
           helperText={description === "" ? "Field cannot be empty" : ""}
           error={description === ""}
         />
-        <div style={{ contentContainerStyle }}>
+        <br />
+        <br />
+        <div>
           <label>
             Building:
             <select
@@ -139,15 +126,20 @@ const AddSection = (props) => {
             </select>
           </label>
         </div>
+        <br />
+        <br />
+        <Button
+          variant="contained"
+          color="primary"
+          type="submit"
+          onClick={postSection}
+        >
+          Add Section
+        </Button>
+        <button id="check" onClick={getSection}>
+          Show Sections
+        </button>
       </div>
-      <Button
-        variant="contained"
-        color="primary"
-        type="submit"
-        onClick={postSection}
-      >
-        Add Section
-      </Button>
     </>
   );
 };

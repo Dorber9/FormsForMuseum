@@ -10,7 +10,7 @@ import IconButton from "@material-ui/core/IconButton";
 const AddSection = (props) => {
   const [description, setDescription] = useState("");
   const [name, setName] = useState("");
-  const [selectedValue, setSelectedValue] = useState("Please Select Building");
+  const [selectedValue, setSelectedValue] = useState("");
   const [sectionList, setSectionList] = useState([]);
   const [buildingList, setBuildingList] = useState([]);
   useEffect(() => {
@@ -25,7 +25,9 @@ const AddSection = (props) => {
   }, [props.object != null ? props.object : ""]);
 
   const postSection = () => {
-    if (selectedValue === "Please Select Building") {
+    console.log("selected value is")
+    console.log(selectedValue)
+    if (selectedValue === "") {
       alert("Please Select a Building");
     } else {
       Axios.post("http://34.65.174.141:3001/addSection", {
@@ -56,6 +58,16 @@ const AddSection = (props) => {
       setBuildingList(response.data);
     });
   };
+
+  const deleteSection = () => {
+  Axios.delete(
+    `http://34.65.174.141:3001/deleteMuseum/${props.object.idSection}`,
+    {}
+  ).then(() => {
+    window.location.reload(false);
+  });
+};
+
 
   return (
     <>
@@ -109,7 +121,6 @@ const AddSection = (props) => {
                 label: selectedValue.Name,
               }}
               onChange={(event) => {
-                console.log(event.target.value);
                 setSelectedValue(event.target.value);
               }}
             >
@@ -118,7 +129,7 @@ const AddSection = (props) => {
               </option>
               {buildingList.map((val, key) => {
                 return (
-                  <option className="building" value={val.BuildingID}>
+                  <option className="building" value={val.BuildingID} >
                     {val.Name}
                   </option>
                 );
@@ -136,6 +147,20 @@ const AddSection = (props) => {
         >
           Add Section
         </Button>
+        {props.object == null ? (
+          ""
+        ) : (
+      <Button
+      variant="contained"
+      color="primary"
+      type="submit"
+      style={{ color: "white", background: "red", marginLeft: "10px" }}
+      onClick={deleteSection}
+     >
+      Delete Section
+    </Button>
+    )}
+
         <button id="check" onClick={getSection}>
           Show Sections
         </button>

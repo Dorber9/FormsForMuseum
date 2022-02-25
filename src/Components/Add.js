@@ -18,9 +18,10 @@ import "../App.css";
   ></link>
 </head>;
 
+
 const Add = () => {
   return (
-    <div className="tb">
+    <div className="tb" style={{}}>
       <h1>Manage Museum Data</h1>
       <Tabs>
         <TabList>

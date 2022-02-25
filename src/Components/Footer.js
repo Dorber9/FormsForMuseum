@@ -17,6 +17,7 @@ import {
 
 const Footer = () => {
   return (
+    <div className="footerStyle">
     <Box>
       <Container>
         <Row style={{ marginLeft: "25%" }}>
@@ -49,6 +50,7 @@ const Footer = () => {
         </Row>
       </Container>
     </Box>
+    </div>
   );
 };
 export default Footer;

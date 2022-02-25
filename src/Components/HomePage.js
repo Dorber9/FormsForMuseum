@@ -12,6 +12,7 @@ import Data from "../Images/Data.jpg";
 import Reports from "../Images/Reports.png";
 import Course from "../Images/Course.jpg";
 
+
 const HomePage = () => {
   return (
     <div>
@@ -32,7 +33,7 @@ const HomePage = () => {
                   </Button>
                 </ListGroupItem>
                 <ListGroupItem>
-                  <Button variant="primary">Manage Data</Button>
+                  <Button variant="primary" href="/ModifyData">Manage Data</Button>
                 </ListGroupItem>
               </ListGroup>
             </Card.Body>

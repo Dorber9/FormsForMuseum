@@ -69,6 +69,15 @@ const AddBuilding = (props) => {
     });
   };
 
+  const deleteBuilding = () => {
+  Axios.delete(
+    `http://34.65.174.141:3001/deleteBuilding/${props.object.BuildingID}`,
+    {}
+  ).then(() => {
+    window.location.reload(false);
+  });
+};
+
   return (
     <>
       {buildingList.map((val, key) => {
@@ -154,9 +163,26 @@ const AddBuilding = (props) => {
         >
           Add Building
         </Button>
+        {
+  props.object == null ? (
+    ""
+  ) : (
+    <Button
+      variant="contained"
+      color="primary"
+      type="submit"
+      style={{color: "white", background:"red" , marginLeft:"10px"}}
+      onClick={deleteBuilding}
+    >
+      Delete Building
+    </Button>
+  )
+}
+
         <button onClick={getBuilding} id="check">
           Show Buildings
         </button>
+       
       </div>
     </>
   );

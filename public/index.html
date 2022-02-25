@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="utf-8" />
-    <link
-      rel="icon"
-      href="https://ugmp.co.il/wp-content/uploads/2019/06/logo_amnon-1024x669.png"
-    />
+    <link rel="icon" href="https://ugmp.co.il/wp-content/uploads/2019/06/logo_amnon-1024x669.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
 
@@ -25,10 +23,9 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <title>Museum of Prehistoric</title>
-  </head>
+</head>
 
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
+<body class="Background">
     <div id="root"></div>
     <!--
       This HTML file is a template.
@@ -40,5 +37,17 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
-  </body>
+</body>
+
+<style>
+    .Background {
+        background-image: url("./bg.jpg"), linear-gradient(45deg, #000000e0, transparent);
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+</style>
+
 </html>

@@ -252,21 +252,34 @@ const AddDisplay = (props) => {
         <br />
         Section:
         <select
-          value={{ value: selectedValue.id, label: selectedValue.Name }}
           onChange={(event) => {
             setSelectedValue(event.target.value);
-            console.log("HI");
           }}
         >
-          <option disabled selected value>
-            Please Select Section
-          </option>
+          {props.object == null ? (
+            <option disabled selected value>
+              Please Select Section
+            </option>
+          ) : (
+            ""
+          )}
+
           {sectionList.map((val, key) => {
-            return (
-              <option className="section" value={val.idSection}>
-                {val.Name}
-              </option>
-            );
+            if (props.object != null) {
+              if (val.idSection == props.object.SectionID) {
+                return (
+                  <option selected className="section" value={val.idSection}>
+                    {val.Name}
+                  </option>
+                );
+              }
+            } else {
+              return (
+                <option className="section" value={val.idSection}>
+                  {val.Name}
+                </option>
+              );
+            }
           })}
         </select>
         <br />

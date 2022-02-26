@@ -25,8 +25,8 @@ const AddSection = (props) => {
   }, [props.object != null ? props.object : ""]);
 
   const postSection = () => {
-    console.log("selected value is")
-    console.log(selectedValue)
+    console.log("selected value is");
+    console.log(selectedValue);
     if (selectedValue === "") {
       alert("Please Select a Building");
     } else {
@@ -60,14 +60,13 @@ const AddSection = (props) => {
   };
 
   const deleteSection = () => {
-  Axios.delete(
-    `http://34.65.174.141:3001/deleteMuseum/${props.object.idSection}`,
-    {}
-  ).then(() => {
-    window.location.reload(false);
-  });
-};
-
+    Axios.delete(
+      `http://34.65.174.141:3001/deleteMuseum/${props.object.idSection}`,
+      {}
+    ).then(() => {
+      window.location.reload(false);
+    });
+  };
 
   return (
     <>
@@ -116,23 +115,37 @@ const AddSection = (props) => {
           <label>
             Building:
             <select
-              value={{
-                value: selectedValue.BuildingID,
-                label: selectedValue.Name,
-              }}
               onChange={(event) => {
                 setSelectedValue(event.target.value);
               }}
             >
-              <option disabled selected value>
-                Please Select Building
-              </option>
+              {props.object == null ? (
+                <option disabled selected value>
+                  Please Select Building
+                </option>
+              ) : (
+                ""
+              )}
+
               {buildingList.map((val, key) => {
-                return (
-                  <option className="building" value={val.BuildingID} >
-                    {val.Name}
-                  </option>
-                );
+                if (props.object != null) {
+                  if (val.BuildingID == props.object.BuildingID)
+                    return (
+                      <option
+                        selected
+                        className="building"
+                        value={val.BuildingID}
+                      >
+                        {val.Name}
+                      </option>
+                    );
+                } else {
+                  return (
+                    <option className="building" value={val.BuildingID}>
+                      {val.Name}
+                    </option>
+                  );
+                }
               })}
             </select>
           </label>
@@ -150,16 +163,16 @@ const AddSection = (props) => {
         {props.object == null ? (
           ""
         ) : (
-      <Button
-      variant="contained"
-      color="primary"
-      type="submit"
-      style={{ color: "white", background: "red", marginLeft: "10px" }}
-      onClick={deleteSection}
-     >
-      Delete Section
-    </Button>
-    )}
+          <Button
+            variant="contained"
+            color="primary"
+            type="submit"
+            style={{ color: "white", background: "red", marginLeft: "10px" }}
+            onClick={deleteSection}
+          >
+            Delete Section
+          </Button>
+        )}
 
         <button id="check" onClick={getSection}>
           Show Sections

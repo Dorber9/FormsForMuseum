@@ -171,21 +171,34 @@ const AddShowcase = (props) => {
         <br />
         Display:
         <select
-          value={{ value: selectedValue.id, label: selectedValue.Name }}
           onChange={(event) => {
             setSelectedValue(event.target.value);
-            console.log(event.target.value);
           }}
         >
-          <option disabled selected value>
-            Please Select Display
-          </option>
+          {props.object == null ? (
+            <option disabled selected value>
+              Please Select Display
+            </option>
+          ) : (
+            ""
+          )}
+
           {displayList.map((val, key) => {
-            return (
-              <option className="display" value={val.idDisplay}>
-                {val.Name}
-              </option>
-            );
+            if (props.object != null) {
+              if (val.idDisplay == props.object.DisplayID) {
+                return (
+                  <option selected className="display" value={val.idDisplay}>
+                    {val.Name}
+                  </option>
+                );
+              }
+            } else {
+              return (
+                <option className="display" value={val.idDisplay}>
+                  {val.Name}
+                </option>
+              );
+            }
           })}
         </select>
         <br />

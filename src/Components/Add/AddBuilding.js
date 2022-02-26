@@ -31,6 +31,7 @@ const AddBuilding = (props) => {
       setCity(props.object.City);
       setAddress(props.object.Address);
       setSelectedValue(museumList.filter((m) => m.id == props.object.MuseumID));
+      console.log(selectedValue);
     }
   }, [props.object != null ? props.object : ""]);
 
@@ -70,13 +71,13 @@ const AddBuilding = (props) => {
   };
 
   const deleteBuilding = () => {
-  Axios.delete(
-    `http://34.65.174.141:3001/deleteBuilding/${props.object.BuildingID}`,
-    {}
-  ).then(() => {
-    window.location.reload(false);
-  });
-};
+    Axios.delete(
+      `http://34.65.174.141:3001/deleteBuilding/${props.object.BuildingID}`,
+      {}
+    ).then(() => {
+      window.location.reload(false);
+    });
+  };
 
   return (
     <>
@@ -135,21 +136,35 @@ const AddBuilding = (props) => {
         <label>
           Museum:
           <select
-            value={{ value: selectedValue.id, label: selectedValue.name }}
             style={{ marginLeft: "10px" }}
             onChange={(event) => {
               setSelectedValue(event.target.value);
             }}
           >
-            <option disabled selected value>
-              Please Select Museum
-            </option>
+            {props.object == null ? (
+              <option disabled selected value>
+                Please Select Museum
+              </option>
+            ) : (
+              ""
+            )}
+
             {museumList.map((val, key) => {
-              return (
-                <option className="museum" value={val.id}>
-                  {val.name}
-                </option>
-              );
+              if (props.object != null) {
+                if (val.id == props.object.MuseumID) {
+                  return (
+                    <option selected className="museum" value={val.id}>
+                      {val.name}
+                    </option>
+                  );
+                }
+              } else {
+                return (
+                  <option className="museum" value={val.id}>
+                    {val.name}
+                  </option>
+                );
+              }
             })}
           </select>
         </label>
@@ -163,26 +178,23 @@ const AddBuilding = (props) => {
         >
           Add Building
         </Button>
-        {
-  props.object == null ? (
-    ""
-  ) : (
-    <Button
-      variant="contained"
-      color="primary"
-      type="submit"
-      style={{color: "white", background:"red" , marginLeft:"10px"}}
-      onClick={deleteBuilding}
-    >
-      Delete Building
-    </Button>
-  )
-}
+        {props.object == null ? (
+          ""
+        ) : (
+          <Button
+            variant="contained"
+            color="primary"
+            type="submit"
+            style={{ color: "white", background: "red", marginLeft: "10px" }}
+            onClick={deleteBuilding}
+          >
+            Delete Building
+          </Button>
+        )}
 
         <button onClick={getBuilding} id="check">
           Show Buildings
         </button>
-       
       </div>
     </>
   );

@@ -1,16 +1,16 @@
 import styled from "styled-components";
 
 export const Box = styled.div`
-  padding: 40px 60px;
+  padding: 20px 60px;
   background: #00001a;
-  position: relative;
+  position: abosulute;
   bottom: 0;
-  left: 0;
+
   width: 100%;
 
   @media (max-width: 1000px) {
     padding: 35px 0px;
-    align-items: left;
+    align-items: center;
   }
 `;
 
@@ -26,7 +26,7 @@ export const Container = styled.div`
 export const Column = styled.div`
   display: flex;
   flex-direction: column;
-  text-align: left;
+  text-align: center;
   margin-left: 60px;
 `;
 

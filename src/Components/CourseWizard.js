@@ -15,11 +15,11 @@ const CourseWizard = () => {
         </TabList>
 
         <TabPanel>
-          <h2 style={{ textAlign: "left" }}>Add New Course</h2>
+          <h2 style={{ textAlign: "left" }}>Add New Quest</h2>
           <AddCourse />
         </TabPanel>
         <TabPanel>
-          <h2 style={{ textAlign: "left" }}>Modify Course</h2>
+          <h2 style={{ textAlign: "left" }}>Modify Quest</h2>
           <ModifyCourse />
         </TabPanel>
       </Tabs>

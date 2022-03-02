@@ -243,33 +243,19 @@ function AddItem(props) {
           helperText={name === "" ? "Field cannot be empty" : ""}
           error={name === ""}
         />
-        <br />
-        <br />
+        
         <TextField
-          value={descr}
+          value={site}
+          style={{ marginLeft: "5px" }}
           onChange={(e) => {
-            setDescr(e.target.value);
+            setSite(e.target.value);
           }}
           variant="outlined"
           type="text"
-          name="Description"
-          placeholder="Description"
-          helperText={descr === "" ? "Field cannot be empty" : ""}
-          error={descr === ""}
-        />
-        <br />
-        <br />
-        <TextField
-          value={shortDescr}
-          onChange={(e) => {
-            setShortDescr(e.target.value);
-          }}
-          variant="outlined"
-          type="text"
-          name="Short Description"
-          placeholder="Short Description"
-          helperText={shortDescr === "" ? "Field cannot be empty" : ""}
-          error={shortDescr === ""}
+          name="Site"
+          placeholder="Site"
+          helperText={site === "" ? "Field cannot be empty" : ""}
+          error={site === ""}
         />
         <br />
         <br />
@@ -345,20 +331,6 @@ function AddItem(props) {
         <br />
 
         <TextField
-          value={site}
-          onChange={(e) => {
-            setSite(e.target.value);
-          }}
-          variant="outlined"
-          type="text"
-          name="Site"
-          placeholder="Site"
-          helperText={site === "" ? "Field cannot be empty" : ""}
-          error={site === ""}
-        />
-        <br />
-        <br />
-        <TextField
           value={period}
           onChange={(e) => {
             setPeriod(e.target.value);
@@ -370,10 +342,10 @@ function AddItem(props) {
           helperText={period === "" ? "Field cannot be empty" : ""}
           error={period === ""}
         />
-        <br />
-        <br />
+
         <TextField
           value={age}
+          style={{ marginLeft: "5px" }}
           onChange={(e) => {
             setAge(e.target.value);
           }}
@@ -384,10 +356,10 @@ function AddItem(props) {
           helperText={age === "" ? "Field cannot be empty" : ""}
           error={age === ""}
         />
-        <br />
-        <br />
+        
         <TextField
           value={material}
+          style={{ marginLeft: "5px" }}
           onChange={(e) => {
             setMaterial(e.target.value);
           }}
@@ -397,20 +369,6 @@ function AddItem(props) {
           placeholder="Material"
           helperText={material === "" ? "Field cannot be empty" : ""}
           error={material === ""}
-        />
-        <br />
-        <br />
-        <TextField
-          value={website}
-          onChange={(e) => {
-            setWebsite(e.target.value);
-          }}
-          variant="outlined"
-          type="text"
-          name="Website"
-          placeholder="Website"
-          helperText={website === "" ? "Field cannot be empty" : ""}
-          error={website === ""}
         />
         <br />
         <br />
@@ -426,10 +384,23 @@ function AddItem(props) {
           helperText={size === "" ? "Field cannot be empty" : ""}
           error={size === ""}
         />
-        <br />
-        <br />
+        
+        <TextField
+          value={website}
+          style={{ marginLeft: "5px" }}
+          onChange={(e) => {
+            setWebsite(e.target.value);
+          }}
+          variant="outlined"
+          type="text"
+          name="Website"
+          placeholder="Website"
+          helperText={website === "" ? "Field cannot be empty" : ""}
+          error={website === ""}
+        />
         <TextField
           value={references}
+          style={{ marginLeft: "5px" }}
           onChange={(e) => {
             setReferences(e.target.value);
           }}
@@ -439,6 +410,34 @@ function AddItem(props) {
           placeholder="References"
           helperText={references === "" ? "Field cannot be empty" : ""}
           error={references === ""}
+        />
+        <br />
+        <br />
+        <TextField
+          value={descr}
+          onChange={(e) => {
+            setDescr(e.target.value);
+          }}
+          variant="outlined"
+          type="text"
+          name="Description"
+          placeholder="Description"
+          helperText={descr === "" ? "Field cannot be empty" : ""}
+          error={descr === ""}
+        />
+        <br />
+        <br />
+        <TextField
+          value={shortDescr}
+          onChange={(e) => {
+            setShortDescr(e.target.value);
+          }}
+          variant="outlined"
+          type="text"
+          name="Short Description"
+          placeholder="Short Description"
+          helperText={shortDescr === "" ? "Field cannot be empty" : ""}
+          error={shortDescr === ""}
         />
         <br />
         <br />

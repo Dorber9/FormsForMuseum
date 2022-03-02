@@ -461,7 +461,7 @@ function AddItem(props) {
                   fullWidth
                   value={inputField.categoryDescr}
                   onChange={(event) => handleChangeInput(inputField.id, event)}
-                  rows="8"
+                  rows="4"
                 />
                 <IconButton
                   disabled={inputFields.length === 1}

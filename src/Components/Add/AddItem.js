@@ -243,7 +243,7 @@ function AddItem(props) {
           helperText={name === "" ? "Field cannot be empty" : ""}
           error={name === ""}
         />
-        
+
         <TextField
           value={site}
           style={{ marginLeft: "5px" }}
@@ -356,7 +356,7 @@ function AddItem(props) {
           helperText={age === "" ? "Field cannot be empty" : ""}
           error={age === ""}
         />
-        
+
         <TextField
           value={material}
           style={{ marginLeft: "5px" }}
@@ -384,7 +384,7 @@ function AddItem(props) {
           helperText={size === "" ? "Field cannot be empty" : ""}
           error={size === ""}
         />
-        
+
         <TextField
           value={website}
           style={{ marginLeft: "5px" }}
@@ -461,7 +461,7 @@ function AddItem(props) {
                   fullWidth
                   value={inputField.categoryDescr}
                   onChange={(event) => handleChangeInput(inputField.id, event)}
-                  rows="4"
+                  rows="3"
                 />
                 <IconButton
                   disabled={inputFields.length === 1}

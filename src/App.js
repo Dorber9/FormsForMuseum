@@ -14,7 +14,14 @@ import Header from "./Components/Header";
 function App() {
   return (
     <>
-      <div style={{ backgroundColor: "#ebebe0" }}>
+      <div
+        style={{
+          backgroundColor: "#ebebe0",
+          position: "absolute",
+          width: "100%",
+          height: "100%",
+        }}
+      >
         <Header />
 
         <BrowserRouter>
@@ -30,6 +37,7 @@ function App() {
             <Route exact path="/ModifyData" element={<ModifyData />}></Route>
             <Route exact path="/Reports" element={<Reports />}></Route>
           </Routes>
+
           <Footer />
         </BrowserRouter>
       </div>

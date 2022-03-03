@@ -46,7 +46,7 @@ const HomePage = () => {
               <Card.Text>Generate Reports from the museum database</Card.Text>
               <ListGroup className="list-group-flush">
                 <ListGroupItem>
-                  <Button variant="primary" href="/Add">
+                  <Button variant="primary" href="/Reports">
                     Reports
                   </Button>
                 </ListGroupItem>

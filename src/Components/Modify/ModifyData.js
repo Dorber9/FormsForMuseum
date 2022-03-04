@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from "react";
 import { useState, useEffect } from "react";
 import Select from "react-select";
@@ -8,19 +9,9 @@ import AddSection from "../Add/AddSection";
 import AddDisplay from "../Add/AddDisplay";
 import AddShowcase from "../Add/AddShowcase";
 import AddItem from "../Add/AddItem";
+import QRCode from "react-qr-code";
 
 import { render } from "react-dom";
-
-const contentContainerStyle = {
-  display: "block",
-  marginLeft: "5%",
-  marginTop: "15px",
-  marginBottom: "15px",
-  justifyContent: "center", //Centered vertically
-  alignItems: "center", // Centered horizontally
-  flex: 1,
-  width: "40%",
-};
 
 const ModifyData = () => {
   const [selectedObject, setSelectedObject] = useState("");
@@ -35,51 +26,39 @@ const ModifyData = () => {
   const [objectName, setObjectName] = useState("");
 
   const getDisplay = () => {
-    Axios.get("http://34.65.174.141:3001/Display").then(
-      (response) => {
-        setDisplayList(response.data);
-      }
-    );
+    Axios.get("http://34.65.174.141:3001/Display").then((response) => {
+      setDisplayList(response.data);
+    });
   };
 
   const getShowcase = () => {
-    Axios.get("http://34.65.174.141:3001/Showcase").then(
-      (response) => {
-        setShowcaseList(response.data);
-      }
-    );
+    Axios.get("http://34.65.174.141:3001/Showcase").then((response) => {
+      setShowcaseList(response.data);
+    });
   };
 
   const getItems = () => {
-    Axios.get("http://34.65.174.141:3001/Item").then(
-      (response) => {
-        setItemsList(response.data);
-      }
-    );
+    Axios.get("http://34.65.174.141:3001/Item").then((response) => {
+      setItemsList(response.data);
+    });
   };
 
   const getMuseum = () => {
-    Axios.get("http://34.65.174.141:3001/museum").then(
-      (response) => {
-        setMuseumList(response.data);
-      }
-    );
+    Axios.get("http://34.65.174.141:3001/museum").then((response) => {
+      setMuseumList(response.data);
+    });
   };
 
   const getBuilding = () => {
-    Axios.get("http://34.65.174.141:3001/building").then(
-      (response) => {
-        setBuildingList(response.data);
-      }
-    );
+    Axios.get("http://34.65.174.141:3001/building").then((response) => {
+      setBuildingList(response.data);
+    });
   };
 
   const getSection = () => {
-    Axios.get("http://34.65.174.141:3001/section").then(
-      (response) => {
-        setSectionList(response.data);
-      }
-    );
+    Axios.get("http://34.65.174.141:3001/section").then((response) => {
+      setSectionList(response.data);
+    });
   };
 
   const getWantedList = (id, type) => {
@@ -91,6 +70,7 @@ const ModifyData = () => {
           if (id === i.id) {
             wanted = i;
           }
+          return;
         });
         break;
 
@@ -99,6 +79,7 @@ const ModifyData = () => {
           if (id === i.BuildingID) {
             wanted = i;
           }
+          return;
         });
         break;
 
@@ -107,6 +88,7 @@ const ModifyData = () => {
           if (id === i.idSection) {
             wanted = i;
           }
+          return;
         });
         break;
 
@@ -115,6 +97,7 @@ const ModifyData = () => {
           if (id === i.idShowcase) {
             wanted = i;
           }
+          return;
         });
         break;
 
@@ -123,6 +106,7 @@ const ModifyData = () => {
           if (id === i.idDisplay) {
             wanted = i;
           }
+          return;
         });
         break;
 
@@ -131,6 +115,7 @@ const ModifyData = () => {
           if (id === i.ItemID) {
             wanted = i;
           }
+          return;
         });
         break;
     }
@@ -183,9 +168,15 @@ const ModifyData = () => {
     { value: "Item", label: "Item" },
   ];
   return (
-    <div>
+    <div style={{ minHeight: `calc(100vh - 80px)` }}>
       <h2>Hello, what would you like to modify?</h2>
-      <div style={contentContainerStyle}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
         <Select
           options={typeOptions}
           onChange={(e) => {
@@ -198,7 +189,13 @@ const ModifyData = () => {
       {selectedObject == "" ? (
         ""
       ) : (
-        <div style={contentContainerStyle}>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
           {selectedObject == "" ? (
             ""
           ) : (
@@ -208,6 +205,7 @@ const ModifyData = () => {
                 label:
                   objectName === "" ? "Select " + selectedObject : objectName,
               }}
+              maxMenuHeight={180}
               options={mapOptions()}
               onChange={(e) => {
                 setWantedObject(e.value);
@@ -237,6 +235,7 @@ const ModifyData = () => {
           )}
         </div>
       )}
+      <QRCode value="hey" size="150" />
     </div>
   );
 };

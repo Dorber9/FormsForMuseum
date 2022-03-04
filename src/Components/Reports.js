@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from "react";
 import { useState, useEffect } from "react";
 import Select from "react-select";
@@ -85,9 +86,9 @@ const Reports = () => {
         />
       </div>
       <div>
-        {selectedObject == ""
+        {selectedObject === ""
           ? ""
-          : selectedObject == "Museum"
+          : selectedObject === "Museum"
           ? museumList.map((m) => {
               return <h4>{m.name}</h4>;
             })

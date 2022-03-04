@@ -17,7 +17,7 @@ function App() {
       <div
         style={{
           backgroundColor: "#ebebe0",
-          position: "absolute",
+          position: "relative",
           width: "100%",
           height: "100%",
         }}
@@ -37,7 +37,6 @@ function App() {
             <Route exact path="/ModifyData" element={<ModifyData />}></Route>
             <Route exact path="/Reports" element={<Reports />}></Route>
           </Routes>
-
           <Footer />
         </BrowserRouter>
       </div>

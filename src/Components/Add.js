@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useState } from "react";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
@@ -17,7 +18,6 @@ import "../App.css";
     crossorigin="anonymous"
   ></link>
 </head>;
-
 
 const Add = () => {
   return (

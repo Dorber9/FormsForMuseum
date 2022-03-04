@@ -1,3 +1,4 @@
+/* eslint-disable */
 import Container from "@material-ui/core/Container";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
@@ -484,9 +485,9 @@ function AddItem(props) {
           >
             Add Item
           </Button>
+          <button onClick={getItems}>Show Items</button>
         </form>
 
-        <button onClick={getItems}>Show Items</button>
         {itemsList.map((val, key) => {
           return (
             <div className="desplay">

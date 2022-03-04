@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from "react";
 import { TextField } from "@material-ui/core";
 import { useState, useEffect } from "react";
@@ -52,9 +53,8 @@ const AddMuseum = (props) => {
       `http://34.65.174.141:3001/deleteMuseum/${props.object.id}`,
       {}
     ).then(() => {
-        window.location.reload(false);
+      window.location.reload(false);
     });
-    
   };
 
   const getMuseum = () => {
@@ -111,7 +111,7 @@ const AddMuseum = (props) => {
         ) : (
           <Button
             variant="contained"
-            style={{color: "white", background:"red" , marginLeft:"10px"}}
+            style={{ color: "white", background: "red", marginLeft: "10px" }}
             type="submit"
             onClick={deleteMuseum}
           >

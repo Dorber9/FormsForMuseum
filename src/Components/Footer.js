@@ -1,3 +1,4 @@
+/* eslint-disable */
 import {
   FaInstagram,
   FaYoutube,
@@ -56,7 +57,8 @@ import {
 
 const Footer = () => (
   <footer className="footer">
-    ©<FooterLink>Dor Berko </FooterLink>
+    <FaCopyright />
+    <FooterLink>Dor Berko </FooterLink>
     <FooterLink>Yuval Maron </FooterLink>
     <FooterLink>Eitan Ivchanko </FooterLink>
     <FooterLink>Liran Segal</FooterLink>

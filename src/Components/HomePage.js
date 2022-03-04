@@ -14,7 +14,7 @@ import Course from "../Images/Course.jpg";
 
 const HomePage = () => {
   return (
-    <div>
+    <div style={{ minHeight: `calc(100vh - 80px)` }}>
       <Container>
         <CardGroup style={{ padding: "10px" }}>
           <Card className="card" border="primary">

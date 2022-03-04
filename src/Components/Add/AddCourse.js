@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { Container, TextField } from "@material-ui/core";
 import React from "react";
 import Select from "react-select";
@@ -45,6 +46,7 @@ const AddCourse = () => {
   const [courseName, setCourseName] = useState("");
   const [selectedObject, setSelectedObject] = useState("");
   const [itemData, setItemData] = useState("");
+  const [correct, setCorrect] = useState("0");
   const [displayList, setDisplayList] = useState([]);
   const [showcaseList, setShowcaseList] = useState([]);
   const [itemsList, setItemsList] = useState([]);
@@ -61,6 +63,12 @@ const AddCourse = () => {
     { id: uuidv4(), type: "", objectName: "", question: "" },
   ]);
 
+  const options = [
+    { value: "1", label: "1" },
+    { value: "2", label: "2" },
+    { value: "3", label: "3" },
+    { value: "4", label: "4" },
+  ];
   const addCourse = () => {};
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -107,29 +115,23 @@ const AddCourse = () => {
   };
 
   const getDisplay = () => {
-    Axios.get("http://34.65.174.141:3001/Display").then(
-      (response) => {
-        setDisplayList(response.data);
-      }
-    );
+    Axios.get("http://34.65.174.141:3001/Display").then((response) => {
+      setDisplayList(response.data);
+    });
     displayOptions();
   };
 
   const getShowcase = () => {
-    Axios.get("http://34.65.174.141:3001/Showcase").then(
-      (response) => {
-        setShowcaseList(response.data);
-      }
-    );
+    Axios.get("http://34.65.174.141:3001/Showcase").then((response) => {
+      setShowcaseList(response.data);
+    });
     showcaseOptions();
   };
 
   const getItems = () => {
-    Axios.get("http://34.65.174.141:3001/Item").then(
-      (response) => {
-        setItemsList(response.data);
-      }
-    );
+    Axios.get("http://34.65.174.141:3001/Item").then((response) => {
+      setItemsList(response.data);
+    });
     itemOptions();
   };
 
@@ -168,7 +170,7 @@ const AddCourse = () => {
           style={contentContainerStyle}
           type="text"
           name="courseName"
-          placeholder="Course Name"
+          placeholder="Quest Name"
           helperText={courseName === "" ? "Field cannot be empty" : ""}
           error={courseName === ""}
         />
@@ -237,19 +239,77 @@ const AddCourse = () => {
                   }}
                 />
               </div>
-              <div style={{ marginRight: "10%", marginLeft: "10%" }}>
+              <div>
                 <TextField
                   name="question"
                   label="Question"
                   variant="filled"
-                  multiline
                   fullWidth
                   value={inputField.question}
                   onChange={(event) =>
                     handleChangeInputText(inputField.id, event)
                   }
-                  rows="6"
                 />
+                <TextField
+                  name="answer1"
+                  label="First Answer"
+                  variant="outlined"
+                  style={{ width: "25%" }}
+                  value={inputField.question}
+                  onChange={(event) =>
+                    handleChangeInputText(inputField.id, event)
+                  }
+                />
+                <TextField
+                  name="answer2"
+                  label="Second Answer"
+                  variant="outlined"
+                  style={{ width: "25%" }}
+                  value={inputField.question}
+                  onChange={(event) =>
+                    handleChangeInputText(inputField.id, event)
+                  }
+                />
+                <br />
+                <TextField
+                  name="answer3"
+                  label="Third Answer"
+                  variant="outlined"
+                  style={{ width: "25%" }}
+                  value={inputField.question}
+                  onChange={(event) =>
+                    handleChangeInputText(inputField.id, event)
+                  }
+                />
+                <TextField
+                  name="answer4"
+                  label="Fourth Answer"
+                  variant="outlined"
+                  style={{ width: "25%" }}
+                  value={inputField.question}
+                  onChange={(event) =>
+                    handleChangeInputText(inputField.id, event)
+                  }
+                />
+                <div style={{ width: "20%", display: "inline-block" }}>
+                  <Select
+                    options={options}
+                    onChange={(e) => {
+                      setCorrect(e.value);
+                    }}
+                  />
+                </div>
+                <TextField
+                  name="hint"
+                  label="Hint"
+                  variant="outlined"
+                  style={{ width: "75%" }}
+                  value={inputField.question}
+                  onChange={(event) =>
+                    handleChangeInputText(inputField.id, event)
+                  }
+                />
+
                 <IconButton
                   disabled={inputFields.length === 1}
                   onClick={() => handleRemoveFields(inputField.id)}

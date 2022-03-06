@@ -69,7 +69,10 @@ const Reports = () => {
     { value: "Item", label: "Item" },
   ];
   return (
-    <div style={{ textAlign: "center", alignItems: "center" }}>
+    <div
+      className="pshDwn"
+      style={{ textAlign: "center", alignItems: "center" }}
+    >
       <h2>Reports</h2>
       <div
         style={{

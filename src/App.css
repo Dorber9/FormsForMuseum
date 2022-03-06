@@ -123,3 +123,7 @@ main {
   font-size: 12px;
   text-align: center;
 }
+
+.pshDwn {
+  min-height: calc(100vh - 80px);
+}

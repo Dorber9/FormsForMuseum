@@ -179,8 +179,8 @@ const AddCourse = () => {
 
         <div className="rowC">
           <Select
+            styles={selectStyles}
             name="type"
-            className="rS"
             options={objectsList}
             onChange={(e) => {
               setSelectedObject(e.value);
@@ -209,11 +209,6 @@ const AddCourse = () => {
               <h2>Next Item</h2>
               <div className="rowC">
                 <Select
-<<<<<<< HEAD
-                  style={{zIndex: 0}}
-                  className="rS"
-=======
->>>>>>> d5926866f4940f39c337c3b38d2796d27247fa9c
                   options={objectsList}
                   styles={selectStyles}
                   onChange={(e) => {

@@ -9,7 +9,6 @@ import AddSection from "../Add/AddSection";
 import AddDisplay from "../Add/AddDisplay";
 import AddShowcase from "../Add/AddShowcase";
 import AddItem from "../Add/AddItem";
-import QRCode from "react-qr-code";
 
 import { render } from "react-dom";
 
@@ -235,7 +234,6 @@ const ModifyData = () => {
           )}
         </div>
       )}
-      <QRCode value="hey" size="150" />
     </div>
   );
 };

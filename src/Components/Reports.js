@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import Select from "react-select";
 import Axios from "axios";
 import "../App.css";
+import QRCode from "react-qr-code";
+
 
 const Reports = () => {
   const [selectedObject, setSelectedObject] = useState("");
@@ -69,6 +71,7 @@ const Reports = () => {
     { value: "Item", label: "Item" },
   ];
   return (
+    <>
     <div
       className="pshDwn"
       style={{ textAlign: "center", alignItems: "center" }}
@@ -97,7 +100,12 @@ const Reports = () => {
             })
           : ""}
       </div>
+      <br></br>
+      Qr code Example:
+                    <QRCode value="https://ugmp.co.il/" size="150" />
     </div>
+    
+    </>
   );
 };
 

@@ -209,6 +209,7 @@ const AddCourse = () => {
               <h2>Next Item</h2>
               <div className="rowC">
                 <Select
+                  style={{zIndex: 0}}
                   className="rS"
                   options={objectsList}
                   onChange={(e) => {
@@ -244,7 +245,9 @@ const AddCourse = () => {
                   name="question"
                   label="Question"
                   variant="filled"
+                  style={{zIndex: 1}}
                   fullWidth
+                  hiddenLabel
                   value={inputField.question}
                   onChange={(event) =>
                     handleChangeInputText(inputField.id, event)

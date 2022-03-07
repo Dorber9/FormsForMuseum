@@ -12,7 +12,6 @@ import AddIcon from "@material-ui/icons/Add";
 import { v4 as uuidv4 } from "uuid";
 
 import Axios from "axios";
-import "../../App.css";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -27,8 +26,7 @@ const useStyles = makeStyles((theme) => ({
 
 const contentContainerStyle = {
   display: "block",
-  marginLeft: "5%",
-  marginTop: "15px",
+  
   marginBottom: "15px",
   justifyContent: "center", //Centered vertically
   alignItems: "center", // Centered horizontally
@@ -41,6 +39,8 @@ const objectsList = [
   { value: "Showcase", label: "Showcase" },
   { value: "Item", label: "Item" },
 ];
+
+const selectStyles = { menu: (styles) => ({ ...styles, zIndex: 999 }) };
 
 const AddCourse = () => {
   const [courseName, setCourseName] = useState("");
@@ -209,9 +209,13 @@ const AddCourse = () => {
               <h2>Next Item</h2>
               <div className="rowC">
                 <Select
+<<<<<<< HEAD
                   style={{zIndex: 0}}
                   className="rS"
+=======
+>>>>>>> d5926866f4940f39c337c3b38d2796d27247fa9c
                   options={objectsList}
+                  styles={selectStyles}
                   onChange={(e) => {
                     setSelectedObject(e.value);
                     handleChangeInput(inputField.id, "type", e);
@@ -220,6 +224,7 @@ const AddCourse = () => {
                 />
                 <Select
                   name="objectName"
+                  menuPortalTarget={document.body}
                   options={
                     selectedObject == "Display"
                       ? displayList.map((val, key) => {

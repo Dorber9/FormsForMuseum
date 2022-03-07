@@ -13,6 +13,8 @@ const options = [
   { value: "0", label: "Non permanent" },
 ];
 
+const selectStyles = { menu: (styles) => ({ ...styles, zIndex: 999 }) };
+
 const AddDisplay = (props) => {
   const [name, setName] = useState("");
   const [theme, setTheme] = useState("");
@@ -26,6 +28,8 @@ const AddDisplay = (props) => {
   const [sectionList, setSectionList] = useState([]);
   const [displayList, setDisplayList] = useState([]);
   const [selectedValue, setSelectedValue] = useState("Please Select Section");
+  const [curatorLabel, setCuratorLabel] = useState("Curator");
+
   useEffect(() => {
     getSection();
     if (props.object != null) {
@@ -153,6 +157,7 @@ const AddDisplay = (props) => {
               label: permanent == 1 ? "Permanent" : "Non permanent",
             }}
             options={options}
+            styles={selectStyles}
             onChange={(e) => {
               setPermanent(e.value);
               console.log(permanent);
@@ -203,7 +208,7 @@ const AddDisplay = (props) => {
           variant="outlined"
           type="text"
           name="Curator"
-          label="Curator"
+          label={curatorLabel}
           helperText={curator === "" ? "Field cannot be empty" : ""}
           error={curator === ""}
         />

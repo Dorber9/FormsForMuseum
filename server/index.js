@@ -10,7 +10,7 @@ const path = require("path");
 app.use(cors());
 app.use(express.json());
 
-const db = mysql.createConnection({
+const db = mysql.createPool({
   user: "root",
   host: "35.224.215.248",
   password: "MOPHM2022",

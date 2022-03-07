@@ -80,6 +80,7 @@ function AddItem(props) {
   const [display, setDisplay] = useState("");
   const [showcase, setShowcase] = useState("");
   const [references, setReferences] = useState("");
+
   const [itemData, setItemData] = useState([
     { id: uuidv4(), category: "", categoryDescr: "" },
   ]);

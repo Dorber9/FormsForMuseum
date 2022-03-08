@@ -11,6 +11,7 @@ import ModifyData from "./Components/Modify/ModifyData";
 import Reports from "./Components/Reports";
 import Header from "./Components/Header";
 
+
 function App() {
   return (
     <>
@@ -23,7 +24,7 @@ function App() {
         }}
       >
         <Header />
-
+        
         <BrowserRouter>
           <Routes>
             <Route exact path="/Add" element={<Add />}></Route>

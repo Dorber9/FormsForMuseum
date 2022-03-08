@@ -29,7 +29,7 @@ const Add = () => {
           <Tab>Building</Tab>
           <Tab>Section</Tab>
           <Tab>Display</Tab>
-          <Tab>Showcase</Tab>
+          <Tab>Exibition</Tab>
           <Tab>Item</Tab>
         </TabList>
 
@@ -50,7 +50,7 @@ const Add = () => {
           <AddDisplay object={null} />
         </TabPanel>
         <TabPanel>
-          <h2 style={{ textAlign: "center" }}>Add Showcase</h2>
+          <h2 style={{ textAlign: "center" }}>Add Exibition</h2>
           <AddShowcase object={null} />
         </TabPanel>
         <TabPanel>

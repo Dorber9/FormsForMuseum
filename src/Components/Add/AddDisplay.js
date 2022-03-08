@@ -13,7 +13,9 @@ const options = [
   { value: "0", label: "Non permanent" },
 ];
 
-const selectStyles = { menu: (styles) => ({ ...styles, zIndex: 999 }) };
+const selectStyles = {
+  menu: (styles) => ({ ...styles, zIndex: 999 }),
+};
 
 const AddDisplay = (props) => {
   const [name, setName] = useState("");
@@ -128,19 +130,31 @@ const AddDisplay = (props) => {
           helperText={name === "" ? "Field cannot be empty" : ""}
           error={name === ""}
         />
-        <br />
-        <br />
         <TextField
-          value={theme}
+          value={curator}
+          style={{ marginLeft: "5px" }}
           onChange={(e) => {
-            setTheme(e.target.value);
+            setCurator(e.target.value);
           }}
           variant="outlined"
           type="text"
-          name="Theme"
-          label="Theme"
-          helperText={theme === "" ? "Field cannot be empty" : ""}
-          error={theme === ""}
+          name="Curator"
+          label={curatorLabel}
+          helperText={curator === "" ? "Field cannot be empty" : ""}
+          error={curator === ""}
+        />
+        <TextField
+          value={designer}
+          style={{ marginLeft: "5px" }}
+          onChange={(e) => {
+            setDesigner(e.target.value);
+          }}
+          variant="outlined"
+          type="text"
+          name="Designer"
+          label="Designer"
+          helperText={designer === "" ? "Field cannot be empty" : ""}
+          error={designer === ""}
         />
         <br />
         <br />
@@ -165,7 +179,6 @@ const AddDisplay = (props) => {
           />
         </div>
         <br />
-        <br />
         {permanent === "1" ? (
           ""
         ) : (
@@ -182,9 +195,9 @@ const AddDisplay = (props) => {
               error={startDate === ""}
               disabled={permanent === "1"}
             />
-            <br />
-            <br />
+
             <TextField
+              style={{ marginLeft: "5px" }}
               value={endDate}
               onChange={(e) => {
                 setEndDate(e.target.value);
@@ -201,30 +214,29 @@ const AddDisplay = (props) => {
           </>
         )}
         <TextField
-          value={curator}
+          value={theme}
           onChange={(e) => {
-            setCurator(e.target.value);
+            setTheme(e.target.value);
           }}
           variant="outlined"
           type="text"
-          name="Curator"
-          label={curatorLabel}
-          helperText={curator === "" ? "Field cannot be empty" : ""}
-          error={curator === ""}
+          name="Theme"
+          label="Theme"
+          helperText={theme === "" ? "Field cannot be empty" : ""}
+          error={theme === ""}
         />
-        <br />
-        <br />
         <TextField
-          value={designer}
+          style={{ marginLeft: "5px" }}
+          value={reason}
           onChange={(e) => {
-            setDesigner(e.target.value);
+            setReason(e.target.value);
           }}
           variant="outlined"
           type="text"
-          name="Designer"
-          label="Designer"
-          helperText={designer === "" ? "Field cannot be empty" : ""}
-          error={designer === ""}
+          name="Reason"
+          label="Reason"
+          helperText={reason === "" ? "Field cannot be empty" : ""}
+          error={reason === ""}
         />
         <br />
         <br />
@@ -237,22 +249,12 @@ const AddDisplay = (props) => {
           type="text"
           name="Description"
           label="Description"
+          style={{ width: "75%" }}
+          fullWidth
+          multiline
+          rows="3"
           helperText={description === "" ? "Field cannot be empty" : ""}
           error={description === ""}
-        />
-        <br />
-        <br />
-        <TextField
-          value={reason}
-          onChange={(e) => {
-            setReason(e.target.value);
-          }}
-          variant="outlined"
-          type="text"
-          name="Reason"
-          label="Reason"
-          helperText={reason === "" ? "Field cannot be empty" : ""}
-          error={reason === ""}
         />
         <br />
         <br />

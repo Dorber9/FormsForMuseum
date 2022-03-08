@@ -107,6 +107,10 @@ const AddSection = (props) => {
           type="text"
           name="Description"
           label="Description"
+          style={{ width: "75%" }}
+          fullWidth
+          multiline
+          rows="3"
           helperText={description === "" ? "Field cannot be empty" : ""}
           error={description === ""}
         />

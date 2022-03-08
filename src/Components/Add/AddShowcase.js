@@ -11,9 +11,9 @@ const AddShowcase = (props) => {
   const [number, setNumber] = useState("");
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-
   const [type, setType] = useState("");
   const [specialCare, setSpecialCare] = useState("0");
+  const [specialCareDesc, setSpecialCareDesc] = useState("");
   const [showcaseList, setShowcaseList] = useState([]);
   const [displayList, setDisplayList] = useState([]);
   const [selectedValue, setSelectedValue] = useState("Please Select Display");
@@ -103,9 +103,8 @@ const AddShowcase = (props) => {
           helperText={number === "" ? "Field cannot be empty" : ""}
           error={number === ""}
         />
-        <br />
-        <br />
         <TextField
+          style={{ marginLeft: "5px" }}
           value={name}
           onChange={(event) => {
             setName(event.target.value);
@@ -117,23 +116,8 @@ const AddShowcase = (props) => {
           helperText={name === "" ? "Field cannot be empty" : ""}
           error={name === ""}
         />
-        <br />
-        <br />
         <TextField
-          value={description}
-          onChange={(event) => {
-            setDescription(event.target.value);
-          }}
-          variant="outlined"
-          type="text"
-          name="Description"
-          label="Description"
-          helperText={description === "" ? "Field cannot be empty" : ""}
-          error={description === ""}
-        />
-        <br />
-        <br />
-        <TextField
+          style={{ marginLeft: "5px" }}
           value={type}
           onChange={(event) => {
             setType(event.target.value);
@@ -147,6 +131,25 @@ const AddShowcase = (props) => {
         />
         <br />
         <br />
+        <TextField
+          value={description}
+          onChange={(event) => {
+            setDescription(event.target.value);
+          }}
+          variant="outlined"
+          type="text"
+          name="Description"
+          label="Description"
+          style={{ width: "75%" }}
+          fullWidth
+          multiline
+          rows="3"
+          helperText={description === "" ? "Field cannot be empty" : ""}
+          error={description === ""}
+        />
+        <br />
+        <label htmlFor="">Special Care </label>
+        <br />
         <div
           style={{
             display: "flex",
@@ -154,20 +157,36 @@ const AddShowcase = (props) => {
             alignItems: "center",
           }}
         >
-          <label htmlFor="">Special Care</label>
-          <br />
-          <br />
+          
           <Select
-            value={{
-              value: specialCare,
-              label: specialCare === "1" ? "Yes" : "No",
-            }}
+            
             options={trueFalse}
             onChange={(e) => {
               setSpecialCare(e.value);
             }}
           />
         </div>
+        <br />
+        {specialCare === "0" ? (
+          ""
+        ) : (
+          <TextField
+            value={specialCareDesc}
+            onChange={(event) => {
+              setSpecialCareDesc(event.target.value);
+            }}
+            variant="outlined"
+            type="text"
+            name="specialCareDesc"
+            label="Special Care Description"
+            style={{ width: "75%" }}
+            fullWidth
+            multiline
+            rows="3"
+            helperText={specialCareDesc === "" ? "Field cannot be empty" : ""}
+            error={specialCareDesc === ""}
+          />
+        )}
         <br />
         <br />
         Display:

@@ -424,6 +424,10 @@ function AddItem(props) {
           type="text"
           name="Description"
           placeholder="Description"
+          style={{ width: "75%" }}
+          fullWidth
+          multiline
+          rows="3"
           helperText={descr === "" ? "Field cannot be empty" : ""}
           error={descr === ""}
         />
@@ -437,6 +441,10 @@ function AddItem(props) {
           variant="outlined"
           type="text"
           name="Short Description"
+          style={{ width: "75%" }}
+          fullWidth
+          multiline
+          rows="3"
           placeholder="Short Description"
           helperText={shortDescr === "" ? "Field cannot be empty" : ""}
           error={shortDescr === ""}

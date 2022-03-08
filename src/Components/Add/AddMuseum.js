@@ -81,20 +81,17 @@ const AddMuseum = (props) => {
       })}
 
       <div className="txtF">
-        <div style={{ padding: "1%" }}>
-          <label htmlFor="name">Museum's name</label>
-        </div>
         <TextField
           value={name}
+          required
           onChange={(event) => {
             setName(event.target.value);
           }}
-          variant="outlined"
+          variant="filled"
           type="text"
           name="name"
           label="Museum Name"
           helperText={name === "" ? "Field cannot be empty" : ""}
-          error={name === ""}
         />
         <br></br>
         <br></br>

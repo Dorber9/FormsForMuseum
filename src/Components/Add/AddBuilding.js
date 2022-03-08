@@ -18,10 +18,10 @@ const contentContainerStyle = {
 };
 
 const AddBuilding = (props) => {
-  const [address, setAddress] = useState("");
-  const [city, setCity] = useState("");
+  const [address, setAddress] = useState("1222000");
+  const [city, setCity] = useState("מעיין ברוך");
   const [name, setName] = useState("");
-  const [selectedValue, setSelectedValue] = useState("Please Select Museum");
+  const [selectedValue, setSelectedValue] = useState(1);
   const [buildingList, setBuildingList] = useState([]);
   const [museumList, setMuseumList] = useState([]);
   const [building, setBuilding] = useState({});
@@ -108,6 +108,7 @@ const AddBuilding = (props) => {
           error={name === ""}
         />
         <br />
+        <br />
         <TextField
           value={city}
           onChange={(event) => {
@@ -120,6 +121,7 @@ const AddBuilding = (props) => {
           helperText={city === "" ? "Field cannot be empty" : ""}
           error={city === ""}
         />
+        <br />
         <br />
         <TextField
           value={address}
@@ -134,9 +136,11 @@ const AddBuilding = (props) => {
           error={address === ""}
         />
         <br />
+        <br />
         <label>
           Museum:
           <select
+            value={selectedValue}
             style={{ marginLeft: "10px" }}
             onChange={(event) => {
               setSelectedValue(event.target.value);

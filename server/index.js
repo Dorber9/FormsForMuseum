@@ -494,7 +494,7 @@ app.delete("/delete/:id", (req, res) => {
 });
 
 const storage = multer.diskStorage({
-    destination: "./public/uploads/",
+    destination: "/home/mophm2022/frontEnd/src/public/uploads/",
     filename: function(req, file, cb) {
         cb(null, "IMAGE-" + Date.now() + path.extname(file.originalname));
     },

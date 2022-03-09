@@ -35,7 +35,7 @@ class ReactUploadImage extends React.Component {
     return (
       <form onSubmit={this.onFormSubmit}>
         <h1>File Upload</h1>
-        <img src={require('src/uploads/IMAGE-1646843561991.jpg')} />
+        <img src={require('../uploads/IMAGE-1646843561991.jpg')} />
         
         
         

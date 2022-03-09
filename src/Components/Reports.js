@@ -5,6 +5,7 @@ import Select from "react-select";
 import Axios from "axios";
 import "../App.css";
 import QRCode from "react-qr-code";
+import ReactUploadImage from "./ReactUploadImage";
 
 
 const Reports = () => {
@@ -70,6 +71,8 @@ const Reports = () => {
     { value: "Showcase", label: "Showcase" },
     { value: "Item", label: "Item" },
   ];
+
+ 
   return (
     <>
     <div
@@ -104,6 +107,9 @@ const Reports = () => {
       Qr code Example:
                     <QRCode value="https://ugmp.co.il/" size="150" />
     </div>
+    <div>
+          <ReactUploadImage></ReactUploadImage>
+        </div>
     
     </>
   );

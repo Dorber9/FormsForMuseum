@@ -38,7 +38,7 @@ class ReactUploadImage extends React.Component {
     return (
       <form onSubmit={this.onFormSubmit}>
         <h1>File Upload</h1>
-        <img src={AAA} />
+        <img src={AAA}></img>
         
         
         

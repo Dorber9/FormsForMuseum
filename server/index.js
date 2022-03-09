@@ -560,6 +560,6 @@ app.get("/test", function (req, res) {
 });
 
 app.listen(port, () => {
-  console.log("Yey, your server is running on port HADA" + port);
+  console.log("Yey, your server is running on port " + port);
 });
 

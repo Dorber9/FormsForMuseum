@@ -20,9 +20,10 @@ class ReactUploadImage extends React.Component {
       },
     };
     axios
-      .post("http://localhost:3001/upload", formData, config)
+      .post("http://34.65.174.141:3001/upload", formData, config)
       .then((response) => {
         alert("The file is successfully uploaded");
+        console.log(response);
       })
       .catch((error) => {});
   }

@@ -4,6 +4,10 @@ import React from "react";
 const axios = require("axios");
 
 
+var imageName = require('../public/uploads/IMAGE-1646846399222.jpeg')
+
+
+
 class ReactUploadImage extends React.Component {
   constructor(props) {
     super(props);
@@ -38,7 +42,7 @@ class ReactUploadImage extends React.Component {
     return (
       <form onSubmit={this.onFormSubmit}>
         <h1>File Upload</h1>
-        <img src={'../public/uploads/IMAGE-1646846399222.jpeg'} /> 
+        <img src={'imageName'} /> 
         
         
         

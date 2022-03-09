@@ -514,7 +514,7 @@ app.post("/upload", (req, res) => {
         console.log(`${__dirname}\\public\\uploads\\${req.file.filename}`)
             /*Now do where ever you want to do*/
         if (!err) {
-            return res.send(200).end();
+            return res.sendStatus(status);
         } else {
             res.json("idwidqwidwdi");
         }

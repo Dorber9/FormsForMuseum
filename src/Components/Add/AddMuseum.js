@@ -1,13 +1,11 @@
 /* eslint-disable */
 import React from "react";
-import { TextField } from "@material-ui/core";
+import { TextField, InputLabel } from "@material-ui/core";
 import { useState, useEffect } from "react";
 import Axios from "axios";
-import Container from "@material-ui/core/Container";
 import Button from "@material-ui/core/Button";
-import IconButton from "@material-ui/core/IconButton";
-import RemoveIcon from "@material-ui/icons/Remove";
-import AddIcon from "@material-ui/icons/Add";
+
+
 
 const AddMuseum = (props) => {
   const [name, setName] = useState("");
@@ -65,10 +63,6 @@ const AddMuseum = (props) => {
 
   return (
     <>
-      {/* <div>
-        <button onClick={getMuseum}>Show Museums</button>
-      </div> */}
-
       {museumList.map((val, key) => {
         return (
           <div className="museum">
@@ -81,17 +75,18 @@ const AddMuseum = (props) => {
       })}
 
       <div className="txtF">
+        {/* <InputLabel>Museum Name</InputLabel> <br /> */}
         <TextField
           value={name}
           required
+          style={{ borderBottomColor: "red" }}
           onChange={(event) => {
             setName(event.target.value);
           }}
-          variant="filled"
+          variant="outlined"
+          placeholder="Museum's Name"
           type="text"
           name="name"
-          label="Museum Name"
-          helperText={name === "" ? "Field cannot be empty" : ""}
         />
         <br></br>
         <br></br>

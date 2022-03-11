@@ -10,11 +10,17 @@ import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import ModifyData from "./Components/Modify/ModifyData";
 import Reports from "./Components/Reports";
 import Header from "./Components/Header";
+import {Translator} from 'react-auto-translate';
 
 
 function App() {
   return (
     <>
+     <Translator
+      from='en'
+      to='he'
+      googleApiKey='AIzaSyBp9UbjyBP9K1I4Yh8E9G_T6srKYKD8xR8'
+    >
       <div
         style={{
           backgroundColor: "#ebebe0",
@@ -41,6 +47,7 @@ function App() {
           <Footer />
         </BrowserRouter>
       </div>
+      </Translator>
     </>
   );
 }

@@ -8,6 +8,7 @@ import QRCode from "react-qr-code";
 import ReactUploadImage from "./ReactUploadImage";
 
 
+
 const Reports = () => {
   const [selectedObject, setSelectedObject] = useState("");
   const [displayList, setDisplayList] = useState([]);
@@ -75,6 +76,15 @@ const Reports = () => {
  
   return (
     <>
+   
+      <div
+        style={{
+          backgroundColor: "#ebebe0",
+          position: "relative",
+          width: "100%",
+          height: "100%",
+        }}
+      ></div>
     <div
       className="pshDwn"
       style={{ textAlign: "center", alignItems: "center" }}
@@ -104,13 +114,13 @@ const Reports = () => {
           : ""}
       </div>
       <br></br>
-      Qr code Example:
+      
+     
                     <QRCode value="https://ugmp.co.il/" size="150" />
     </div>
     <div>
           <ReactUploadImage></ReactUploadImage>
         </div>
-    
     </>
   );
 };

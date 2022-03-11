@@ -12,6 +12,8 @@ import AddItem from "../Add/AddItem";
 
 import { render } from "react-dom";
 
+const selectStyles = { menu: (styles) => ({ ...styles, zIndex: 999 }) };
+
 const ModifyData = () => {
   const [selectedObject, setSelectedObject] = useState("");
   const [wantedObject, setWantedObject] = useState("");
@@ -177,6 +179,7 @@ const ModifyData = () => {
         }}
       >
         <Select
+          styles={selectStyles}
           options={typeOptions}
           onChange={(e) => {
             setSelectedObject(e.value);
@@ -199,6 +202,7 @@ const ModifyData = () => {
             ""
           ) : (
             <Select
+              styles={selectStyles}
               value={{
                 value: wantedObject,
                 label:

@@ -11,20 +11,25 @@ import {
 import Data from "../Images/Data.jpg";
 import Reports from "../Images/Reports.png";
 import Course from "../Images/Course.jpg";
+import {Translate} from 'react-auto-translate';
 
 const HomePage = () => {
   return (
     <div style={{ minHeight: `calc(100vh - 80px)` }}>
       <Container>
+        
         <CardGroup style={{ padding: "10px" }}>
           <Card className="card" border="primary">
             <Card.Img className="cardImage" variant="top" src={Data} />
             <Card.Body>
               <Card.Title>Manage Data</Card.Title>
+              
               <Card.Text>
                 Here you can add, modify or delete items from the museum
                 database.
+                
               </Card.Text>
+              
               <ListGroup className="list-group-flush">
                 <ListGroupItem>
                   <Button variant="primary" href="/Add">
@@ -71,6 +76,7 @@ const HomePage = () => {
             </Card.Body>
           </Card>
         </CardGroup>
+      
       </Container>
     </div>
   );

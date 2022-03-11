@@ -1,5 +1,9 @@
 import React from "react";
+
+
 const axios = require("axios");
+
+
 
 class ReactUploadImage extends React.Component {
   constructor(props) {
@@ -34,8 +38,8 @@ class ReactUploadImage extends React.Component {
   render() {
     return (
       <form onSubmit={this.onFormSubmit}>
-        <h1>File Upload</h1>
-        <img src={"Desktop/unnamed.jpg"}></img>
+        <h1>File Upload</h1>  
+        
         <input type="file" name="myImage" onChange={this.onChange} />
         <button type="submit">Upload</button>
       </form>

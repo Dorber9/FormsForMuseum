@@ -10,6 +10,7 @@ import AddShowcase from "./Add/AddShowcase";
 import AddSection from "./Add/AddSection";
 import Header from "./Header";
 import "../App.css";
+import AddMuseumBuildingSection from "./Add/AddMuseumBuildingSection";
 <head>
   <link
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
@@ -25,26 +26,31 @@ const Add = () => {
       <h1>Manage Museum Data</h1>
       <Tabs>
         <TabList>
-          <Tab>Museum</Tab>
-          <Tab>Building</Tab>
-          <Tab>Section</Tab>
+          {/* <Tab>Museum</Tab> */}
+          <Tab>Museum/Building/Section</Tab>
+          {/* <Tab>Building</Tab> */}
+          {/* <Tab>Section</Tab> */}
           <Tab>Display</Tab>
           <Tab>Exibition</Tab>
           <Tab>Item</Tab>
         </TabList>
 
-        <TabPanel>
+        {/* <TabPanel>
           <h2 style={{ textAlign: "center" }}>Add Museum</h2>
           <AddMuseum object={null} />
-        </TabPanel>
+        </TabPanel> */}
         <TabPanel>
+          <h2 style={{ textAlign: "center" }}>Add Museum/Building/Section</h2>
+          <AddMuseumBuildingSection object={null}/>
+        </TabPanel>
+        {/* <TabPanel>
           <h2 style={{ textAlign: "center" }}>Add Building</h2>
           <AddBuilding object={null} />
-        </TabPanel>
-        <TabPanel>
+        </TabPanel> */}
+        {/* <TabPanel>
           <h2 style={{ textAlign: "center" }}>Add Section</h2>
           <AddSection object={null} />
-        </TabPanel>
+        </TabPanel> */}
         <TabPanel>
           <h2 style={{ textAlign: "center" }}>Add Display</h2>
           <AddDisplay object={null} />

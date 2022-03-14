@@ -35,6 +35,7 @@ const Header = () => {
               Reports <FaWpforms />
             </Nav.Link>
             <Nav.Link href="DemoPage">Demo</Nav.Link>
+            <Nav.Link href="ItemsList">Items List</Nav.Link>
           </Nav>
         </Container>
       </Navbar>

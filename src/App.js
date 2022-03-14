@@ -11,6 +11,8 @@ import ModifyData from "./Components/Modify/ModifyData";
 import Reports from "./Components/Reports";
 import Header from "./Components/Header";
 import {Translator} from 'react-auto-translate';
+import ListOfItems from "./Components/ListOfItems";
+
 
 
 function App() {
@@ -36,6 +38,7 @@ function App() {
             <Route exact path="/Add" element={<Add />}></Route>
             <Route exact path="/" element={<HomePage />}></Route>
             <Route exact path="/DemoPage" element={<DemoPage />}></Route>
+            <Route exact path="/ItemsList" element={<ListOfItems></ListOfItems>}></Route>
             <Route
               exact
               path="/CourseWizard"

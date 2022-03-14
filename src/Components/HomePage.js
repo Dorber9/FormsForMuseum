@@ -11,7 +11,6 @@ import {
 import Data from "../Images/Data.jpg";
 import Reports from "../Images/Reports.png";
 import Course from "../Images/Course.jpg";
-import {Translate} from 'react-auto-translate';
 
 const HomePage = () => {
   return (

@@ -11,6 +11,7 @@ import AddSection from "./Add/AddSection";
 import Header from "./Header";
 import "../App.css";
 import AddMuseumBuildingSection from "./Add/AddMuseumBuildingSection";
+import AddQuestion from "./Add/AddQuestion";
 <head>
   <link
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
@@ -22,7 +23,7 @@ import AddMuseumBuildingSection from "./Add/AddMuseumBuildingSection";
 
 const Add = () => {
   return (
-    <div className="tb" style={{}}>
+    <div className="tb">
       <h1>Manage Museum Data</h1>
       <Tabs>
         <TabList>
@@ -33,6 +34,7 @@ const Add = () => {
           <Tab>Display</Tab>
           <Tab>Exibition</Tab>
           <Tab>Item</Tab>
+          <Tab>Question</Tab>
         </TabList>
 
         {/* <TabPanel>
@@ -41,7 +43,7 @@ const Add = () => {
         </TabPanel> */}
         <TabPanel>
           <h2 style={{ textAlign: "center" }}>Add Museum/Building/Section</h2>
-          <AddMuseumBuildingSection object={null}/>
+          <AddMuseumBuildingSection object={null} />
         </TabPanel>
         {/* <TabPanel>
           <h2 style={{ textAlign: "center" }}>Add Building</h2>
@@ -62,6 +64,10 @@ const Add = () => {
         <TabPanel>
           <h2 style={{ textAlign: "center" }}>Add New Item</h2>
           <AddItem object={null} />
+        </TabPanel>
+        <TabPanel>
+          <h2 style={{ textAlign: "center" }}>Add New Question</h2>
+          <AddQuestion object={null} />
         </TabPanel>
       </Tabs>
     </div>

@@ -5,8 +5,6 @@ import { useState, useEffect } from "react";
 import Axios from "axios";
 import Button from "@material-ui/core/Button";
 
-
-
 const AddMuseum = (props) => {
   const [name, setName] = useState("");
   const [museumList, setMuseumList] = useState([]);
@@ -76,7 +74,9 @@ const AddMuseum = (props) => {
 
       <div className="txtF">
         {/* <InputLabel>Museum Name</InputLabel> <br /> */}
+
         <TextField
+          disabled
           value={name}
           required
           style={{ borderBottomColor: "red" }}

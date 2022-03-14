@@ -24,16 +24,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const contentContainerStyle = {
-  display: "block",
-  
-  marginBottom: "15px",
-  justifyContent: "center", //Centered vertically
-  alignItems: "center", // Centered horizontally
-  flex: 1,
-  width: "20%",
-};
-
 const objectsList = [
   { value: "Display", label: "Display" },
   { value: "Showcase", label: "Showcase" },
@@ -161,13 +151,12 @@ const AddCourse = () => {
 
   return (
     <Container>
-      <div className="txtj">
+      <div className="txtf">
         <TextField
           onChange={(e) => {
             setCourseName(e.target.value);
           }}
           variant="outlined"
-          style={contentContainerStyle}
           type="text"
           name="courseName"
           placeholder="Quest Name"
@@ -177,7 +166,14 @@ const AddCourse = () => {
         <br />
         <h2>Starting Item</h2>
 
-        <div className="rowC">
+        <div
+          className="txtf"
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
           <Select
             styles={selectStyles}
             name="type"
@@ -207,7 +203,14 @@ const AddCourse = () => {
           {inputFields.map((inputField) => (
             <div key={inputField.id}>
               <h2>Next Item</h2>
-              <div className="rowC">
+              <div
+                className="txtf"
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
                 <Select
                   options={objectsList}
                   styles={selectStyles}
@@ -245,7 +248,7 @@ const AddCourse = () => {
                   name="question"
                   label="Question"
                   variant="filled"
-                  style={{zIndex: 1}}
+                  style={{ zIndex: 1 }}
                   fullWidth
                   hiddenLabel
                   value={inputField.question}
@@ -273,7 +276,7 @@ const AddCourse = () => {
                     handleChangeInputText(inputField.id, event)
                   }
                 />
-                <br />
+
                 <TextField
                   name="answer3"
                   label="Third Answer"

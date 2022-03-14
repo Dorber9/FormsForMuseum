@@ -7,8 +7,8 @@ import ModifyCourse from "./Modify/ModifyCourse";
 
 const CourseWizard = () => {
   return (
-    <div>
-      <h1>Manage Museum Data</h1>
+    <div className="tb">
+      <h1>Manage Quests</h1>
       <Tabs>
         <TabList>
           <Tab>Add</Tab>
@@ -16,11 +16,11 @@ const CourseWizard = () => {
         </TabList>
 
         <TabPanel>
-          <h2 style={{ textAlign: "left" }}>Add New Quest</h2>
+          <h2 style={{ textAlign: "center" }}>Add New Quest</h2>
           <AddCourse />
         </TabPanel>
         <TabPanel>
-          <h2 style={{ textAlign: "left" }}>Modify Quest</h2>
+          <h2 style={{ textAlign: "center" }}>Modify Quest</h2>
           <ModifyCourse />
         </TabPanel>
       </Tabs>

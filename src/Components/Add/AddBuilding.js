@@ -110,6 +110,7 @@ const AddBuilding = (props) => {
         <br />
         <br />
         <TextField
+          disabled
           value={city}
           onChange={(event) => {
             setCity(event.target.value);
@@ -124,6 +125,7 @@ const AddBuilding = (props) => {
         <br />
         <br />
         <TextField
+          disabled
           value={address}
           onChange={(event) => {
             setAddress(event.target.value);

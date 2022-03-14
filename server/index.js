@@ -467,6 +467,17 @@ app.delete("/deleteItem/:id", (req, res) => {
     });
 });
 
+app.get("/Item/:id", (req, res) => {
+  const id = req.params.id;
+  db.query("SELECT * FROM item WHERE ItemID = ?", id, (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(result);
+    }
+  });
+});
+
 app.put("/update", (req, res) => {
     const id = req.body.id;
     const wage = req.body.wage;

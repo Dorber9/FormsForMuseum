@@ -130,7 +130,7 @@ function AddItem(props) {
       alert("Please Select a Display");
     } else {
       console.log(itemData);
-      Axios.post("http://localhost:3001/addItem", {
+      Axios.post("http://34.65.174.141:3001/addItem", {
         ID: itemId,
         name: name,
         descr: descr,

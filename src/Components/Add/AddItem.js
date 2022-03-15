@@ -1,5 +1,4 @@
 /* eslint-disable */
-import Container from "@material-ui/core/Container";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
@@ -8,6 +7,10 @@ import AddIcon from "@material-ui/icons/Add";
 import { v4 as uuidv4 } from "uuid";
 import { makeStyles } from "@material-ui/core/styles";
 import Select from "react-select";
+import {
+  Container,
+  Card,
+} from "react-bootstrap";
 
 import { useState, useEffect } from "react";
 import Axios from "axios";
@@ -218,6 +221,11 @@ function AddItem(props) {
 
   return (
     <>
+    <Container>
+      <Card className="addCard" border="secondary" style={{background: "#8080808a"}} >
+        <Card.Body>
+             
+              <Card.Text>
       <div className="txtf">
         <TextField
           value={itemId}
@@ -510,6 +518,10 @@ function AddItem(props) {
           );
         })}
       </div>
+              </Card.Text>
+      </Card.Body>
+      </Card>
+      </Container>
     </>
   );
 }

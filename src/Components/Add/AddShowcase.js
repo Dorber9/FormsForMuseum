@@ -6,6 +6,10 @@ import Axios from "axios";
 import "../../App.css";
 import Button from "@material-ui/core/Button";
 import Select from "react-select";
+import {
+  Container,
+  Card,
+} from "react-bootstrap";
 
 const AddShowcase = (props) => {
   const [number, setNumber] = useState("");
@@ -76,6 +80,11 @@ const AddShowcase = (props) => {
 
   return (
     <>
+    <Container>
+      <Card className="addCard" border="secondary" style={{background: "#8080808a"}} >
+        <Card.Body>
+             
+              <Card.Text>
       {showcaseList.map((val, key) => {
         return (
           <div className="showcase">
@@ -235,6 +244,10 @@ const AddShowcase = (props) => {
           Show Showcase
         </button>
       </div>
+          </Card.Text>
+      </Card.Body>
+      </Card>
+      </Container>
     </>
   );
 };

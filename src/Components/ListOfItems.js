@@ -1,5 +1,7 @@
 import React from 'react';
 import Select from "react-select";
+import { Link } from "react-router-dom";
+
 
 
 import { useState, useEffect } from "react";
@@ -33,6 +35,9 @@ const ListOfItems  =() => {
                     setItemId(e.value);
                   }}
           />
+           <Link to={`/Item/${itemID}`}>
+                  <button className="btn draw-border">View Item</button>
+                </Link>
           <ViewItemWiki itemId={itemID}> </ViewItemWiki>
         </div>
     );

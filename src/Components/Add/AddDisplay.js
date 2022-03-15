@@ -6,8 +6,11 @@ import Axios from "axios";
 import "../../App.css";
 import Select from "react-select";
 import Button from "@material-ui/core/Button";
-import IconButton from "@material-ui/core/IconButton";
-
+import {
+  Container,
+  Card,
+} from "react-bootstrap";
+import "../../App.css";
 const options = [
   { value: "1", label: "Permanent" },
   { value: "0", label: "Non permanent" },
@@ -99,6 +102,11 @@ const AddDisplay = (props) => {
 
   return (
     <>
+    <Container>
+      <Card className="addCard" border="secondary" style={{background: "#8080808a"}} >
+        <Card.Body>
+             
+              <Card.Text>
       {displayList.map((val, key) => {
         return (
           <div className="desplay">
@@ -304,6 +312,10 @@ const AddDisplay = (props) => {
           Show Display
         </button>
       </div>
+      </Card.Text>
+      </Card.Body>
+      </Card>
+      </Container>
     </>
   );
 };

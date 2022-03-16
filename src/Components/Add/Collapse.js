@@ -8,7 +8,7 @@ const Collapse = (props) => {
   };
   const { getCollapseProps, getToggleProps, isExpanded } = useCollapse(config);
   return (
-    <div className="collapsible">
+    <div className="collapsible" dir="rtl">
       <div className="header" {...getToggleProps()}>
         <div className="title">
           <h4>{props.title}</h4>

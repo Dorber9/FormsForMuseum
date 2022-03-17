@@ -6,10 +6,7 @@ import Axios from "axios";
 import "../../App.css";
 import Select from "react-select";
 import Button from "@material-ui/core/Button";
-import {
-  Container,
-  Card,
-} from "react-bootstrap";
+import { Container, Card } from "react-bootstrap";
 import "../../App.css";
 const options = [
   { value: "1", label: "Permanent" },
@@ -102,219 +99,226 @@ const AddDisplay = (props) => {
 
   return (
     <>
-    <Container>
-      <Card className="addCard" border="secondary" style={{background: "#8080808a"}} >
-        <Card.Body>
-             
-              <Card.Text>
-      {displayList.map((val, key) => {
-        return (
-          <div className="desplay">
-            <div>
-              <h3>Name: {val.Name}</h3>
-              <h3>Theme: {val.Theme}</h3>
-              <h3>permanent: {val.permanent}</h3>
-              <h3>StartDate: {val.StartDate}</h3>
-              <h3>EndDate: {val.EndDate}</h3>
-              <h3>Curator: {val.Curator}</h3>
-              <h3>Designer: {val.Designer}</h3>
-              <h3>Desc: {val.ShortDesc}</h3>
-              <h3>Reason: {val.Reason}</h3>
-              <h3>Section ID: {val.SectionID}</h3>
-            </div>
-          </div>
-        );
-      })}
-      <div className="txtf">
-        <TextField
-          value={name}
-          onChange={(e) => {
-            setName(e.target.value);
-          }}
-          variant="outlined"
-          type="text"
-          name="name"
-          label="Name"
-          helperText={name === "" ? "Field cannot be empty" : ""}
-          error={name === ""}
-        />
-        <TextField
-          value={curator}
-          style={{ marginLeft: "5px" }}
-          onChange={(e) => {
-            setCurator(e.target.value);
-          }}
-          variant="outlined"
-          type="text"
-          name="Curator"
-          label={curatorLabel}
-          helperText={curator === "" ? "Field cannot be empty" : ""}
-          error={curator === ""}
-        />
-        <TextField
-          value={designer}
-          style={{ marginLeft: "5px" }}
-          onChange={(e) => {
-            setDesigner(e.target.value);
-          }}
-          variant="outlined"
-          type="text"
-          name="Designer"
-          label="Designer"
-          helperText={designer === "" ? "Field cannot be empty" : ""}
-          error={designer === ""}
-        />
-        <br />
-        <br />
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
+      <Container>
+        <Card
+          className="addCard"
+          border="secondary"
+          style={{ background: "#dbdbdbad" }}
         >
-          <Select
-            value={{
-              value: "" + permanent,
-              label: permanent == 1 ? "Permanent" : "Non permanent",
-            }}
-            options={options}
-            styles={selectStyles}
-            onChange={(e) => {
-              setPermanent(e.value);
-              console.log(permanent);
-            }}
-          />
-        </div>
-        <br />
-        {permanent === "1" ? (
-          ""
-        ) : (
-          <>
-            <TextField
-              value={startDate}
-              onChange={(e) => {
-                setStartDate(e.target.value);
-              }}
-              variant="outlined"
-              type="date"
-              name="StartDate"
-              helperText="Start Date"
-              error={startDate === ""}
-              disabled={permanent === "1"}
-            />
-
-            <TextField
-              style={{ marginLeft: "5px" }}
-              value={endDate}
-              onChange={(e) => {
-                setEndDate(e.target.value);
-              }}
-              variant="outlined"
-              type="date"
-              name="EndDate"
-              helperText="End Date"
-              error={endDate === ""}
-              disabled={permanent === "1"}
-            />
-            <br />
-            <br />
-          </>
-        )}
-        <TextField
-          value={theme}
-          onChange={(e) => {
-            setTheme(e.target.value);
-          }}
-          variant="outlined"
-          type="text"
-          name="Theme"
-          label="Theme"
-          helperText={theme === "" ? "Field cannot be empty" : ""}
-          error={theme === ""}
-        />
-        <TextField
-          style={{ marginLeft: "5px" }}
-          value={reason}
-          onChange={(e) => {
-            setReason(e.target.value);
-          }}
-          variant="outlined"
-          type="text"
-          name="Reason"
-          label="Reason"
-          helperText={reason === "" ? "Field cannot be empty" : ""}
-          error={reason === ""}
-        />
-        <br />
-        <br />
-        <TextField
-          value={description}
-          onChange={(e) => {
-            setDescription(e.target.value);
-          }}
-          variant="outlined"
-          type="text"
-          name="Description"
-          label="Description"
-          style={{ width: "75%" }}
-          fullWidth
-          multiline
-          rows="3"
-          helperText={description === "" ? "Field cannot be empty" : ""}
-          error={description === ""}
-        />
-        <br />
-        <br />
-        Section:
-        <select
-          onChange={(event) => {
-            setSelectedValue(event.target.value);
-          }}
-        >
-          {props.object == null ? (
-            <option disabled selected value>
-              Please Select Section
-            </option>
-          ) : (
-            ""
-          )}
-
-          {sectionList.map((val, key) => {
-            if (props.object != null) {
-              if (val.idSection == props.object.SectionID) {
+          <Card.Body>
+            <Card.Text>
+              {displayList.map((val, key) => {
                 return (
-                  <option selected className="section" value={val.idSection}>
-                    {val.Name}
-                  </option>
+                  <div className="desplay">
+                    <div>
+                      <h3>Name: {val.Name}</h3>
+                      <h3>Theme: {val.Theme}</h3>
+                      <h3>permanent: {val.permanent}</h3>
+                      <h3>StartDate: {val.StartDate}</h3>
+                      <h3>EndDate: {val.EndDate}</h3>
+                      <h3>Curator: {val.Curator}</h3>
+                      <h3>Designer: {val.Designer}</h3>
+                      <h3>Desc: {val.ShortDesc}</h3>
+                      <h3>Reason: {val.Reason}</h3>
+                      <h3>Section ID: {val.SectionID}</h3>
+                    </div>
+                  </div>
                 );
-              }
-            } else {
-              return (
-                <option className="section" value={val.idSection}>
-                  {val.Name}
-                </option>
-              );
-            }
-          })}
-        </select>
-        <br />
-        <br />
-        <Button
-          variant="contained"
-          color="primary"
-          type="submit"
-          onClick={postDisplay}
-        >
-          Add Display
-        </Button>
-        {/* <button id="check" onClick={getDisplay}>
+              })}
+              <div className="txtf">
+                <TextField
+                  value={name}
+                  onChange={(e) => {
+                    setName(e.target.value);
+                  }}
+                  variant="outlined"
+                  type="text"
+                  name="name"
+                  label="Name"
+                  helperText={name === "" ? "Field cannot be empty" : ""}
+                  error={name === ""}
+                />
+                <TextField
+                  value={curator}
+                  style={{ marginLeft: "5px" }}
+                  onChange={(e) => {
+                    setCurator(e.target.value);
+                  }}
+                  variant="outlined"
+                  type="text"
+                  name="Curator"
+                  label={curatorLabel}
+                  helperText={curator === "" ? "Field cannot be empty" : ""}
+                  error={curator === ""}
+                />
+                <TextField
+                  value={designer}
+                  style={{ marginLeft: "5px" }}
+                  onChange={(e) => {
+                    setDesigner(e.target.value);
+                  }}
+                  variant="outlined"
+                  type="text"
+                  name="Designer"
+                  label="Designer"
+                  helperText={designer === "" ? "Field cannot be empty" : ""}
+                  error={designer === ""}
+                />
+                <br />
+                <br />
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <Select
+                    value={{
+                      value: "" + permanent,
+                      label: permanent == 1 ? "Permanent" : "Non permanent",
+                    }}
+                    options={options}
+                    styles={selectStyles}
+                    onChange={(e) => {
+                      setPermanent(e.value);
+                      console.log(permanent);
+                    }}
+                  />
+                </div>
+                <br />
+                {permanent === "1" ? (
+                  ""
+                ) : (
+                  <>
+                    <TextField
+                      value={startDate}
+                      onChange={(e) => {
+                        setStartDate(e.target.value);
+                      }}
+                      variant="outlined"
+                      type="date"
+                      name="StartDate"
+                      helperText="Start Date"
+                      error={startDate === ""}
+                      disabled={permanent === "1"}
+                    />
+
+                    <TextField
+                      style={{ marginLeft: "5px" }}
+                      value={endDate}
+                      onChange={(e) => {
+                        setEndDate(e.target.value);
+                      }}
+                      variant="outlined"
+                      type="date"
+                      name="EndDate"
+                      helperText="End Date"
+                      error={endDate === ""}
+                      disabled={permanent === "1"}
+                    />
+                    <br />
+                    <br />
+                  </>
+                )}
+                <TextField
+                  value={theme}
+                  onChange={(e) => {
+                    setTheme(e.target.value);
+                  }}
+                  variant="outlined"
+                  type="text"
+                  name="Theme"
+                  label="Theme"
+                  helperText={theme === "" ? "Field cannot be empty" : ""}
+                  error={theme === ""}
+                />
+                <TextField
+                  style={{ marginLeft: "5px" }}
+                  value={reason}
+                  onChange={(e) => {
+                    setReason(e.target.value);
+                  }}
+                  variant="outlined"
+                  type="text"
+                  name="Reason"
+                  label="Reason"
+                  helperText={reason === "" ? "Field cannot be empty" : ""}
+                  error={reason === ""}
+                />
+                <br />
+                <br />
+                <TextField
+                  value={description}
+                  onChange={(e) => {
+                    setDescription(e.target.value);
+                  }}
+                  variant="outlined"
+                  type="text"
+                  name="Description"
+                  label="Description"
+                  style={{ width: "75%" }}
+                  fullWidth
+                  multiline
+                  rows="3"
+                  helperText={description === "" ? "Field cannot be empty" : ""}
+                  error={description === ""}
+                />
+                <br />
+                <br />
+                Section:
+                <select
+                  onChange={(event) => {
+                    setSelectedValue(event.target.value);
+                  }}
+                >
+                  {props.object == null ? (
+                    <option disabled selected value>
+                      Please Select Section
+                    </option>
+                  ) : (
+                    ""
+                  )}
+
+                  {sectionList.map((val, key) => {
+                    if (props.object != null) {
+                      if (val.idSection == props.object.SectionID) {
+                        return (
+                          <option
+                            selected
+                            className="section"
+                            value={val.idSection}
+                          >
+                            {val.Name}
+                          </option>
+                        );
+                      }
+                    } else {
+                      return (
+                        <option className="section" value={val.idSection}>
+                          {val.Name}
+                        </option>
+                      );
+                    }
+                  })}
+                </select>
+                <br />
+                <br />
+                <Button
+                  variant="contained"
+                  color="primary"
+                  type="submit"
+                  onClick={postDisplay}
+                >
+                  SUBMIT
+                </Button>
+                {/* <button id="check" onClick={getDisplay}>
           Show Display
         </button> */}
-      </div>
-      </Card.Text>
-      </Card.Body>
-      </Card>
+              </div>
+            </Card.Text>
+          </Card.Body>
+        </Card>
       </Container>
     </>
   );

@@ -199,7 +199,7 @@ const AddCourse = () => {
             }
           />
         </div>
-        <form className={classes.root} onSubmit={handleSubmit}>
+        {/* <form className={classes.root} onSubmit={handleSubmit}>
           {inputFields.map((inputField) => (
             <div key={inputField.id}>
               <h2>Next Item</h2>
@@ -337,7 +337,7 @@ const AddCourse = () => {
           >
             Add Item
           </Button>
-        </form>
+        </form> */}
       </div>
     </Container>
   );

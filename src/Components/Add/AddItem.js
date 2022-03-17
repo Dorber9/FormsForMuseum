@@ -7,10 +7,7 @@ import AddIcon from "@material-ui/icons/Add";
 import { v4 as uuidv4 } from "uuid";
 import { makeStyles } from "@material-ui/core/styles";
 import Select from "react-select";
-import {
-  Container,
-  Card,
-} from "react-bootstrap";
+import { Container, Card } from "react-bootstrap";
 
 import { useState, useEffect } from "react";
 import Axios from "axios";
@@ -221,309 +218,340 @@ function AddItem(props) {
     setShowcaseList(temp);
   };
 
+  const deleteItem = () => {
+    Axios.delete(
+      `http://34.65.174.141:3001/deleteItem/${props.object.id}`,
+      {}
+    ).then(() => {
+      window.location.reload(false);
+    });
+  };
+
   return (
     <>
-    <Container>
-      <Card className="addCard" border="secondary" style={{background: "#8080808a"}} >
-        <Card.Body>
-             
-              <Card.Text>
-      <div className="txtf">
-        <TextField
-          value={itemId}
-          onChange={(e) => {
-            setItemId(e.target.value);
-          }}
-          variant="outlined"
-          type="text"
-          name="itemId"
-          placeholder="ID"
-          helperText={itemId === "" ? "Field cannot be empty" : ""}
-          error={itemId === ""}
-        />
-
-        <TextField
-          style={{ marginLeft: "5px" }}
-          value={name}
-          onChange={(e) => {
-            setName(e.target.value);
-          }}
-          variant="outlined"
-          type="text"
-          name="name"
-          placeholder="name"
-          helperText={name === "" ? "Field cannot be empty" : ""}
-          error={name === ""}
-        />
-
-        <TextField
-          value={site}
-          style={{ marginLeft: "5px" }}
-          onChange={(e) => {
-            setSite(e.target.value);
-          }}
-          variant="outlined"
-          type="text"
-          name="Site"
-          placeholder="Site"
-          helperText={site === "" ? "Field cannot be empty" : ""}
-          error={site === ""}
-        />
-        <br />
-        <br />
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
+      <Container>
+        <Card
+          className="addCard"
+          border="secondary"
+          style={{ background: "#dbdbdbad" }}
         >
-          <Select
-            value={{
-              value: storage,
-              label: storage === "1" ? "In Storage" : "In Museum",
-            }}
-            options={options}
-            onChange={(e) => {
-              setStorage(e.value);
-            }}
-          />
-        </div>
-
-        {storage === "1" ? (
-          ""
-        ) : (
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <Select
-              value={{
-                value: display.DisplayID,
-                label: display.name,
-              }}
-              options={displayList.map((val, key) => {
-                return { value: val.idDisplay, label: val.Name };
-              })}
-              onChange={(e) => {
-                setDisplay(e.value);
-              }}
-            />
-          </div>
-        )}
-
-        {storage == "1" ? (
-          ""
-        ) : (
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <Select
-              value={{
-                value: showcase.idSowcase,
-                label: showcase.Name,
-              }}
-              options={showcaseList.map((val, key) => {
-                return { value: val.idShowcase, label: val.Name };
-              })}
-              onChange={(e) => {
-                setShowcase(e.value);
-              }}
-            />
-          </div>
-        )}
-        <br />
-        <br />
-
-        <TextField
-          value={period}
-          onChange={(e) => {
-            setPeriod(e.target.value);
-          }}
-          variant="outlined"
-          type="text"
-          name="Period"
-          placeholder="Period"
-          helperText={period === "" ? "Field cannot be empty" : ""}
-          error={period === ""}
-        />
-
-        <TextField
-          value={age}
-          style={{ marginLeft: "5px" }}
-          onChange={(e) => {
-            setAge(e.target.value);
-          }}
-          variant="outlined"
-          type="text"
-          name="Age"
-          placeholder="Age"
-          helperText={age === "" ? "Field cannot be empty" : ""}
-          error={age === ""}
-        />
-
-        <TextField
-          value={material}
-          style={{ marginLeft: "5px" }}
-          onChange={(e) => {
-            setMaterial(e.target.value);
-          }}
-          variant="outlined"
-          type="text"
-          name="Material"
-          placeholder="Material"
-          helperText={material === "" ? "Field cannot be empty" : ""}
-          error={material === ""}
-        />
-        <br />
-        <br />
-        <TextField
-          value={size}
-          onChange={(e) => {
-            setSize(e.target.value);
-          }}
-          variant="outlined"
-          type="text"
-          name="Size"
-          placeholder="Size(h X w X d )"
-          helperText={size === "" ? "Field cannot be empty" : ""}
-          error={size === ""}
-        />
-
-        <TextField
-          value={website}
-          style={{ marginLeft: "5px" }}
-          onChange={(e) => {
-            setWebsite(e.target.value);
-          }}
-          variant="outlined"
-          type="text"
-          name="Website"
-          placeholder="Website"
-          helperText={website === "" ? "Field cannot be empty" : ""}
-          error={website === ""}
-        />
-        <TextField
-          value={references}
-          style={{ marginLeft: "5px" }}
-          onChange={(e) => {
-            setReferences(e.target.value);
-          }}
-          variant="outlined"
-          type="text"
-          name="References"
-          placeholder="References"
-          helperText={references === "" ? "Field cannot be empty" : ""}
-          error={references === ""}
-        />
-        <br />
-        <br />
-        <TextField
-          value={descr}
-          onChange={(e) => {
-            setDescr(e.target.value);
-          }}
-          variant="outlined"
-          type="text"
-          name="Description"
-          placeholder="Description"
-          style={{ width: "75%" }}
-          fullWidth
-          multiline
-          rows="3"
-          helperText={descr === "" ? "Field cannot be empty" : ""}
-          error={descr === ""}
-        />
-        <br />
-        <br />
-        <TextField
-          value={shortDescr}
-          onChange={(e) => {
-            setShortDescr(e.target.value);
-          }}
-          variant="outlined"
-          type="text"
-          name="Short Description"
-          style={{ width: "75%" }}
-          fullWidth
-          multiline
-          rows="3"
-          placeholder="Short Description"
-          helperText={shortDescr === "" ? "Field cannot be empty" : ""}
-          error={shortDescr === ""}
-        />
-        <br />
-        <br />
-
-        <form className={classes.root} onSubmit={handleSubmit}>
-          {inputFields.map((inputField) => (
-            <div key={inputField.id}>
-              <TextField
-                name="category"
-                label="Category"
-                variant="filled"
-                value={inputField.category}
-                onChange={(event) => handleChangeInput(inputField.id, event)}
-              />
-              <div style={{ marginRight: "10%", marginLeft: "10%" }}>
+          <Card.Body>
+            <Card.Text>
+              <div className="txtf">
                 <TextField
-                  name="categoryDescr"
-                  label="Description"
-                  variant="filled"
-                  multiline
-                  fullWidth
-                  value={inputField.categoryDescr}
-                  onChange={(event) => handleChangeInput(inputField.id, event)}
-                  rows="3"
+                  value={itemId}
+                  onChange={(e) => {
+                    setItemId(e.target.value);
+                  }}
+                  variant="outlined"
+                  type="text"
+                  name="itemId"
+                  placeholder="ID"
+                  helperText={itemId === "" ? "Field cannot be empty" : ""}
+                  error={itemId === ""}
                 />
-                <IconButton
-                  disabled={inputFields.length === 1}
-                  onClick={() => handleRemoveFields(inputField.id)}
-                >
-                  <RemoveIcon />
-                </IconButton>
-                <IconButton onClick={handleAddFields}>
-                  <AddIcon />
-                </IconButton>
-              </div>
-            </div>
-          ))}
-          <Button
-            className={classes.button}
-            variant="contained"
-            color="primary"
-            type="submit"
-            onClick={handleSubmit}
-          >
-            Add Item
-          </Button>
-          {/* <button onClick={getItems}>Show Items</button> */}
-        </form>
 
-        {itemsList.map((val, key) => {
-          return (
-            <div className="desplay">
-              <div>
-                <h3>ID: {val.ItemID}</h3>
-                <h3>Name: {val.ItemName}</h3>
-                <h3>descr: {val.Descr}</h3>
-                <h3>Item Data: {val.ItemData}</h3>
+                <TextField
+                  style={{ marginLeft: "5px" }}
+                  value={name}
+                  onChange={(e) => {
+                    setName(e.target.value);
+                  }}
+                  variant="outlined"
+                  type="text"
+                  name="name"
+                  placeholder="name"
+                  helperText={name === "" ? "Field cannot be empty" : ""}
+                  error={name === ""}
+                />
+
+                <TextField
+                  value={site}
+                  style={{ marginLeft: "5px" }}
+                  onChange={(e) => {
+                    setSite(e.target.value);
+                  }}
+                  variant="outlined"
+                  type="text"
+                  name="Site"
+                  placeholder="Site"
+                  helperText={site === "" ? "Field cannot be empty" : ""}
+                  error={site === ""}
+                />
+                <br />
+                <br />
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <Select
+                    value={{
+                      value: storage,
+                      label: storage === "1" ? "In Storage" : "In Museum",
+                    }}
+                    options={options}
+                    onChange={(e) => {
+                      setStorage(e.value);
+                    }}
+                  />
+                </div>
+
+                {storage === "1" ? (
+                  ""
+                ) : (
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
+                    <Select
+                      value={{
+                        value: display.DisplayID,
+                        label: display.name,
+                      }}
+                      options={displayList.map((val, key) => {
+                        return { value: val.idDisplay, label: val.Name };
+                      })}
+                      onChange={(e) => {
+                        setDisplay(e.value);
+                      }}
+                    />
+                  </div>
+                )}
+
+                {storage == "1" ? (
+                  ""
+                ) : (
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
+                    <Select
+                      value={{
+                        value: showcase.idSowcase,
+                        label: showcase.Name,
+                      }}
+                      options={showcaseList.map((val, key) => {
+                        return { value: val.idShowcase, label: val.Name };
+                      })}
+                      onChange={(e) => {
+                        setShowcase(e.value);
+                      }}
+                    />
+                  </div>
+                )}
+                <br />
+                <br />
+
+                <TextField
+                  value={period}
+                  onChange={(e) => {
+                    setPeriod(e.target.value);
+                  }}
+                  variant="outlined"
+                  type="text"
+                  name="Period"
+                  placeholder="Period"
+                  helperText={period === "" ? "Field cannot be empty" : ""}
+                  error={period === ""}
+                />
+
+                <TextField
+                  value={age}
+                  style={{ marginLeft: "5px" }}
+                  onChange={(e) => {
+                    setAge(e.target.value);
+                  }}
+                  variant="outlined"
+                  type="text"
+                  name="Age"
+                  placeholder="Age"
+                  helperText={age === "" ? "Field cannot be empty" : ""}
+                  error={age === ""}
+                />
+
+                <TextField
+                  value={material}
+                  style={{ marginLeft: "5px" }}
+                  onChange={(e) => {
+                    setMaterial(e.target.value);
+                  }}
+                  variant="outlined"
+                  type="text"
+                  name="Material"
+                  placeholder="Material"
+                  helperText={material === "" ? "Field cannot be empty" : ""}
+                  error={material === ""}
+                />
+                <br />
+                <br />
+                <TextField
+                  value={size}
+                  onChange={(e) => {
+                    setSize(e.target.value);
+                  }}
+                  variant="outlined"
+                  type="text"
+                  name="Size"
+                  placeholder="Size(h X w X d )"
+                  helperText={size === "" ? "Field cannot be empty" : ""}
+                  error={size === ""}
+                />
+
+                <TextField
+                  value={website}
+                  style={{ marginLeft: "5px" }}
+                  onChange={(e) => {
+                    setWebsite(e.target.value);
+                  }}
+                  variant="outlined"
+                  type="text"
+                  name="Website"
+                  placeholder="Website"
+                  helperText={website === "" ? "Field cannot be empty" : ""}
+                  error={website === ""}
+                />
+                <TextField
+                  value={references}
+                  style={{ marginLeft: "5px" }}
+                  onChange={(e) => {
+                    setReferences(e.target.value);
+                  }}
+                  variant="outlined"
+                  type="text"
+                  name="References"
+                  placeholder="References"
+                  helperText={references === "" ? "Field cannot be empty" : ""}
+                  error={references === ""}
+                />
+                <br />
+                <br />
+                <TextField
+                  value={descr}
+                  onChange={(e) => {
+                    setDescr(e.target.value);
+                  }}
+                  variant="outlined"
+                  type="text"
+                  name="Description"
+                  placeholder="Description"
+                  style={{ width: "75%" }}
+                  fullWidth
+                  multiline
+                  rows="3"
+                  helperText={descr === "" ? "Field cannot be empty" : ""}
+                  error={descr === ""}
+                />
+                <br />
+                <br />
+                <TextField
+                  value={shortDescr}
+                  onChange={(e) => {
+                    setShortDescr(e.target.value);
+                  }}
+                  variant="outlined"
+                  type="text"
+                  name="Short Description"
+                  style={{ width: "75%" }}
+                  fullWidth
+                  multiline
+                  rows="3"
+                  placeholder="Short Description"
+                  helperText={shortDescr === "" ? "Field cannot be empty" : ""}
+                  error={shortDescr === ""}
+                />
+                <br />
+                <br />
+
+                <form className={classes.root} onSubmit={handleSubmit}>
+                  {inputFields.map((inputField) => (
+                    <div key={inputField.id}>
+                      <TextField
+                        name="category"
+                        label="Category"
+                        variant="filled"
+                        value={inputField.category}
+                        onChange={(event) =>
+                          handleChangeInput(inputField.id, event)
+                        }
+                      />
+                      <div style={{ marginRight: "10%", marginLeft: "10%" }}>
+                        <TextField
+                          name="categoryDescr"
+                          label="Description"
+                          variant="filled"
+                          multiline
+                          fullWidth
+                          value={inputField.categoryDescr}
+                          onChange={(event) =>
+                            handleChangeInput(inputField.id, event)
+                          }
+                          rows="3"
+                        />
+                        <IconButton
+                          disabled={inputFields.length === 1}
+                          onClick={() => handleRemoveFields(inputField.id)}
+                        >
+                          <RemoveIcon />
+                        </IconButton>
+                        <IconButton onClick={handleAddFields}>
+                          <AddIcon />
+                        </IconButton>
+                      </div>
+                    </div>
+                  ))}
+                  <Button
+                    className={classes.button}
+                    variant="contained"
+                    color="primary"
+                    type="submit"
+                    onClick={handleSubmit}
+                  >
+                    SUBMIT
+                  </Button>
+                  {/* <button onClick={getItems}>Show Items</button> */}
+                </form>
+
+                {itemsList.map((val, key) => {
+                  return (
+                    <div className="desplay">
+                      <div>
+                        <h3>ID: {val.ItemID}</h3>
+                        <h3>Name: {val.ItemName}</h3>
+                        <h3>descr: {val.Descr}</h3>
+                        <h3>Item Data: {val.ItemData}</h3>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
-            </div>
-          );
-        })}
-      </div>
-       
-              </Card.Text>
-      </Card.Body>
-      </Card>
+              {props.object == null ? (
+                ""
+              ) : (
+                <Button
+                  variant="contained"
+                  style={{
+                    color: "white",
+                    background: "red",
+                    marginLeft: "10px",
+                  }}
+                  type="submit"
+                  onClick={deleteItem}
+                >
+                  Delete Item
+                </Button>
+              )}
+            </Card.Text>
+          </Card.Body>
+        </Card>
       </Container>
     </>
   );

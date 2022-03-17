@@ -163,7 +163,7 @@ const AddSection = (props) => {
           type="submit"
           onClick={postSection}
         >
-          Add Section
+          SUBMIT
         </Button>
         {props.object == null ? (
           ""

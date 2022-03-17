@@ -183,7 +183,7 @@ const AddBuilding = (props) => {
           type="submit"
           onClick={postBuilding}
         >
-          Add Building
+          SUBMIT
         </Button>
         {props.object == null ? (
           ""

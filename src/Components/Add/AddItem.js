@@ -15,6 +15,8 @@ import {
 import { useState, useEffect } from "react";
 import Axios from "axios";
 import "../../App.css";
+import AddQuestion from "./AddQuestion";
+import Collapse from "./Collapse";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -502,7 +504,7 @@ function AddItem(props) {
           >
             Add Item
           </Button>
-          <button onClick={getItems}>Show Items</button>
+          {/* <button onClick={getItems}>Show Items</button> */}
         </form>
 
         {itemsList.map((val, key) => {
@@ -518,6 +520,7 @@ function AddItem(props) {
           );
         })}
       </div>
+       
               </Card.Text>
       </Card.Body>
       </Card>

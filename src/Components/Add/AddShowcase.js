@@ -240,9 +240,9 @@ const AddShowcase = (props) => {
         >
           Add Showcase
         </Button>
-        <button id="check" onClick={getShowcase}>
+        {/* <button id="check" onClick={getShowcase}>
           Show Showcase
-        </button>
+        </button> */}
       </div>
           </Card.Text>
       </Card.Body>

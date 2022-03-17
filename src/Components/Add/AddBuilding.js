@@ -199,9 +199,9 @@ const AddBuilding = (props) => {
           </Button>
         )}
 
-        <button onClick={getBuilding} id="check">
+        {/* <button onClick={getBuilding} id="check">
           Show Buildings
-        </button>
+        </button> */}
       </div>
     </>
   );

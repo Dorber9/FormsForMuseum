@@ -1,5 +1,6 @@
 import React from 'react';
 import Collapse from "./Add/Collapse";
+import QRCode from 'react-qr-code';
 
 import { useState, useEffect } from "react";
 import Axios from "axios";
@@ -15,7 +16,7 @@ const ViewItemWiki = (props) => {
         getItem();
       
     // eslint-disable-next-line
-    }, [props.itemId]);
+    }, [props]);
 
   
   // Get the relevant item data based on his Id
@@ -50,18 +51,19 @@ const ViewItemWiki = (props) => {
   };
     return (
         <>
-        <div>
-           {
-               itemKeys.map((key)=> {
-                   if(key!="ItemData") {
-                   return (
-                    <div>
-                        <h7>{key} :</h7>
-                        <h8>{itemData[key]}</h8>
-                        </div>
-                   )
-                   }
-               })
+        <div className="pshDwn">
+           {<h1 style={{textAlign: "center"}}>{itemData.ItemName}</h1>
+           
+            //    itemKeys.map((key)=> {
+            //        if(key!="ItemData") {
+            //        return (
+            //         <div>
+            //             <h7>{key} :</h7>
+            //             <h8>{itemData[key]}</h8>
+            //             </div>
+            //        )
+            //        }
+            //    })
                }
            {itemDataWiki.map((item)=> {
                return (
@@ -71,6 +73,7 @@ const ViewItemWiki = (props) => {
                </div>
                )
            })}
+           <QRCode value={`${window.location.href}`} size="150" />
         </div>
         </>
     );

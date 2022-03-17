@@ -31,11 +31,11 @@ const Header = () => {
                 Quest Wizard
               </NavDropdown.Item>
             </NavDropdown>
-            <Nav.Link href="Reports">
+            <Nav.Link href="../Reports">
               Reports <FaWpforms />
             </Nav.Link>
-            <Nav.Link href="DemoPage">Demo</Nav.Link>
-            <Nav.Link href="ItemsList">Items List</Nav.Link>
+            <Nav.Link href="../DemoPage">Demo</Nav.Link>
+            <Nav.Link href="../ItemsList">Items List</Nav.Link>
           </Nav>
         </Container>
       </Navbar>

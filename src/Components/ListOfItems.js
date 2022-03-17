@@ -35,10 +35,13 @@ const ListOfItems  =() => {
                     setItemId(e.value);
                   }}
           />
+          <br></br>
+               <div>   
            <Link to={`/Item/${itemID}`}>
-                  <button className="btn draw-border">View Item</button>
+                  <button  className="btn draw-border">View Item</button>
                 </Link>
-          <ViewItemWiki itemId={itemID}> </ViewItemWiki>
+                </div>  
+          {/* <ViewItemWiki itemId={itemID}> </ViewItemWiki> */}
         </div>
     );
 

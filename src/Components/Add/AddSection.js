@@ -179,9 +179,9 @@ const AddSection = (props) => {
           </Button>
         )}
 
-        <button id="check" onClick={getSection}>
+        {/* <button id="check" onClick={getSection}>
           Show Sections
-        </button>
+        </button> */}
       </div>
     </>
   );

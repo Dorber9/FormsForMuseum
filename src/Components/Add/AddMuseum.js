@@ -110,9 +110,9 @@ const AddMuseum = (props) => {
             Delete Museum
           </Button>
         )}
-        <button id="check" onClick={getMuseum}>
+        {/* <button id="check" onClick={getMuseum}>
           Show Museums
-        </button>
+        </button> */}
       </div>
       <br></br>
       <br></br>

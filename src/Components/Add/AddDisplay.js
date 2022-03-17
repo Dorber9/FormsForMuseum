@@ -308,9 +308,9 @@ const AddDisplay = (props) => {
         >
           Add Display
         </Button>
-        <button id="check" onClick={getDisplay}>
+        {/* <button id="check" onClick={getDisplay}>
           Show Display
-        </button>
+        </button> */}
       </div>
       </Card.Text>
       </Card.Body>

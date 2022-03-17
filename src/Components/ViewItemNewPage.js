@@ -17,9 +17,10 @@ const ViewItemNewPage = (props) => {
     }, [id]);
   return (
     <div>
-        <QRCode value={`${window.location.href}`} size="150" />
+        
         <br></br>
         <ViewItemWiki itemId={id}> </ViewItemWiki>
+        
     </div>
   )
 }

@@ -1,0 +1,30 @@
+import React from 'react';
+import Select from "react-select";
+import ViewItemWiki from './ViewItemWiki';
+
+const ItemsList = () => {
+
+//       const [itemsList, setItemsList] = useState([]);
+//       const [itemID, setItemId] = useState("");
+
+//       useEffect(() => {
+//       getItems()
+//     // eslint-disable-next-line
+//   }, [itemID]);
+
+//        const getItems = () => {
+//     Axios.get("http://34.65.174.141:3001/Item").then((response) => {
+//       setItemsList(response.data);
+//     });
+//   };
+
+    return (
+        <div>
+           dsddssd
+        </div>
+    );
+};
+
+
+
+export default ItemsList;

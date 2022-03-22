@@ -38,7 +38,8 @@ function AddItem(props) {
     e.preventDefault();
 
     setItemData(inputFields);
-    postItem();
+    // postItem();
+    setFlag(true)
   };
 
   const handleChangeInput = (id, event) => {
@@ -82,6 +83,7 @@ function AddItem(props) {
   const [display, setDisplay] = useState("");
   const [showcase, setShowcase] = useState("");
   const [references, setReferences] = useState("");
+  const [questionsFlag, setFlag] = useState(false);
 
   const [itemData, setItemData] = useState([
     { id: uuidv4(), category: "", categoryDescr: "" },
@@ -235,8 +237,10 @@ function AddItem(props) {
           border="secondary"
           style={{ background: "#dbdbdbad" }}
         >
+          
           <Card.Body>
             <Card.Text>
+             
               <div className="txtf">
                 <TextField
                   value={itemId}
@@ -549,9 +553,13 @@ function AddItem(props) {
                   Delete Item
                 </Button>
               )}
+              {questionsFlag==false ? (
+                ""
+              ) : (<AddQuestion id={itemId} name={name}></AddQuestion>)}
+            
             </Card.Text>
           </Card.Body>
-        </Card>
+        </Card> 
       </Container>
     </>
   );

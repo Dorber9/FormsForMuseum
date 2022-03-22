@@ -1,0 +1,39 @@
+import React from 'react';
+
+const ViewItemWiki = (props) => {
+
+      const [itemData, setItemData] = useState([]);
+
+    useEffect(() => {
+        getItem();
+    // eslint-disable-next-line
+    }, [props.itemId]);
+
+  
+
+  // Get the relevant item data based on his Id
+  const getItem = async () => {
+    try {
+      let res = await axios.get(
+        `http://34.65.174.141:3001/Item/${props.itemId}`
+      );
+      const itemResData = JSON.parse(JSON.stringify(res.data));
+      setItemData(itemResData);
+    } catch (error) {
+      console.log(error.data);
+    }
+  };
+    return (
+        <div>
+            <h1>{itemId}</h1>
+            {itemData.map((it) =>{
+                it    
+            }
+            )}
+        </div>
+    );
+};
+
+
+
+export default ViewItemWiki;

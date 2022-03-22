@@ -25,11 +25,14 @@ const useStyles = makeStyles((theme) => ({
 
 const selectStyles = { menu: (styles) => ({ ...styles, zIndex: 999 }) };
 
-const AddQuestion = () => {
+const AddQuestion = (props) => {
   const [itemsList, setItemsList] = useState([]);
   const [wantedItem, setWantedItem] = useState("");
   const [itemData, setItemData] = useState("");
   const [correct, setCorrect] = useState("0");
+  const [val,setVal] = useState("")
+  const [lab,setLabel] = useState("e")
+  
 
   const mapOptions = () => {
     return itemsList.map((val, key) => {
@@ -63,15 +66,24 @@ const AddQuestion = () => {
   };
 
   const getItems = () => {
+    
     Axios.get("http://34.65.174.141:3001/Item").then((response) => {
+      
       setItemsList(response.data);
+      
     });
   };
 
+  /* ****** check about itemid prop in add question ***** */
   useEffect(() => {
     getItems();
-  }, []);
+    if(props.name!=null){
+      setWantedItem(props.ItemID);
+    }
+    
+  }, [props]);
   const classes = useStyles();
+
 
   const handleChangeInput = (id, name, event) => {
     const newInputFields = inputFields.map((i) => {
@@ -138,7 +150,19 @@ const AddQuestion = () => {
                   alignItems: "center",
                 }}
               >
+                {props.name != null ? 
+                (
                 <Select
+                defaultValue= {{value: props.ItemID, label: props.name}}
+                  styles={selectStyles}
+                  options={itemsList.map((val, key) => {
+                    return { value: val.ItemID, label: val.ItemName };
+                  })}
+                  onChange={(e) => {
+                    setWantedItem(e.value);
+                  }}
+                /> ) : (
+                       <Select
                   styles={selectStyles}
                   options={itemsList.map((val, key) => {
                     return { value: val.ItemID, label: val.ItemName };
@@ -147,6 +171,8 @@ const AddQuestion = () => {
                     setWantedItem(e.value);
                   }}
                 />
+                )}
+
               </div>
               {wantedItem === "" ? (
                 ""
@@ -208,6 +234,7 @@ const AddQuestion = () => {
                           }
                         />
                         <div style={{ width: "20%", display: "inline-block" }}>
+                          
                           <Select
                             options={options}
                             styles={selectStyles}

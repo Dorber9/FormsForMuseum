@@ -521,11 +521,11 @@ app.post("/upload", (req, res) => {
     upload(req, res, function(err) {
         // console.log("Request ---", req.body);
         // console.log("Request file ---", req.file); //Here you get file.
-        res.json(`${__dirname}/../../frontEnd/public/${req.file.filename}`)
+        res.json(`../../frontEnd/public/${req.file.filename}`)
         console.log(`${__dirname}/../../frontEnd/public/${req.file.filename}`)
             /*Now do where ever you want to do*/
         if (!err) {
-            return `${__dirname}/../../frontEnd/public/${req.file.filename}`;
+            return `../../frontEnd/public/${req.file.filename}`;
         } else {
             res.json("idwidqwidwdi");
         }

@@ -40,9 +40,10 @@ const AddShowcase = (props) => {
       Axios.post("http://34.65.174.141:3001/addShowcase", {
         Number: number,
         Name: name,
-        Desc: description,
+        Descr: description,
         Type: type,
         SpecialCare: specialCare,
+        SpecialCareDescr: specialCareDesc,
         DisplayID: selectedValue,
         ImagePath: path,
       }).then(() => {
@@ -51,15 +52,53 @@ const AddShowcase = (props) => {
           {
             Number: number,
             Name: name,
-            Desc: description,
+            Descr: description,
             Type: type,
             SpecialCare: specialCare,
+            SpecialCareDescr: specialCareDesc,
             DisplayID: selectedValue,
             ImagePath: path,
           },
         ]);
       });
     }
+  };
+
+  const updateShowcase = () => {
+    Axios.put("http://34.65.174.141:3001/updateShowcase", {
+      idShowcase: props.object.idShowcase,
+      Number: number,
+      Name: name,
+      Descr: description,
+      Type: type,
+      SpecialCare: specialCare,
+      SpecialCareDescr: specialCareDesc,
+      DisplayID: selectedValue,
+      ImagePath: path,
+    }).then(() => {
+      setShowcaseList([
+        ...showcaseList,
+        {
+          Number: number,
+          Name: name,
+          Descr: description,
+          Type: type,
+          SpecialCare: specialCare,
+          SpecialCareDescr: specialCareDesc,
+          DisplayID: selectedValue,
+          ImagePath: path,
+        },
+      ]);
+    });
+  };
+
+  const deleteShowcase = () => {
+    Axios.delete(
+      `http://34.65.174.141:3001/deleteShowcase/${props.object.idShowcase}`,
+      {}
+    ).then(() => {
+      window.location.reload(false);
+    });
   };
 
   const trueFalse = [
@@ -217,25 +256,18 @@ const AddShowcase = (props) => {
                   )}
 
                   {displayList.map((val, key) => {
-                    if (props.object != null) {
-                      if (val.idDisplay == props.object.DisplayID) {
-                        return (
-                          <option
-                            selected
-                            className="display"
-                            value={val.idDisplay}
-                          >
-                            {val.Name}
-                          </option>
-                        );
-                      }
-                    } else {
-                      return (
-                        <option className="display" value={val.idDisplay}>
-                          {val.Name}
-                        </option>
-                      );
-                    }
+                    return (
+                      <option
+                        selected={
+                          props.object != null &&
+                          val.idDisplay == props.object.DisplayID
+                        }
+                        className="display"
+                        value={val.idDisplay}
+                      >
+                        {val.Name}
+                      </option>
+                    );
                   })}
                 </select>
                 <br />
@@ -244,13 +276,27 @@ const AddShowcase = (props) => {
                   variant="contained"
                   color="primary"
                   type="submit"
-                  onClick={postShowcase}
+                  onClick={props.object == null ? postShowcase : updateShowcase}
                 >
                   SUBMIT
                 </Button>
-                {/* <button id="check" onClick={getShowcase}>
-          Show Showcase
-        </button> */}
+                {props.object == null ? (
+                  ""
+                ) : (
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    type="submit"
+                    style={{
+                      color: "white",
+                      background: "red",
+                      marginLeft: "10px",
+                    }}
+                    onClick={deleteShowcase}
+                  >
+                    Delete Exibition
+                  </Button>
+                )}
               </div>
             </Card.Text>
           </Card.Body>

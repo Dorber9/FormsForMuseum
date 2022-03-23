@@ -21,8 +21,8 @@ const AddDisplay = (props) => {
   const [name, setName] = useState("");
   const [theme, setTheme] = useState("");
   const [permanent, setPermanent] = useState("1");
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
   const [curator, setCurator] = useState("");
   const [designer, setDesigner] = useState("");
   const [description, setDescription] = useState("");
@@ -83,6 +83,47 @@ const AddDisplay = (props) => {
         ]);
       });
     }
+  };
+
+  const updateDisplay = () => {
+    Axios.put("http://34.65.174.141:3001/updateDisplay", {
+      idDisplay: props.object.idDisplay,
+      Name: name,
+      Theme: theme,
+      permanent: permanent,
+      StartDate: startDate,
+      EndDate: endDate,
+      Curator: curator,
+      Designer: designer,
+      ShortDesc: description,
+      Reason: reason,
+      SectionID: selectedValue,
+    }).then(() => {
+      setDisplayList([
+        ...displayList,
+        {
+          Name: name,
+          Theme: theme,
+          permanent: permanent,
+          StartDate: startDate,
+          EndDate: endDate,
+          Curator: curator,
+          Designer: designer,
+          ShortDesc: description,
+          Reason: reason,
+          SectionID: selectedValue,
+        },
+      ]);
+    });
+  };
+
+  const deleteDisplay = () => {
+    Axios.delete(
+      `http://34.65.174.141:3001/deleteDisplay/${props.object.idDisplay}`,
+      {}
+    ).then(() => {
+      window.location.reload(false);
+    });
   };
 
   const getSection = () => {
@@ -267,25 +308,18 @@ const AddDisplay = (props) => {
                   )}
 
                   {sectionList.map((val, key) => {
-                    if (props.object != null) {
-                      if (val.idSection == props.object.SectionID) {
-                        return (
-                          <option
-                            selected
-                            className="section"
-                            value={val.idSection}
-                          >
-                            {val.Name}
-                          </option>
-                        );
-                      }
-                    } else {
-                      return (
-                        <option className="section" value={val.idSection}>
-                          {val.Name}
-                        </option>
-                      );
-                    }
+                    return (
+                      <option
+                        selected={
+                          props.object != null &&
+                          val.idSection == props.object.SectionID
+                        }
+                        className="section"
+                        value={val.idSection}
+                      >
+                        {val.Name}
+                      </option>
+                    );
                   })}
                 </select>
                 <br />
@@ -294,13 +328,27 @@ const AddDisplay = (props) => {
                   variant="contained"
                   color="primary"
                   type="submit"
-                  onClick={postDisplay}
+                  onClick={props.object == null ? postDisplay : updateDisplay}
                 >
                   SUBMIT
                 </Button>
-                {/* <button id="check" onClick={getDisplay}>
-          Show Display
-        </button> */}
+                {props.object == null ? (
+                  ""
+                ) : (
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    type="submit"
+                    style={{
+                      color: "white",
+                      background: "red",
+                      marginLeft: "10px",
+                    }}
+                    onClick={deleteDisplay}
+                  >
+                    Delete Display
+                  </Button>
+                )}
               </div>
             </Card.Text>
           </Card.Body>

@@ -4,6 +4,7 @@ import { TextField, InputLabel } from "@material-ui/core";
 import { useState, useEffect } from "react";
 import Axios from "axios";
 import Button from "@material-ui/core/Button";
+import { Container, Card } from "react-bootstrap";
 
 const AddMuseum = (props) => {
   const [name, setName] = useState("");
@@ -60,63 +61,77 @@ const AddMuseum = (props) => {
   };
 
   return (
-    <>
-      {museumList.map((val, key) => {
-        return (
-          <div className="museum">
-            <div>
-              <h3>id: {val.id}</h3>
-              <h3>name: {val.name}</h3>
-            </div>
-          </div>
-        );
-      })}
+    <Container>
+      <Card
+        className="addCard"
+        border="secondary"
+        style={{ background: "#dbdbdbad" }}
+      >
+        <Card.Body>
+          <Card.Text>
+            {museumList.map((val, key) => {
+              return (
+                <div className="museum">
+                  <div>
+                    <h3>id: {val.id}</h3>
+                    <h3>name: {val.name}</h3>
+                  </div>
+                </div>
+              );
+            })}
 
-      <div className="txtF">
-        {/* <InputLabel>Museum Name</InputLabel> <br /> */}
+            <div className="txtF">
+              {/* <InputLabel>Museum Name</InputLabel> <br /> */}
 
-        <TextField
-          disabled
-          value={name}
-          required
-          style={{ borderBottomColor: "red" }}
-          onChange={(event) => {
-            setName(event.target.value);
-          }}
-          variant="outlined"
-          placeholder="Museum's Name"
-          type="text"
-          name="name"
-        />
-        <br></br>
-        <br></br>
-        <Button
-          variant="contained"
-          color="primary"
-          type="submit"
-          onClick={props.object == null ? postMuseum : updateMuseum}
-        >
-          Submit
-        </Button>
-        {props.object == null ? (
-          ""
-        ) : (
-          <Button
-            variant="contained"
-            style={{ color: "white", background: "red", marginLeft: "10px" }}
-            type="submit"
-            onClick={deleteMuseum}
-          >
-            Delete Museum
-          </Button>
-        )}
-        {/* <button id="check" onClick={getMuseum}>
+              <TextField
+                disabled
+                value={name}
+                required
+                style={{ borderBottomColor: "red" }}
+                onChange={(event) => {
+                  setName(event.target.value);
+                }}
+                variant="outlined"
+                placeholder="Museum's Name"
+                type="text"
+                name="name"
+              />
+              <br></br>
+              <br></br>
+              <Button
+                variant="contained"
+                color="primary"
+                type="submit"
+                onClick={props.object == null ? postMuseum : updateMuseum}
+              >
+                Submit
+              </Button>
+              {props.object == null ? (
+                ""
+              ) : (
+                <Button
+                  variant="contained"
+                  style={{
+                    color: "white",
+                    background: "red",
+                    marginLeft: "10px",
+                  }}
+                  type="submit"
+                  onClick={deleteMuseum}
+                >
+                  Delete Museum
+                </Button>
+              )}
+              {/* <button id="check" onClick={getMuseum}>
           Show Museums
         </button> */}
-      </div>
-      <br></br>
-      <br></br>
-    </>
+            </div>
+            <br></br>
+            <br></br>
+          </Card.Text>
+        </Card.Body>
+      </Card>
+    </Container>
   );
 };
 

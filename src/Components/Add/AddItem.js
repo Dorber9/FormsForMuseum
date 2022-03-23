@@ -39,8 +39,17 @@ function AddItem(props) {
     e.preventDefault();
 
     setItemData(inputFields);
-    console.log(path);
+
     postItem();
+    setFlag(true);
+  };
+
+  const handleUpdateItem = (e) => {
+    e.preventDefault();
+
+    setItemData(inputFields);
+
+    updateItem();
     setFlag(true);
   };
 
@@ -180,6 +189,50 @@ function AddItem(props) {
     }
   };
 
+  const updateItem = () => {
+    console.log(itemData);
+    Axios.put("http://34.65.174.141:3001/updateItem", {
+      ID: itemId,
+      name: name,
+      descr: descr,
+      shortDescr: shortDescr,
+      storage: storage,
+      displayID: display,
+      showcaseID: showcase,
+      site: site,
+      period: period,
+      age: age,
+      material: material,
+      website: website,
+      size: size,
+      references: references,
+      ImagePath: path,
+      itemData: inputFields,
+    }).then(() => {
+      setItemsList([
+        ...itemsList,
+        {
+          ID: itemId,
+          name: name,
+          descr: descr,
+          shortDescr: shortDescr,
+          storage: storage,
+          displayID: display,
+          showcaseID: showcase,
+          site: site,
+          period: period,
+          age: age,
+          material: material,
+          website: website,
+          size: size,
+          references: references,
+          ImagePath: path,
+          itemData: itemData,
+        },
+      ]);
+    });
+  };
+
   const getDisplay = () => {
     Axios.get("http://34.65.174.141:3001/Display").then((response) => {
       setDisplayList(response.data);
@@ -315,10 +368,6 @@ function AddItem(props) {
                     }}
                   >
                     <Select
-                      value={{
-                        value: display.DisplayID,
-                        label: display.name,
-                      }}
                       options={displayList.map((val, key) => {
                         return { value: val.idDisplay, label: val.Name };
                       })}
@@ -340,10 +389,6 @@ function AddItem(props) {
                     }}
                   >
                     <Select
-                      value={{
-                        value: showcase.idSowcase,
-                        label: showcase.Name,
-                      }}
                       options={showcaseList.map((val, key) => {
                         return { value: val.idShowcase, label: val.Name };
                       })}
@@ -505,7 +550,9 @@ function AddItem(props) {
                     variant="contained"
                     color="primary"
                     type="submit"
-                    onClick={handleSubmit}
+                    onClick={
+                      props.object == null ? handleSubmit : handleUpdateItem
+                    }
                   >
                     SUBMIT
                   </Button>

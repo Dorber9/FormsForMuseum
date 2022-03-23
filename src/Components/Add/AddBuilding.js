@@ -31,7 +31,7 @@ const AddBuilding = (props) => {
       setName(props.object.Name);
       setCity(props.object.City);
       setAddress(props.object.Address);
-      setSelectedValue(museumList.filter((m) => m.id == props.object.MuseumID));
+      setSelectedValue(props.object.MuseumID);
       console.log(selectedValue);
     }
   }, [props.object != null ? props.object : ""]);
@@ -57,6 +57,26 @@ const AddBuilding = (props) => {
         ]);
       });
     }
+  };
+
+  const updateBuilding = () => {
+    Axios.put("http://34.65.174.141:3001/updateBuilding", {
+      BuildingID: props.object.BuildingID,
+      Name: name,
+      City: city,
+      Address: address,
+      MuseumID: selectedValue,
+    }).then(() => {
+      setBuildingList([
+        ...buildingList,
+        {
+          Name: name,
+          City: city,
+          Address: address,
+          MuseumID: selectedValue,
+        },
+      ]);
+    });
   };
 
   const getBuilding = () => {
@@ -140,7 +160,6 @@ const AddBuilding = (props) => {
         <label>
           Museum:
           <select
-            value={selectedValue}
             style={{ marginLeft: "10px" }}
             onChange={(event) => {
               setSelectedValue(event.target.value);
@@ -155,21 +174,17 @@ const AddBuilding = (props) => {
             )}
 
             {museumList.map((val, key) => {
-              if (props.object != null) {
-                if (val.id == props.object.MuseumID) {
-                  return (
-                    <option selected className="museum" value={val.id}>
-                      {val.name}
-                    </option>
-                  );
-                }
-              } else {
-                return (
-                  <option className="museum" value={val.id}>
-                    {val.name}
-                  </option>
-                );
-              }
+              return (
+                <option
+                  selected={
+                    props.object != null && val.id == props.object.MuseumID
+                  }
+                  className="museum"
+                  value={val.id}
+                >
+                  {val.name}
+                </option>
+              );
             })}
           </select>
         </label>
@@ -179,7 +194,7 @@ const AddBuilding = (props) => {
           variant="contained"
           color="primary"
           type="submit"
-          onClick={postBuilding}
+          onClick={props.object == null ? postBuilding : updateBuilding}
         >
           SUBMIT
         </Button>

@@ -165,7 +165,7 @@ const ModifyData = () => {
     { value: "Building", label: "Building" },
     { value: "Section", label: "Section" },
     { value: "Display", label: "Display" },
-    { value: "Showcase", label: "Showcase" },
+    { value: "Showcase", label: "Exibition" },
     { value: "Item", label: "Item" },
   ];
   return (

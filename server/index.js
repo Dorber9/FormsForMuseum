@@ -319,9 +319,10 @@ app.put("/updateShowcase", (req, res) => {
     const SpecialCare = req.body.SpecialCare;
     const DisplayID = req.body.DisplayID;
     const ImagePath = req.body.ImagePath;
+    const SpecialCareDescr = req.body.SpecialCareDescr;
 
     db.query(
-        "UPDATE Showcase SET Number = ?, Name = ?, Descr = ?, Type = ?, SpecialCare = ?, DisplayID = ?, ImagePath = ? WHERE idShowcase = ?", [Number, Name, Descr, Type, SpecialCare, ImagePath, DisplayID, idShowcase],
+        "UPDATE showcase SET Number = ?, Name = ?, Descr = ?, Type = ?, SpecialCare = ?, SpecialCareDescr = ?, DisplayID = ?, ImagePath = ? WHERE idShowcase = ?", [Number, Name, Descr, Type, SpecialCare, SpecialCareDescr, ImagePath, DisplayID, idShowcase],
         (err, result) => {
             if (err) {
                 console.log(err);

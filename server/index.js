@@ -177,7 +177,7 @@ app.put("/updateSection", (req, res) => {
 });
 app.delete("/deleteSection/:id", (req, res) => {
     const id = req.params.id;
-    db.query("DELETE FROM building WHERE idSection = ?", id, (err, result) => {
+    db.query("DELETE FROM section WHERE idSection = ?", id, (err, result) => {
         if (err) {
             console.log(err);
         } else {
@@ -271,7 +271,7 @@ app.put("/updateDisplay", (req, res) => {
 });
 app.delete("/deleteDisplay/:id", (req, res) => {
     const id = req.params.id;
-    db.query("DELETE FROM building WHERE idDisplay = ?", id, (err, result) => {
+    db.query("DELETE FROM display WHERE idDisplay = ?", id, (err, result) => {
         if (err) {
             console.log(err);
         } else {
@@ -334,7 +334,7 @@ app.put("/updateShowcase", (req, res) => {
 });
 app.delete("/deleteShowcase/:id", (req, res) => {
     const id = req.params.id;
-    db.query("DELETE FROM building WHERE idShowcase = ?", id, (err, result) => {
+    db.query("DELETE FROM showcase WHERE idShowcase = ?", id, (err, result) => {
         if (err) {
             console.log(err);
         } else {

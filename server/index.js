@@ -245,7 +245,7 @@ app.put("/updateDisplay", (req, res) => {
     const SectionID = req.body.SectionID;
 
     db.query(
-        "UPDATE display SET Name = ?, Theme = ?, permanent = ?, StartDate = ?, EndDate = ?, Curator = ?, ShortDesc = ?, Reason = ?, SectionID = ? WHERE idDisplay = ?", [
+        "UPDATE display SET Name = ?, Theme = ?, permanent = ?, StartDate = ?, EndDate = ?, Curator = ?, Designer = ?, ShortDesc = ?, Reason = ?, SectionID = ? WHERE idDisplay = ?", [
             Name,
             Theme,
             permanent,
@@ -253,10 +253,7 @@ app.put("/updateDisplay", (req, res) => {
             EndDate,
             Curator,
             Designer,
-            ShortDesc,
-            Curator,
-            Designer,
-            ShortDesc,
+            ShortDesc, 
             Reason,
             SectionID,
             idDisplay,

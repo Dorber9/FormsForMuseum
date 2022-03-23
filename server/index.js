@@ -381,7 +381,7 @@ app.post("/addItem", (req, res) => {
     console.log(data1.toString().split("^%^"));
 
     db.query(
-        "INSERT INTO item (ItemID, ItemName, Descr, ShortDescr, InStorage, DisplayID, ShowcaseID, Site, Period, Age, Material, Website, Size, Refs, ImagePath, ItemData) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", [
+        "INSERT INTO item (ItemID, ItemName, Descr, ShortDescr, InStorage, DisplayID, ShowcaseID, Site, Period, Age, Material, Website, Size, Refs, ImagePath, ItemData) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", [
             ID,
             name,
             descr,

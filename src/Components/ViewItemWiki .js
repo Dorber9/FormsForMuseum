@@ -68,6 +68,7 @@ const ViewItemWiki = (props) => {
         {itemDataWiki.map((item) => {
           return (
             <div>
+              <img src={item.ImagePath} alt="HALO" />
               <Collapse title={item.category}>{item.categoryDescr}</Collapse>
             </div>
           );

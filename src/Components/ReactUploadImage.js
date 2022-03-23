@@ -1,15 +1,13 @@
 import React from "react";
 
-
 const axios = require("axios");
-
-
 
 class ReactUploadImage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       file: null,
+      path: null,
     };
     this.onFormSubmit = this.onFormSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
@@ -24,10 +22,11 @@ class ReactUploadImage extends React.Component {
       },
     };
     axios
-      .post("http://localhost:3001/upload", formData, config)
+      .post("http://34.65.174.141:3001/upload", formData, config)
       .then((response) => {
         alert("The file is successfully uploaded");
-        console.log(response);
+        this.setState({ path: response.data });
+        this.props.parentCallback(this.state.path);
       })
       .catch((error) => {});
   }
@@ -38,8 +37,9 @@ class ReactUploadImage extends React.Component {
   render() {
     return (
       <form onSubmit={this.onFormSubmit}>
-        <h1>File Upload</h1>  
-        
+        <h1>File Upload</h1>
+        <img src="../../public/IMAGE-1648043921582.jpg" alt="MZABET" />
+
         <input type="file" name="myImage" onChange={this.onChange} />
         <button type="submit">Upload</button>
       </form>

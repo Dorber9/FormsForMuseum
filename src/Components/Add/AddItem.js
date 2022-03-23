@@ -14,6 +14,7 @@ import Axios from "axios";
 import "../../App.css";
 import AddQuestion from "./AddQuestion";
 import Collapse from "./Collapse";
+import ReactUploadImage from "../ReactUploadImage";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -38,8 +39,9 @@ function AddItem(props) {
     e.preventDefault();
 
     setItemData(inputFields);
-    // postItem();
-    setFlag(true)
+    console.log(path);
+    postItem();
+    setFlag(true);
   };
 
   const handleChangeInput = (id, event) => {
@@ -83,6 +85,7 @@ function AddItem(props) {
   const [display, setDisplay] = useState("");
   const [showcase, setShowcase] = useState("");
   const [references, setReferences] = useState("");
+  const [path, setPath] = useState("");
   const [questionsFlag, setFlag] = useState(false);
 
   const [itemData, setItemData] = useState([
@@ -149,6 +152,7 @@ function AddItem(props) {
         website: website,
         size: size,
         references: references,
+        ImagePath: path,
         itemData: inputFields,
       }).then(() => {
         setItemsList([
@@ -168,6 +172,7 @@ function AddItem(props) {
             website: website,
             size: size,
             references: references,
+            ImagePath: path,
             itemData: itemData,
           },
         ]);
@@ -229,6 +234,10 @@ function AddItem(props) {
     });
   };
 
+  const handleCallback = (childData) => {
+    setPath(childData);
+  };
+
   return (
     <>
       <Container>
@@ -237,10 +246,8 @@ function AddItem(props) {
           border="secondary"
           style={{ background: "#dbdbdbad" }}
         >
-          
           <Card.Body>
             <Card.Text>
-             
               <div className="txtf">
                 <TextField
                   value={itemId}
@@ -474,6 +481,9 @@ function AddItem(props) {
                 />
                 <br />
                 <br />
+                <ReactUploadImage
+                  parentCallback={handleCallback}
+                ></ReactUploadImage>
 
                 <form className={classes.root} onSubmit={handleSubmit}>
                   {inputFields.map((inputField) => (
@@ -553,13 +563,14 @@ function AddItem(props) {
                   Delete Item
                 </Button>
               )}
-              {questionsFlag==false ? (
+              {questionsFlag == false ? (
                 ""
-              ) : (<AddQuestion id={itemId} name={name}></AddQuestion>)}
-            
+              ) : (
+                <AddQuestion id={itemId} name={name}></AddQuestion>
+              )}
             </Card.Text>
           </Card.Body>
-        </Card> 
+        </Card>
       </Container>
     </>
   );

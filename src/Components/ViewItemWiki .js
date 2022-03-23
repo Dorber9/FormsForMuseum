@@ -54,7 +54,9 @@ const ViewItemWiki = (props) => {
   return (
     <>
       <div className="pshDwn">
-        <img src={path} alt="LA" />
+        <div style={{ textAlign: "center" }}>
+          <img src={path} alt="LA" />
+        </div>
         {
           <h1 style={{ textAlign: "center" }}>{itemData.ItemName}</h1>
 

@@ -227,7 +227,7 @@ function AddItem(props) {
 
   const deleteItem = () => {
     Axios.delete(
-      `http://34.65.174.141:3001/deleteItem/${props.object.id}`,
+      `http://34.65.174.141:3001/deleteItem/${props.object.ItemID}`,
       {}
     ).then(() => {
       window.location.reload(false);

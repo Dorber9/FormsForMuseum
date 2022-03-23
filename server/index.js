@@ -411,6 +411,7 @@ app.post("/addItem", (req, res) => {
     );
 });
 app.put("/updateItem", (req, res) => {
+    console.log("HI";
     const ID = req.body.ID;
     const name = req.body.name;
     const descr = req.body.descr;

@@ -369,6 +369,7 @@ app.post("/addItem", (req, res) => {
     const size = req.body.size;
     const references = req.body.references;
     const itemData = req.body.itemData;
+    const ImagePath = req.body.ImagePath;
     const data = itemData.map((x) =>
         Object.keys(x)
         .filter((key) => key != "id")
@@ -380,7 +381,7 @@ app.post("/addItem", (req, res) => {
     console.log(data1.toString().split("^%^"));
 
     db.query(
-        "INSERT INTO item (ItemID, ItemName, Descr, ShortDescr, InStorage, DisplayID, ShowcaseID, Site, Period, Age, Material, Website, Size, Refs, ItemData) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", [
+        "INSERT INTO item (ItemID, ItemName, Descr, ShortDescr, InStorage, DisplayID, ShowcaseID, Site, Period, Age, Material, Website, Size, Refs, ImagePath, ItemData) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", [
             ID,
             name,
             descr,
@@ -395,6 +396,7 @@ app.post("/addItem", (req, res) => {
             website,
             size,
             references,
+            ImagePath,
             data1.toString(),
         ],
         (err, result) => {
@@ -422,6 +424,7 @@ app.put("/updateItem", (req, res) => {
     const size = req.body.size;
     const references = req.body.references;
     const itemData = req.body.itemData;
+    const ImagePath = req.body.ImagePath;
     const data = itemData.map((x) =>
         Object.keys(x)
         .filter((key) => key != "id")
@@ -431,7 +434,7 @@ app.put("/updateItem", (req, res) => {
     const data1 = data.map((temp) => temp + "^%^");
 
     db.query(
-        "UPDATE item SET  ItemName = ?, Descr = ?, ShortDescr = ?, InStorage = ?, DisplayID = ?, ShowcaseID = ?, Site = ?, Period = ?, Age = ?, Material = ?, Website = ?, Size = ?, Refs = ?, ItemData = ? WHERE ID = ?", [
+        "UPDATE item SET  ItemName = ?, Descr = ?, ShortDescr = ?, InStorage = ?, DisplayID = ?, ShowcaseID = ?, Site = ?, Period = ?, Age = ?, Material = ?, Website = ?, Size = ?, Refs = ?, ImagePath = ?, ItemData = ? WHERE ID = ?", [
             name,
             descr,
             shortDescr,

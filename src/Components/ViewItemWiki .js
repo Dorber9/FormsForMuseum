@@ -10,6 +10,7 @@ const ViewItemWiki = (props) => {
   const [itemDataWiki, setDataWiki] = useState([]);
   const [itemData, setData] = useState([]);
   const [itemKeys, setKeys] = useState([]);
+  const [path, setPath] = useState("");
 
   useEffect(() => {
     setDataWiki([]);
@@ -30,6 +31,8 @@ const ViewItemWiki = (props) => {
 
       console.log(itemData);
       const data = res.data[0].ItemData.split("^%^");
+      setPath(res.data[0].ImagePath);
+      console.log(res.data[0].ImagePath);
       data.pop();
       var temp = [];
 
@@ -51,6 +54,7 @@ const ViewItemWiki = (props) => {
   return (
     <>
       <div className="pshDwn">
+        <img src={path} alt="LA" />
         {
           <h1 style={{ textAlign: "center" }}>{itemData.ItemName}</h1>
 
@@ -68,8 +72,6 @@ const ViewItemWiki = (props) => {
         {itemDataWiki.map((item) => {
           return (
             <div>
-              <img src={item.ImagePath} alt="HALO" />
-              <h1>{item.ImagePath}</h1>
               <Collapse title={item.category}>{item.categoryDescr}</Collapse>
             </div>
           );

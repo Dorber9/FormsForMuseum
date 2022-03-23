@@ -310,6 +310,7 @@ app.get("/Showcase", (req, res) => {
     });
 });
 app.put("/updateShowcase", (req, res) => {
+    console.log("hon");
     const idShowcase = req.body.idShowcase;
     const Number = req.body.Number;
     const Name = req.body.Name;

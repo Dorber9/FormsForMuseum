@@ -231,6 +231,7 @@ app.get("/Display", (req, res) => {
     });
 });
 app.put("/updateDisplay", (req, res) => {
+    console.log("Hada");
     const idDisplay = req.body.idDisplay;
     const Name = req.body.Name;
     const Theme = req.body.Theme;

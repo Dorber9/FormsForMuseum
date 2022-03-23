@@ -436,21 +436,24 @@ app.put("/updateItem", (req, res) => {
     const data1 = data.map((temp) => temp + "^%^");
 
     db.query(
-        "UPDATE item SET  ItemName = ?, Descr = ?, ShortDescr = ?, InStorage = ?, DisplayID = ?, ShowcaseID = ?, Site = ?, Period = ?, Age = ?, Material = ?, Website = ?, Size = ?, Refs = ?, ImagePath = ?, ItemData = ? WHERE ID = ?", [
+        "UPDATE item SET  ItemName = ?, Descr = ?, Material = ?, Period = ?, Site = ?, ShortDescr = ?, Age = ?, Website = ?, Size = ?, InStorage = ?, DisplayID = ?, ShowcaseID = ?, Refs = ?, ImagePath = ?, ItemData = ? WHERE ItemID = ?", [
             name,
             descr,
+            material,
+            period,
+            site,
             shortDescr,
+            age,
+            website,
+            age,
+            size,
             storage,
             displayID,
             showcaseID,
-            site,
-            period,
-            age,
-            material,
-            website,
-            size,
             references,
+            ImagePath,
             data1.toString(),
+            ID,
         ],
         (err, result) => {
             if (err) {

@@ -93,8 +93,6 @@ const AddSection = (props) => {
           type="text"
           name="name"
           label="Name"
-          helperText={name === "" ? "Field cannot be empty" : ""}
-          error={name === ""}
         />
         <br />
         <br />
@@ -111,8 +109,6 @@ const AddSection = (props) => {
           fullWidth
           multiline
           rows="3"
-          helperText={description === "" ? "Field cannot be empty" : ""}
-          error={description === ""}
         />
         <br />
         <br />

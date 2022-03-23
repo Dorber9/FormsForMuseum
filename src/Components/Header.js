@@ -7,7 +7,7 @@ import {
   MenuItem,
   Container,
 } from "react-bootstrap";
-import { FaHome, FaArchway, FaWpforms } from "react-icons/fa";
+import { FaHome, FaArchway, FaWpforms, FaTable } from "react-icons/fa";
 
 const Header = () => {
   return (
@@ -34,8 +34,10 @@ const Header = () => {
             <Nav.Link href="../Reports">
               Reports <FaWpforms />
             </Nav.Link>
-            <Nav.Link href="../DemoPage">Demo</Nav.Link>
-            <Nav.Link href="../ItemsList">Items List</Nav.Link>
+
+            <Nav.Link href="../ItemsList">
+              Items <FaTable />
+            </Nav.Link>
           </Nav>
         </Container>
       </Navbar>

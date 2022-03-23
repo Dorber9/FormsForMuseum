@@ -258,8 +258,6 @@ function AddItem(props) {
                   type="text"
                   name="itemId"
                   placeholder="ID"
-                  helperText={itemId === "" ? "Field cannot be empty" : ""}
-                  error={itemId === ""}
                 />
 
                 <TextField
@@ -272,8 +270,6 @@ function AddItem(props) {
                   type="text"
                   name="name"
                   placeholder="name"
-                  helperText={name === "" ? "Field cannot be empty" : ""}
-                  error={name === ""}
                 />
 
                 <TextField
@@ -286,8 +282,6 @@ function AddItem(props) {
                   type="text"
                   name="Site"
                   placeholder="Site"
-                  helperText={site === "" ? "Field cannot be empty" : ""}
-                  error={site === ""}
                 />
                 <br />
                 <br />
@@ -371,8 +365,6 @@ function AddItem(props) {
                   type="text"
                   name="Period"
                   placeholder="Period"
-                  helperText={period === "" ? "Field cannot be empty" : ""}
-                  error={period === ""}
                 />
 
                 <TextField
@@ -385,8 +377,6 @@ function AddItem(props) {
                   type="text"
                   name="Age"
                   placeholder="Age"
-                  helperText={age === "" ? "Field cannot be empty" : ""}
-                  error={age === ""}
                 />
 
                 <TextField
@@ -399,8 +389,6 @@ function AddItem(props) {
                   type="text"
                   name="Material"
                   placeholder="Material"
-                  helperText={material === "" ? "Field cannot be empty" : ""}
-                  error={material === ""}
                 />
                 <br />
                 <br />
@@ -413,8 +401,6 @@ function AddItem(props) {
                   type="text"
                   name="Size"
                   placeholder="Size(h X w X d )"
-                  helperText={size === "" ? "Field cannot be empty" : ""}
-                  error={size === ""}
                 />
 
                 <TextField
@@ -427,8 +413,6 @@ function AddItem(props) {
                   type="text"
                   name="Website"
                   placeholder="Website"
-                  helperText={website === "" ? "Field cannot be empty" : ""}
-                  error={website === ""}
                 />
                 <TextField
                   value={references}
@@ -440,8 +424,6 @@ function AddItem(props) {
                   type="text"
                   name="References"
                   placeholder="References"
-                  helperText={references === "" ? "Field cannot be empty" : ""}
-                  error={references === ""}
                 />
                 <br />
                 <br />
@@ -458,8 +440,6 @@ function AddItem(props) {
                   fullWidth
                   multiline
                   rows="3"
-                  helperText={descr === "" ? "Field cannot be empty" : ""}
-                  error={descr === ""}
                 />
                 <br />
                 <br />
@@ -476,8 +456,6 @@ function AddItem(props) {
                   multiline
                   rows="3"
                   placeholder="Short Description"
-                  helperText={shortDescr === "" ? "Field cannot be empty" : ""}
-                  error={shortDescr === ""}
                 />
                 <br />
                 <br />

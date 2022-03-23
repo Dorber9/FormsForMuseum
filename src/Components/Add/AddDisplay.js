@@ -135,8 +135,6 @@ const AddDisplay = (props) => {
                   type="text"
                   name="name"
                   label="Name"
-                  helperText={name === "" ? "Field cannot be empty" : ""}
-                  error={name === ""}
                 />
                 <TextField
                   value={curator}
@@ -148,8 +146,6 @@ const AddDisplay = (props) => {
                   type="text"
                   name="Curator"
                   label={curatorLabel}
-                  helperText={curator === "" ? "Field cannot be empty" : ""}
-                  error={curator === ""}
                 />
                 <TextField
                   value={designer}
@@ -161,8 +157,6 @@ const AddDisplay = (props) => {
                   type="text"
                   name="Designer"
                   label="Designer"
-                  helperText={designer === "" ? "Field cannot be empty" : ""}
-                  error={designer === ""}
                 />
                 <br />
                 <br />
@@ -200,7 +194,6 @@ const AddDisplay = (props) => {
                       type="date"
                       name="StartDate"
                       helperText="Start Date"
-                      error={startDate === ""}
                       disabled={permanent === "1"}
                     />
 
@@ -214,7 +207,6 @@ const AddDisplay = (props) => {
                       type="date"
                       name="EndDate"
                       helperText="End Date"
-                      error={endDate === ""}
                       disabled={permanent === "1"}
                     />
                     <br />
@@ -230,8 +222,6 @@ const AddDisplay = (props) => {
                   type="text"
                   name="Theme"
                   label="Theme"
-                  helperText={theme === "" ? "Field cannot be empty" : ""}
-                  error={theme === ""}
                 />
                 <TextField
                   style={{ marginLeft: "5px" }}
@@ -243,8 +233,6 @@ const AddDisplay = (props) => {
                   type="text"
                   name="Reason"
                   label="Reason"
-                  helperText={reason === "" ? "Field cannot be empty" : ""}
-                  error={reason === ""}
                 />
                 <br />
                 <br />
@@ -261,8 +249,6 @@ const AddDisplay = (props) => {
                   fullWidth
                   multiline
                   rows="3"
-                  helperText={description === "" ? "Field cannot be empty" : ""}
-                  error={description === ""}
                 />
                 <br />
                 <br />

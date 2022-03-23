@@ -104,8 +104,6 @@ const AddBuilding = (props) => {
           type="text"
           name="name"
           label="Building Name"
-          helperText={name === "" ? "Field cannot be empty" : ""}
-          error={name === ""}
         />
         <br />
         <br />

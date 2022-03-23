@@ -7,6 +7,7 @@ import "../../App.css";
 import Button from "@material-ui/core/Button";
 import Select from "react-select";
 import { Container, Card } from "react-bootstrap";
+import ReactUploadImage from "../ReactUploadImage";
 
 const AddShowcase = (props) => {
   const [number, setNumber] = useState("");
@@ -18,6 +19,7 @@ const AddShowcase = (props) => {
   const [showcaseList, setShowcaseList] = useState([]);
   const [displayList, setDisplayList] = useState([]);
   const [selectedValue, setSelectedValue] = useState("Please Select Display");
+  const [path, setPath] = useState("");
 
   useEffect(() => {
     getDisplay();
@@ -42,6 +44,7 @@ const AddShowcase = (props) => {
         Type: type,
         SpecialCare: specialCare,
         DisplayID: selectedValue,
+        ImagePath: path,
       }).then(() => {
         setShowcaseList([
           ...showcaseList,
@@ -52,6 +55,7 @@ const AddShowcase = (props) => {
             Type: type,
             SpecialCare: specialCare,
             DisplayID: selectedValue,
+            ImagePath: path,
           },
         ]);
       });
@@ -73,6 +77,10 @@ const AddShowcase = (props) => {
     Axios.get("http://34.65.174.141:3001/Display").then((response) => {
       setDisplayList(response.data);
     });
+  };
+
+  const handleCallback = (childData) => {
+    setPath(childData);
   };
 
   return (
@@ -100,6 +108,11 @@ const AddShowcase = (props) => {
                 );
               })}
               <div className="txtf">
+                {props.object == null ? (
+                  ""
+                ) : (
+                  <img src={props.object.ImagePath}></img>
+                )}
                 <TextField
                   value={number}
                   onChange={(event) => {
@@ -109,8 +122,6 @@ const AddShowcase = (props) => {
                   type="text"
                   name="Number"
                   label="Number"
-                  helperText={number === "" ? "Field cannot be empty" : ""}
-                  error={number === ""}
                 />
                 <TextField
                   style={{ marginLeft: "5px" }}
@@ -122,8 +133,6 @@ const AddShowcase = (props) => {
                   type="text"
                   name="Name"
                   label="Name"
-                  helperText={name === "" ? "Field cannot be empty" : ""}
-                  error={name === ""}
                 />
                 <TextField
                   style={{ marginLeft: "5px" }}
@@ -135,8 +144,6 @@ const AddShowcase = (props) => {
                   type="text"
                   name="Type"
                   label="Type"
-                  helperText={type === "" ? "Field cannot be empty" : ""}
-                  error={type === ""}
                 />
                 <br />
                 <br />
@@ -153,10 +160,11 @@ const AddShowcase = (props) => {
                   fullWidth
                   multiline
                   rows="3"
-                  helperText={description === "" ? "Field cannot be empty" : ""}
-                  error={description === ""}
                 />
                 <br />
+                <ReactUploadImage
+                  parentCallback={handleCallback}
+                ></ReactUploadImage>
                 <label htmlFor="">Special Care </label>
                 <br />
                 <div
@@ -190,10 +198,6 @@ const AddShowcase = (props) => {
                     fullWidth
                     multiline
                     rows="3"
-                    helperText={
-                      specialCareDesc === "" ? "Field cannot be empty" : ""
-                    }
-                    error={specialCareDesc === ""}
                   />
                 )}
                 <br />

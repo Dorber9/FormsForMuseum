@@ -288,9 +288,10 @@ app.post("/addShowcase", (req, res) => {
     const Type = req.body.Type;
     const SpecialCare = req.body.SpecialCare;
     const DisplayID = req.body.DisplayID;
+    const ImagePath = req.body.ImagePath;
 
     db.query(
-        "INSERT INTO showcase (Number,Name,Descr,Type,SpecialCare,DisplayID) VALUES (?,?,?,?,?,?)", [Number, Name, Descr, Type, SpecialCare, DisplayID],
+        "INSERT INTO showcase (Number,Name,Descr,Type,SpecialCare,DisplayID,ImagePath) VALUES (?,?,?,?,?,?,?)", [Number, Name, Descr, Type, SpecialCare, DisplayID, ImagePath],
         (err, result) => {
             if (err) {
                 console.log(err);
@@ -318,9 +319,10 @@ app.put("/updateShowcase", (req, res) => {
     const Type = req.body.Type;
     const SpecialCare = req.body.SpecialCare;
     const DisplayID = req.body.DisplayID;
+    const ImagePath = req.body.ImagePath;
 
     db.query(
-        "UPDATE section SET Number = ?, Name = ?, Descr = ?, Type = ?, SpecialCare = ?, DisplayID = ? WHERE idShowcase = ?", [Number, Name, Descr, Type, SpecialCare, DisplayID],
+        "UPDATE section SET Number = ?, Name = ?, Descr = ?, Type = ?, SpecialCare = ?, DisplayID = ?, ImagePath = ? WHERE idShowcase = ?", [Number, Name, Descr, Type, SpecialCare, ImagePath, DisplayID],
         (err, result) => {
             if (err) {
                 console.log(err);

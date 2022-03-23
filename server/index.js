@@ -81,13 +81,13 @@ app.delete("/deleteMuseum/:id", (req, res) => {
 
 //add and get Buildings
 app.post("/addBuilding", (req, res) => {
-    const name = req.body.name;
-    const city = req.body.city;
-    const address = req.body.address;
+    const Name = req.body.Name;
+    const City = req.body.City;
+    const Address = req.body.Address;
     const MuseumID = req.body.MuseumID;
     console.log(MuseumID);
     db.query(
-        "INSERT INTO building (name,city,address,MuseumID) VALUES (?,?,?,?)", [name, city, address, MuseumID],
+        "INSERT INTO building (Name,City,Address,MuseumID) VALUES (?,?,?,?)", [Name, City, Address, MuseumID],
         (err, result) => {
             if (err) {
                 console.log(err);

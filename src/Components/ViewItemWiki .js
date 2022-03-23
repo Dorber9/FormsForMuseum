@@ -69,6 +69,7 @@ const ViewItemWiki = (props) => {
           return (
             <div>
               <img src={item.ImagePath} alt="HALO" />
+              <h1>{item.ImagePath}</h1>
               <Collapse title={item.category}>{item.categoryDescr}</Collapse>
             </div>
           );

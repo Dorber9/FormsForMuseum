@@ -30,9 +30,8 @@ const AddQuestion = (props) => {
   const [wantedItem, setWantedItem] = useState("");
   const [itemData, setItemData] = useState("");
   const [correct, setCorrect] = useState("0");
-  const [val,setVal] = useState("")
-  const [lab,setLabel] = useState("e")
-  
+  const [val, setVal] = useState("");
+  const [lab, setLabel] = useState("e");
 
   const mapOptions = () => {
     return itemsList.map((val, key) => {
@@ -59,6 +58,8 @@ const AddQuestion = (props) => {
     { value: "3", label: "3" },
     { value: "4", label: "4" },
   ];
+
+  // SEND TO DATABASE //
   const handleSubmit = (e) => {
     e.preventDefault();
     setItemData(inputFields);
@@ -66,24 +67,19 @@ const AddQuestion = (props) => {
   };
 
   const getItems = () => {
-    
     Axios.get("http://34.65.174.141:3001/Item").then((response) => {
-      
       setItemsList(response.data);
-      
     });
   };
 
   /* ****** check about itemid prop in add question ***** */
   useEffect(() => {
     getItems();
-    if(props.name!=null){
+    if (props.name != null) {
       setWantedItem(props.ItemID);
     }
-    
   }, [props]);
   const classes = useStyles();
-
 
   const handleChangeInput = (id, name, event) => {
     const newInputFields = inputFields.map((i) => {
@@ -150,29 +146,28 @@ const AddQuestion = (props) => {
                   alignItems: "center",
                 }}
               >
-                {props.name != null ? 
-                (
-                <Select
-                defaultValue= {{value: props.ItemID, label: props.name}}
-                  styles={selectStyles}
-                  options={itemsList.map((val, key) => {
-                    return { value: val.ItemID, label: val.ItemName };
-                  })}
-                  onChange={(e) => {
-                    setWantedItem(e.value);
-                  }}
-                /> ) : (
-                       <Select
-                  styles={selectStyles}
-                  options={itemsList.map((val, key) => {
-                    return { value: val.ItemID, label: val.ItemName };
-                  })}
-                  onChange={(e) => {
-                    setWantedItem(e.value);
-                  }}
-                />
+                {props.name != null ? (
+                  <Select
+                    defaultValue={{ value: props.ItemID, label: props.name }}
+                    styles={selectStyles}
+                    options={itemsList.map((val, key) => {
+                      return { value: val.ItemID, label: val.ItemName };
+                    })}
+                    onChange={(e) => {
+                      setWantedItem(e.value);
+                    }}
+                  />
+                ) : (
+                  <Select
+                    styles={selectStyles}
+                    options={itemsList.map((val, key) => {
+                      return { value: val.ItemID, label: val.ItemName };
+                    })}
+                    onChange={(e) => {
+                      setWantedItem(e.value);
+                    }}
+                  />
                 )}
-
               </div>
               {wantedItem === "" ? (
                 ""
@@ -234,7 +229,6 @@ const AddQuestion = (props) => {
                           }
                         />
                         <div style={{ width: "20%", display: "inline-block" }}>
-                          
                           <Select
                             options={options}
                             styles={selectStyles}

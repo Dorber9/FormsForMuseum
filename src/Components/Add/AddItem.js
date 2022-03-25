@@ -310,7 +310,7 @@ function AddItem(props) {
                   variant="outlined"
                   type="text"
                   name="itemId"
-                  placeholder="ID"
+                  label="ID"
                 />
 
                 <TextField
@@ -322,7 +322,7 @@ function AddItem(props) {
                   variant="outlined"
                   type="text"
                   name="name"
-                  placeholder="name"
+                  label="name"
                 />
 
                 <TextField
@@ -334,7 +334,7 @@ function AddItem(props) {
                   variant="outlined"
                   type="text"
                   name="Site"
-                  placeholder="Site"
+                  label="Site"
                 />
                 <br />
                 <br />
@@ -409,7 +409,7 @@ function AddItem(props) {
                   variant="outlined"
                   type="text"
                   name="Period"
-                  placeholder="Period"
+                  label="Period"
                 />
 
                 <TextField
@@ -421,7 +421,7 @@ function AddItem(props) {
                   variant="outlined"
                   type="text"
                   name="Age"
-                  placeholder="Age"
+                  label="Age"
                 />
 
                 <TextField
@@ -433,7 +433,7 @@ function AddItem(props) {
                   variant="outlined"
                   type="text"
                   name="Material"
-                  placeholder="Material"
+                  label="Material"
                 />
                 <br />
                 <br />
@@ -445,7 +445,7 @@ function AddItem(props) {
                   variant="outlined"
                   type="text"
                   name="Size"
-                  placeholder="Size(h X w X d )"
+                  label="Size(h X w X d )"
                 />
 
                 <TextField
@@ -457,7 +457,7 @@ function AddItem(props) {
                   variant="outlined"
                   type="text"
                   name="Website"
-                  placeholder="Website"
+                  label="Website"
                 />
                 <TextField
                   value={references}
@@ -468,7 +468,7 @@ function AddItem(props) {
                   variant="outlined"
                   type="text"
                   name="References"
-                  placeholder="References"
+                  label="References"
                 />
                 <br />
                 <br />
@@ -480,7 +480,7 @@ function AddItem(props) {
                   variant="outlined"
                   type="text"
                   name="Description"
-                  placeholder="Description"
+                  label="Description"
                   style={{ width: "75%" }}
                   fullWidth
                   multiline
@@ -500,7 +500,7 @@ function AddItem(props) {
                   fullWidth
                   multiline
                   rows="3"
-                  placeholder="Short Description"
+                  label="Short Description"
                 />
                 <br />
                 <br />

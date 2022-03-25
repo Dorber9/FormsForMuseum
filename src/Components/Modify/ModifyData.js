@@ -169,7 +169,7 @@ const ModifyData = () => {
     { value: "Item", label: "Item" },
   ];
   return (
-    <div style={{ minHeight: `calc(100vh - 80px)` }}>
+    <div style={{ minHeight: `calc(100vh - 80px)`, textAlign: "center" }}>
       <h2>Hello, what would you like to modify?</h2>
       <div
         style={{
@@ -222,7 +222,7 @@ const ModifyData = () => {
       {wantedObject == "" ? (
         ""
       ) : (
-        <div>
+        <div className="tc">
           {selectedObject === "Museum" ? (
             <AddMuseum object={getWantedList(wantedObject, "Museum")} />
           ) : selectedObject === "Building" ? (

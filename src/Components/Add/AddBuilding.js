@@ -3,7 +3,7 @@ import React from "react";
 import { TextField } from "@material-ui/core";
 import { useState, useEffect } from "react";
 import Axios from "axios";
-
+import { Container, Card } from "react-bootstrap";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 
@@ -102,120 +102,137 @@ const AddBuilding = (props) => {
 
   return (
     <>
-      {buildingList.map((val, key) => {
-        return (
-          <div className="building">
-            <div>
-              <h3>id: {val.BuildingID}</h3>
-              <h3>name: {val.Name}</h3>
-              <h3>city: {val.City}</h3>
-              <h3>address: {val.Address}</h3>
-            </div>
-          </div>
-        );
-      })}
-      <div className="txtf">
-        <TextField
-          value={name}
-          onChange={(event) => {
-            setName(event.target.value);
-          }}
-          variant="outlined"
-          type="text"
-          name="name"
-          label="Building Name"
-        />
-        <br />
-        <br />
-        <TextField
-          disabled
-          value={city}
-          onChange={(event) => {
-            setCity(event.target.value);
-          }}
-          variant="outlined"
-          type="text"
-          name="City"
-          label="City"
-          helperText={city === "" ? "Field cannot be empty" : ""}
-          error={city === ""}
-        />
-        <br />
-        <br />
-        <TextField
-          disabled
-          value={address}
-          onChange={(event) => {
-            setAddress(event.target.value);
-          }}
-          variant="outlined"
-          type="text"
-          name="Address"
-          label="Address"
-          helperText={address === "" ? "Field cannot be empty" : ""}
-          error={address === ""}
-        />
-        <br />
-        <br />
-        <label>
-          Museum:
-          <select
-            style={{ marginLeft: "10px" }}
-            onChange={(event) => {
-              setSelectedValue(event.target.value);
-            }}
-          >
-            {props.object == null ? (
-              <option disabled selected value>
-                Please Select Museum
-              </option>
-            ) : (
-              ""
-            )}
-
-            {museumList.map((val, key) => {
-              return (
-                <option
-                  selected={
-                    props.object != null && val.id == props.object.MuseumID
-                  }
-                  className="museum"
-                  value={val.id}
-                >
-                  {val.name}
-                </option>
-              );
-            })}
-          </select>
-        </label>
-        <br />
-        <br />
-        <Button
-          variant="contained"
-          color="primary"
-          type="submit"
-          onClick={props.object == null ? postBuilding : updateBuilding}
+      <Container>
+        <Card
+          className="addCard"
+          border="secondary"
+          style={{ background: "#dbdbdbad" }}
         >
-          SUBMIT
-        </Button>
-        {props.object == null ? (
-          ""
-        ) : (
-          <Button
-            variant="contained"
-            color="primary"
-            type="submit"
-            style={{ color: "white", background: "red", marginLeft: "10px" }}
-            onClick={deleteBuilding}
-          >
-            Delete Building
-          </Button>
-        )}
+          <Card.Body>
+            <Card.Text>
+              {buildingList.map((val, key) => {
+                return (
+                  <div className="building">
+                    <div>
+                      <h3>id: {val.BuildingID}</h3>
+                      <h3>name: {val.Name}</h3>
+                      <h3>city: {val.City}</h3>
+                      <h3>address: {val.Address}</h3>
+                    </div>
+                  </div>
+                );
+              })}
+              <div className="txtf">
+                <TextField
+                  value={name}
+                  onChange={(event) => {
+                    setName(event.target.value);
+                  }}
+                  variant="outlined"
+                  type="text"
+                  name="name"
+                  label="Building Name"
+                />
+                <br />
+                <br />
+                <TextField
+                  disabled
+                  value={city}
+                  onChange={(event) => {
+                    setCity(event.target.value);
+                  }}
+                  variant="outlined"
+                  type="text"
+                  name="City"
+                  label="City"
+                  helperText={city === "" ? "Field cannot be empty" : ""}
+                  error={city === ""}
+                />
+                <br />
+                <br />
+                <TextField
+                  disabled
+                  value={address}
+                  onChange={(event) => {
+                    setAddress(event.target.value);
+                  }}
+                  variant="outlined"
+                  type="text"
+                  name="Address"
+                  label="Address"
+                  helperText={address === "" ? "Field cannot be empty" : ""}
+                  error={address === ""}
+                />
+                <br />
+                <br />
+                <label>
+                  Museum:
+                  <select
+                    style={{ marginLeft: "10px" }}
+                    onChange={(event) => {
+                      setSelectedValue(event.target.value);
+                    }}
+                  >
+                    {props.object == null ? (
+                      <option disabled selected value>
+                        Please Select Museum
+                      </option>
+                    ) : (
+                      ""
+                    )}
 
-        {/* <button onClick={getBuilding} id="check">
+                    {museumList.map((val, key) => {
+                      return (
+                        <option
+                          selected={
+                            props.object != null &&
+                            val.id == props.object.MuseumID
+                          }
+                          className="museum"
+                          value={val.id}
+                        >
+                          {val.name}
+                        </option>
+                      );
+                    })}
+                  </select>
+                </label>
+                <br />
+                <br />
+                <Button
+                  variant="contained"
+                  color="primary"
+                  type="submit"
+                  onClick={props.object == null ? postBuilding : updateBuilding}
+                >
+                  SUBMIT
+                </Button>
+                {props.object == null ? (
+                  ""
+                ) : (
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    type="submit"
+                    style={{
+                      color: "white",
+                      background: "red",
+                      marginLeft: "10px",
+                    }}
+                    onClick={deleteBuilding}
+                  >
+                    Delete Building
+                  </Button>
+                )}
+
+                {/* <button onClick={getBuilding} id="check">
           Show Buildings
         </button> */}
-      </div>
+              </div>
+            </Card.Text>
+          </Card.Body>
+        </Card>
+      </Container>
     </>
   );
 };

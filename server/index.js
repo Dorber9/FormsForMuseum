@@ -79,6 +79,19 @@ app.delete("/deleteMuseum/:id", (req, res) => {
     });
 });
 
+app.post("/addQuestion", (req, res) => {
+    const questions = (req.body.questions);
+    questions.forEach(element => {
+        var question = element.question;
+        var answer1 = element.answer1;
+        var answer2 = element.answer2;
+        var answer3 = element.answer3;
+        var hint = element.hint;
+        var correct = element.correct;
+        /* add here db query to question table */
+    });
+})
+
 //add and get Buildings
 app.post("/addBuilding", (req, res) => {
     const Name = req.body.Name;
@@ -253,7 +266,7 @@ app.put("/updateDisplay", (req, res) => {
             EndDate,
             Curator,
             Designer,
-            ShortDesc, 
+            ShortDesc,
             Reason,
             SectionID,
             idDisplay,
@@ -476,14 +489,14 @@ app.delete("/deleteItem/:id", (req, res) => {
 });
 
 app.get("/Item/:id", (req, res) => {
-  const id = req.params.id;
-  db.query("SELECT * FROM item WHERE ItemID = ?", id, (err, result) => {
-    if (err) {
-      console.log(err);
-    } else {
-      res.send(result);
-    }
-  });
+    const id = req.params.id;
+    db.query("SELECT * FROM item WHERE ItemID = ?", id, (err, result) => {
+        if (err) {
+            console.log(err);
+        } else {
+            res.send(result);
+        }
+    });
 });
 
 app.put("/update", (req, res) => {

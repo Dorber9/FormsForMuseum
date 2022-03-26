@@ -62,7 +62,18 @@ const AddQuestion = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setItemData(inputFields);
+    postQuestion();
     console.log(itemData);
+  };
+
+
+    /* change to relevant url */
+   const postQuestion = () => {
+    Axios.post("http://localhost:3001/addQuestion", {
+      questions: itemData,
+    }).then((response) => {
+      console.log(response);
+    });
   };
 
   const getItems = () => {

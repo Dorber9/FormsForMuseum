@@ -63,8 +63,14 @@ const AddQuestion = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setItemData(inputFields);
-    postQuestion();
-    console.log(itemData);
+    if(props.object){
+     
+      updateQuestion()
+      return
+    }
+    else
+      postQuestion();
+      return
   };
 
 
@@ -72,6 +78,15 @@ const AddQuestion = (props) => {
    const postQuestion = () => {
     Axios.post("http://localhost:3001/addQuestion", {
       questions: itemData,
+      itemID: wantedItem,
+    }).then((response) => {
+      console.log(response);
+    });
+  };
+   const updateQuestion = () => {
+    Axios.update("http://localhost:3001/updateQuestion", {
+      questions: itemData,
+      itemID: wantedItem,
     }).then((response) => {
       console.log(response);
     });
@@ -176,6 +191,8 @@ const AddQuestion = (props) => {
       }
       setInputFields(temp);
   }
+
+ 
 
   return (
     <div>
@@ -282,6 +299,7 @@ const AddQuestion = (props) => {
                         />
                         <div style={{ width: "20%", display: "inline-block" }}>
                           <Select
+                            defaultInputValue={inputField.correct}
                             options={options}
                             styles={selectStyles}
                             onChange={(e) => {

@@ -137,7 +137,7 @@ app.put("/updateQuestion", (req, res) => {
 
     console.log(element);
     db.query(
-      "UPDATE questions SET Question = ?, a1 = ?, a2 = ?, a3 = ?, a4 = ?, Clue = ?, Correct = ?, ObjectID = ?  WHERE QuestionID = ?",
+      "UPDATE Questions SET Question = ?, a1 = ?, a2 = ?, a3 = ?, a4 = ?, Clue = ?, Correct = ?, ObjectID = ?  WHERE QuestionID = ?",
 
       [
         question,
@@ -164,7 +164,7 @@ app.put("/updateQuestion", (req, res) => {
 
 app.delete("/deleteQuestion/:id", (req, res) => {
   const id = req.params.qid;
-  db.query("DELETE FROM Question WHERE QuestionID = ?", id, (err, result) => {
+  db.query("DELETE FROM Questions WHERE QuestionID = ?", id, (err, result) => {
     if (err) {
       console.log(err);
     } else {

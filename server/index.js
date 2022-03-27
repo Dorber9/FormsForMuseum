@@ -164,7 +164,7 @@ app.put("/updateQuestion", (req, res) => {
 
 app.delete("/deleteQuestion/:id", (req, res) => {
   const id = req.params.qid;
-  db.query("DELETE FROM questions WHERE QuestionID = ?", id, (err, result) => {
+  db.query("DELETE FROM Question WHERE QuestionID = ?", id, (err, result) => {
     if (err) {
       console.log(err);
     } else {

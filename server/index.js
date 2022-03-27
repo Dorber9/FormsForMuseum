@@ -80,27 +80,29 @@ app.delete("/deleteMuseum/:id", (req, res) => {
 });
 
 app.post("/addQuestion", (req, res) => {
-    const questions = (req.body.questions);
-    questions.forEach(element => {
-        var question = element.question;
-        var answer1 = element.answer1;
-        var answer2 = element.answer2;
-        var answer3 = element.answer3;
-        var answer4 = element.answer4;
-        var hint = element.hint;
-        var correct = element.correct;
-    //     db.query(
-    //     "INSERT INTO Questions (Question,1,2,3,4,Correct,Clue) VALUES (?,?,?,?,?,?,?)", [question, answer1, answer2, answer3,answer4,hint,correct],
-    //     (err, result) => {
-    //         if (err) {
-    //             console.log(err);
-    //         } else {
-    //             res.send("Values Inserted");
-    //         }
-    //     }
-    // );
-        console.log(element);
-    });
+  const questions = req.body.questions;
+  questions.forEach((element) => {
+    var question = element.question;
+    var answer1 = element.answer1;
+    var answer2 = element.answer2;
+    var answer3 = element.answer3;
+    var answer4 = element.answer4;
+    var hint = element.hint;
+    var correct = element.correct;
+    console.log(element);
+    db.query(
+      "INSERT INTO Questions (Question,1,2,3,4,Correct,Clue) VALUES (?,?,?,?,?,?,?)",
+      [question, answer1, answer2, answer3, answer4, hint, correct],
+      (err, result) => {
+        if (err) {
+          console.log(err);
+        } else {
+          res.send("Values Inserted");
+        }
+      }
+    );
+  });
+});
 
 //add and get Buildings
 app.post("/addBuilding", (req, res) => {

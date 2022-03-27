@@ -92,11 +92,12 @@ app.get("/question", (req, res) => {
 });
 
 app.post("/addQuestion", (req, res) => {
-  var ObjectID = req.body.itemID;
+  
   console.log(req.body);
   const questions = req.body.questions;
   console.log(questions);
   questions.forEach((element) => {
+    var ObjectID = req.body.itemID;
     var question = element.question;
     var answer1 = element.answer1;
     var answer2 = element.answer2;

@@ -80,7 +80,7 @@ app.delete("/deleteMuseum/:id", (req, res) => {
 });
 
 app.post("/addQuestion", (req, res) => {
-  const ObjectID = req.body.itemID;
+  var ObjectID = req.body.itemID;
   const questions = req.body.questions;
   questions.forEach((element) => {
     var question = element.question;

@@ -89,18 +89,18 @@ app.post("/addQuestion", (req, res) => {
         var answer4 = element.answer4;
         var hint = element.hint;
         var correct = element.correct;
-        db.query(
-        "INSERT INTO Questions (Question,1,2,3,4,Correct,Clue) VALUES (?,?,?,?,?,?,?)", [question, answer1, answer2, answer3,answer4,hint,correct],
-        (err, result) => {
-            if (err) {
-                console.log(err);
-            } else {
-                res.send("Values Inserted");
-            }
-        }
-    );
+    //     db.query(
+    //     "INSERT INTO Questions (Question,1,2,3,4,Correct,Clue) VALUES (?,?,?,?,?,?,?)", [question, answer1, answer2, answer3,answer4,hint,correct],
+    //     (err, result) => {
+    //         if (err) {
+    //             console.log(err);
+    //         } else {
+    //             res.send("Values Inserted");
+    //         }
+    //     }
+    // );
+        console.log(element);
     });
-})
 
 //add and get Buildings
 app.post("/addBuilding", (req, res) => {

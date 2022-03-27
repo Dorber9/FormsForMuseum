@@ -124,6 +124,7 @@ app.post("/addQuestion", (req, res) => {
 app.put("/updateQuestion", (req, res) => {
   const questions = req.body.questions;
   var ObjectID = req.body.itemID;
+  console.log(questions);
   questions.forEach((element) => {
     var question = element.question;
     var qid = element.qid;

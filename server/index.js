@@ -79,6 +79,7 @@ app.delete("/deleteMuseum/:id", (req, res) => {
     });
 });
 
+// add, update, get Questions
 app.get("/question", (req, res) => {
     db.query("SELECT * FROM Questions", (err, result) => {
         if (err) {
@@ -114,6 +115,47 @@ app.post("/addQuestion", (req, res) => {
             }
         );
     });
+});
+
+app.put("/updateQuestion", (req, res) => {
+    const questions = req.body.questions;
+    var ObjectID = req.body.itemID;
+    questions.forEach((element) => {
+        var question = element.question;
+        var qid = element.qid;
+        var answer1 = element.answer1;
+        var answer2 = element.answer2;
+        var answer3 = element.answer3;
+        var answer4 = element.answer4;
+        var hint = element.hint;
+        var correct = element.correct;
+
+    console.log(element);
+    db.query(
+      "UPDATE questions SET Question = ?, a1 = ?, a2 = ?, a3 = ?, a4 = ?, Clue = ?, Correct = ?, ObjectID = ?  WHERE QuestionID = ?",
+    
+      [question, answer1, answer2, answer3, answer4, hint, correct, ObjectID,qid],
+      (err, result) => {
+        if (err) {
+          console.log(err);
+        } else {
+          //res.send("Values Inserted");
+          console.log("hada");
+        }
+      }
+    );
+  });
+});
+
+app.delete("/deleteQuestion/:id", (req, res) => {
+  const id = req.params.qid;
+  db.query("DELETE FROM questions WHERE QuestionID = ?", id, (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(result);
+    }
+  });
 });
 
 //add and get Buildings

@@ -91,7 +91,7 @@ app.post("/addQuestion", (req, res) => {
     var correct = element.correct;
     console.log(element);
     db.query(
-      "INSERT INTO Questions (Question,1,2,3,4,Correct,Clue) VALUES (?,?,?,?,?,?,?)",
+      "INSERT INTO Questions (Question,1,2,3,4,Clue,Correct) VALUES (?,?,?,?,?,?,?)",
       [question, answer1, answer2, answer3, answer4, hint, correct],
       (err, result) => {
         if (err) {

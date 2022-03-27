@@ -9,6 +9,7 @@ import AddSection from "../Add/AddSection";
 import AddDisplay from "../Add/AddDisplay";
 import AddShowcase from "../Add/AddShowcase";
 import AddItem from "../Add/AddItem";
+import AddQuestion from "../Add/AddQuestion";
 
 import { render } from "react-dom";
 
@@ -23,6 +24,7 @@ const ModifyData = () => {
   const [museumList, setMuseumList] = useState([]);
   const [buildingList, setBuildingList] = useState([]);
   const [sectionList, setSectionList] = useState([]);
+  const [questionsList, setQuestionsList] = useState([]);
 
   const [objectName, setObjectName] = useState("");
 
@@ -61,6 +63,14 @@ const ModifyData = () => {
       setSectionList(response.data);
     });
   };
+
+   const getQuestions = () => {
+    Axios.get("http://localhost:3001/question").then((response) => {
+      setQuestionsList(response.data)
+    });
+  };
+
+
 
   const getWantedList = (id, type) => {
     var wanted = "";
@@ -130,6 +140,7 @@ const ModifyData = () => {
     getMuseum();
     getBuilding();
     getSection();
+    getQuestions();
     // eslint-disable-next-line
   }, [selectedObject]);
 
@@ -238,6 +249,7 @@ const ModifyData = () => {
           )}
         </div>
       )}
+      <AddQuestion id={getWantedList(wantedObject, "Item")} object={questionsList}></AddQuestion>
     </div>
   );
 };

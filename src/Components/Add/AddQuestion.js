@@ -89,6 +89,7 @@ const AddQuestion = (props) => {
     if (props.name != null) {
       setWantedItem(props.ItemID);
     }
+    
   }, [props]);
   const classes = useStyles();
 
@@ -139,6 +140,43 @@ const AddQuestion = (props) => {
     setInputFields(values);
   };
 
+  const modifyInputFields = (id) => {
+    setInputFields([]);
+      const data=props.object;
+      var temp = [];
+      console.log(wantedItem)
+      data.forEach((element) => {
+      
+        if(element.ObjectID==id)
+        temp.push({
+          id: uuidv4(),
+          question: element.Question,
+          answer1: element.a1,
+          answer2: element.a2,
+          answer3: element.a3,
+          answer4: element.a4,
+          hint: element.Clue,
+          correct: element.Correct,
+        });
+      });
+      if(temp.length==0){
+        setInputFields([
+      {
+      id: uuidv4(),
+      question: "",
+      answer1: "",
+      answer2: "",
+      answer3: "",
+      answer4: "",
+      hint: "",
+      correct: "",
+    },
+    ])
+      return
+      }
+      setInputFields(temp);
+  }
+
   return (
     <div>
       <Container>
@@ -166,6 +204,7 @@ const AddQuestion = (props) => {
                     })}
                     onChange={(e) => {
                       setWantedItem(e.value);
+                      modifyInputFields(e.value);
                     }}
                   />
                 ) : (
@@ -176,11 +215,13 @@ const AddQuestion = (props) => {
                     })}
                     onChange={(e) => {
                       setWantedItem(e.value);
+                      if(props.object!=null)
+                        modifyInputFields(e.value);
                     }}
                   />
                 )}
               </div>
-              {wantedItem === "" ? (
+              {wantedItem === "" && props.object==null ? (
                 ""
               ) : (
                 <form className={classes.root} onSubmit={handleSubmit}>

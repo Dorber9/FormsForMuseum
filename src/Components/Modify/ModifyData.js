@@ -178,6 +178,7 @@ const ModifyData = () => {
     { value: "Display", label: "Display" },
     { value: "Showcase", label: "Exibition" },
     { value: "Item", label: "Item" },
+    { value: "Question", label: "Question" }
   ];
   return (
     <div style={{ minHeight: `calc(100vh - 80px)`, textAlign: "center" }}>
@@ -209,7 +210,7 @@ const ModifyData = () => {
             alignItems: "center",
           }}
         >
-          {selectedObject == "" ? (
+          {selectedObject == "" || selectedObject == "Question" ? (
             ""
           ) : (
             <Select
@@ -249,7 +250,10 @@ const ModifyData = () => {
           )}
         </div>
       )}
-      <AddQuestion id={getWantedList(wantedObject, "Item")} object={questionsList}></AddQuestion>
+      {selectedObject === "Question" ? 
+      <div style={{marginTop: "10px"}}>
+      <AddQuestion  object={questionsList}></AddQuestion> </div>
+        : ""  }
     </div>
   );
 };

@@ -559,18 +559,7 @@ function AddItem(props) {
                   {/* <button onClick={getItems}>Show Items</button> */}
                 </form>
 
-                {itemsList.map((val, key) => {
-                  return (
-                    <div className="desplay">
-                      <div>
-                        <h3>ID: {val.ItemID}</h3>
-                        <h3>Name: {val.ItemName}</h3>
-                        <h3>descr: {val.Descr}</h3>
-                        <h3>Item Data: {val.ItemData}</h3>
-                      </div>
-                    </div>
-                  );
-                })}
+          
               </div>
               {props.object == null ? (
                 ""

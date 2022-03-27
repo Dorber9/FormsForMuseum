@@ -28,10 +28,23 @@ const selectStyles = { menu: (styles) => ({ ...styles, zIndex: 999 }) };
 const AddQuestion = (props) => {
   const [itemsList, setItemsList] = useState([]);
   const [wantedItem, setWantedItem] = useState("");
-  const [itemData, setItemData] = useState("");
+  const [itemData, setItemData] = useState([
+     {
+      id: uuidv4(),
+      question: "",
+      answer1: "",
+      answer2: "",
+      answer3: "",
+      answer4: "",
+      hint: "",
+      correct: "",
+      qid: "",
+    },
+  ]);
   const [correct, setCorrect] = useState("0");
   const [val, setVal] = useState("");
   const [lab, setLabel] = useState("e");
+  const[emptyFlag,setFlag]= useState(false)
 
   const mapOptions = () => {
     return itemsList.map((val, key) => {
@@ -39,7 +52,7 @@ const AddQuestion = (props) => {
     });
   };
 
-  const [inputFields, setInputFields] = useState([
+  const [inputFields, setInputFields] = useState(props.object== null ? [
     {
       id: uuidv4(),
       question: "",
@@ -49,8 +62,9 @@ const AddQuestion = (props) => {
       answer4: "",
       hint: "",
       correct: "",
+      qid: "",
     },
-  ]);
+  ] : []);
 
   const options = [
     { value: "1", label: "1" },
@@ -60,35 +74,54 @@ const AddQuestion = (props) => {
   ];
 
   // SEND TO DATABASE //
-  const handleSubmit = (e) => {
+   const handleSubmit = (e) => {
     e.preventDefault();
+
     setItemData(inputFields);
-    if(props.object){
-     
-      updateQuestion()
-      return
-    }
-    else
-      postQuestion();
-      return
+
+    postQuestion();
   };
 
+  const handleUpdate = (e) => {
+    e.preventDefault();
+
+    setItemData(inputFields);
+
+    updateQuestion();
+  };
+
+  
+const deleteQuestion = (id) => {
+  console.log(id)
+    Axios.delete(
+      `http://34.65.174.141:3001/deleteQuestion/${id}`,
+      
+    ).then(() => {
+           window.location.reload(false);
+
+    });
+  };
 
     /* change to relevant url */
    const postQuestion = () => {
-    Axios.post("http://localhost:3001/addQuestion", {
-      questions: itemData,
+    Axios.post("http://34.65.174.141:3001/addQuestion", {
+      questions: inputFields,
       itemID: wantedItem,
     }).then((response) => {
       console.log(response);
+                 window.location.reload(false);
+
     });
   };
    const updateQuestion = () => {
-    Axios.update("http://localhost:3001/updateQuestion", {
-      questions: itemData,
+     
+    Axios.put("http://34.65.174.141:3001/updateQuestion", {
+      questions: inputFields,
       itemID: wantedItem,
     }).then((response) => {
       console.log(response);
+                 window.location.reload(false);
+
     });
   };
 
@@ -98,20 +131,20 @@ const AddQuestion = (props) => {
     });
   };
 
-  /* ****** check about itemid prop in add question ***** */
+  
   useEffect(() => {
     getItems();
-    if (props.name != null) {
-      setWantedItem(props.ItemID);
+    if (props.object != null) {
+      modifyInputFields("");
     }
     
   }, [props]);
   const classes = useStyles();
 
   const handleChangeInput = (id, name, event) => {
-    const newInputFields = inputFields.map((i) => {
+   const newInputFields = inputFields.map((i) => {
       if (id === i.id) {
-        i[name] = event.value;
+        i[event.target.name] = event.target.value;
       }
       return i;
     });
@@ -142,6 +175,7 @@ const AddQuestion = (props) => {
         answer4: "",
         hint: "",
         correct: "",
+        qid: ""
       },
     ]);
   };
@@ -172,24 +206,16 @@ const AddQuestion = (props) => {
           answer4: element.a4,
           hint: element.Clue,
           correct: element.Correct,
+          qid: element.QuestionID
         });
       });
       if(temp.length==0){
-        setInputFields([
-      {
-      id: uuidv4(),
-      question: "",
-      answer1: "",
-      answer2: "",
-      answer3: "",
-      answer4: "",
-      hint: "",
-      correct: "",
-    },
-    ])
+        setFlag(true)
       return
       }
+      setFlag(false)
       setInputFields(temp);
+      
   }
 
  
@@ -202,7 +228,7 @@ const AddQuestion = (props) => {
           border="secondary"
           style={{ padding: "10px", background: "#dbdbdbad" }}
         >
-          <Card.Title>Add Questions</Card.Title>
+          <Card.Title>{props.object ==null ? "Add Questions" : "Modify Questions" }</Card.Title>
           <Card.Body>
             <Card.Text>
               <div
@@ -241,7 +267,7 @@ const AddQuestion = (props) => {
               {wantedItem === "" && props.object==null ? (
                 ""
               ) : (
-                <form className={classes.root} onSubmit={handleSubmit}>
+                <form className={classes.root}>
                   {inputFields.map((inputField) => (
                     <div key={inputField.id}>
                       <div>
@@ -318,7 +344,8 @@ const AddQuestion = (props) => {
                             handleChangeInputText(inputField.id, event)
                           }
                         />
-
+                        {props.object == null ? 
+                        <>
                         <IconButton
                           disabled={inputFields.length === 1}
                           onClick={() => handleRemoveFields(inputField.id)}
@@ -327,19 +354,42 @@ const AddQuestion = (props) => {
                         </IconButton>
                         <IconButton onClick={handleAddFields}>
                           <AddIcon />
-                        </IconButton>
+                        </IconButton>  
+                        </> : <Button
+                  variant="contained"
+                  style={{
+                    color: "white",
+                    background: "red",
+                    marginLeft: "10px",
+                  }}
+                  type="button"
+                  onClick={()=>deleteQuestion(inputField.qid)}
+                >
+                  Delete
+                </Button> }
                       </div>
+                      
                     </div>
                   ))}
+                  {emptyFlag == false  ? 
+                  <>
                   <Button
                     className={classes.button}
                     variant="contained"
                     color="primary"
                     type="submit"
-                    onClick={handleSubmit}
+                    onClick={props.object == null ? handleSubmit : handleUpdate}
                   >
-                    Add Question
-                  </Button>
+                    Submit
+                  </Button></> : emptyFlag && wantedItem != "" ? 
+
+                  <div>
+                  <h2 style={{    color: "#ff002f",
+    fontSize:"15px",
+    marginTop:"5px"}}>No questions for this Item :(</h2>
+                  
+                  </div>
+                   :""} 
                 </form>
               )}
             </Card.Text>

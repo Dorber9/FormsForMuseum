@@ -80,6 +80,7 @@ app.delete("/deleteMuseum/:id", (req, res) => {
 });
 
 app.post("/addQuestion", (req, res) => {
+  const ObjectID = req.body.itemID;
   const questions = req.body.questions;
   questions.forEach((element) => {
     var question = element.question;
@@ -89,10 +90,11 @@ app.post("/addQuestion", (req, res) => {
     var answer4 = element.answer4;
     var hint = element.hint;
     var correct = element.correct;
+    
     console.log(element);
     db.query(
-      "INSERT INTO Questions (Question,a1,a2,a3,a4,Clue,Correct) VALUES (?,?,?,?,?,?,?)",
-      [question, answer1, answer2, answer3, answer4, hint, correct],
+      "INSERT INTO Questions (Question,a1,a2,a3,a4,Clue,Correct,ObjectID) VALUES (?,?,?,?,?,?,?,?)",
+      [question, answer1, answer2, answer3, answer4, hint, correct, ObjectID],
       (err, result) => {
         if (err) {
           console.log(err);

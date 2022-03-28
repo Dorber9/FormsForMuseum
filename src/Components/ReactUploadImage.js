@@ -26,7 +26,7 @@ class ReactUploadImage extends React.Component {
       .post("http://34.65.174.141:3001/upload", formData, config)
       .then((response) => {
         this.setState({ path: response.data });
-        this.props.parentCallback(this.state.path);
+        // this.props.parentCallback(this.state.path);
         alert("File uploaded successfully!");
       })
       .catch((error) => {});
@@ -38,7 +38,7 @@ class ReactUploadImage extends React.Component {
   render() {
     return (
       <div style={{ margin: "2%" }}>
-        <form>
+        <form onSubmit={this.onFormSubmit}>
           <h6>Upload Image</h6>
 
           <input
@@ -49,7 +49,6 @@ class ReactUploadImage extends React.Component {
           />
 
           <Button
-          onClick={this.onFormSubmit}
             type="button"
             style={{
               color: "white",

@@ -41,22 +41,22 @@ const AddBuilding = (props) => {
       alert("Please Select a Museum");
     } else {
       Axios.post("http://34.65.174.141:3001/addBuilding", {
-         Name: name,
-         City: city,
-         Address: address,
-         MuseumID: selectedValue,
+        Name: name,
+        City: city,
+        Address: address,
+        MuseumID: selectedValue,
       }).then(() => {
         setBuildingList([
           ...buildingList,
           {
-          Name: name,
-          City: city,
-          Address: address,
-          MuseumID: selectedValue,
+            Name: name,
+            City: city,
+            Address: address,
+            MuseumID: selectedValue,
           },
         ]);
-        alert("Sucess!")
-        window.location.reload(false)
+        alert("Success!");
+        window.location.reload(false);
       });
     }
   };
@@ -112,7 +112,6 @@ const AddBuilding = (props) => {
         >
           <Card.Body>
             <Card.Text>
-            
               <div className="txtf">
                 <TextField
                   value={name}

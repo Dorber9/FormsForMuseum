@@ -7,8 +7,6 @@ import "../App.css";
 import QRCode from "react-qr-code";
 import ReactUploadImage from "./ReactUploadImage";
 
-
-
 const Reports = () => {
   const [selectedObject, setSelectedObject] = useState("");
   const [displayList, setDisplayList] = useState([]);
@@ -69,14 +67,12 @@ const Reports = () => {
     { value: "Building", label: "Building" },
     { value: "Section", label: "Section" },
     { value: "Display", label: "Display" },
-    { value: "Showcase", label: "Showcase" },
+    { value: "Showcase", label: "Exibition" },
     { value: "Item", label: "Item" },
   ];
 
- 
   return (
     <>
-   
       <div
         style={{
           backgroundColor: "#ebebe0",
@@ -85,40 +81,37 @@ const Reports = () => {
           height: "100%",
         }}
       ></div>
-    <div
-      className="pshDwn"
-      style={{ textAlign: "center", alignItems: "center" }}
-    >
-      <h2>Reports</h2>
       <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
+        className="pshDwn"
+        style={{ textAlign: "center", alignItems: "center" }}
       >
-        <Select
-          options={typeOptions}
-          onChange={(e) => {
-            setSelectedObject(e.value);
+        <h2>Reports</h2>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
           }}
-        />
-      </div>
-      <div>
-        {selectedObject === ""
-          ? ""
-          : selectedObject === "Museum"
-          ? museumList.map((m) => {
-              return <h4>{m.name}</h4>;
-            })
-          : ""}
-      </div>
-      <br></br>
-      
-     
-    </div>
-    <div>
+        >
+          <Select
+            options={typeOptions}
+            onChange={(e) => {
+              setSelectedObject(e.value);
+            }}
+          />
         </div>
+        <div>
+          {selectedObject === ""
+            ? ""
+            : selectedObject === "Museum"
+            ? museumList.map((m) => {
+                return <h4>{m.name}</h4>;
+              })
+            : ""}
+        </div>
+        <br></br>
+      </div>
+      <div></div>
     </>
   );
 };

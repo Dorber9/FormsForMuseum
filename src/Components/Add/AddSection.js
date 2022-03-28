@@ -24,8 +24,6 @@ const AddSection = (props) => {
   }, [props.object != null ? props.object : ""]);
 
   const postSection = () => {
-    console.log("selected value is");
-    console.log(selectedValue);
     if (selectedValue === "") {
       alert("Please Select a Building");
     } else {
@@ -42,6 +40,8 @@ const AddSection = (props) => {
             BuildingID: selectedValue,
           },
         ]);
+        alert("Success!");
+        window.location.reload(false);
       });
     }
   };
@@ -94,18 +94,6 @@ const AddSection = (props) => {
       >
         <Card.Body>
           <Card.Text>
-            {sectionList.map((val, key) => {
-              return (
-                <div className="section">
-                  <div>
-                    <h3>id: {val.idSection}</h3>
-                    <h3>name: {val.Name}</h3>
-                    <h3>description: {val.Description}</h3>
-                    <h3>building: {val.BuildingID}</h3>
-                  </div>
-                </div>
-              );
-            })}
             <div className="txtf">
               <TextField
                 value={name}

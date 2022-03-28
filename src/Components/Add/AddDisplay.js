@@ -81,6 +81,8 @@ const AddDisplay = (props) => {
             SectionID: selectedValue,
           },
         ]);
+        alert("Success!");
+        window.location.reload(false);
       });
     }
   };
@@ -148,24 +150,6 @@ const AddDisplay = (props) => {
         >
           <Card.Body>
             <Card.Text>
-              {displayList.map((val, key) => {
-                return (
-                  <div className="desplay">
-                    <div>
-                      <h3>Name: {val.Name}</h3>
-                      <h3>Theme: {val.Theme}</h3>
-                      <h3>permanent: {val.permanent}</h3>
-                      <h3>StartDate: {val.StartDate}</h3>
-                      <h3>EndDate: {val.EndDate}</h3>
-                      <h3>Curator: {val.Curator}</h3>
-                      <h3>Designer: {val.Designer}</h3>
-                      <h3>Desc: {val.ShortDesc}</h3>
-                      <h3>Reason: {val.Reason}</h3>
-                      <h3>Section ID: {val.SectionID}</h3>
-                    </div>
-                  </div>
-                );
-              })}
               <div className="txtf">
                 <TextField
                   value={name}

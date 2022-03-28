@@ -27,32 +27,18 @@ const Add = () => {
       <h1>Manage Museum Data</h1>
       <Tabs>
         <TabList>
-          {/* <Tab>Museum</Tab> */}
           <Tab>Museum/Building/Section</Tab>
-          {/* <Tab>Building</Tab> */}
-          {/* <Tab>Section</Tab> */}
           <Tab>Display</Tab>
           <Tab>Exibition</Tab>
           <Tab>Item</Tab>
           <Tab>Question</Tab>
         </TabList>
 
-        {/* <TabPanel>
-          <h2 style={{ textAlign: "center" }}>Add Museum</h2>
-          <AddMuseum object={null} />
-        </TabPanel> */}
         <TabPanel>
           <h2 style={{ textAlign: "center" }}>Add Museum/Building/Section</h2>
           <AddMuseumBuildingSection object={null} />
         </TabPanel>
-        {/* <TabPanel>
-          <h2 style={{ textAlign: "center" }}>Add Building</h2>
-          <AddBuilding object={null} />
-        </TabPanel> */}
-        {/* <TabPanel>
-          <h2 style={{ textAlign: "center" }}>Add Section</h2>
-          <AddSection object={null} />
-        </TabPanel> */}
+
         <TabPanel>
           <h2 style={{ textAlign: "center" }}>Add Display</h2>
           <AddDisplay object={null} />

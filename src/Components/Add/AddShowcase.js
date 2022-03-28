@@ -40,7 +40,7 @@ const AddShowcase = (props) => {
       Axios.post("http://34.65.174.141:3001/addShowcase", {
         Number: number,
         Name: name,
-        Descr: description,
+        Desc: description,
         Type: type,
         SpecialCare: specialCare,
         SpecialCareDescr: specialCareDesc,
@@ -52,7 +52,7 @@ const AddShowcase = (props) => {
           {
             Number: number,
             Name: name,
-            Descr: description,
+            Desc: description,
             Type: type,
             SpecialCare: specialCare,
             SpecialCareDescr: specialCareDesc,
@@ -60,6 +60,8 @@ const AddShowcase = (props) => {
             ImagePath: path,
           },
         ]);
+        alert("Success!");
+        window.location.reload(false);
       });
     }
   };
@@ -132,20 +134,6 @@ const AddShowcase = (props) => {
         >
           <Card.Body>
             <Card.Text>
-              {showcaseList.map((val, key) => {
-                return (
-                  <div className="showcase">
-                    <div>
-                      <h3>Number: {val.Number}</h3>
-                      <h3>Name: {val.Name}</h3>
-                      <h3>Description: {val.Descr}</h3>
-                      <h3>Type: {val.Type}</h3>
-                      <h3>Special Care: {val.SpecialCare}</h3>
-                      <h3>DisplayID: {val.DisplayID}</h3>
-                    </div>
-                  </div>
-                );
-              })}
               <div className="txtf">
                 {props.object == null ? (
                   ""

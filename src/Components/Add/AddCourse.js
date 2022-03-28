@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
 
 const objectsList = [
   { value: "Display", label: "Display" },
-  { value: "Showcase", label: "Showcase" },
+  { value: "Showcase", label: "Exibition" },
   { value: "Item", label: "Item" },
 ];
 

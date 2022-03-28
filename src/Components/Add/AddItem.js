@@ -301,292 +301,295 @@ function AddItem(props) {
         >
           <Card.Body>
             <Card.Text>
-              <div className="txtf">
-                <TextField
-                  value={itemId}
-                  onChange={(e) => {
-                    setItemId(e.target.value);
-                  }}
-                  variant="outlined"
-                  type="text"
-                  name="itemId"
-                  label="ID"
-                />
-
-                <TextField
-                  style={{ marginLeft: "5px" }}
-                  value={name}
-                  onChange={(e) => {
-                    setName(e.target.value);
-                  }}
-                  variant="outlined"
-                  type="text"
-                  name="name"
-                  label="name"
-                />
-
-                <TextField
-                  value={site}
-                  style={{ marginLeft: "5px" }}
-                  onChange={(e) => {
-                    setSite(e.target.value);
-                  }}
-                  variant="outlined"
-                  type="text"
-                  name="Site"
-                  label="Site"
-                />
-                <br />
-                <br />
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                >
-                  <Select
-                    value={{
-                      value: storage,
-                      label: storage === "1" ? "In Storage" : "In Museum",
-                    }}
-                    options={options}
-                    onChange={(e) => {
-                      setStorage(e.value);
-                    }}
-                  />
-                </div>
-
-                {storage === "1" ? (
-                  ""
-                ) : (
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                    }}
-                  >
-                    <Select
-                      options={displayList.map((val, key) => {
-                        return { value: val.idDisplay, label: val.Name };
-                      })}
+              {questionsFlag == false ? (
+                <>
+                  <div className="txtf">
+                    <TextField
+                      value={itemId}
                       onChange={(e) => {
-                        setDisplay(e.value);
+                        setItemId(e.target.value);
                       }}
+                      variant="outlined"
+                      type="text"
+                      name="itemId"
+                      label="ID"
                     />
-                  </div>
-                )}
 
-                {storage == "1" ? (
-                  ""
-                ) : (
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                    }}
-                  >
-                    <Select
-                      options={showcaseList.map((val, key) => {
-                        return { value: val.idShowcase, label: val.Name };
-                      })}
+                    <TextField
+                      style={{ marginLeft: "5px" }}
+                      value={name}
                       onChange={(e) => {
-                        setShowcase(e.value);
+                        setName(e.target.value);
                       }}
+                      variant="outlined"
+                      type="text"
+                      name="name"
+                      label="name"
                     />
-                  </div>
-                )}
-                <br />
-                <br />
 
-                <TextField
-                  value={period}
-                  onChange={(e) => {
-                    setPeriod(e.target.value);
-                  }}
-                  variant="outlined"
-                  type="text"
-                  name="Period"
-                  label="Period"
-                />
-
-                <TextField
-                  value={age}
-                  style={{ marginLeft: "5px" }}
-                  onChange={(e) => {
-                    setAge(e.target.value);
-                  }}
-                  variant="outlined"
-                  type="text"
-                  name="Age"
-                  label="Age"
-                />
-
-                <TextField
-                  value={material}
-                  style={{ marginLeft: "5px" }}
-                  onChange={(e) => {
-                    setMaterial(e.target.value);
-                  }}
-                  variant="outlined"
-                  type="text"
-                  name="Material"
-                  label="Material"
-                />
-                <br />
-                <br />
-                <TextField
-                  value={size}
-                  onChange={(e) => {
-                    setSize(e.target.value);
-                  }}
-                  variant="outlined"
-                  type="text"
-                  name="Size"
-                  label="Size(h X w X d )"
-                />
-
-                <TextField
-                  value={website}
-                  style={{ marginLeft: "5px" }}
-                  onChange={(e) => {
-                    setWebsite(e.target.value);
-                  }}
-                  variant="outlined"
-                  type="text"
-                  name="Website"
-                  label="Website"
-                />
-                <TextField
-                  value={references}
-                  style={{ marginLeft: "5px" }}
-                  onChange={(e) => {
-                    setReferences(e.target.value);
-                  }}
-                  variant="outlined"
-                  type="text"
-                  name="References"
-                  label="References"
-                />
-                <br />
-                <br />
-                <TextField
-                  value={descr}
-                  onChange={(e) => {
-                    setDescr(e.target.value);
-                  }}
-                  variant="outlined"
-                  type="text"
-                  name="Description"
-                  label="Description"
-                  style={{ width: "75%" }}
-                  fullWidth
-                  multiline
-                  rows="3"
-                />
-                <br />
-                <br />
-                <TextField
-                  value={shortDescr}
-                  onChange={(e) => {
-                    setShortDescr(e.target.value);
-                  }}
-                  variant="outlined"
-                  type="text"
-                  name="Short Description"
-                  style={{ width: "75%" }}
-                  fullWidth
-                  multiline
-                  rows="3"
-                  label="Short Description"
-                />
-                <br />
-                <br />
-                <ReactUploadImage
-                  parentCallback={handleCallback}
-                ></ReactUploadImage>
-
-                <form className={classes.root} onSubmit={handleSubmit}>
-                  {inputFields.map((inputField) => (
-                    <div key={inputField.id}>
-                      <TextField
-                        name="category"
-                        label="Category"
-                        variant="filled"
-                        value={inputField.category}
-                        onChange={(event) =>
-                          handleChangeInput(inputField.id, event)
-                        }
+                    <TextField
+                      value={site}
+                      style={{ marginLeft: "5px" }}
+                      onChange={(e) => {
+                        setSite(e.target.value);
+                      }}
+                      variant="outlined"
+                      type="text"
+                      name="Site"
+                      label="Site"
+                    />
+                    <br />
+                    <br />
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
+                    >
+                      <Select
+                        value={{
+                          value: storage,
+                          label: storage === "1" ? "In Storage" : "In Museum",
+                        }}
+                        options={options}
+                        onChange={(e) => {
+                          setStorage(e.value);
+                        }}
                       />
-                      <div style={{ marginRight: "10%", marginLeft: "10%" }}>
-                        <TextField
-                          name="categoryDescr"
-                          label="Description"
-                          variant="filled"
-                          multiline
-                          fullWidth
-                          value={inputField.categoryDescr}
-                          onChange={(event) =>
-                            handleChangeInput(inputField.id, event)
-                          }
-                          rows="3"
-                        />
-                        <IconButton
-                          disabled={inputFields.length === 1}
-                          onClick={() => handleRemoveFields(inputField.id)}
-                        >
-                          <RemoveIcon />
-                        </IconButton>
-                        <IconButton onClick={handleAddFields}>
-                          <AddIcon />
-                        </IconButton>
-                      </div>
                     </div>
-                  ))}
-                  <Button
-                    className={classes.button}
-                    variant="contained"
-                    color="primary"
-                    type="submit"
-                    onClick={
-                      props.object == null ? handleSubmit : handleUpdateItem
-                    }
-                  >
-                    SUBMIT
-                  </Button>
-                  {/* <button onClick={getItems}>Show Items</button> */}
-                </form>
 
-          
-              </div>
-              {props.object == null ? (
-                ""
+                    {storage === "1" ? (
+                      ""
+                    ) : (
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                        }}
+                      >
+                        <Select
+                          options={displayList.map((val, key) => {
+                            return { value: val.idDisplay, label: val.Name };
+                          })}
+                          onChange={(e) => {
+                            setDisplay(e.value);
+                          }}
+                        />
+                      </div>
+                    )}
+
+                    {storage == "1" ? (
+                      ""
+                    ) : (
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                        }}
+                      >
+                        <Select
+                          options={showcaseList.map((val, key) => {
+                            return { value: val.idShowcase, label: val.Name };
+                          })}
+                          onChange={(e) => {
+                            setShowcase(e.value);
+                          }}
+                        />
+                      </div>
+                    )}
+                    <br />
+                    <br />
+
+                    <TextField
+                      value={period}
+                      onChange={(e) => {
+                        setPeriod(e.target.value);
+                      }}
+                      variant="outlined"
+                      type="text"
+                      name="Period"
+                      label="Period"
+                    />
+
+                    <TextField
+                      value={age}
+                      style={{ marginLeft: "5px" }}
+                      onChange={(e) => {
+                        setAge(e.target.value);
+                      }}
+                      variant="outlined"
+                      type="text"
+                      name="Age"
+                      label="Age"
+                    />
+
+                    <TextField
+                      value={material}
+                      style={{ marginLeft: "5px" }}
+                      onChange={(e) => {
+                        setMaterial(e.target.value);
+                      }}
+                      variant="outlined"
+                      type="text"
+                      name="Material"
+                      label="Material"
+                    />
+                    <br />
+                    <br />
+                    <TextField
+                      value={size}
+                      onChange={(e) => {
+                        setSize(e.target.value);
+                      }}
+                      variant="outlined"
+                      type="text"
+                      name="Size"
+                      label="Size(h X w X d )"
+                    />
+
+                    <TextField
+                      value={website}
+                      style={{ marginLeft: "5px" }}
+                      onChange={(e) => {
+                        setWebsite(e.target.value);
+                      }}
+                      variant="outlined"
+                      type="text"
+                      name="Website"
+                      label="Website"
+                    />
+                    <TextField
+                      value={references}
+                      style={{ marginLeft: "5px" }}
+                      onChange={(e) => {
+                        setReferences(e.target.value);
+                      }}
+                      variant="outlined"
+                      type="text"
+                      name="References"
+                      label="References"
+                    />
+                    <br />
+                    <br />
+                    <TextField
+                      value={descr}
+                      onChange={(e) => {
+                        setDescr(e.target.value);
+                      }}
+                      variant="outlined"
+                      type="text"
+                      name="Description"
+                      label="Description"
+                      style={{ width: "75%" }}
+                      fullWidth
+                      multiline
+                      rows="3"
+                    />
+                    <br />
+                    <br />
+                    <TextField
+                      value={shortDescr}
+                      onChange={(e) => {
+                        setShortDescr(e.target.value);
+                      }}
+                      variant="outlined"
+                      type="text"
+                      name="Short Description"
+                      style={{ width: "75%" }}
+                      fullWidth
+                      multiline
+                      rows="3"
+                      label="Short Description"
+                    />
+                    <br />
+                    <br />
+                    <ReactUploadImage
+                      parentCallback={handleCallback}
+                    ></ReactUploadImage>
+
+                    <form className={classes.root} onSubmit={handleSubmit}>
+                      {inputFields.map((inputField) => (
+                        <div key={inputField.id}>
+                          <TextField
+                            name="category"
+                            label="Category"
+                            variant="filled"
+                            value={inputField.category}
+                            onChange={(event) =>
+                              handleChangeInput(inputField.id, event)
+                            }
+                          />
+                          <div
+                            style={{ marginRight: "10%", marginLeft: "10%" }}
+                          >
+                            <TextField
+                              name="categoryDescr"
+                              label="Description"
+                              variant="filled"
+                              multiline
+                              fullWidth
+                              value={inputField.categoryDescr}
+                              onChange={(event) =>
+                                handleChangeInput(inputField.id, event)
+                              }
+                              rows="3"
+                            />
+                            <IconButton
+                              disabled={inputFields.length === 1}
+                              onClick={() => handleRemoveFields(inputField.id)}
+                            >
+                              <RemoveIcon />
+                            </IconButton>
+                            <IconButton onClick={handleAddFields}>
+                              <AddIcon />
+                            </IconButton>
+                          </div>
+                        </div>
+                      ))}
+                      <Button
+                        className={classes.button}
+                        variant="contained"
+                        color="primary"
+                        type="submit"
+                        onClick={
+                          props.object == null ? handleSubmit : handleUpdateItem
+                        }
+                      >
+                        SUBMIT
+                      </Button>
+                      {/* <button onClick={getItems}>Show Items</button> */}
+                    </form>
+                  </div>
+                  {props.object == null ? (
+                    ""
+                  ) : (
+                    <Button
+                      variant="contained"
+                      style={{
+                        color: "white",
+                        background: "red",
+                        marginLeft: "10px",
+                      }}
+                      type="submit"
+                      onClick={deleteItem}
+                    >
+                      Delete Item
+                    </Button>
+                  )}
+                </>
               ) : (
                 <Button
                   variant="contained"
-                  style={{
-                    color: "white",
-                    background: "red",
-                    marginLeft: "10px",
+                  color="primary"
+                  onClick={() => {
+                    window.location.href = `../AddQuestion/${itemId}`;
                   }}
-                  type="submit"
-                  onClick={deleteItem}
                 >
-                  Delete Item
+                  Add Questions to {name}
                 </Button>
-              )}
-              {questionsFlag == false ? (
-                ""
-              ) : (
-                <Button
-            variant="contained"
-            color="primary"
-            onClick={() => {
-              window.location.href = `../AddQuestion/${itemId}`;
-            }}
-          > Add Questions</Button>
               )}
             </Card.Text>
           </Card.Body>

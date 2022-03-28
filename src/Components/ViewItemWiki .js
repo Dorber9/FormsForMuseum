@@ -2,7 +2,7 @@
 import React from "react";
 import Collapse from "./Add/Collapse";
 import QRCode from "react-qr-code";
-
+import Logo from "../logo_amnon.png"
 import { useState, useEffect } from "react";
 import Axios from "axios";
 
@@ -55,9 +55,11 @@ const ViewItemWiki = (props) => {
     <>
       <div className="pshDwn">
         <div style={{ textAlign: "center" }}>
-          <img src={path} alt="LA" />
+          {path.length!=0 ? 
+          <img src={path} alt="LA" /> : <img src={Logo} style={{height:"150px"}} alt="Something is wrong" />  }
         </div>
         {
+          
           <h1 style={{ textAlign: "center" }}>{itemData.ItemName}</h1>
 
           //    itemKeys.map((key)=> {

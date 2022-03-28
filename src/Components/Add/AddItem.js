@@ -577,11 +577,11 @@ function AddItem(props) {
                   Delete Item
                 </Button>
               )}
-              {questionsFlag == false ? (
+              {/* {questionsFlag == false ? (
                 ""
               ) : (
                 <AddQuestion id={itemId} name={name}></AddQuestion>
-              )}
+              )} */}
             </Card.Text>
           </Card.Body>
         </Card>

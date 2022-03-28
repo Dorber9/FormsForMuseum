@@ -26,6 +26,7 @@ class ReactUploadImage extends React.Component {
       .then((response) => {
         this.setState({ path: response.data });
         this.props.parentCallback(this.state.path);
+        alert("File uploaded successfully!")
       })
       .catch((error) => {});
   }
@@ -38,7 +39,7 @@ class ReactUploadImage extends React.Component {
       <form onSubmit={this.onFormSubmit}>
         <h1>File Upload</h1>
 
-        <input type="file" name="myImage" onChange={this.onChange} />
+        <input accept="image/png, image/gif, image/jpeg" type="file" name="myImage" onChange={this.onChange} />
         <button type="submit">Upload</button>
       </form>
     );

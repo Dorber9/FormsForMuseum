@@ -38,7 +38,7 @@ class ReactUploadImage extends React.Component {
   render() {
     return (
       <div style={{ margin: "2%" }}>
-        <form onSubmit={this.onFormSubmit}>
+        <form>
           <h6>Upload Image</h6>
 
           <input
@@ -49,7 +49,8 @@ class ReactUploadImage extends React.Component {
           />
 
           <Button
-            type="submit"
+          onClick={this.onFormSubmit}
+            type="button"
             style={{
               color: "white",
               background: "#3b89d9",

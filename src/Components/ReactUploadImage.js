@@ -1,4 +1,5 @@
 import React from "react";
+import { Button } from "react-bootstrap";
 
 const axios = require("axios");
 
@@ -26,7 +27,7 @@ class ReactUploadImage extends React.Component {
       .then((response) => {
         this.setState({ path: response.data });
         this.props.parentCallback(this.state.path);
-        alert("File uploaded successfully!")
+        alert("File uploaded successfully!");
       })
       .catch((error) => {});
   }
@@ -36,12 +37,29 @@ class ReactUploadImage extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.onFormSubmit}>
-        <h6>Upload Image</h6>
+      <div style={{ margin: "2%" }}>
+        <form onSubmit={this.onFormSubmit}>
+          <h6>Upload Image</h6>
 
-        <input accept="image/png, image/gif, image/jpeg" type="file" name="myImage" onChange={this.onChange} />
-        <button type="submit">Upload</button>
-      </form>
+          <input
+            accept="image/png, image/gif, image/jpeg"
+            type="file"
+            name="myImage"
+            onChange={this.onChange}
+          />
+
+          <Button
+            type="submit"
+            style={{
+              color: "white",
+              background: "#3b89d9",
+              marginLeft: "-90px",
+            }}
+          >
+            Upload
+          </Button>
+        </form>
+      </div>
     );
   }
 }

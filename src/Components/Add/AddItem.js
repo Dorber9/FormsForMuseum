@@ -301,6 +301,9 @@ function AddItem(props) {
         >
           <Card.Body>
             <Card.Text>
+              <h4 style={{ textAlign: "center", marginBottom: "2%" }}>
+                Add Item
+              </h4>
               {questionsFlag == false ? (
                 <>
                   <div className="txtf">

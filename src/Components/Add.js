@@ -35,24 +35,19 @@ const Add = () => {
         </TabList>
 
         <TabPanel>
-          <h2 style={{ textAlign: "center" }}>Add Museum/Building/Section</h2>
           <AddMuseumBuildingSection object={null} />
         </TabPanel>
 
         <TabPanel>
-          <h2 style={{ textAlign: "center" }}>Add Display</h2>
           <AddDisplay object={null} />
         </TabPanel>
         <TabPanel>
-          <h2 style={{ textAlign: "center" }}>Add Exibition</h2>
           <AddShowcase object={null} />
         </TabPanel>
         <TabPanel>
-          <h2 style={{ textAlign: "center" }}>Add New Item</h2>
           <AddItem object={null} />
         </TabPanel>
         <TabPanel>
-          <h2 style={{ textAlign: "center" }}>Add New Question</h2>
           <AddQuestion object={null} />
         </TabPanel>
       </Tabs>

@@ -134,6 +134,9 @@ const AddShowcase = (props) => {
         >
           <Card.Body>
             <Card.Text>
+              <h4 style={{ textAlign: "center", marginBottom: "2%" }}>
+                Add Exibition
+              </h4>
               <div className="txtf">
                 {props.object == null ? (
                   ""

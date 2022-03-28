@@ -577,11 +577,17 @@ function AddItem(props) {
                   Delete Item
                 </Button>
               )}
-              {/* {questionsFlag == false ? (
+              {questionsFlag == false ? (
                 ""
               ) : (
-                <AddQuestion id={itemId} name={name}></AddQuestion>
-              )} */}
+                <Button
+            variant="contained"
+            color="primary"
+            onClick={() => {
+              window.location.href = `../AddQuestion/${itemId}`;
+            }}
+          > Add Questions</Button>
+              )}
             </Card.Text>
           </Card.Body>
         </Card>

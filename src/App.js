@@ -13,6 +13,9 @@ import Header from "./Components/Header";
 import {Translator} from 'react-auto-translate';
 import ListOfItems from "./Components/ListOfItems";
 import ViewItemNewPage from "./Components/ViewItemNewPage";
+import AddQuestionNew from "./AddQuestionNew"
+
+
 
 
 
@@ -24,12 +27,13 @@ function App() {
       to='he'
       googleApiKey='AIzaSyBp9UbjyBP9K1I4Yh8E9G_T6srKYKD8xR8'
     >
-      <div
+      <div className="fontBody"
         style={{
           backgroundColor: "#ebebe0",
           position: "relative",
           width: "100%",
           height: "100%",
+           
         }}
       >
         <Header />
@@ -41,6 +45,8 @@ function App() {
             <Route exact path="/DemoPage" element={<DemoPage />}></Route>
             <Route exact path="/ItemsList" element={<ListOfItems></ListOfItems>}></Route>
             <Route exact path="/Item/:id"  element={<ViewItemNewPage/>}></Route>
+            <Route exact path="/AddQuestion/:id"  element={<AddQuestionNew></AddQuestionNew>}></Route>
+            
             <Route
               exact
               path="/CourseWizard"

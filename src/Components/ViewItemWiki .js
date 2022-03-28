@@ -80,7 +80,9 @@ const ViewItemWiki = (props) => {
             </div>
           );
         })}
+        <div style={{marginTop: "50px" , textAlign: "center"}}>
         <QRCode value={`${window.location.href}`} size="150" />
+        </div>
       </div>
     </>
   );

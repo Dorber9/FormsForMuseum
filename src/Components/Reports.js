@@ -116,10 +116,8 @@ const Reports = () => {
       <br></br>
       
      
-                    <QRCode value="https://ugmp.co.il/" size="150" />
     </div>
     <div>
-          <ReactUploadImage></ReactUploadImage>
         </div>
     </>
   );

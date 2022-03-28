@@ -28,6 +28,7 @@ const selectStyles = { menu: (styles) => ({ ...styles, zIndex: 999 }) };
 const AddQuestion = (props) => {
   const [itemsList, setItemsList] = useState([]);
   const [wantedItem, setWantedItem] = useState("");
+  const[itemName,setItemName]= useState("")
   const [itemData, setItemData] = useState([
      {
       id: uuidv4(),
@@ -43,7 +44,7 @@ const AddQuestion = (props) => {
   ]);
   const [correct, setCorrect] = useState("0");
   const [val, setVal] = useState("");
-  const [lab, setLabel] = useState("e");
+  const [lab, setLabel] = useState("");
   const[emptyFlag,setFlag]= useState(false)
 
   const mapOptions = () => {
@@ -136,9 +137,16 @@ const deleteQuestion = (id) => {
     getItems();
     if (props.object != null) {
       modifyInputFields("");
+      return;
     }
+    if(props.itemId){
+      console.log(props.itemName)
+      setWantedItem(props.itemId)
+      setLabel(props.itemName)
+    }
+
     
-  }, [props]);
+  }, [props,props.itemId, props.itemName]);
   const classes = useStyles();
 
   const handleChangeInput = (id, name, event) => {
@@ -218,8 +226,6 @@ const deleteQuestion = (id) => {
       
   }
 
- 
-
   return (
     <div>
       <Container>
@@ -238,18 +244,18 @@ const deleteQuestion = (id) => {
                   alignItems: "center",
                 }}
               >
-                {props.name != null ? (
+                {props.itemId != null ? (<>
                   <Select
-                    defaultValue={{ value: props.ItemID, label: props.name }}
+                    value={{ value: props.itemId, label: props.itemName}}
                     styles={selectStyles}
                     options={itemsList.map((val, key) => {
-                      return { value: val.ItemID, label: val.ItemName };
+                        return { value: val.ItemID, label: val.ItemName} ;
                     })}
                     onChange={(e) => {
                       setWantedItem(e.value);
                       modifyInputFields(e.value);
                     }}
-                  />
+                  /></>
                 ) : (
                   <Select
                     styles={selectStyles}
@@ -257,7 +263,9 @@ const deleteQuestion = (id) => {
                       return { value: val.ItemID, label: val.ItemName };
                     })}
                     onChange={(e) => {
+                      setItemName(e.label);
                       setWantedItem(e.value);
+
                       if(props.object!=null)
                         modifyInputFields(e.value);
                     }}
@@ -386,7 +394,12 @@ const deleteQuestion = (id) => {
                   <div>
                   <h2 style={{    color: "#ff002f",
     fontSize:"15px",
-    marginTop:"5px"}}>No questions for this Item :(</h2>
+    marginTop:"5px"}}>No questions for this Item :( </h2> <div> <Button    variant="contained"
+            color="primary"
+            onClick={() => {
+              window.location.href = `../AddQuestion/${wantedItem}`;
+            }}
+          > Add Questions</Button> </div>
                   
                   </div>
                    :""} 

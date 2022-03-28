@@ -145,7 +145,6 @@ function AddItem(props) {
     if (storage === "0" && display === "") {
       alert("Please Select a Display");
     } else {
-      console.log(itemData);
       Axios.post("http://34.65.174.141:3001/addItem", {
         ID: itemId,
         name: name,

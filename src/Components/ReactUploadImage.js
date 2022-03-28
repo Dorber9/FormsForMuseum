@@ -26,10 +26,10 @@ class ReactUploadImage extends React.Component {
       .post("http://34.65.174.141:3001/upload", formData, config)
       .then((response) => {
         this.setState({ path: response.data });
-        // this.props.parentCallback(this.state.path);
+        this.props.parentCallback(this.state.path);
         alert("File uploaded successfully!");
       })
-      .catch((error) => {});
+      .catch((error) => {console.log(error)});
   }
   onChange(e) {
     this.setState({ file: e.target.files[0] });

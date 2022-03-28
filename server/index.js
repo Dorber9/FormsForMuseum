@@ -386,12 +386,13 @@ app.post("/addShowcase", (req, res) => {
   const Descr = req.body.Desc;
   const Type = req.body.Type;
   const SpecialCare = req.body.SpecialCare;
+  const SpecialCareDescr = req.body.SpecialCareDescr;
   const DisplayID = req.body.DisplayID;
   const ImagePath = req.body.ImagePath;
 
   db.query(
-    "INSERT INTO showcase (Number,Name,Descr,Type,SpecialCare,DisplayID,ImagePath) VALUES (?,?,?,?,?,?,?)",
-    [Number, Name, Descr, Type, SpecialCare, DisplayID, ImagePath],
+    "INSERT INTO showcase (Number,Name,Descr,Type,SpecialCare,SpecialCareDescr,DisplayID,ImagePath) VALUES (?,?,?,?,?,?,?,?)",
+    [Number, Name, Descr, Type, SpecialCare, SpecialCareDescr, DisplayID, ImagePath],
     (err, result) => {
       if (err) {
         console.log(err);

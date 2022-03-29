@@ -13,7 +13,9 @@ class ReactUploadImage extends React.Component {
     this.onFormSubmit = this.onFormSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
   }
-  onFormSubmit() {
+  onFormSubmit(e) {
+    e.preventDefault();
+    npm;
     const formData = new FormData();
     console.log(formData);
     formData.append("myImage", this.state.file);

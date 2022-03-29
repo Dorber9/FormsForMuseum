@@ -13,9 +13,9 @@ class ReactUploadImage extends React.Component {
     this.onFormSubmit = this.onFormSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
   }
-  onFormSubmit(e) {
-    e.preventDefault();
+  onFormSubmit() {
     const formData = new FormData();
+    console.log(formData);
     formData.append("myImage", this.state.file);
     const config = {
       headers: {
@@ -29,7 +29,9 @@ class ReactUploadImage extends React.Component {
         this.props.parentCallback(this.state.path);
         alert("File uploaded successfully!");
       })
-      .catch((error) => {console.log(error)});
+      .catch((error) => {
+        console.log(error);
+      });
   }
   onChange(e) {
     this.setState({ file: e.target.files[0] });
@@ -38,27 +40,26 @@ class ReactUploadImage extends React.Component {
   render() {
     return (
       <div style={{ margin: "2%" }}>
-        <form onSubmit={this.onFormSubmit}>
-          <h6>Upload Image</h6>
+        <h6>Upload Image</h6>
 
-          <input
-            accept="image/png, image/gif, image/jpeg"
-            type="file"
-            name="myImage"
-            onChange={this.onChange}
-          />
+        <input
+          accept="image/png, image/gif, image/jpeg"
+          type="file"
+          name="myImage"
+          onChange={this.onChange}
+        />
 
-          <Button
-            type="button"
-            style={{
-              color: "white",
-              background: "#3b89d9",
-              marginLeft: "-90px",
-            }}
-          >
-            Upload
-          </Button>
-        </form>
+        <Button
+          onClick={this.onFormSubmit}
+          type="button"
+          style={{
+            color: "white",
+            background: "#3b89d9",
+            marginLeft: "-90px",
+          }}
+        >
+          Upload
+        </Button>
       </div>
     );
   }

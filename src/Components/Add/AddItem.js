@@ -39,7 +39,8 @@ function AddItem(props) {
     e.preventDefault();
 
     setItemData(inputFields);
-
+    console.log(path);
+    onFormSubmit();
     postItem();
     setFlag(true);
   };
@@ -95,6 +96,8 @@ function AddItem(props) {
   const [showcase, setShowcase] = useState("");
   const [references, setReferences] = useState("");
   const [path, setPath] = useState("");
+
+  const [file, setFile] = useState(null);
   const [questionsFlag, setFlag] = useState(false);
 
   const [itemData, setItemData] = useState([
@@ -252,6 +255,38 @@ function AddItem(props) {
     });
   };
 
+  const onFormSubmit = async () => {
+    const formData = new FormData();
+    console.log(formData);
+    formData.append("myImage", file);
+    const config = {
+      headers: {
+        "content-type": "multipart/form-data",
+      },
+    };
+    let res = await Axios.post(
+      "http://34.65.174.141:3001/upload",
+      formData,
+      config
+    );
+    // .then((response) => {
+    //   path = response.data;
+    //   console.log(path);
+
+    //   // alert("File uploaded successfully!");
+    // })
+    console.log(res);
+    setPath(res.data);
+    console.log(path);
+    // .catch((error) => {
+    //   console.log(error);
+    // });
+  };
+
+  const fileChange = (e) => {
+    setFile(e.target.files[0]);
+  };
+
   const selectStyle = {
     width: "220px",
     marginLeft: "50px",
@@ -300,7 +335,6 @@ function AddItem(props) {
         >
           <Card.Body>
             <Card.Text>
-           
               {questionsFlag == false ? (
                 <>
                   <h4 style={{ textAlign: "center", marginBottom: "2%" }}>
@@ -509,9 +543,16 @@ function AddItem(props) {
                     />
                     <br />
                     <br />
-                    <ReactUploadImage
-                      parentCallback={handleCallback}
-                    ></ReactUploadImage>
+                    <div style={{ margin: "2%" }}>
+                      <h6>Upload Image</h6>
+
+                      <input
+                        accept="image/png, image/gif, image/jpeg"
+                        type="file"
+                        name="myImage"
+                        onChange={fileChange}
+                      />
+                    </div>
 
                     <form className={classes.root} onSubmit={handleSubmit}>
                       {inputFields.map((inputField) => (

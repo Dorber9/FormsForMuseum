@@ -39,9 +39,9 @@ function AddItem(props) {
     e.preventDefault();
 
     setItemData(inputFields);
-    console.log(path);
+    
     onFormSubmit();
-    postItem();
+    // postItem();
     setFlag(true);
   };
 
@@ -50,7 +50,7 @@ function AddItem(props) {
 
     setItemData(inputFields);
 
-    updateItem();
+    onFormSubmit();
     setFlag(true);
   };
 
@@ -95,10 +95,10 @@ function AddItem(props) {
   const [display, setDisplay] = useState("");
   const [showcase, setShowcase] = useState("");
   const [references, setReferences] = useState("");
-  const [path, setPath] = useState("");
-
+  const[path,setPath]= useState("");
   const [file, setFile] = useState(null);
   const [questionsFlag, setFlag] = useState(false);
+  const[ImageFlag,setImageFlag] = useState(false);
 
   const [itemData, setItemData] = useState([
     { id: uuidv4(), category: "", categoryDescr: "" },
@@ -128,6 +128,7 @@ function AddItem(props) {
       setSize(props.object.Size);
       setReferences(props.object.Refs);
       setInputFields([]);
+      setPath(props.object.ImagePath)
       const data = props.object.ItemData.split("^%^");
       data.pop();
       var temp = [];
@@ -144,7 +145,8 @@ function AddItem(props) {
     }
   }, [props.object != null ? props.object : ""]);
 
-  const postItem = () => {
+  const postItem = (imgPath) => {
+    
     if (storage === "0" && display === "") {
       alert("Please Select a Display");
     } else {
@@ -163,7 +165,7 @@ function AddItem(props) {
         website: website,
         size: size,
         references: references,
-        ImagePath: path,
+        ImagePath: imgPath,
         itemData: inputFields,
       }).then(() => {
         setItemsList([
@@ -183,7 +185,7 @@ function AddItem(props) {
             website: website,
             size: size,
             references: references,
-            ImagePath: path,
+            ImagePath: imgPath,
             itemData: itemData,
           },
         ]);
@@ -191,8 +193,7 @@ function AddItem(props) {
     }
   };
 
-  const updateItem = () => {
-    console.log(itemData);
+  const updateItem = (imgPath) => {
     Axios.put("http://34.65.174.141:3001/updateItem", {
       ID: itemId,
       name: name,
@@ -208,7 +209,7 @@ function AddItem(props) {
       website: website,
       size: size,
       references: references,
-      ImagePath: path,
+      ImagePath: imgPath,
       itemData: inputFields,
     }).then(() => {
       setItemsList([
@@ -228,7 +229,7 @@ function AddItem(props) {
           website: website,
           size: size,
           references: references,
-          ImagePath: path,
+          ImagePath: imgPath,
           itemData: itemData,
         },
       ]);
@@ -256,35 +257,60 @@ function AddItem(props) {
   };
 
   const onFormSubmit = async () => {
-    const formData = new FormData();
-    console.log(formData);
-    formData.append("myImage", file);
-    const config = {
-      headers: {
-        "content-type": "multipart/form-data",
-      },
-    };
-    let res = await Axios.post(
-      "http://34.65.174.141:3001/upload",
-      formData,
-      config
-    );
-    // .then((response) => {
-    //   path = response.data;
-    //   console.log(path);
+    
+    if(props.object==null ){
+      try {
+      const formData = new FormData();
+      formData.append("myImage", file);
+      const config = {
+        headers: {
+          "content-type": "multipart/form-data",
+        },
+      };
+      let res = await Axios.post(
+        "http://34.65.174.141:3001/upload",
+        formData,
+        config
+      );
+      postItem(res.data)
+      } catch (error) {
+        console.log(error.data);
+      }
 
-    //   // alert("File uploaded successfully!");
-    // })
-    console.log(res);
-    setPath(res.data);
-    console.log(path);
-    // .catch((error) => {
-    //   console.log(error);
-    // });
+  }
+    
+  else
+      if(ImageFlag){
+        try {
+          const formData = new FormData();
+          formData.append("myImage", file);
+          const config = {
+            headers: {
+              "content-type": "multipart/form-data",
+            },
+          };
+          let res = await Axios.post(
+            "http://34.65.174.141:3001/upload",
+            formData,
+            config
+          );
+          updateItem(res.data)
+          } catch (error) {
+            console.log(error.data);
+          }
+      }
+      else
+          updateItem(path)
   };
 
+  const tryFunction =(param) => {
+    setPath(param)
+  }
+
   const fileChange = (e) => {
+    setImageFlag(true)
     setFile(e.target.files[0]);
+    
   };
 
   const selectStyle = {

@@ -56,7 +56,7 @@ const ViewItemWiki = (props) => {
       <div className="pshDwn">
         <div style={{ textAlign: "center" }}>
           {path.length != 0 ? (
-            <img src={path} alt="LA" />
+            <img src={path} style={{ height: "250px" }} alt="Oops! Something went wrong" />
           ) : (
             <img
               src={Logo}

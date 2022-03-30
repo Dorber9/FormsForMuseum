@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import './App.css';
+import './Login.css';
 
 async function loginUser(credentials) {
  return fetch('http://localhost:3000/login', {
@@ -23,33 +23,39 @@ export default function Login({ setToken }) {
     //   username,
     //   password
     // });
+    console.log("im here")
+    console.log(username)
+    console.log(password)
     if(username== "MophmAdmin" && password== "j8$c~m38S484<nA)")
         setToken("abc");
     else{
         alert("Wrong details!")
-        window.location.reload(false)
+        // window.location.reload(false)
     }
   }
 
   return(
     <div className="login-wrapper">
-      <h1>Please Log In</h1>
-      <form onSubmit={handleSubmit}>
-        <label>
-          <p>Username</p>
-          <input type="text" onChange={e => setUserName(e.target.value)} />
-        </label>
-        <br></br>
-        <label>
-          <p>Password</p>
-          <input type="password" onChange={e => setPassword(e.target.value)} />
-        </label>
-        <br></br>
-        <div>
-          <button type="submit">Submit</button>
-        </div>
-      </form>
+      
+      <body>
+    <div className="background">
+        <div className="shape"></div>
+        <div className="shape"></div>
     </div>
+    <form onSubmit={handleSubmit}>
+        <h3>Login Here</h3>
+
+        <label for="username">Username</label>
+        <input type="text" placeholder="Email or Phone" id="username" onChange={e => setUserName(e.target.value)}/>
+
+        <label for="password">Password</label>
+        <input type="password" placeholder="Password" id="password" onChange={e => setPassword(e.target.value)}/>
+
+        <button>Log In</button>
+            
+    </form>
+    </body>
+</div>
   )
 }
 

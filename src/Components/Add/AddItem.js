@@ -41,7 +41,6 @@ function AddItem(props) {
     setItemData(inputFields);
     
     onFormSubmit();
-    // postItem();
     setFlag(true);
   };
 
@@ -51,6 +50,7 @@ function AddItem(props) {
     setItemData(inputFields);
 
     onFormSubmit();
+
     setFlag(true);
   };
 
@@ -189,7 +189,8 @@ function AddItem(props) {
             itemData: itemData,
           },
         ]);
-      });
+    window.location.href = `../AddQuestion/${itemId}`;
+  });
     }
   };
 
@@ -233,7 +234,7 @@ function AddItem(props) {
           itemData: itemData,
         },
       ]);
-    });
+     window.location.reload(false)});
   };
 
   const getDisplay = () => {
@@ -650,17 +651,10 @@ function AddItem(props) {
                     </Button>
                   )}
                 </>
-              ) : (
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={() => {
-                    window.location.href = `../AddQuestion/${itemId}`;
-                  }}
-                >
-                  Add Questions to {name}
-                </Button>
-              )}
+              ) : props.object==null ? (
+                
+                 <div> Loading Add Questions to {name} ... </div>
+              ) : (<div>Modified Successfully!</div>)}
             </Card.Text>
           </Card.Body>
         </Card>

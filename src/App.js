@@ -1,4 +1,4 @@
-import React from "react";
+import React , { useState } from "react";
 import "./App.css";
 import { Route, BrowserRouter, Routes } from "react-router-dom";
 import DemoPage from "./Components/DemoPage";
@@ -14,12 +14,19 @@ import {Translator} from 'react-auto-translate';
 import ListOfItems from "./Components/ListOfItems";
 import ViewItemNewPage from "./Components/ViewItemNewPage";
 import AddQuestionNew from "./AddQuestionNew"
+import Login from "./Login";
 
 
 
 
 
 function App() {
+
+  const [token, setToken] = useState();
+
+  if(!token) {
+    return <Login setToken={setToken} />
+  }
   return (
     <>
      <Translator

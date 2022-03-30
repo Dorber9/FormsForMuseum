@@ -3,6 +3,12 @@
     font-family: 'Libre Baskerville', serif;
 }
 
+.login-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .App {
     text-align: center;
     width: 100vw;

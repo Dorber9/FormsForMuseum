@@ -15,18 +15,16 @@ import ListOfItems from "./Components/ListOfItems";
 import ViewItemNewPage from "./Components/ViewItemNewPage";
 import AddQuestionNew from "./AddQuestionNew"
 import Login from "./Login";
-
-
-
-
-
+import useToken from "./useToken";
 function App() {
 
-  const [token, setToken] = useState();
+  const { token, setToken } = useToken();
 
   if(!token) {
+    
     return <Login setToken={setToken} />
   }
+
   return (
     <>
      <Translator

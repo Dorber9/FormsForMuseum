@@ -30,7 +30,7 @@ export default function Login({ setToken }) {
         setToken("abc");
     else{
         alert("Wrong details!")
-        // window.location.reload(false)
+        window.location.reload(false)
     }
   }
 

@@ -14,10 +14,10 @@ import Course from "../Images/Course.jpg";
 
 const HomePage = () => {
   return (
-    <div style={{ minHeight: `calc(100vh - 80px)` }}>
+    <div className="tb" style={{ minHeight: `calc(100vh - 80px)` }}>
       <Container>
         
-        <CardGroup style={{ padding: "10px" }}>
+        <CardGroup style={{ padding: "10px" , marginTop:"10px", boxShadow: "1px 2px 5px rgb(255 244 244)" }}>
           <Card className="card" border="primary">
             <Card.Img className="cardImage" variant="top" src={Data} />
             <Card.Body>

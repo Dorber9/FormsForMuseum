@@ -6,11 +6,15 @@
           box-sizing: border-box;
       }
       
-      body {
-          background-color: #080710;
+      .login-wrapper {
+          background-color: #000000;
       }
       
-      .background {
+      .login-body {
+          background-color: #000000;
+      }
+      
+      .login-background {
           width: 430px;
           height: 520px;
           position: absolute;
@@ -19,7 +23,7 @@
           top: 50%;
       }
       
-      .background .shape {
+      .login-background .shape {
           height: 200px;
           width: 200px;
           position: absolute;
@@ -38,7 +42,7 @@
           bottom: -80px;
       }
       
-      form {
+      .login-form {
           height: 520px;
           width: 400px;
           background-color: rgba(255, 255, 255, 0.13);
@@ -53,7 +57,7 @@
           padding: 50px 35px;
       }
       
-      form * {
+      .login-form * {
           font-family: 'Poppins', sans-serif;
           color: #ffffff;
           letter-spacing: 0.5px;
@@ -61,21 +65,21 @@
           border: none;
       }
       
-      form h3 {
+      .login-h3 {
           font-size: 32px;
           font-weight: 500;
           line-height: 42px;
           text-align: center;
       }
       
-      label {
+      .login-label {
           display: block;
           margin-top: 30px;
           font-size: 16px;
           font-weight: 500;
       }
       
-      input {
+      .login-input {
           display: block;
           height: 50px;
           width: 100%;
@@ -87,11 +91,11 @@
           font-weight: 300;
       }
       
-      ::placeholder {
+      .login-wrapper.placeholder {
           color: #e5e5e5;
       }
       
-      button {
+      .login-button {
           margin-top: 50px;
           width: 100%;
           background-color: #ffffff;

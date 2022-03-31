@@ -21,17 +21,19 @@ import AddQuestion from "./Add/AddQuestion";
   ></link>
 </head>;
 
+const tabStyle= {color: "white"}
+
 const Add = () => {
   return (
     <div className="tb">
-      <h1>Manage Museum Data</h1>
+      <h3 style={{color:"white", marginTop:"10px"}}>Manage Museum Data</h3>
       <Tabs>
         <TabList>
-          <Tab>Museum/Building/Section</Tab>
-          <Tab>Display</Tab>
-          <Tab>Exibition</Tab>
-          <Tab>Item</Tab>
-          <Tab>Question</Tab>
+          <Tab style={tabStyle}>Museum/Building/Section</Tab>
+          <Tab style={tabStyle}>Display</Tab>
+          <Tab style={tabStyle}>Exibition</Tab>
+          <Tab style={tabStyle}>Item</Tab>
+          <Tab style={tabStyle}>Question</Tab>
         </TabList>
 
         <TabPanel>

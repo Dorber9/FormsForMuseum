@@ -9,33 +9,36 @@ import {
 } from "react-bootstrap";
 import { FaHome, FaArchway, FaWpforms, FaTable } from "react-icons/fa";
 
+const navStyle= {color: "white"}
+
+
 const Header = () => {
   return (
     <>
-      <Navbar bg="primary" variant="dark">
+      <Navbar style={{background:"black",boxShadow: "0 0 10px rgb(255 244 244)"}} variant="dark">
         <Container>
           <Navbar.Brand href="/">
             Museum <FaArchway />{" "}
           </Navbar.Brand>
           <Nav className="me-auto">
-            <Nav.Link href="/">
+            <Nav.Link style={navStyle} href="/">
               Home <FaHome />
             </Nav.Link>
 
-            <NavDropdown title="Data" id="basic-nav-dropdown">
-              <NavDropdown.Item href="/Add">Add</NavDropdown.Item>
-              <NavDropdown.Item href="/ModifyData">Modify</NavDropdown.Item>
+            <NavDropdown style={navStyle} title="Data" id="basic-nav-dropdown">
+              <NavDropdown.Item  href="/Add">Add</NavDropdown.Item>
+              <NavDropdown.Item  href="/ModifyData">Modify</NavDropdown.Item>
 
               <NavDropdown.Divider />
               <NavDropdown.Item href="/CourseWizard">
                 Quest Wizard
               </NavDropdown.Item>
             </NavDropdown>
-            <Nav.Link href="../Reports">
+            <Nav.Link style={navStyle} href="../Reports">
               Reports <FaWpforms />
             </Nav.Link>
 
-            <Nav.Link href="../ItemsList">
+            <Nav.Link style={navStyle} href="../ItemsList">
               Items <FaTable />
             </Nav.Link>
           </Nav>

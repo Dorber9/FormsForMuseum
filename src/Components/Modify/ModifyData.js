@@ -181,8 +181,8 @@ const ModifyData = () => {
     { value: "Question", label: "Question" }
   ];
   return (
-    <div style={{ minHeight: `calc(100vh - 80px)`, textAlign: "center" }}>
-      <h2>Hello, what would you like to modify?</h2>
+    <div className="tb" style={{ minHeight: `calc(100vh - 80px)`, textAlign: "center" }}>
+      <h5 style={{color:"white", marginTop:"10px"}}>Hello, what would you like to modify?</h5>
       <div
         style={{
           display: "flex",

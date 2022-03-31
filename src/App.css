@@ -30,7 +30,7 @@ main {
 .tb {
     text-align: center;
     min-height: calc(100vh - 70px);
-    background-image: url("/src/Images/11.jpg"), linear-gradient(45deg, #000000e0, transparent);
+    background-image: url("/src/Images/bg.jpg"), linear-gradient(45deg, #000000e0, transparent);
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
@@ -70,6 +70,12 @@ main {
     display: flex;
     flex-direction: row;
     margin-bottom: 2%;
+}
+
+.tb .react-tabs__tab--selected {
+    background: #00000042;
+    border-color: #aaa;
+    border-radius: 5px 5px 0 0;
 }
 
 .rS-menu {

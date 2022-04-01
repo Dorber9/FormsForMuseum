@@ -148,6 +148,10 @@ main {
     color: white;
 }
 
+.addCss .card-body {
+    color: white;
+}
+
 .addCard {
     padding: 10px;
 }
@@ -166,6 +170,10 @@ main {
 
 .pshDwn {
     min-height: calc(100vh - 80px);
+}
+
+#basic-nav-dropdown .dropdown-toggle {
+    color: white;
 }
 
 
@@ -246,4 +254,34 @@ main {
 
 .tb .bn30:hover .text {
     background-image: linear-gradient(-45deg, #4568dc, #b06ab3);
+}
+
+.input-container label {
+    position: absolute;
+    font-size: 16px;
+    color: #fff;
+    pointer-event: none;
+    transition: all 0.5s ease-in-out;
+}
+
+.input-container input {
+    border: 0;
+    border-bottom: 1px solid #555;
+    background: transparent;
+    width: 100%;
+    padding: 8px 0 5px 0;
+    font-size: 16px;
+    color: #fff;
+}
+
+.input-container input:focus {
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #e74c3c;
+}
+
+.input-container input:focus~label,
+.input-container input:valid~label {
+    top: -12px;
+    font-size: 12px;
 }

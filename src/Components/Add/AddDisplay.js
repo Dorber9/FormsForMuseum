@@ -17,6 +17,9 @@ const selectStyles = {
   menu: (styles) => ({ ...styles, zIndex: 999 }),
 };
 
+const cardShadow={boxShadow:"rgb(189 189 189) 5px 5px 10px" , background:"#ffee9db3"};
+
+
 const AddDisplay = (props) => {
   const [name, setName] = useState("");
   const [theme, setTheme] = useState("");
@@ -144,17 +147,17 @@ const AddDisplay = (props) => {
     <>
       <Container>
         <Card
-          className="addCard"
-          border="secondary"
-          style={{ background: "#dbdbdbad" }}
+           style={cardShadow}
         >
           <Card.Body>
             <Card.Text>
-              <h4 style={{ textAlign: "center", marginBottom: "2%" }}>
+              <h4 style={{ textAlign: "center", marginBottom: "2%",color:"black" }}>
                 Add Display
               </h4>
               <div className="txtf">
+          
                 <TextField
+                
                   value={name}
                   onChange={(e) => {
                     setName(e.target.value);
@@ -163,6 +166,9 @@ const AddDisplay = (props) => {
                   type="text"
                   name="name"
                   label="Name"
+                  color="warning"
+                  
+
                 />
                 <TextField
                   value={curator}

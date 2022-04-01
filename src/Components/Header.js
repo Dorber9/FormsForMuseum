@@ -26,6 +26,7 @@ const Header = () => {
             </Nav.Link>
 
             <NavDropdown style={navStyle} title="Data" id="basic-nav-dropdown">
+              
               <NavDropdown.Item  href="/Add">Add</NavDropdown.Item>
               <NavDropdown.Item  href="/ModifyData">Modify</NavDropdown.Item>
 

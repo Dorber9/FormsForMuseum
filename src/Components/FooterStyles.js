@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Box = styled.div`
+export const Box = styled.div `
   padding: 20px 60px;
   background: #00001a;
   position: fixed;
@@ -15,7 +15,7 @@ export const Box = styled.div`
   }
 `;
 
-export const Container = styled.div`
+export const Container = styled.div `
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -24,14 +24,14 @@ export const Container = styled.div`
   /* background: red; */
 `;
 
-export const Column = styled.div`
+export const Column = styled.div `
   display: flex;
   flex-direction: column;
   text-align: center;
   margin-left: 60px;
 `;
 
-export const Row = styled.div`
+export const Row = styled.div `
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(185px, 1fr));
   grid-gap: 20px;
@@ -41,7 +41,7 @@ export const Row = styled.div`
   }
 `;
 
-export const FooterLink = styled.a`
+export const FooterLink = styled.a `
   padding: 2px;
   color: #fff;
   margin-bottom: 0px;
@@ -49,12 +49,12 @@ export const FooterLink = styled.a`
   text-decoration: none;
 
   &:hover {
-    color: green;
+    color: rgb(255 225 140);
     transition: 200ms ease-in;
   }
 `;
 
-export const Heading = styled.p`
+export const Heading = styled.p `
   font-size: 24px;
   color: lightblue;
   margin-bottom: -20px;

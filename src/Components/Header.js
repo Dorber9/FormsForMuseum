@@ -15,7 +15,7 @@ const navStyle= {color: "white"}
 const Header = () => {
   return (
     <>
-      <Navbar style={{background:"black",boxShadow: "0 0 10px rgb(255 244 244)"}} variant="dark">
+      <Navbar style={{background:"black",boxShadow: "rgb(210 188 125) 0px 0px 5px"}} variant="dark">
         <Container>
           <Navbar.Brand href="/">
             Museum <FaArchway />{" "}

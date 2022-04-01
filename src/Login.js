@@ -2,16 +2,16 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import './Login.css';
 
-async function loginUser(credentials) {
- return fetch('http://localhost:3000/login', {
-   method: 'POST',
-   headers: {
-     'Content-Type': 'application/json'
-   },
-   body: JSON.stringify(credentials)
- })
-   .then(data => data.json())
-}
+// async function loginUser(credentials) {
+//  return fetch('http://localhost:3000/login', {
+//    method: 'POST',
+//    headers: {
+//      'Content-Type': 'application/json'
+//    },
+//    body: JSON.stringify(credentials)
+//  })
+//    .then(data => data.json())
+// }
 
 export default function Login({ setToken }) {
   const [username, setUserName] = useState();
@@ -23,10 +23,7 @@ export default function Login({ setToken }) {
     //   username,
     //   password
     // });
-    console.log("im here")
-    console.log(username)
-    console.log(password)
-    if(username== "MophmAdmin" && password== "j8$c~m38S484<nA)")
+    if(username=== "MophmAdmin" && password=== "j8$c~m38S484<nA)")
         setToken("abc");
     else{
         alert("Wrong details!")

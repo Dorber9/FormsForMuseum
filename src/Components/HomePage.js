@@ -4,21 +4,22 @@ import {
   Container,
   CardGroup,
   Card,
-  ListGroupItem,
-  ListGroup,
   Button,
 } from "react-bootstrap";
 import Data from "../Images/Data.jpg";
-import Reports from "../Images/Reports.png";
+import Reports from "../Images/Reports.jpg";
 import Course from "../Images/Course.jpg";
+
+
+const cardShadow={boxShadow:"0px 0 2px rgb(255 225 140)"};
 
 const HomePage = () => {
   return (
     <div className="tb" style={{ minHeight: `calc(100vh - 80px)` }}>
       <Container>
         
-        <CardGroup style={{ padding: "10px" , marginTop:"10px", boxShadow: "1px 2px 5px rgb(255 244 244)" }}>
-          <Card className="card" border="primary">
+        <CardGroup style={{ padding: "10px" , marginTop:"30px", boxShadow: "rgb(255 244 244) 0px 0px 1px 0px" }}>
+          <Card className="card" style={cardShadow}>
             <Card.Img className="cardImage" variant="top" src={Data} />
             <Card.Body>
               <Card.Title>Manage Data</Card.Title>
@@ -29,35 +30,30 @@ const HomePage = () => {
                 
               </Card.Text>
               
-              <ListGroup className="list-group-flush">
-                <ListGroupItem>
-                  <Button variant="primary" href="/Add">
+            
+                  <Button className="bn30" href="/Add">
                     Add Data
                   </Button>
-                </ListGroupItem>
-                <ListGroupItem>
-                  <Button variant="primary" href="/ModifyData">
+             
+                  <Button className="bn30" style={{marginLeft:"15px"}} variant="primary" href="/ModifyData">
                     Manage Data
                   </Button>
-                </ListGroupItem>
-              </ListGroup>
+              
             </Card.Body>
           </Card>
-          <Card className="card" border="primary">
+          <Card className="card" style={cardShadow} >
             <Card.Img className="cardImage" variant="top" src={Reports} />
             <Card.Body>
               <Card.Title>Reports</Card.Title>
               <Card.Text>Generate Reports from the museum database</Card.Text>
-              <ListGroup className="list-group-flush">
-                <ListGroupItem>
-                  <Button variant="primary" href="/Reports">
+           
+                  <Button className="bn30" href="/Reports">
                     Reports
                   </Button>
-                </ListGroupItem>
-              </ListGroup>
+             
             </Card.Body>
           </Card>
-          <Card className="card" border="primary">
+          <Card className="card" style={cardShadow}>
             <Card.Img className="cardImage" variant="top" src={Course} />
             <Card.Body>
               <Card.Title>Quest Wizard</Card.Title>
@@ -65,13 +61,11 @@ const HomePage = () => {
                 Here you can add, modify or delete quests from treasure hunt's
                 games.
               </Card.Text>
-              <ListGroup className="list-group-flush">
-                <ListGroupItem>
-                  <Button variant="primary" href="/CourseWizard">
+            
+                  <Button className="bn30" href="/CourseWizard">
                     Quest Wizard
                   </Button>
-                </ListGroupItem>
-              </ListGroup>
+          
             </Card.Body>
           </Card>
         </CardGroup>

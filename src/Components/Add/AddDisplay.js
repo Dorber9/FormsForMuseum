@@ -7,6 +7,8 @@ import "../../App.css";
 import Select from "react-select";
 import Button from "@material-ui/core/Button";
 import { Container, Card } from "react-bootstrap";
+  import { makeStyles} from "@material-ui/core/styles";
+
 import "../../App.css";
 const options = [
   { value: "1", label: "Permanent" },
@@ -14,10 +16,10 @@ const options = [
 ];
 
 const selectStyles = {
-  menu: (styles) => ({ ...styles, zIndex: 999 }),
+  menu: (styles) => ({ ...styles, zIndex: 999,background:"black" }),
 };
 
-const cardShadow={boxShadow:"rgb(189 189 189) 5px 5px 10px" , background:"#ffee9db3"};
+const cardShadow={boxShadow:"inset rgb(0 0 0) -2px -1px 14px 2px" , background:"#ffee9db3"};
 
 
 const AddDisplay = (props) => {
@@ -34,6 +36,32 @@ const AddDisplay = (props) => {
   const [displayList, setDisplayList] = useState([]);
   const [selectedValue, setSelectedValue] = useState("Please Select Section");
   const [curatorLabel, setCuratorLabel] = useState("Curator");
+
+
+  const styles = makeStyles((theme) => ({
+  root: {
+    "& .MuiOutlinedInput-root": {
+      boxShadow: " 1px 2px 5px rgb(255 203 43)",
+      '&.Mui-focused fieldset': {
+        borderColor: 'yellow',
+      },
+    },
+    '& label.Mui-focused': {
+      color: 'white',
+    },
+    '& label': {
+      color: "rgb(255 225 132)",
+	  marginLeft: "32%",
+    },
+    "& .MuiOutlinedInput-notchedOutline":{
+    background: "rgb(3 3 1 / 83%)"
+    },
+  
+
+    
+  }
+
+}));
 
   useEffect(() => {
     getSection();
@@ -142,10 +170,11 @@ const AddDisplay = (props) => {
       setDisplayList(response.data);
     });
   };
+const classes = styles();
 
   return (
     <>
-      <Container>
+      <Container style={{width:"65%"}}>
         <Card
            style={cardShadow}
         >
@@ -155,22 +184,21 @@ const AddDisplay = (props) => {
                 Add Display
               </h4>
               <div className="txtf">
-          
                 <TextField
-                
+                    className={classes.root}
+                  
                   value={name}
                   onChange={(e) => {
                     setName(e.target.value);
                   }}
+                  
                   variant="outlined"
                   type="text"
                   name="name"
                   label="Name"
-                  color="warning"
-                  
-
-                />
+                          />
                 <TextField
+                className={classes.root}
                   value={curator}
                   style={{ marginLeft: "5px" }}
                   onChange={(e) => {
@@ -182,6 +210,7 @@ const AddDisplay = (props) => {
                   label={curatorLabel}
                 />
                 <TextField
+                className={classes.root}
                   value={designer}
                   style={{ marginLeft: "5px" }}
                   onChange={(e) => {
@@ -220,6 +249,7 @@ const AddDisplay = (props) => {
                 ) : (
                   <>
                     <TextField
+                    className={classes.root}
                       value={startDate}
                       onChange={(e) => {
                         setStartDate(e.target.value);
@@ -232,6 +262,7 @@ const AddDisplay = (props) => {
                     />
 
                     <TextField
+                    className={classes.root}
                       style={{ marginLeft: "5px" }}
                       value={endDate}
                       onChange={(e) => {
@@ -248,6 +279,7 @@ const AddDisplay = (props) => {
                   </>
                 )}
                 <TextField
+                className={classes.root}
                   value={theme}
                   onChange={(e) => {
                     setTheme(e.target.value);
@@ -258,6 +290,7 @@ const AddDisplay = (props) => {
                   label="Theme"
                 />
                 <TextField
+                className={classes.root}
                   style={{ marginLeft: "5px" }}
                   value={reason}
                   onChange={(e) => {
@@ -271,6 +304,7 @@ const AddDisplay = (props) => {
                 <br />
                 <br />
                 <TextField
+                className={classes.root}
                   value={description}
                   onChange={(e) => {
                     setDescription(e.target.value);
@@ -318,6 +352,7 @@ const AddDisplay = (props) => {
                 <br />
                 <br />
                 <Button
+                className="bn30"
                   variant="contained"
                   color="primary"
                   type="submit"

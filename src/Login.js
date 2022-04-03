@@ -26,8 +26,9 @@ export default function Login({ setToken }) {
     if(username=== "MophmAdmin" && password=== "j8$c~m38S484<nA)")
         setToken("abc");
     else{
-        alert("Wrong details!")
-        window.location.reload(false)
+        // alert("Wrong details!")
+        // window.location.reload(false)
+        setToken("user")
     }
   }
 

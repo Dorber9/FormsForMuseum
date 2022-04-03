@@ -1,10 +1,41 @@
 /* eslint-disable */
 import React from "react";
-import { TextField, InputLabel } from "@material-ui/core";
+import { TextField, InputLabel, makeStyles } from "@material-ui/core";
 import { useState, useEffect } from "react";
 import Axios from "axios";
 import Button from "@material-ui/core/Button";
 import { Container, Card } from "react-bootstrap";
+
+
+const cardShadow={boxShadow:"inset rgb(0 0 0) -2px -1px 14px 2px" , background:"#ffee9db3"};
+
+
+ const styles = makeStyles((theme) => ({
+  root: {
+    "& .MuiOutlinedInput-root": {
+      boxShadow: " 1px 2px 5px rgb(255 203 43)",
+      '&.Mui-focused fieldset': {
+        borderColor: 'yellow',
+      },
+    },
+    '& label.Mui-focused': {
+      color: 'white',
+    },
+    '& label': {
+      color: "rgb(255 225 132)",
+	  marginLeft: "32%",
+    },
+    "& .MuiOutlinedInput-notchedOutline":{
+    background: "rgb(3 3 1 / 83%)"
+    },
+    "& .MuiOutlinedInput-input": {
+    zIndex:"999",
+    color: "white"
+    }
+  
+  }
+
+}));
 
 const AddMuseum = (props) => {
   const [name, setName] = useState("");
@@ -60,12 +91,13 @@ const AddMuseum = (props) => {
     });
   };
 
+  const classes = styles();
+
+
   return (
     <Container>
       <Card
-        className="addCard"
-        border="secondary"
-        style={{ background: "#dbdbdbad" }}
+        style={cardShadow}
       >
         <Card.Body>
           <Card.Text>
@@ -84,6 +116,7 @@ const AddMuseum = (props) => {
               {/* <InputLabel>Museum Name</InputLabel> <br /> */}
 
               <TextField
+              className={classes.root}
                 disabled
                 value={name}
                 required
@@ -99,6 +132,8 @@ const AddMuseum = (props) => {
               <br></br>
               <br></br>
               <Button
+                              className="bn30"
+
                 variant="contained"
                 color="primary"
                 type="submit"
@@ -110,6 +145,7 @@ const AddMuseum = (props) => {
                 ""
               ) : (
                 <Button
+                
                   variant="contained"
                   style={{
                     color: "white",

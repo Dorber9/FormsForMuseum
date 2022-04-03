@@ -41,15 +41,18 @@ function App() {
            
         }}
       >
-        <Header />
+        {token =="abc" ?< Header /> : ""}
         
         <BrowserRouter>
           <Routes>
             <Route exact path="/Add" element={<Add />}></Route>
-            <Route exact path="/" element={<HomePage />}></Route>
+            {token == "abc" && 
+            <Route exact path="/" element={<HomePage />}></Route> }
+            {token != "abc" && 
+            <Route exact path="/" element={<ListOfItems></ListOfItems>}></Route> }
             <Route exact path="/DemoPage" element={<DemoPage />}></Route>
             <Route exact path="/ItemsList" element={<ListOfItems></ListOfItems>}></Route>
-            <Route exact path="/Item/:id"  element={<ViewItemNewPage/>}></Route>
+            <Route exact path="/Item/:id"  element={<ViewItemNewPage token={token}/>}></Route>
             <Route exact path="/AddQuestion/:id"  element={<AddQuestionNew></AddQuestionNew>}></Route>
             
             <Route

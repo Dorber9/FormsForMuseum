@@ -11,11 +11,13 @@ const ViewItemWiki = (props) => {
   const [itemData, setData] = useState([]);
   const [itemKeys, setKeys] = useState([]);
   const [path, setPath] = useState("");
+  const [token,setToken]=useState(JSON.parse(localStorage.getItem('token')))
 
   useEffect(() => {
     setDataWiki([]);
     getItem();
-
+    console.log(token)
+    
     // eslint-disable-next-line
   }, [props]);
 
@@ -29,10 +31,8 @@ const ViewItemWiki = (props) => {
       setData(res.data[0]);
       setKeys(Object.keys(itemData));
 
-      console.log(itemData);
       const data = res.data[0].ItemData.split("^%^");
       setPath(res.data[0].ImagePath);
-      console.log(res.data[0].ImagePath);
       data.pop();
       var temp = [];
 
@@ -87,7 +87,10 @@ const ViewItemWiki = (props) => {
           );
         })}
         <div style={{ marginTop: "50px", textAlign: "center" }}>
-          <QRCode value={`${window.location.href}`} size="150" />
+          {token ==="abc" ?
+          <QRCode value={`${window.location.href}`} size="150" /> : ""
+}
+          
         </div>
       </div>
     </>

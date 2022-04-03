@@ -56,6 +56,10 @@ const AddDisplay = (props) => {
     "& .MuiOutlinedInput-notchedOutline":{
     background: "rgb(3 3 1 / 83%)"
     },
+    "& .MuiOutlinedInput-input": {
+    zIndex:"999",
+    color: "white"
+    }
   
 
     

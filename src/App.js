@@ -54,7 +54,7 @@ function App() {
             <Route exact path="/" element={<ListOfItems></ListOfItems>}></Route> }
             <Route exact path="/DemoPage" element={<DemoPage />}></Route>
             <Route exact path="/ItemsList" element={<ListOfItems></ListOfItems>}></Route>
-            <Route exact path="/Item/:id"  element={<ViewItemNewPage token={token}/>}></Route>
+            <Route exact path="/Item/:id"  element={<ViewItemNewPage/>}></Route>
             <Route exact path="/AddQuestion/:id"  element={<AddQuestionNew></AddQuestionNew>}></Route>
             
             <Route

@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const selectStyles = { menu: (styles) => ({ ...styles, zIndex: 999 }) };
+const selectStyles = { menu: (styles) => ({ ...styles, zIndex: 999,background:"black" }) };
 
 const AddQuestion = (props) => {
   const [itemsList, setItemsList] = useState([]);
@@ -226,13 +226,13 @@ const deleteQuestion = (id) => {
       
   }
 
+      const cardShadow={boxShadow:"inset rgb(0 0 0) -2px -1px 14px 2px" , background:"#ffee9db3"};
+
   return (
     <div>
       <Container>
         <Card
-          className="addCard"
-          border="secondary"
-          style={{ padding: "10px", background: "#dbdbdbad" }}
+         style={cardShadow}
         >
           <Card.Title>{props.object ==null ? "Add Questions" : "Modify Questions" }</Card.Title>
           <Card.Body>
@@ -382,7 +382,7 @@ const deleteQuestion = (id) => {
                   {emptyFlag == false  ? 
                   <>
                   <Button
-                    className={classes.button}
+                    className="bn30"
                     variant="contained"
                     color="primary"
                     type="submit"

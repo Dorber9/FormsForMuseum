@@ -18,9 +18,35 @@ import ReactUploadImage from "../ReactUploadImage";
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    '&.MuiTextField-focused fieldset': {
+        borderColor: 'yellow',
+      },
     "& .MuiTextField-root": {
       margin: theme.spacing(1),
+      boxShadow: " 1px 2px 5px rgb(255 203 43)",
+       
+          '& label.Mui-focused': {
+      color: 'white',
+      },
+      '& label': {
+        color: "rgb(255 225 132)",
+      marginLeft: "32%",
+      },
+      "& .MuiOutlinedInput-notchedOutline":{
+      background: "rgb(3 3 1 / 83%)"
+      },
+      "& .MuiOutlinedInput-input": {
+      zIndex:"1",
+      color: "white"
+      },
     },
+    "& .MuiOutlinedInput-root": {
+      boxShadow: " 1px 2px 5px rgb(255 203 43)",
+      '&.Mui-focused fieldset': {
+        borderColor: 'yellow',
+      },
+    },
+
   },
   button: {
     margin: theme.spacing(1),
@@ -129,7 +155,7 @@ function AddItem(props) {
     background: "rgb(3 3 1 / 83%)"
     },
     "& .MuiOutlinedInput-input": {
-    zIndex:"999",
+    zIndex:"1",
     color: "white"
     }
   
@@ -640,7 +666,7 @@ function AddItem(props) {
                       {inputFields.map((inputField) => (
                         <div key={inputField.id}>
                           <TextField
-                            className={classstyle.root}
+                            className={classes.root}
                             name="category"
                             label="Category"
                             variant="filled"
@@ -653,7 +679,7 @@ function AddItem(props) {
                             style={{ marginRight: "10%", marginLeft: "10%" }}
                           >
                             <TextField
-                                          className={classstyle.root}
+                                          className={classes.root}
 
                               name="categoryDescr"
                               label="Description"

@@ -32,7 +32,7 @@ const cardShadow={boxShadow:"inset rgb(0 0 0) -2px -1px 14px 2px" , background:"
     background: "rgb(3 3 1 / 83%)"
     },
     "& .MuiOutlinedInput-input": {
-    zIndex:"999",
+    zIndex:"1",
     color: "white"
     }
   

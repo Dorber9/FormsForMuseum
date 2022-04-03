@@ -43,7 +43,7 @@ const AddShowcase = (props) => {
     background: "rgb(3 3 1 / 83%)"
     },
     "& .MuiOutlinedInput-input": {
-    zIndex:"999",
+    zIndex:"1",
     color: "white"
     }
   

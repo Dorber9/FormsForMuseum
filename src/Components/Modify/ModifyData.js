@@ -13,7 +13,7 @@ import AddQuestion from "../Add/AddQuestion";
 
 import { render } from "react-dom";
 
-const selectStyles = { menu: (styles) => ({ ...styles, zIndex: 999 }) };
+const selectStyles = { menu: (styles) => ({ ...styles, zIndex: 999,background:"black" }) };
 
 const ModifyData = () => {
   const [selectedObject, setSelectedObject] = useState("");

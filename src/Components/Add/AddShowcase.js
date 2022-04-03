@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React from "react";
-import { TextField } from "@material-ui/core";
+import { TextField,makeStyles } from "@material-ui/core";
 import { useState, useEffect } from "react";
 import Axios from "axios";
 import "../../App.css";
@@ -20,6 +20,39 @@ const AddShowcase = (props) => {
   const [displayList, setDisplayList] = useState([]);
   const [selectedValue, setSelectedValue] = useState("Please Select Display");
   const [path, setPath] = useState("");
+
+  const cardShadow={boxShadow:"inset rgb(0 0 0) -2px -1px 14px 2px" , background:"#ffee9db3"};
+
+
+ const styles = makeStyles((theme) => ({
+  root: {
+    "& .MuiOutlinedInput-root": {
+      boxShadow: " 1px 2px 5px rgb(255 203 43)",
+      '&.Mui-focused fieldset': {
+        borderColor: 'yellow',
+      },
+    },
+    '& label.Mui-focused': {
+      color: 'white',
+    },
+    '& label': {
+      color: "rgb(255 225 132)",
+	  marginLeft: "32%",
+    },
+    "& .MuiOutlinedInput-notchedOutline":{
+    background: "rgb(3 3 1 / 83%)"
+    },
+    "& .MuiOutlinedInput-input": {
+    zIndex:"999",
+    color: "white"
+    }
+  
+  }
+
+}));
+
+const classes = styles();
+
 
   useEffect(() => {
     getDisplay();
@@ -128,9 +161,7 @@ const AddShowcase = (props) => {
     <>
       <Container>
         <Card
-          className="addCard"
-          border="secondary"
-          style={{ background: "#dbdbdbad" }}
+        style={cardShadow}
         >
           <Card.Body>
             <Card.Text>
@@ -144,6 +175,7 @@ const AddShowcase = (props) => {
                   <img src={props.object.ImagePath}></img>
                 )}
                 <TextField
+                              className={classes.root}
                   value={number}
                   onChange={(event) => {
                     setNumber(event.target.value);
@@ -154,6 +186,8 @@ const AddShowcase = (props) => {
                   label="Number"
                 />
                 <TextField
+                              className={classes.root}
+
                   style={{ marginLeft: "5px" }}
                   value={name}
                   onChange={(event) => {
@@ -165,6 +199,8 @@ const AddShowcase = (props) => {
                   label="Name"
                 />
                 <TextField
+                              className={classes.root}
+
                   style={{ marginLeft: "5px" }}
                   value={type}
                   onChange={(event) => {
@@ -178,6 +214,8 @@ const AddShowcase = (props) => {
                 <br />
                 <br />
                 <TextField
+                              className={classes.root}
+
                   value={description}
                   onChange={(event) => {
                     setDescription(event.target.value);
@@ -264,6 +302,7 @@ const AddShowcase = (props) => {
                 <br />
                 <br />
                 <Button
+                  className="bn30"
                   variant="contained"
                   color="primary"
                   type="submit"

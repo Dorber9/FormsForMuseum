@@ -16,8 +16,10 @@ import ViewItemNewPage from "./Components/ViewItemNewPage";
 import AddQuestionNew from "./AddQuestionNew"
 import Login from "./Login";
 import useToken from "./useToken";
-function App() {
 
+
+function App() {
+  
   const { token, setToken } = useToken();
 
   if(!token) {
@@ -41,14 +43,14 @@ function App() {
            
         }}
       >
-        {token =="abc" ?< Header /> : ""}
+        {token ==="abc" ?< Header /> : ""}
         
         <BrowserRouter>
           <Routes>
             <Route exact path="/Add" element={<Add />}></Route>
-            {token == "abc" && 
+            {token === "abc" && 
             <Route exact path="/" element={<HomePage />}></Route> }
-            {token != "abc" && 
+            {token !== "abc" && 
             <Route exact path="/" element={<ListOfItems></ListOfItems>}></Route> }
             <Route exact path="/DemoPage" element={<DemoPage />}></Route>
             <Route exact path="/ItemsList" element={<ListOfItems></ListOfItems>}></Route>

@@ -107,6 +107,37 @@ function AddItem(props) {
   const [showcaseList, setShowcaseList] = useState([]);
   const [itemsList, setItemsList] = useState([]);
 
+    const cardShadow={boxShadow:"inset rgb(0 0 0) -2px -1px 14px 2px" , background:"#ffee9db3"};
+
+
+ const styles = makeStyles((theme) => ({
+  root: {
+    "& .MuiOutlinedInput-root": {
+      boxShadow: " 1px 2px 5px rgb(255 203 43)",
+      '&.Mui-focused fieldset': {
+        borderColor: 'yellow',
+      },
+    },
+    '& label.Mui-focused': {
+      color: 'white',
+    },
+    '& label': {
+      color: "rgb(255 225 132)",
+	  marginLeft: "32%",
+    },
+    "& .MuiOutlinedInput-notchedOutline":{
+    background: "rgb(3 3 1 / 83%)"
+    },
+    "& .MuiOutlinedInput-input": {
+    zIndex:"999",
+    color: "white"
+    }
+  
+  }
+
+}));
+
+
   useEffect(() => {
     getDisplay();
     getShowcase();
@@ -352,13 +383,16 @@ function AddItem(props) {
     setPath(childData);
   };
 
+    const classstyle =  styles();
+
+
+
+
   return (
     <>
       <Container>
         <Card
-          className="addCard"
-          border="secondary"
-          style={{ background: "#dbdbdbad" }}
+         style={cardShadow}
         >
           <Card.Body>
             <Card.Text>
@@ -369,6 +403,8 @@ function AddItem(props) {
                   </h4>
                   <div className="txtf">
                     <TextField
+                                  className={classstyle.root}
+
                       value={itemId}
                       onChange={(e) => {
                         setItemId(e.target.value);
@@ -380,6 +416,8 @@ function AddItem(props) {
                     />
 
                     <TextField
+                                  className={classstyle.root}
+
                       style={{ marginLeft: "5px" }}
                       value={name}
                       onChange={(e) => {
@@ -392,6 +430,8 @@ function AddItem(props) {
                     />
 
                     <TextField
+                                  className={classstyle.root}
+
                       value={site}
                       style={{ marginLeft: "5px" }}
                       onChange={(e) => {
@@ -467,7 +507,8 @@ function AddItem(props) {
                     <br />
                     <br />
 
-                    <TextField
+                    <TextField              className={classstyle.root}
+
                       value={period}
                       onChange={(e) => {
                         setPeriod(e.target.value);
@@ -479,6 +520,8 @@ function AddItem(props) {
                     />
 
                     <TextField
+                                  className={classstyle.root}
+
                       value={age}
                       style={{ marginLeft: "5px" }}
                       onChange={(e) => {
@@ -491,6 +534,8 @@ function AddItem(props) {
                     />
 
                     <TextField
+                                  className={classstyle.root}
+
                       value={material}
                       style={{ marginLeft: "5px" }}
                       onChange={(e) => {
@@ -504,6 +549,8 @@ function AddItem(props) {
                     <br />
                     <br />
                     <TextField
+                                  className={classstyle.root}
+
                       value={size}
                       onChange={(e) => {
                         setSize(e.target.value);
@@ -515,6 +562,8 @@ function AddItem(props) {
                     />
 
                     <TextField
+                                  className={classstyle.root}
+
                       value={website}
                       style={{ marginLeft: "5px" }}
                       onChange={(e) => {
@@ -526,6 +575,8 @@ function AddItem(props) {
                       label="Website"
                     />
                     <TextField
+                                  className={classstyle.root}
+
                       value={references}
                       style={{ marginLeft: "5px" }}
                       onChange={(e) => {
@@ -539,6 +590,8 @@ function AddItem(props) {
                     <br />
                     <br />
                     <TextField
+                                  className={classstyle.root}
+
                       value={descr}
                       onChange={(e) => {
                         setDescr(e.target.value);
@@ -555,6 +608,8 @@ function AddItem(props) {
                     <br />
                     <br />
                     <TextField
+                                  className={classstyle.root}
+
                       value={shortDescr}
                       onChange={(e) => {
                         setShortDescr(e.target.value);
@@ -585,6 +640,7 @@ function AddItem(props) {
                       {inputFields.map((inputField) => (
                         <div key={inputField.id}>
                           <TextField
+                            className={classstyle.root}
                             name="category"
                             label="Category"
                             variant="filled"
@@ -597,6 +653,8 @@ function AddItem(props) {
                             style={{ marginRight: "10%", marginLeft: "10%" }}
                           >
                             <TextField
+                                          className={classstyle.root}
+
                               name="categoryDescr"
                               label="Description"
                               variant="filled"
@@ -621,6 +679,7 @@ function AddItem(props) {
                         </div>
                       ))}
                       <Button
+                        id="bn30"
                         className={classes.button}
                         variant="contained"
                         color="primary"

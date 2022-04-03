@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React from "react";
-import { TextField } from "@material-ui/core";
+import { TextField,makeStyles } from "@material-ui/core";
 import { useState, useEffect } from "react";
 import Axios from "axios";
 import { Container, Card } from "react-bootstrap";
@@ -16,6 +16,36 @@ const contentContainerStyle = {
   alignItems: "center", // Centered horizontally
   flex: 1,
 };
+
+const cardShadow={boxShadow:"inset rgb(0 0 0) -2px -1px 14px 2px" , background:"#ffee9db3"};
+
+
+ const styles = makeStyles((theme) => ({
+  root: {
+    "& .MuiOutlinedInput-root": {
+      boxShadow: " 1px 2px 5px rgb(255 203 43)",
+      '&.Mui-focused fieldset': {
+        borderColor: 'yellow',
+      },
+    },
+    '& label.Mui-focused': {
+      color: 'white',
+    },
+    '& label': {
+      color: "rgb(255 225 132)",
+	  marginLeft: "32%",
+    },
+    "& .MuiOutlinedInput-notchedOutline":{
+    background: "rgb(3 3 1 / 83%)"
+    },
+    "& .MuiOutlinedInput-input": {
+    zIndex:"999",
+    color: "white"
+    }
+  
+  }
+
+}));
 
 const AddBuilding = (props) => {
   const [address, setAddress] = useState("1222000");
@@ -102,18 +132,20 @@ const AddBuilding = (props) => {
     });
   };
 
+    const classes = styles();
+
+
   return (
     <>
       <Container>
         <Card
-          className="addCard"
-          border="secondary"
-          style={{ background: "#dbdbdbad" }}
+          style={cardShadow}
         >
           <Card.Body>
             <Card.Text>
               <div className="txtf">
                 <TextField
+                className={classes.root}
                   value={name}
                   onChange={(event) => {
                     setName(event.target.value);
@@ -126,6 +158,7 @@ const AddBuilding = (props) => {
                 <br />
                 <br />
                 <TextField
+                 className={classes.root}
                   disabled
                   value={city}
                   onChange={(event) => {
@@ -141,6 +174,7 @@ const AddBuilding = (props) => {
                 <br />
                 <br />
                 <TextField
+                 className={classes.root}
                   disabled
                   value={address}
                   onChange={(event) => {
@@ -190,6 +224,7 @@ const AddBuilding = (props) => {
                 <br />
                 <br />
                 <Button
+                  className="bn30"
                   variant="contained"
                   color="primary"
                   type="submit"

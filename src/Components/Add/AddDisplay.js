@@ -61,8 +61,6 @@ const AddDisplay = (props) => {
     color: "white"
     }
   
-
-    
   }
 
 }));

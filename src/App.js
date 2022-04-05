@@ -1,4 +1,5 @@
 import React from "react";
+
 import "./App.css";
 import { Route, BrowserRouter, Routes } from "react-router-dom";
 import DemoPage from "./Components/DemoPage";
@@ -19,8 +20,15 @@ import useToken from "./useToken";
 
 
 function App() {
+
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setLoading(false);
+  //   }, 2000);
+  // }, []);
   
   const { token, setToken } = useToken();
+  
 
   if(!token) {
     

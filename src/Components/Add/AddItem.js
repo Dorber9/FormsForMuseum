@@ -18,43 +18,42 @@ import ReactUploadImage from "../ReactUploadImage";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    '&.MuiTextField-focused fieldset': {
-        borderColor: 'yellow',
-      },
     "& .MuiTextField-root": {
       margin: theme.spacing(1),
       boxShadow: " 1px 2px 5px rgb(255 203 43)",
-       
-          '& label.Mui-focused': {
+     
+      '&.Mui-focused fieldset': {
+        borderColor: 'yellow',
+      },
+    },
+        "& .MuiOutlinedInput-notchedOutline":{
+    background: "rgb(3 3 1 / 83%)"
+    },
+    '& label.Mui-focused': {
       color: 'white',
+      
       },
       '& label': {
         color: "rgb(255 225 132)",
       marginLeft: "32%",
-      },
-      "& .MuiOutlinedInput-notchedOutline":{
-      background: "rgb(3 3 1 / 83%)"
       },
       "& .MuiOutlinedInput-input": {
       zIndex:"1",
       color: "white"
       },
     },
-    "& .MuiOutlinedInput-root": {
-      boxShadow: " 1px 2px 5px rgb(255 203 43)",
-      '&.Mui-focused fieldset': {
+    '&.Mui-focused': {
         borderColor: 'yellow',
       },
-    },
 
-  },
   button: {
     margin: theme.spacing(1),
   },
 }));
 
+
+
 function AddItem(props) {
-  const classes = useStyles();
   const [inputFields, setInputFields] = useState(
     props.object == null
       ? [{ id: uuidv4(), category: "", categoryDescr: "" }]
@@ -140,6 +139,7 @@ function AddItem(props) {
   root: {
     "& .MuiOutlinedInput-root": {
       boxShadow: " 1px 2px 5px rgb(255 203 43)",
+      
       '&.Mui-focused fieldset': {
         borderColor: 'yellow',
       },
@@ -371,10 +371,7 @@ function AddItem(props) {
     
   };
 
-  const selectStyle = {
-    width: "220px",
-    marginLeft: "50px",
-  };
+
   const options = [
     { value: "1", label: "In Storage" },
     { value: "0", label: "In Museum" },
@@ -410,6 +407,7 @@ function AddItem(props) {
   };
 
     const classstyle =  styles();
+    const classes = useStyles();
 
 
 
@@ -652,24 +650,26 @@ function AddItem(props) {
                     <br />
                     <br />
                     <div style={{ margin: "2%" }}>
-                      <h6>Upload Image</h6>
+                      <h6 style={{color:"black"}}>Upload Image</h6>
 
                       <input
                         accept="image/png, image/gif, image/jpeg"
                         type="file"
                         name="myImage"
+                        style={{color:"black"}}
                         onChange={fileChange}
                       />
+                         
                     </div>
 
                     <form className={classes.root} onSubmit={handleSubmit}>
                       {inputFields.map((inputField) => (
                         <div key={inputField.id}>
                           <TextField
-                            className={classes.root}
+                            className={classstyle.root}
                             name="category"
                             label="Category"
-                            variant="filled"
+                            variant="outlined"
                             value={inputField.category}
                             onChange={(event) =>
                               handleChangeInput(inputField.id, event)
@@ -679,11 +679,10 @@ function AddItem(props) {
                             style={{ marginRight: "10%", marginLeft: "10%" }}
                           >
                             <TextField
-                                          className={classes.root}
-
+                              className={classstyle.root}
                               name="categoryDescr"
                               label="Description"
-                              variant="filled"
+                              variant="outlined"
                               multiline
                               fullWidth
                               value={inputField.categoryDescr}

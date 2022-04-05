@@ -26,9 +26,9 @@ export default function Login({ setToken }) {
     if(username=== "MophmAdmin" && password=== "j8$c~m38S484<nA)")
         setToken("abc");
     else{
-        // alert("Wrong details!")
-        // window.location.reload(false)
-        setToken("user")
+        alert("Wrong details!")
+        window.location.reload(false)
+        // setToken("user")
     }
   }
 
@@ -44,7 +44,7 @@ export default function Login({ setToken }) {
         <h3 className="login-h3">Login Here</h3>
 
         <label className="login-label" for="username">Username</label>
-        <input className="login-input" type="text" placeholder="Email or Phone" id="username" onChange={e => setUserName(e.target.value)}/>
+        <input className="login-input" type="text" placeholder="Username" id="username" onChange={e => setUserName(e.target.value)}/>
 
         <label className="login-label" for="password">Password</label>
         <input className="login-input" type="password" placeholder="Password" id="password" onChange={e => setPassword(e.target.value)}/>

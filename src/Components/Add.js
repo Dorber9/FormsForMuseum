@@ -1,14 +1,12 @@
 /* eslint-disable */
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
-import AddMuseum from "./Add/AddMuseum";
-import AddBuilding from "./Add/AddBuilding";
+
 import AddDisplay from "./Add/AddDisplay";
 import AddItem from "./Add/AddItem";
 import AddShowcase from "./Add/AddShowcase";
-import AddSection from "./Add/AddSection";
-import Header from "./Header";
+
 import "../App.css";
 import AddMuseumBuildingSection from "./Add/AddMuseumBuildingSection";
 import AddQuestion from "./Add/AddQuestion";
@@ -23,9 +21,14 @@ import AddQuestion from "./Add/AddQuestion";
 
 const tabStyle= {color: "white"}
 
+  
+
 const Add = () => {
+
   return (
+    
     <div className="tb">
+     
       <h3 style={{color:"white", marginTop:"10px"}}>Manage Museum Data</h3>
       <Tabs>
         <TabList>
@@ -52,8 +55,8 @@ const Add = () => {
         <TabPanel>
           <AddQuestion object={null} />
         </TabPanel>
-      </Tabs>
-    </div>
+      </Tabs> 
+    </div> 
   );
 };
 

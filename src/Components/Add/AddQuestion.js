@@ -16,14 +16,43 @@ const useStyles = makeStyles((theme) => ({
   root: {
     "& .MuiTextField-root": {
       margin: theme.spacing(1),
+      boxShadow: " 1px 2px 5px rgb(255 203 43)",
+     
+      '&.Mui-focused fieldset': {
+        borderColor: 'yellow',
+      },
     },
-  },
+        "& .MuiOutlinedInput-notchedOutline":{
+    background: "rgb(3 3 1 / 83%)"
+    },
+    '& label.Mui-focused': {
+      color: 'white',
+      
+      },
+      '& label': {
+        color: "rgb(255 225 132)",
+      marginLeft: "32%",
+      },
+      "& .MuiOutlinedInput-input": {
+      zIndex:"1",
+      color: "white"
+      },
+    },
+    '&.Mui-focused': {
+        borderColor: 'yellow',
+      },
+
   button: {
     margin: theme.spacing(1),
   },
 }));
 
-const selectStyles = { menu: (styles) => ({ ...styles, zIndex: 999,background:"black" }) };
+const selectStyles = { menu: (styles) => ({ ...styles, zIndex: 999,background:"black" , color:"white" }),  control: base => ({
+      ...base,
+      "&:hover": {
+        color: "black"
+      }
+    }) };
 
 const AddQuestion = (props) => {
   const [itemsList, setItemsList] = useState([]);
@@ -226,6 +255,7 @@ const deleteQuestion = (id) => {
       
   }
 
+
       const cardShadow={boxShadow:"inset rgb(0 0 0) -2px -1px 14px 2px" , background:"#ffee9db3"};
 
   return (
@@ -280,9 +310,10 @@ const deleteQuestion = (id) => {
                     <div key={inputField.id}>
                       <div>
                         <TextField
+                            className={classes.root}
                           name="question"
                           label="Question"
-                          variant="filled"
+                          variant="outlined"
                           style={{ zIndex: 1, width: "80%" }}
                           hiddenLabel
                           value={inputField.question}
@@ -291,6 +322,8 @@ const deleteQuestion = (id) => {
                           }
                         />
                         <TextField
+                                                    className={classes.root}
+
                           name="answer1"
                           label="First Answer"
                           variant="outlined"
@@ -301,6 +334,8 @@ const deleteQuestion = (id) => {
                           }
                         />
                         <TextField
+                                                    className={classes.root}
+
                           name="answer2"
                           label="Second Answer"
                           variant="outlined"
@@ -312,6 +347,8 @@ const deleteQuestion = (id) => {
                         />
 
                         <TextField
+                                                    className={classes.root}
+
                           name="answer3"
                           label="Third Answer"
                           variant="outlined"
@@ -322,6 +359,7 @@ const deleteQuestion = (id) => {
                           }
                         />
                         <TextField
+                                                    className={classes.root}
                           name="answer4"
                           label="Fourth Answer"
                           variant="outlined"

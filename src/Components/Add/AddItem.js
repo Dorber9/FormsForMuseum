@@ -317,23 +317,28 @@ function AddItem(props) {
   const onFormSubmit = async () => {
     
     if(props.object==null ){
-      try {
-      const formData = new FormData();
-      formData.append("myImage", file);
-      const config = {
-        headers: {
-          "content-type": "multipart/form-data",
-        },
-      };
-      let res = await Axios.post(
-        "http://34.65.174.141:3001/upload",
-        formData,
-        config
-      );
-      postItem(res.data)
-      } catch (error) {
-        console.log(error.data);
+        if(ImageFlag){
+        try {
+        const formData = new FormData();
+        formData.append("myImage", file);
+        const config = {
+          headers: {
+            "content-type": "multipart/form-data",
+          },
+        };
+        console.log(file)
+        let res = await Axios.post(
+          "http://34.65.174.141:3001/upload",
+          formData,
+          config
+        );
+        postItem(res.data)
+        } catch (error) {
+          console.log(error.data);
+        }
       }
+      else
+          postItem("")
 
   }
     
@@ -737,8 +742,8 @@ function AddItem(props) {
                 </>
               ) : props.object==null ? (
                 
-                 <div> Loading Add Questions to {name} ... </div>
-              ) : (<div>Modified Successfully!</div>)}
+                 ""
+              ) : ""}
             </Card.Text>
           </Card.Body>
         </Card>

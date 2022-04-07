@@ -10,13 +10,16 @@ const ViewItemWiki = (props) => {
   const [itemDataWiki, setDataWiki] = useState([]);
   const [itemData, setData] = useState([]);
   const [itemKeys, setKeys] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [path, setPath] = useState("");
   const [token,setToken]=useState(JSON.parse(localStorage.getItem('token')))
 
   useEffect(() => {
     setDataWiki([]);
     getItem();
-    console.log(token)
+   
+
+
     
     // eslint-disable-next-line
   }, [props]);
@@ -44,7 +47,9 @@ const ViewItemWiki = (props) => {
         });
       });
       setDataWiki(temp);
-
+       setTimeout(() => {
+      setLoading(false);
+      }, 5000);
       //   const itemResData = JSON.parse(JSON.stringify(res.data));
       //   setItemData(itemResData);
     } catch (error) {
@@ -53,9 +58,13 @@ const ViewItemWiki = (props) => {
   };
   return (
     <>
+    {loading?  <div style={{position:"center"}} className ="spinner-container">
+      <div className="loading-spinner">
+      </div>
+    </div> :
       <div className="pshDwn">
         <div style={{ textAlign: "center" }}>
-          {path.length != 0 ? (
+          {path!="" ? (
             <img src={path} style={{ height: "250px" }} alt="Oops! Something went wrong" />
           ) : (
             <img
@@ -93,7 +102,7 @@ const ViewItemWiki = (props) => {
           
         </div>
       </div>
-    </>
+    }</>
   );
 };
 

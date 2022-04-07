@@ -8,6 +8,7 @@ import { v4 as uuidv4 } from "uuid";
 import { makeStyles } from "@material-ui/core/styles";
 import Select from "react-select";
 import { Container, Card } from "react-bootstrap";
+import Resizer from "react-image-file-resizer";
 
 import { useState, useEffect } from "react";
 import Axios from "axios";
@@ -53,6 +54,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 
+
 function AddItem(props) {
   const [inputFields, setInputFields] = useState(
     props.object == null
@@ -78,6 +80,13 @@ function AddItem(props) {
 
     setFlag(true);
   };
+
+  const selectStyles = { menu: (styles) => ({ ...styles, zIndex: 999,background:"black" , color:"white" }),  control: base => ({
+      ...base,
+      "&:hover": {
+        color: "black"
+      }
+    }) };
 
   const handleChangeInput = (id, event) => {
     const newInputFields = inputFields.map((i) => {
@@ -124,7 +133,7 @@ function AddItem(props) {
   const [file, setFile] = useState(null);
   const [questionsFlag, setFlag] = useState(false);
   const[ImageFlag,setImageFlag] = useState(false);
-
+  const[ImageTry, setTry]= useState("")
   const [itemData, setItemData] = useState([
     { id: uuidv4(), category: "", categoryDescr: "" },
   ]);
@@ -134,6 +143,23 @@ function AddItem(props) {
 
     const cardShadow={boxShadow:"inset rgb(0 0 0) -2px -1px 14px 2px" , background:"#ffee9db3"};
 
+
+    const resizeFile = (file) =>
+  new Promise((resolve) => {
+    Resizer.imageFileResizer(
+      file,
+      300,
+      300,
+      "JPEG",
+      100,
+      0,
+      (uri) => {
+        resolve(uri);
+        setTry(uri)
+      },
+      "base64"
+    );
+  });
 
  const styles = makeStyles((theme) => ({
   root: {
@@ -202,7 +228,7 @@ function AddItem(props) {
     }
   }, [props.object != null ? props.object : ""]);
 
-  const postItem = (imgPath) => {
+  const postItem = (img) => {
     
     if (storage === "0" && display === "") {
       alert("Please Select a Display");
@@ -222,7 +248,7 @@ function AddItem(props) {
         website: website,
         size: size,
         references: references,
-        ImagePath: imgPath,
+        ImagePath: img,
         itemData: inputFields,
       }).then(() => {
         setItemsList([
@@ -242,16 +268,16 @@ function AddItem(props) {
             website: website,
             size: size,
             references: references,
-            ImagePath: imgPath,
+            ImagePath: ImageTry,
             itemData: itemData,
           },
         ]);
-    window.location.href = `../AddQuestion/${itemId}`;
+    
   });
     }
   };
 
-  const updateItem = (imgPath) => {
+  const updateItem = (img) => {
     Axios.put("http://34.65.174.141:3001/updateItem", {
       ID: itemId,
       name: name,
@@ -267,7 +293,7 @@ function AddItem(props) {
       website: website,
       size: size,
       references: references,
-      ImagePath: imgPath,
+      ImagePath: img,
       itemData: inputFields,
     }).then(() => {
       setItemsList([
@@ -287,11 +313,11 @@ function AddItem(props) {
           website: website,
           size: size,
           references: references,
-          ImagePath: imgPath,
+          ImagePath: img,
           itemData: itemData,
         },
       ]);
-     window.location.reload(false)});
+     });
   };
 
   const getDisplay = () => {
@@ -315,56 +341,45 @@ function AddItem(props) {
   };
 
   const onFormSubmit = async () => {
-    
-    if(props.object==null ){
-        if(ImageFlag){
+     if(ImageFlag){
         try {
-        const formData = new FormData();
-        formData.append("myImage", file);
-        const config = {
-          headers: {
-            "content-type": "multipart/form-data",
-          },
-        };
-        console.log(file)
-        let res = await Axios.post(
-          "http://34.65.174.141:3001/upload",
-          formData,
-          config
-        );
-        postItem(res.data)
+          console.log("im here 2")
+         const image = await resizeFile(file);
+         props.object==null ? postItem(image) : updateItem(image)
         } catch (error) {
           console.log(error.data);
         }
       }
-      else
-          postItem("")
-
+      else  {
+          console.log("im here")
+          props.object==null ? postItem("") : updateItem(path)
+      }  
+    
   }
     
-  else
-      if(ImageFlag){
-        try {
-          const formData = new FormData();
-          formData.append("myImage", file);
-          const config = {
-            headers: {
-              "content-type": "multipart/form-data",
-            },
-          };
-          let res = await Axios.post(
-            "http://34.65.174.141:3001/upload",
-            formData,
-            config
-          );
-          updateItem(res.data)
-          } catch (error) {
-            console.log(error.data);
-          }
-      }
-      else
-          updateItem(path)
-  };
+  // else
+  //     if(ImageFlag){
+  //       try {
+  //         const formData = new FormData();
+  //         formData.append("myImage", file);
+  //         const config = {
+  //           headers: {
+  //             "content-type": "multipart/form-data",
+  //           },
+  //         };
+  //         let res = await Axios.post(
+  //           "http://34.65.174.141:3001/upload",
+  //           formData,
+  //           config
+  //         );
+  //         updateItem(res.data)
+  //         } catch (error) {
+  //           console.log(error.data);
+  //         }
+  //     }
+  //     else
+  //         updateItem(path)
+  // };
 
   const tryFunction =(param) => {
     setPath(param)
@@ -481,6 +496,7 @@ function AddItem(props) {
                       }}
                     >
                       <Select
+                         styles={selectStyles}
                         value={{
                           value: storage,
                           label: storage === "1" ? "In Storage" : "In Museum",
@@ -742,8 +758,16 @@ function AddItem(props) {
                 </>
               ) : props.object==null ? (
                 
-                 ""
-              ) : ""}
+                 <div>
+                   <Button id="bn30"
+                        className={classes.button}
+                        variant="contained"
+                        color="primary"
+                        type="submit"
+                        onClick={()=>(window.location.href = `../AddQuestion/${itemId}`)}
+                    > 
+                    Add Questions to {name} </Button> </div>
+              ) : (<div style={{color:"black"}}>Modified Successfully!</div>)}
             </Card.Text>
           </Card.Body>
         </Card>

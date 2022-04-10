@@ -7,6 +7,8 @@ import "../../App.css";
 import Button from "@material-ui/core/Button";
 import Select from "react-select";
 import { Container, Card } from "react-bootstrap";
+import Resizer from "react-image-file-resizer";
+
 import ReactUploadImage from "../ReactUploadImage";
 
 const AddShowcase = (props) => {
@@ -20,6 +22,9 @@ const AddShowcase = (props) => {
   const [displayList, setDisplayList] = useState([]);
   const [selectedValue, setSelectedValue] = useState("Please Select Display");
   const [path, setPath] = useState("");
+  const [ImageFlag, setImageFlag] = useState(false);
+  const [file, setFile] = useState(null);
+
 
   const cardShadow = {
     boxShadow: "inset rgb(0 0 0) -2px -1px 14px 2px",
@@ -39,6 +44,11 @@ const AddShowcase = (props) => {
       ...provided,
       color: state.isFocused ? "black" : "white",
     }),
+  };
+
+    const fileChange = (e) => {
+    setImageFlag(true);
+    setFile(e.target.files[0]);
   };
 
   const styles = makeStyles((theme) => ({
@@ -80,7 +90,40 @@ const AddShowcase = (props) => {
     }
   }, [props.object != null ? props.object : ""]);
 
-  const postShowcase = () => {
+    const handleSubmit = (e) => {
+    e.preventDefault();
+    onFormSubmit();
+  };
+
+  const onFormSubmit = async () => {
+    if (ImageFlag) {
+      try {
+        const image = await resizeFile(file);
+        props.object == null ? postShowcase(image) : updateShowcase(image);
+      } catch (error) {
+        console.log(error.data);
+      }
+    } else {
+      props.object == null ? postShowcase("") : updateShowcase(path);
+    }
+  };
+    const resizeFile = (file) =>
+    new Promise((resolve) => {
+      Resizer.imageFileResizer(
+        file,
+        300,
+        300,
+        "JPEG",
+        100,
+        0,
+        (uri) => {
+          resolve(uri);
+        },
+        "base64"
+      );
+    });
+
+  const postShowcase = (img) => {
     if (selectedValue === "Please Select Display") {
       alert("Please Select a Display");
     } else {
@@ -92,7 +135,7 @@ const AddShowcase = (props) => {
         SpecialCare: specialCare,
         SpecialCareDescr: specialCareDesc,
         DisplayID: selectedValue,
-        ImagePath: path,
+        ImagePath: img,
       }).then(() => {
         setShowcaseList([
           ...showcaseList,
@@ -104,7 +147,7 @@ const AddShowcase = (props) => {
             SpecialCare: specialCare,
             SpecialCareDescr: specialCareDesc,
             DisplayID: selectedValue,
-            ImagePath: path,
+            ImagePath: img,
           },
         ]);
         alert("Success!");
@@ -113,7 +156,7 @@ const AddShowcase = (props) => {
     }
   };
 
-  const updateShowcase = () => {
+  const updateShowcase = (img) => {
     Axios.put("http://34.65.174.141:3001/updateShowcase", {
       idShowcase: props.object.idShowcase,
       Number: number,
@@ -123,7 +166,7 @@ const AddShowcase = (props) => {
       SpecialCare: specialCare,
       SpecialCareDescr: specialCareDesc,
       DisplayID: selectedValue,
-      ImagePath: path,
+      ImagePath: img,
     }).then(() => {
       setShowcaseList([
         ...showcaseList,
@@ -135,7 +178,7 @@ const AddShowcase = (props) => {
           SpecialCare: specialCare,
           SpecialCareDescr: specialCareDesc,
           DisplayID: selectedValue,
-          ImagePath: path,
+          ImagePath: img,
         },
       ]);
     });
@@ -177,7 +220,7 @@ const AddShowcase = (props) => {
         <Card style={cardShadow}>
           <Card.Body>
             <Card.Text>
-              <h4 style={{ textAlign: "center", marginBottom: "2%" }}>
+              <h4 style={{ textAlign: "center", marginBottom: "2%", color:"black" }}>
                 Add Exibition
               </h4>
               <div className="txtf">
@@ -239,10 +282,18 @@ const AddShowcase = (props) => {
                   rows="3"
                 />
                 <br />
-                <ReactUploadImage
-                  parentCallback={handleCallback}
-                ></ReactUploadImage>
-                <label htmlFor="">Special Care </label>
+                    <div style={{ margin: "2%" }}>
+                      <h6 style={{ color: "black" }}>Upload Image</h6>
+
+                      <input
+                        accept="image/png, image/gif, image/jpeg"
+                        type="file"
+                        name="myImage"
+                        style={{ color: "black" }}
+                        onChange={fileChange}
+                      />
+                    </div>
+                <label style={{color:"black"}} htmlFor="">Special Care </label>
                 <br />
                 <div
                   style={{
@@ -318,7 +369,7 @@ const AddShowcase = (props) => {
                   variant="contained"
                   color="primary"
                   type="submit"
-                  onClick={props.object == null ? postShowcase : updateShowcase}
+                  onClick={handleSubmit}
                 >
                   SUBMIT
                 </Button>

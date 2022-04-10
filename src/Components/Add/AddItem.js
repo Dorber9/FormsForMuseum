@@ -271,7 +271,7 @@ function AddItem(props) {
             website: website,
             size: size,
             references: references,
-            ImagePath: ImageTry,
+            ImagePath: img,
             itemData: itemData,
           },
         ]);
@@ -345,14 +345,12 @@ function AddItem(props) {
   const onFormSubmit = async () => {
     if (ImageFlag) {
       try {
-        console.log("im here 2");
         const image = await resizeFile(file);
         props.object == null ? postItem(image) : updateItem(image);
       } catch (error) {
         console.log(error.data);
       }
     } else {
-      console.log("im here");
       props.object == null ? postItem("") : updateItem(path);
     }
   };
@@ -435,7 +433,7 @@ function AddItem(props) {
             <Card.Text>
               {questionsFlag == false ? (
                 <>
-                  <h4 style={{ textAlign: "center", marginBottom: "2%" }}>
+                  <h4 style={{ textAlign: "center", marginBottom: "2%" , color:"black" }}>
                     Add Item
                   </h4>
                   <div className="txtf">
@@ -592,7 +590,7 @@ function AddItem(props) {
                       variant="outlined"
                       type="text"
                       name="Size"
-                      label="Size(h X w X d )"
+                      label="Size(l X w X t )"
                     />
 
                     <TextField

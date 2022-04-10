@@ -327,7 +327,7 @@
         border: 10px solid #f3f3f3;
         border-top: 10px solid #383636;
         border-radius: 50%;
-        animation: spinner 1.5s linear infinite;
+        animation: spinner 3.5s linear infinite;
         align-items: center;
         margin-left: 43%;
     }

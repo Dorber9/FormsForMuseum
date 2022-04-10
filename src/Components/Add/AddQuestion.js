@@ -263,7 +263,7 @@ const AddQuestion = (props) => {
     <div>
       <Container>
         <Card style={cardShadow}>
-          <Card.Title>
+          <Card.Title style={{color:"black"}}>
             {props.object == null ? "Add Questions" : "Modify Questions"}
           </Card.Title>
           <Card.Body>

@@ -49,7 +49,7 @@ const ViewItemWiki = (props) => {
       setDataWiki(temp);
       setTimeout(() => {
         setLoading(false);
-      }, 5000);
+      }, 3000);
       //   const itemResData = JSON.parse(JSON.stringify(res.data));
       //   setItemData(itemResData);
     } catch (error) {
@@ -60,7 +60,8 @@ const ViewItemWiki = (props) => {
     <>
       {loading ? (
         <div style={{ position: "center" }} className="spinner-container">
-          <div className="loading-spinner"></div>
+          <div className="loading-spinner"> Loading...</div>
+          
         </div>
       ) : (
         <div className="pshDwn">

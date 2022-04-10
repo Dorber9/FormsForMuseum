@@ -10,7 +10,7 @@ import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import ModifyData from "./Components/Modify/ModifyData";
 import Reports from "./Components/Reports";
 import Header from "./Components/Header";
-import { Translator, Translate } from "react-auto-translate";
+import { Translator } from "react-auto-translate";
 import ListOfItems from "./Components/ListOfItems";
 import ViewItemNewPage from "./Components/ViewItemNewPage";
 import AddQuestionNew from "./AddQuestionNew";
@@ -18,80 +18,91 @@ import Login from "./Login";
 import useToken from "./useToken";
 
 function App() {
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     setLoading(false);
-  //   }, 2000);
-  // }, []);
+    // useEffect(() => {
+    //   setTimeout(() => {
+    //     setLoading(false);
+    //   }, 2000);
+    // }, []);
 
-  const { token, setToken } = useToken();
+    const { token, setToken } = useToken();
 
-  if (!token) {
-    return <Login setToken={setToken} />;
-  }
+    if (!token) {
+        return <Login setToken = { setToken }
+        />;
+    }
 
-  return (
-    <>
-      <Translator
-        from="en"
-        to="he"
-        googleApiKey="AIzaSyBp9UbjyBP9K1I4Yh8E9G_T6srKYKD8xR8"
-      >
-        <div
-          className="fontBody"
-          style={{
-            backgroundColor: "#ebebe0",
-            position: "relative",
-            width: "100%",
-            height: "100%",
-          }}
-        >
-          {token === "abc" ? <Header /> : ""}
+    return ( <
+            >
+            <
+            Translator from = "en"
+            to = "he"
+            googleApiKey = "AIzaSyBp9UbjyBP9K1I4Yh8E9G_T6srKYKD8xR8" >
+            <
+            div className = "fontBody"
+            style = {
+                {
+                    backgroundColor: "#ebebe0",
+                    position: "relative",
+                    width: "100%",
+                    height: "100%",
+                }
+            } >
+            { token === "abc" ? < Header / > : "" }
 
-          <BrowserRouter>
-            <Routes>
-              <Route exact path="/Add" element={<Add />}></Route>
-              {token === "abc" && (
-                <Route exact path="/" element={<HomePage />}></Route>
-              )}
-              {token !== "abc" && (
-                <Route
-                  exact
-                  path="/"
-                  element={<ListOfItems></ListOfItems>}
-                ></Route>
-              )}
-              <Route exact path="/DemoPage" element={<DemoPage />}></Route>
-              <Route
+            <
+            BrowserRouter >
+            <
+            Routes >
+            <
+            Route exact path = "/Add"
+            element = { < Add / > } > < /Route> {
+                token === "abc" && ( <
+                    Route exact path = "/"
+                    element = { < HomePage / > } > < /Route>
+                )
+            } {
+                token !== "abc" && ( <
+                        Route exact path = "/"
+                        element = { < ListOfItems > < /ListOfItems>} >
+                            < /Route>
+                        )
+                    } <
+                    Route exact path = "/DemoPage"
+                element = { < DemoPage / > } > < /Route> <
+                    Route
                 exact
-                path="/ItemsList"
-                element={<ListOfItems></ListOfItems>}
-              ></Route>
-              <Route
-                exact
-                path="/Item/:id"
-                element={<ViewItemNewPage />}
-              ></Route>
-              <Route
-                exact
-                path="/AddQuestion/:id"
-                element={<AddQuestionNew></AddQuestionNew>}
-              ></Route>
+                path = "/ItemsList"
+                element = { < ListOfItems > < /ListOfItems>} >
+                    < /Route> <
+                    Route
+                    exact
+                    path = "/Item/:id"
+                    element = { < ViewItemNewPage / > } >
+                    < /Route> <
+                    Route
+                    exact
+                    path = "/AddQuestion/:id"
+                    element = { < AddQuestionNew > < /AddQuestionNew>} >
+                        < /Route>
 
-              <Route
-                exact
-                path="/CourseWizard"
-                element={<CourseWizard />}
-              ></Route>
-              <Route exact path="/ModifyData" element={<ModifyData />}></Route>
-              <Route exact path="/Reports" element={<Reports />}></Route>
-            </Routes>
-            <Footer />
-          </BrowserRouter>
-        </div>
-      </Translator>
-    </>
-  );
-}
+                        <
+                        Route
+                        exact
+                        path = "/CourseWizard"
+                        element = { < CourseWizard / > } >
+                        < /Route> <
+                        Route exact path = "/ModifyData"
+                        element = { < ModifyData / > } > < /Route> <
+                        Route exact path = "/Reports"
+                        element = { < Reports / > } > < /Route> <
+                        /Routes> <
+                        Footer / >
+                        <
+                        /BrowserRouter> <
+                        /div> <
+                        /Translator> <
+                        />
+                    );
+                }
 
-export default App;
+                export default App;

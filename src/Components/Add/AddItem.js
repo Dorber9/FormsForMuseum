@@ -22,38 +22,34 @@ const useStyles = makeStyles((theme) => ({
     "& .MuiTextField-root": {
       margin: theme.spacing(1),
       boxShadow: " 1px 2px 5px rgb(255 203 43)",
-     
-      '&.Mui-focused fieldset': {
-        borderColor: 'yellow',
+
+      "&.Mui-focused fieldset": {
+        borderColor: "yellow",
       },
     },
-        "& .MuiOutlinedInput-notchedOutline":{
-    background: "rgb(3 3 1 / 83%)"
+    "& .MuiOutlinedInput-notchedOutline": {
+      background: "rgb(3 3 1 / 83%)",
     },
-    '& label.Mui-focused': {
-      color: 'white',
-      
-      },
-      '& label': {
-        color: "rgb(255 225 132)",
+    "& label.Mui-focused": {
+      color: "white",
+    },
+    "& label": {
+      color: "rgb(255 225 132)",
       marginLeft: "32%",
-      },
-      "& .MuiOutlinedInput-input": {
-      zIndex:"1",
-      color: "white"
-      },
     },
-    '&.Mui-focused': {
-        borderColor: 'yellow',
-      },
+    "& .MuiOutlinedInput-input": {
+      zIndex: "1",
+      color: "white",
+    },
+  },
+  "&.Mui-focused": {
+    borderColor: "yellow",
+  },
 
   button: {
     margin: theme.spacing(1),
   },
 }));
-
-
-
 
 function AddItem(props) {
   const [inputFields, setInputFields] = useState(
@@ -66,7 +62,7 @@ function AddItem(props) {
     e.preventDefault();
 
     setItemData(inputFields);
-    
+
     onFormSubmit();
     setFlag(true);
   };
@@ -81,12 +77,21 @@ function AddItem(props) {
     setFlag(true);
   };
 
-  const selectStyles = { menu: (styles) => ({ ...styles, zIndex: 999,background:"black" , color:"white" }),  control: base => ({
-      ...base,
-      "&:hover": {
-        color: "black"
-      }
-    }) };
+  const selectStyles = {
+    menu: (styles, isFocused) => ({
+      ...styles,
+      zIndex: 999,
+      background: "black",
+
+      // "&:hover": {
+      //   color: isFocused ? "black" : "white",
+      // },
+    }),
+    option: (provided, state) => ({
+      ...provided,
+      color: state.isFocused ? "black" : "white",
+    }),
+  };
 
   const handleChangeInput = (id, event) => {
     const newInputFields = inputFields.map((i) => {
@@ -129,11 +134,11 @@ function AddItem(props) {
   const [display, setDisplay] = useState("");
   const [showcase, setShowcase] = useState("");
   const [references, setReferences] = useState("");
-  const[path,setPath]= useState("");
+  const [path, setPath] = useState("");
   const [file, setFile] = useState(null);
   const [questionsFlag, setFlag] = useState(false);
-  const[ImageFlag,setImageFlag] = useState(false);
-  const[ImageTry, setTry]= useState("")
+  const [ImageFlag, setImageFlag] = useState(false);
+  const [ImageTry, setTry] = useState("");
   const [itemData, setItemData] = useState([
     { id: uuidv4(), category: "", categoryDescr: "" },
   ]);
@@ -141,54 +146,53 @@ function AddItem(props) {
   const [showcaseList, setShowcaseList] = useState([]);
   const [itemsList, setItemsList] = useState([]);
 
-    const cardShadow={boxShadow:"inset rgb(0 0 0) -2px -1px 14px 2px" , background:"#ffee9db3"};
+  const cardShadow = {
+    boxShadow: "inset rgb(0 0 0) -2px -1px 14px 2px",
+    background: "#ffee9db3",
+  };
 
+  const resizeFile = (file) =>
+    new Promise((resolve) => {
+      Resizer.imageFileResizer(
+        file,
+        300,
+        300,
+        "JPEG",
+        100,
+        0,
+        (uri) => {
+          resolve(uri);
+          setTry(uri);
+        },
+        "base64"
+      );
+    });
 
-    const resizeFile = (file) =>
-  new Promise((resolve) => {
-    Resizer.imageFileResizer(
-      file,
-      300,
-      300,
-      "JPEG",
-      100,
-      0,
-      (uri) => {
-        resolve(uri);
-        setTry(uri)
+  const styles = makeStyles((theme) => ({
+    root: {
+      "& .MuiOutlinedInput-root": {
+        boxShadow: " 1px 2px 5px rgb(255 203 43)",
+
+        "&.Mui-focused fieldset": {
+          borderColor: "yellow",
+        },
       },
-      "base64"
-    );
-  });
-
- const styles = makeStyles((theme) => ({
-  root: {
-    "& .MuiOutlinedInput-root": {
-      boxShadow: " 1px 2px 5px rgb(255 203 43)",
-      
-      '&.Mui-focused fieldset': {
-        borderColor: 'yellow',
+      "& label.Mui-focused": {
+        color: "white",
+      },
+      "& label": {
+        color: "rgb(255 225 132)",
+        marginLeft: "32%",
+      },
+      "& .MuiOutlinedInput-notchedOutline": {
+        background: "rgb(3 3 1 / 83%)",
+      },
+      "& .MuiOutlinedInput-input": {
+        zIndex: "1",
+        color: "white",
       },
     },
-    '& label.Mui-focused': {
-      color: 'white',
-    },
-    '& label': {
-      color: "rgb(255 225 132)",
-	  marginLeft: "32%",
-    },
-    "& .MuiOutlinedInput-notchedOutline":{
-    background: "rgb(3 3 1 / 83%)"
-    },
-    "& .MuiOutlinedInput-input": {
-    zIndex:"1",
-    color: "white"
-    }
-  
-  }
-
-}));
-
+  }));
 
   useEffect(() => {
     getDisplay();
@@ -211,7 +215,7 @@ function AddItem(props) {
       setSize(props.object.Size);
       setReferences(props.object.Refs);
       setInputFields([]);
-      setPath(props.object.ImagePath)
+      setPath(props.object.ImagePath);
       const data = props.object.ItemData.split("^%^");
       data.pop();
       var temp = [];
@@ -229,7 +233,6 @@ function AddItem(props) {
   }, [props.object != null ? props.object : ""]);
 
   const postItem = (img) => {
-    
     if (storage === "0" && display === "") {
       alert("Please Select a Display");
     } else {
@@ -272,8 +275,7 @@ function AddItem(props) {
             itemData: itemData,
           },
         ]);
-    
-  });
+      });
     }
   };
 
@@ -317,7 +319,7 @@ function AddItem(props) {
           itemData: itemData,
         },
       ]);
-     });
+    });
   };
 
   const getDisplay = () => {
@@ -341,22 +343,20 @@ function AddItem(props) {
   };
 
   const onFormSubmit = async () => {
-     if(ImageFlag){
-        try {
-          console.log("im here 2")
-         const image = await resizeFile(file);
-         props.object==null ? postItem(image) : updateItem(image)
-        } catch (error) {
-          console.log(error.data);
-        }
+    if (ImageFlag) {
+      try {
+        console.log("im here 2");
+        const image = await resizeFile(file);
+        props.object == null ? postItem(image) : updateItem(image);
+      } catch (error) {
+        console.log(error.data);
       }
-      else  {
-          console.log("im here")
-          props.object==null ? postItem("") : updateItem(path)
-      }  
-    
-  }
-    
+    } else {
+      console.log("im here");
+      props.object == null ? postItem("") : updateItem(path);
+    }
+  };
+
   // else
   //     if(ImageFlag){
   //       try {
@@ -381,16 +381,14 @@ function AddItem(props) {
   //         updateItem(path)
   // };
 
-  const tryFunction =(param) => {
-    setPath(param)
-  }
-
-  const fileChange = (e) => {
-    setImageFlag(true)
-    setFile(e.target.files[0]);
-    
+  const tryFunction = (param) => {
+    setPath(param);
   };
 
+  const fileChange = (e) => {
+    setImageFlag(true);
+    setFile(e.target.files[0]);
+  };
 
   const options = [
     { value: "1", label: "In Storage" },
@@ -426,18 +424,13 @@ function AddItem(props) {
     setPath(childData);
   };
 
-    const classstyle =  styles();
-    const classes = useStyles();
-
-
-
+  const classstyle = styles();
+  const classes = useStyles();
 
   return (
     <>
       <Container>
-        <Card
-         style={cardShadow}
-        >
+        <Card style={cardShadow}>
           <Card.Body>
             <Card.Text>
               {questionsFlag == false ? (
@@ -447,8 +440,7 @@ function AddItem(props) {
                   </h4>
                   <div className="txtf">
                     <TextField
-                                  className={classstyle.root}
-
+                      className={classstyle.root}
                       value={itemId}
                       onChange={(e) => {
                         setItemId(e.target.value);
@@ -460,8 +452,7 @@ function AddItem(props) {
                     />
 
                     <TextField
-                                  className={classstyle.root}
-
+                      className={classstyle.root}
                       style={{ marginLeft: "5px" }}
                       value={name}
                       onChange={(e) => {
@@ -474,8 +465,7 @@ function AddItem(props) {
                     />
 
                     <TextField
-                                  className={classstyle.root}
-
+                      className={classstyle.root}
                       value={site}
                       style={{ marginLeft: "5px" }}
                       onChange={(e) => {
@@ -496,7 +486,7 @@ function AddItem(props) {
                       }}
                     >
                       <Select
-                         styles={selectStyles}
+                        styles={selectStyles}
                         value={{
                           value: storage,
                           label: storage === "1" ? "In Storage" : "In Museum",
@@ -519,6 +509,7 @@ function AddItem(props) {
                         }}
                       >
                         <Select
+                          styles={selectStyles}
                           options={displayList.map((val, key) => {
                             return { value: val.idDisplay, label: val.Name };
                           })}
@@ -540,6 +531,7 @@ function AddItem(props) {
                         }}
                       >
                         <Select
+                          styles={selectStyles}
                           options={showcaseList.map((val, key) => {
                             return { value: val.idShowcase, label: val.Name };
                           })}
@@ -552,8 +544,8 @@ function AddItem(props) {
                     <br />
                     <br />
 
-                    <TextField              className={classstyle.root}
-
+                    <TextField
+                      className={classstyle.root}
                       value={period}
                       onChange={(e) => {
                         setPeriod(e.target.value);
@@ -565,8 +557,7 @@ function AddItem(props) {
                     />
 
                     <TextField
-                                  className={classstyle.root}
-
+                      className={classstyle.root}
                       value={age}
                       style={{ marginLeft: "5px" }}
                       onChange={(e) => {
@@ -579,8 +570,7 @@ function AddItem(props) {
                     />
 
                     <TextField
-                                  className={classstyle.root}
-
+                      className={classstyle.root}
                       value={material}
                       style={{ marginLeft: "5px" }}
                       onChange={(e) => {
@@ -594,8 +584,7 @@ function AddItem(props) {
                     <br />
                     <br />
                     <TextField
-                                  className={classstyle.root}
-
+                      className={classstyle.root}
                       value={size}
                       onChange={(e) => {
                         setSize(e.target.value);
@@ -607,8 +596,7 @@ function AddItem(props) {
                     />
 
                     <TextField
-                                  className={classstyle.root}
-
+                      className={classstyle.root}
                       value={website}
                       style={{ marginLeft: "5px" }}
                       onChange={(e) => {
@@ -620,8 +608,7 @@ function AddItem(props) {
                       label="Website"
                     />
                     <TextField
-                                  className={classstyle.root}
-
+                      className={classstyle.root}
                       value={references}
                       style={{ marginLeft: "5px" }}
                       onChange={(e) => {
@@ -635,8 +622,7 @@ function AddItem(props) {
                     <br />
                     <br />
                     <TextField
-                                  className={classstyle.root}
-
+                      className={classstyle.root}
                       value={descr}
                       onChange={(e) => {
                         setDescr(e.target.value);
@@ -653,8 +639,7 @@ function AddItem(props) {
                     <br />
                     <br />
                     <TextField
-                                  className={classstyle.root}
-
+                      className={classstyle.root}
                       value={shortDescr}
                       onChange={(e) => {
                         setShortDescr(e.target.value);
@@ -671,16 +656,15 @@ function AddItem(props) {
                     <br />
                     <br />
                     <div style={{ margin: "2%" }}>
-                      <h6 style={{color:"black"}}>Upload Image</h6>
+                      <h6 style={{ color: "black" }}>Upload Image</h6>
 
                       <input
                         accept="image/png, image/gif, image/jpeg"
                         type="file"
                         name="myImage"
-                        style={{color:"black"}}
+                        style={{ color: "black" }}
                         onChange={fileChange}
                       />
-                         
                     </div>
 
                     <form className={classes.root} onSubmit={handleSubmit}>
@@ -756,18 +740,24 @@ function AddItem(props) {
                     </Button>
                   )}
                 </>
-              ) : props.object==null ? (
-                
-                 <div>
-                   <Button id="bn30"
-                        className={classes.button}
-                        variant="contained"
-                        color="primary"
-                        type="submit"
-                        onClick={()=>(window.location.href = `../AddQuestion/${itemId}`)}
-                    > 
-                    Add Questions to {name} </Button> </div>
-              ) : (<div style={{color:"black"}}>Modified Successfully!</div>)}
+              ) : props.object == null ? (
+                <div>
+                  <Button
+                    id="bn30"
+                    className={classes.button}
+                    variant="contained"
+                    color="primary"
+                    type="submit"
+                    onClick={() =>
+                      (window.location.href = `../AddQuestion/${itemId}`)
+                    }
+                  >
+                    Add Questions to {name}{" "}
+                  </Button>{" "}
+                </div>
+              ) : (
+                <div style={{ color: "black" }}>Modified Successfully!</div>
+              )}
             </Card.Text>
           </Card.Body>
         </Card>

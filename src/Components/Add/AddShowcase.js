@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React from "react";
-import { TextField,makeStyles } from "@material-ui/core";
+import { TextField, makeStyles } from "@material-ui/core";
 import { useState, useEffect } from "react";
 import Axios from "axios";
 import "../../App.css";
@@ -21,38 +21,52 @@ const AddShowcase = (props) => {
   const [selectedValue, setSelectedValue] = useState("Please Select Display");
   const [path, setPath] = useState("");
 
-  const cardShadow={boxShadow:"inset rgb(0 0 0) -2px -1px 14px 2px" , background:"#ffee9db3"};
+  const cardShadow = {
+    boxShadow: "inset rgb(0 0 0) -2px -1px 14px 2px",
+    background: "#ffee9db3",
+  };
+  const selectStyles = {
+    menu: (styles, isFocused) => ({
+      ...styles,
+      zIndex: 999,
+      background: "black",
 
+      // "&:hover": {
+      //   color: isFocused ? "black" : "white",
+      // },
+    }),
+    option: (provided, state) => ({
+      ...provided,
+      color: state.isFocused ? "black" : "white",
+    }),
+  };
 
- const styles = makeStyles((theme) => ({
-  root: {
-    "& .MuiOutlinedInput-root": {
-      boxShadow: " 1px 2px 5px rgb(255 203 43)",
-      '&.Mui-focused fieldset': {
-        borderColor: 'yellow',
+  const styles = makeStyles((theme) => ({
+    root: {
+      "& .MuiOutlinedInput-root": {
+        boxShadow: " 1px 2px 5px rgb(255 203 43)",
+        "&.Mui-focused fieldset": {
+          borderColor: "yellow",
+        },
+      },
+      "& label.Mui-focused": {
+        color: "white",
+      },
+      "& label": {
+        color: "rgb(255 225 132)",
+        marginLeft: "32%",
+      },
+      "& .MuiOutlinedInput-notchedOutline": {
+        background: "rgb(3 3 1 / 83%)",
+      },
+      "& .MuiOutlinedInput-input": {
+        zIndex: "1",
+        color: "white",
       },
     },
-    '& label.Mui-focused': {
-      color: 'white',
-    },
-    '& label': {
-      color: "rgb(255 225 132)",
-	  marginLeft: "32%",
-    },
-    "& .MuiOutlinedInput-notchedOutline":{
-    background: "rgb(3 3 1 / 83%)"
-    },
-    "& .MuiOutlinedInput-input": {
-    zIndex:"1",
-    color: "white"
-    }
-  
-  }
+  }));
 
-}));
-
-const classes = styles();
-
+  const classes = styles();
 
   useEffect(() => {
     getDisplay();
@@ -160,9 +174,7 @@ const classes = styles();
   return (
     <>
       <Container>
-        <Card
-        style={cardShadow}
-        >
+        <Card style={cardShadow}>
           <Card.Body>
             <Card.Text>
               <h4 style={{ textAlign: "center", marginBottom: "2%" }}>
@@ -175,7 +187,7 @@ const classes = styles();
                   <img src={props.object.ImagePath}></img>
                 )}
                 <TextField
-                              className={classes.root}
+                  className={classes.root}
                   value={number}
                   onChange={(event) => {
                     setNumber(event.target.value);
@@ -186,8 +198,7 @@ const classes = styles();
                   label="Number"
                 />
                 <TextField
-                              className={classes.root}
-
+                  className={classes.root}
                   style={{ marginLeft: "5px" }}
                   value={name}
                   onChange={(event) => {
@@ -199,8 +210,7 @@ const classes = styles();
                   label="Name"
                 />
                 <TextField
-                              className={classes.root}
-
+                  className={classes.root}
                   style={{ marginLeft: "5px" }}
                   value={type}
                   onChange={(event) => {
@@ -214,8 +224,7 @@ const classes = styles();
                 <br />
                 <br />
                 <TextField
-                              className={classes.root}
-
+                  className={classes.root}
                   value={description}
                   onChange={(event) => {
                     setDescription(event.target.value);
@@ -243,6 +252,7 @@ const classes = styles();
                   }}
                 >
                   <Select
+                    styles={selectStyles}
                     options={trueFalse}
                     onChange={(e) => {
                       setSpecialCare(e.value);
@@ -288,8 +298,10 @@ const classes = styles();
                     return (
                       <option
                         selected={
-                          props.object != null &&
-                          val.idDisplay == props.object.DisplayID
+                          (props.object != null &&
+                            val.idDisplay == props.object.DisplayID) ||
+                          val.idDisplay ==
+                            displayList[displayList.length - 1].idDisplay
                         }
                         className="display"
                         value={val.idDisplay}

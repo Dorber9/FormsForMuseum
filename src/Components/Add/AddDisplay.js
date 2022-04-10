@@ -7,7 +7,7 @@ import "../../App.css";
 import Select from "react-select";
 import Button from "@material-ui/core/Button";
 import { Container, Card } from "react-bootstrap";
-  import { makeStyles} from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 
 import "../../App.css";
 const options = [
@@ -16,11 +16,25 @@ const options = [
 ];
 
 const selectStyles = {
-  menu: (styles) => ({ ...styles, zIndex: 999,background:"black" }),
+  menu: (styles, isFocused) => ({
+    ...styles,
+    zIndex: 999,
+    background: "black",
+
+    // "&:hover": {
+    //   color: isFocused ? "black" : "white",
+    // },
+  }),
+  option: (provided, state) => ({
+    ...provided,
+    color: state.isFocused ? "black" : "white",
+  }),
 };
 
-const cardShadow={boxShadow:"inset rgb(0 0 0) -2px -1px 14px 2px" , background:"#ffee9db3"};
-
+const cardShadow = {
+  boxShadow: "inset rgb(0 0 0) -2px -1px 14px 2px",
+  background: "#ffee9db3",
+};
 
 const AddDisplay = (props) => {
   const [name, setName] = useState("");
@@ -28,8 +42,8 @@ const AddDisplay = (props) => {
   const [permanent, setPermanent] = useState("1");
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
-  const [curator, setCurator] = useState("");
-  const [designer, setDesigner] = useState("");
+  const [curator, setCurator] = useState("Amnon Asaf");
+  const [designer, setDesigner] = useState("Amnon Asaf");
   const [description, setDescription] = useState("");
   const [reason, setReason] = useState("");
   const [sectionList, setSectionList] = useState([]);
@@ -37,33 +51,29 @@ const AddDisplay = (props) => {
   const [selectedValue, setSelectedValue] = useState("Please Select Section");
   const [curatorLabel, setCuratorLabel] = useState("Curator");
 
-
   const styles = makeStyles((theme) => ({
-  root: {
-    "& .MuiOutlinedInput-root": {
-      boxShadow: " 1px 2px 5px rgb(255 203 43)",
-      '&.Mui-focused fieldset': {
-        borderColor: 'yellow',
+    root: {
+      "& .MuiOutlinedInput-root": {
+        boxShadow: " 1px 2px 5px rgb(255 203 43)",
+        "&.Mui-focused fieldset": {
+          borderColor: "yellow",
+        },
+      },
+      "& label.Mui-focused": {
+        color: "white",
+      },
+      "& label": {
+        color: "rgb(255 225 132)",
+      },
+      "& .MuiOutlinedInput-notchedOutline": {
+        background: "rgb(3 3 1 / 83%)",
+      },
+      "& .MuiOutlinedInput-input": {
+        zIndex: "1",
+        color: "white",
       },
     },
-    '& label.Mui-focused': {
-      color: 'white',
-    },
-    '& label': {
-      color: "rgb(255 225 132)",
-	  marginLeft: "32%",
-    },
-    "& .MuiOutlinedInput-notchedOutline":{
-    background: "rgb(3 3 1 / 83%)"
-    },
-    "& .MuiOutlinedInput-input": {
-    zIndex:"1",
-    color: "white"
-    }
-  
-  }
-
-}));
+  }));
 
   useEffect(() => {
     getSection();
@@ -172,35 +182,37 @@ const AddDisplay = (props) => {
       setDisplayList(response.data);
     });
   };
-const classes = styles();
+  const classes = styles();
 
   return (
     <>
-      <Container style={{width:"65%"}}>
-        <Card
-           style={cardShadow}
-        >
+      <Container style={{ width: "65%" }}>
+        <Card style={cardShadow}>
           <Card.Body>
             <Card.Text>
-              <h4 style={{ textAlign: "center", marginBottom: "2%",color:"black" }}>
+              <h4
+                style={{
+                  textAlign: "center",
+                  marginBottom: "2%",
+                  color: "black",
+                }}
+              >
                 Add Display
               </h4>
               <div className="txtf">
                 <TextField
-                    className={classes.root}
-                  
+                  className={classes.root}
                   value={name}
                   onChange={(e) => {
                     setName(e.target.value);
                   }}
-                  
                   variant="outlined"
                   type="text"
                   name="name"
                   label="Name"
-                          />
+                />
                 <TextField
-                className={classes.root}
+                  className={classes.root}
                   value={curator}
                   style={{ marginLeft: "5px" }}
                   onChange={(e) => {
@@ -212,7 +224,7 @@ const classes = styles();
                   label={curatorLabel}
                 />
                 <TextField
-                className={classes.root}
+                  className={classes.root}
                   value={designer}
                   style={{ marginLeft: "5px" }}
                   onChange={(e) => {
@@ -251,7 +263,7 @@ const classes = styles();
                 ) : (
                   <>
                     <TextField
-                    className={classes.root}
+                      className={classes.root}
                       value={startDate}
                       onChange={(e) => {
                         setStartDate(e.target.value);
@@ -264,7 +276,7 @@ const classes = styles();
                     />
 
                     <TextField
-                    className={classes.root}
+                      className={classes.root}
                       style={{ marginLeft: "5px" }}
                       value={endDate}
                       onChange={(e) => {
@@ -281,7 +293,7 @@ const classes = styles();
                   </>
                 )}
                 <TextField
-                className={classes.root}
+                  className={classes.root}
                   value={theme}
                   onChange={(e) => {
                     setTheme(e.target.value);
@@ -292,7 +304,7 @@ const classes = styles();
                   label="Theme"
                 />
                 <TextField
-                className={classes.root}
+                  className={classes.root}
                   style={{ marginLeft: "5px" }}
                   value={reason}
                   onChange={(e) => {
@@ -306,7 +318,7 @@ const classes = styles();
                 <br />
                 <br />
                 <TextField
-                className={classes.root}
+                  className={classes.root}
                   value={description}
                   onChange={(e) => {
                     setDescription(e.target.value);
@@ -340,8 +352,10 @@ const classes = styles();
                     return (
                       <option
                         selected={
-                          props.object != null &&
-                          val.idSection == props.object.SectionID
+                          (props.object != null &&
+                            val.idSection == props.object.SectionID) ||
+                          val.idSection ==
+                            sectionList[sectionList.length - 1].idSection
                         }
                         className="section"
                         value={val.idSection}
@@ -354,7 +368,7 @@ const classes = styles();
                 <br />
                 <br />
                 <Button
-                className="bn30"
+                  className="bn30"
                   variant="contained"
                   color="primary"
                   type="submit"

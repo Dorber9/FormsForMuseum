@@ -5,6 +5,8 @@ import QRCode from "react-qr-code";
 import Logo from "../logo_amnon.png";
 import { useState, useEffect } from "react";
 import Axios from "axios";
+import { listItemSecondaryActionClasses } from "@mui/material";
+import { Translate, Translator } from "react-auto-translate";
 
 const ViewItemWiki = (props) => {
   const [itemDataWiki, setDataWiki] = useState([]);
@@ -12,15 +14,12 @@ const ViewItemWiki = (props) => {
   const [itemKeys, setKeys] = useState([]);
   const [loading, setLoading] = useState(true);
   const [path, setPath] = useState("");
-  const [token,setToken]=useState(JSON.parse(localStorage.getItem('token')))
+  const [token, setToken] = useState(JSON.parse(localStorage.getItem("token")));
 
   useEffect(() => {
     setDataWiki([]);
     getItem();
-   
 
-
-    
     // eslint-disable-next-line
   }, [props]);
 
@@ -32,6 +31,7 @@ const ViewItemWiki = (props) => {
       );
 
       setData(res.data[0]);
+
       setKeys(Object.keys(itemData));
 
       const data = res.data[0].ItemData.split("^%^");
@@ -47,8 +47,8 @@ const ViewItemWiki = (props) => {
         });
       });
       setDataWiki(temp);
-       setTimeout(() => {
-      setLoading(false);
+      setTimeout(() => {
+        setLoading(false);
       }, 5000);
       //   const itemResData = JSON.parse(JSON.stringify(res.data));
       //   setItemData(itemResData);
@@ -58,51 +58,57 @@ const ViewItemWiki = (props) => {
   };
   return (
     <>
-    {loading?  <div style={{position:"center"}} className ="spinner-container">
-      <div className="loading-spinner">
-      </div>
-    </div> :
-      <div className="pshDwn">
-        <div style={{ textAlign: "center" }}>
-          {path!="" ? (
-            <img src={path} style={{ height: "250px" }} alt="Oops! Something went wrong" />
-          ) : (
-            <img
-              src={Logo}
-              style={{ height: "150px" }}
-              alt="Something is wrong"
-            />
-          )}
+      {loading ? (
+        <div style={{ position: "center" }} className="spinner-container">
+          <div className="loading-spinner"></div>
         </div>
-        {
+      ) : (
+        <div className="pshDwn">
           <h1 style={{ textAlign: "center" }}>{itemData.ItemName}</h1>
 
-          //    itemKeys.map((key)=> {
-          //        if(key!="ItemData") {
-          //        return (
-          //         <div>
-          //             <h7>{key} :</h7>
-          //             <h8>{itemData[key]}</h8>
-          //             </div>
-          //        )
-          //        }
-          //    })
-        }
-        {itemDataWiki.map((item) => {
-          return (
-            <div>
-              <Collapse title={item.category}>{item.categoryDescr}</Collapse>
-            </div>
-          );
-        })}
-        <div style={{ marginTop: "50px", textAlign: "center" }}>
-          {token ==="abc" ?
-          <QRCode value={`${window.location.href}`} size="150" /> : ""
-}
-          
+          <div style={{ textAlign: "center" }}>
+            {path != "" ? (
+              <img
+                src={path}
+                style={{ height: "250px" }}
+                alt="Oops! Something went wrong"
+              />
+            ) : (
+              <img
+                src={Logo}
+                style={{ height: "150px" }}
+                alt="Something is wrong"
+              />
+            )}
+          </div>
+
+          <div>
+            <h2 style={{ textAlign: "center", direction: "rtl" }}>
+              <div>{itemData.Descr}</div>
+              &nbsp;מוצג זה נמצא ב {itemData.Site}. גילו הוא בערך&nbsp;
+              {itemData.Age}, ולפיכך הוא משתייך לתקופה ה&nbsp;{itemData.Period}{" "}
+              . חומרו של המוצג הוא&nbsp;
+              {itemData.Material}.
+            </h2>
+          </div>
+
+          {itemDataWiki.map((item) => {
+            return (
+              <div>
+                <Collapse title={item.category}>{item.categoryDescr}</Collapse>
+              </div>
+            );
+          })}
+          <div style={{ marginTop: "50px", textAlign: "center" }}>
+            {token === "abc" ? (
+              <QRCode value={`${window.location.href}`} size="150" />
+            ) : (
+              ""
+            )}
+          </div>
         </div>
-      </div>
-    }</>
+      )}
+    </>
   );
 };
 

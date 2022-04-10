@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React from "react";
-import { TextField,makeStyles } from "@material-ui/core";
+import { TextField, makeStyles } from "@material-ui/core";
 import { useState, useEffect } from "react";
 import Axios from "axios";
 import { Container, Card } from "react-bootstrap";
@@ -17,34 +17,34 @@ const contentContainerStyle = {
   flex: 1,
 };
 
-const cardShadow={boxShadow:"inset rgb(0 0 0) -2px -1px 14px 2px" , background:"#ffee9db3"};
+const cardShadow = {
+  boxShadow: "inset rgb(0 0 0) -2px -1px 14px 2px",
+  background: "#ffee9db3",
+};
 
-
- const styles = makeStyles((theme) => ({
+const styles = makeStyles((theme) => ({
   root: {
     "& .MuiOutlinedInput-root": {
       boxShadow: " 1px 2px 5px rgb(255 203 43)",
-      '&.Mui-focused fieldset': {
-        borderColor: 'yellow',
+      "&.Mui-focused fieldset": {
+        borderColor: "yellow",
       },
     },
-    '& label.Mui-focused': {
-      color: 'white',
+    "& label.Mui-focused": {
+      color: "white",
     },
-    '& label': {
+    "& label": {
       color: "rgb(255 225 132)",
-	  marginLeft: "32%",
+      marginLeft: "32%",
     },
-    "& .MuiOutlinedInput-notchedOutline":{
-    background: "rgb(3 3 1 / 83%)"
+    "& .MuiOutlinedInput-notchedOutline": {
+      background: "rgb(3 3 1 / 83%)",
     },
     "& .MuiOutlinedInput-input": {
-    zIndex:"1",
-    color: "white"
-    }
-  
-  }
-
+      zIndex: "1",
+      color: "white",
+    },
+  },
 }));
 
 const AddBuilding = (props) => {
@@ -58,7 +58,7 @@ const AddBuilding = (props) => {
   useEffect(() => {
     getMuseum();
     if (props.object != null) {
-      console.log("im here")
+      console.log("im here");
       setName(props.object.Name);
       setCity(props.object.City);
       setAddress(props.object.Address);
@@ -132,20 +132,17 @@ const AddBuilding = (props) => {
     });
   };
 
-    const classes = styles();
-
+  const classes = styles();
 
   return (
     <>
       <Container>
-        <Card
-          style={cardShadow}
-        >
+        <Card style={cardShadow}>
           <Card.Body>
             <Card.Text>
               <div className="txtf">
                 <TextField
-                className={classes.root}
+                  className={classes.root}
                   value={name}
                   onChange={(event) => {
                     setName(event.target.value);
@@ -158,7 +155,7 @@ const AddBuilding = (props) => {
                 <br />
                 <br />
                 <TextField
-                 className={classes.root}
+                  className={classes.root}
                   disabled
                   value={city}
                   onChange={(event) => {
@@ -174,7 +171,7 @@ const AddBuilding = (props) => {
                 <br />
                 <br />
                 <TextField
-                 className={classes.root}
+                  className={classes.root}
                   disabled
                   value={address}
                   onChange={(event) => {
@@ -209,8 +206,9 @@ const AddBuilding = (props) => {
                       return (
                         <option
                           selected={
-                            props.object != null &&
-                            val.id == props.object.MuseumID
+                            (props.object != null &&
+                              val.id == props.object.MuseumID) ||
+                            val.id == 1
                           }
                           className="museum"
                           value={val.id}

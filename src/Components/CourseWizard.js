@@ -5,18 +5,21 @@ import Button from "@material-ui/core/Button";
 import AddCourse from "./Add/AddCourse";
 import ModifyCourse from "./Modify/ModifyCourse";
 
+const tabStyle= {color: "white"}
+
+
 const CourseWizard = () => {
   return (
     <div className="tb">
-      <h1>Manage Quests</h1>
+      <h1 style={tabStyle}>Manage Quests</h1>
       <Tabs>
         <TabList>
-          <Tab>Add</Tab>
-          <Tab>Modify</Tab>
+          <Tab style={tabStyle}>Add</Tab>
+          <Tab style={tabStyle}>Modify</Tab>
         </TabList>
 
         <TabPanel>
-          <h2 style={{ textAlign: "center" }}>Add New Quest</h2>
+          
           <AddCourse />
         </TabPanel>
         <TabPanel>

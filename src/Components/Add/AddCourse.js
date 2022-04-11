@@ -1,75 +1,148 @@
-/* eslint-disable */
-import { Container, TextField } from "@material-ui/core";
+// eslint-disable-next-line
 import React from "react";
-import Select from "react-select";
-import "../../App.css";
-import { makeStyles } from "@material-ui/core/styles";
 import { useState, useEffect } from "react";
-import Button from "@material-ui/core/Button";
+import Axios from "axios";
+import Select from "react-select";
 import IconButton from "@material-ui/core/IconButton";
 import RemoveIcon from "@material-ui/icons/Remove";
 import AddIcon from "@material-ui/icons/Add";
+import { TextField } from "@material-ui/core";
 import { v4 as uuidv4 } from "uuid";
+import Button from "@material-ui/core/Button";
+import { makeStyles } from "@material-ui/core/styles";
+import { Container, Card } from "react-bootstrap";
 
-import Axios from "axios";
+ 
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    "& .MuiTextField-root": {
-      margin: theme.spacing(1),
-    },
-  },
-  button: {
-    margin: theme.spacing(1),
-  },
-}));
 
-const objectsList = [
-  { value: "Display", label: "Display" },
-  { value: "Showcase", label: "Exibition" },
-  { value: "Item", label: "Item" },
-];
 
-const selectStyles = { menu: (styles) => ({ ...styles, zIndex: 999 }) };
 
-const AddCourse = () => {
-  const [courseName, setCourseName] = useState("");
-  const [selectedObject, setSelectedObject] = useState("");
-  const [itemData, setItemData] = useState("");
-  const [correct, setCorrect] = useState("0");
-  const [displayList, setDisplayList] = useState([]);
-  const [showcaseList, setShowcaseList] = useState([]);
-  const [itemsList, setItemsList] = useState([]);
-
-  useEffect(() => {
-    getDisplay();
-    getShowcase();
-    getItems();
-    // eslint-disable-next-line
-  }, []);
-
-  const classes = useStyles();
-  const [inputFields, setInputFields] = useState([
-    { id: uuidv4(), type: "", objectName: "", question: "" },
-  ]);
-
-  const options = [
-    { value: "1", label: "1" },
-    { value: "2", label: "2" },
-    { value: "3", label: "3" },
-    { value: "4", label: "4" },
-  ];
-  const addCourse = () => {};
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setItemData(inputFields);
-    addCourse();
+ const cardShadow = {
+    boxShadow: "inset rgb(0 0 0) -2px -1px 14px 2px",
+    background: "#ffee9db3",
   };
 
-  const handleChangeInput = (id, name, event) => {
+ const styles = makeStyles((theme) => ({
+    root: {
+      "& .MuiOutlinedInput-root": {
+        boxShadow: " 1px 2px 5px rgb(255 203 43)",
+
+        "&.Mui-focused fieldset": {
+          borderColor: "yellow",
+        },
+      },
+      "& label.Mui-focused": {
+        color: "white",
+      },
+      "& label": {
+        color: "rgb(255 225 132)",
+        marginLeft: "32%",
+      },
+      "& .MuiOutlinedInput-notchedOutline": {
+        background: "rgb(3 3 1 / 83%)",
+      },
+      "& .MuiOutlinedInput-input": {
+        zIndex: "1",
+        color: "white",
+      },
+    },
+  }));
+
+
+ const selectStyles = {
+  menu: (styles, isFocused) => ({
+    ...styles,
+    zIndex: 999,
+    background: "black",
+        layout:"inline",
+
+
+    // "&:hover": {
+    //   color: isFocused ? "black" : "white",
+    // },
+  }),
+  option: (provided, state) => ({
+    ...provided,
+    layout:"inline",
+    color: state.isFocused ? "black" : "white",
+  }),
+};
+
+
+
+
+const AddCourse = (props) => {
+    const [questionsList, setQuestionsList] = useState([]);
+  const classstyle = styles();
+
+    const [itemsList, setItemsList] = useState([]);
+    const [wantedItem, setWantedItem] = useState("");
+    const [flag, setFlag] = useState(false);
+    const [courseName, setCourseName] = useState("");
+    const [inputFields, setInputFields] = useState(
+    props.object == null
+      ? [
+          {
+            id: uuidv4(),
+            courseName: "",
+            itemId: "",
+            questionId: "",
+         
+          },
+        ]
+      : []
+  );
+
+  const handleAddFields = () => {
+    setInputFields([
+      ...inputFields,
+      {
+        id: uuidv4(),
+        id: uuidv4(),
+        courseName: "",
+        itemId: "",
+        questionId: "",
+      },
+    ]);
+  };
+
+  const handleRemoveFields = (id) => {
+    const values = [...inputFields];
+    values.splice(
+      values.findIndex((value) => value.id === id),
+      1
+    );
+    setInputFields(values);
+  };
+
+  const getQuestions = () => {
+    Axios.get("http://34.65.174.141:3001/question").then((response) => {
+      setQuestionsList(response.data)
+    });
+  };
+
+
+   const getItems = () => {
+    Axios.get("http://34.65.174.141:3001/Item").then((response) => {
+      setItemsList(response.data);
+    });
+  };
+    useEffect(() => {
+    getItems();
+    getQuestions();
+    // if (props.object != null) {
+    //   modifyInputFields("");
+    //   return;
+    // }
+    // if (props.itemId) {
+    //   setWantedItem(props.itemId);
+    //   setLabel(props.itemName);
+    // }
+  }, [props]);
+      const handleChangeInput = (id, name, event) => {
     const newInputFields = inputFields.map((i) => {
       if (id === i.id) {
-        i[name] = event.value;
+        i[event.target.name] = event.target.value;
       }
       return i;
     });
@@ -88,259 +161,86 @@ const AddCourse = () => {
     setInputFields(newInputFields);
   };
 
-  const handleAddFields = () => {
-    setInputFields([
-      ...inputFields,
-      { id: uuidv4(), type: "", objectName: "", question: "" },
-    ]);
-  };
-
-  const handleRemoveFields = (id) => {
-    const values = [...inputFields];
-    values.splice(
-      values.findIndex((value) => value.id === id),
-      1
-    );
-    setInputFields(values);
-  };
-
-  const getDisplay = () => {
-    Axios.get("http://34.65.174.141:3001/Display").then((response) => {
-      setDisplayList(response.data);
-    });
-    displayOptions();
-  };
-
-  const getShowcase = () => {
-    Axios.get("http://34.65.174.141:3001/Showcase").then((response) => {
-      setShowcaseList(response.data);
-    });
-    showcaseOptions();
-  };
-
-  const getItems = () => {
-    Axios.get("http://34.65.174.141:3001/Item").then((response) => {
-      setItemsList(response.data);
-    });
-    itemOptions();
-  };
-
-  const displayOptions = () => {
-    const temp = displayList.map((display) => ({
-      value: display.idDisplay,
-      label: display.Name,
-    }));
-    setDisplayList(temp);
-  };
-
-  const showcaseOptions = () => {
-    const temp = showcaseList.map((showcase) => ({
-      value: showcase.idShowcase,
-      label: showcase.Name,
-    }));
-    setShowcaseList(temp);
-  };
-
-  const itemOptions = () => {
-    const temp = itemsList.map((item) => ({
-      value: item.ItemID,
-      label: item.ItemName,
-    }));
-    setShowcaseList(temp);
-  };
-
   return (
-    <Container>
-      <div className="txtf">
-        <TextField
-          onChange={(e) => {
-            setCourseName(e.target.value);
-          }}
-          variant="outlined"
-          type="text"
-          name="courseName"
-          placeholder="Quest Name"
-          helperText={courseName === "" ? "Field cannot be empty" : ""}
-          error={courseName === ""}
-        />
-        <br />
-        <h2>Starting Item</h2>
-
-        <div
-          className="txtf"
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <Select
-            styles={selectStyles}
-            name="type"
-            options={objectsList}
-            onChange={(e) => {
-              setSelectedObject(e.value);
-            }}
-          />
-          <Select
-            name="objectName"
-            options={
-              selectedObject == "Display"
-                ? displayList.map((val, key) => {
-                    return { value: val.idDisplay, label: val.Name };
-                  })
-                : selectedObject == "Item"
-                ? itemsList.map((val, key) => {
-                    return { value: val.ItemID, label: val.ItemName };
-                  })
-                : showcaseList.map((val, key) => {
-                    return { value: val.idShowcase, label: val.Name };
-                  })
-            }
-          />
-        </div>
-        {/* <form className={classes.root} onSubmit={handleSubmit}>
-          {inputFields.map((inputField) => (
-            <div key={inputField.id}>
-              <h2>Next Item</h2>
-              <div
-                className="txtf"
+    <div>
+         <Container>
+        <Card style={cardShadow}>
+          <Card.Title style={{color:"black"}}>
+            {props.object == null ? "Add Quest" : "Modify Quest"}
+          </Card.Title>
+          <Card.Body>
+            <Card.Text>
+                   <div className="txtf">
+                  <TextField
+                      className={classstyle.root}
+                       name="Course Name"
+                          label="Course Name"
+                          variant="outlined"
+                          style={{ width: "25%" }}
+                          onChange={(e) =>
+                                setCourseName(e.target.value)
+                          }
+                />
+               </div>
+                 <form className={classstyle.root}>
+                  {inputFields.map((inputField) => (
+                      <>
+                    <div key={inputField.id}>
+               
+                <div
                 style={{
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
+                  marginTop:"10px"
                 }}
               >
-                <Select
-                  options={objectsList}
-                  styles={selectStyles}
-                  onChange={(e) => {
-                    setSelectedObject(e.value);
-                    handleChangeInput(inputField.id, "type", e);
-                    console.log(inputFields);
-                  }}
-                />
-                <Select
-                  name="objectName"
-                  menuPortalTarget={document.body}
-                  options={
-                    selectedObject == "Display"
-                      ? displayList.map((val, key) => {
-                          return { value: val.idDisplay, label: val.Name };
-                        })
-                      : selectedObject == "Item"
-                      ? itemsList.map((val, key) => {
-                          return { value: val.ItemID, label: val.ItemName };
-                        })
-                      : showcaseList.map((val, key) => {
-                          return { value: val.idShowcase, label: val.Name };
-                        })
-                  }
-                  onChange={(e) => {
-                    setSelectedObject(e.value);
-                    handleChangeInput(inputField.id, "objectName", e);
-                    console.log(inputFields);
-                  }}
-                />
-              </div>
-              <div>
-                <TextField
-                  name="question"
-                  label="Question"
-                  variant="filled"
-                  style={{ zIndex: 1 }}
-                  fullWidth
-                  hiddenLabel
-                  value={inputField.question}
-                  onChange={(event) =>
-                    handleChangeInputText(inputField.id, event)
-                  }
-                />
-                <TextField
-                  name="answer1"
-                  label="First Answer"
-                  variant="outlined"
-                  style={{ width: "25%" }}
-                  value={inputField.question}
-                  onChange={(event) =>
-                    handleChangeInputText(inputField.id, event)
-                  }
-                />
-                <TextField
-                  name="answer2"
-                  label="Second Answer"
-                  variant="outlined"
-                  style={{ width: "25%" }}
-                  value={inputField.question}
-                  onChange={(event) =>
-                    handleChangeInputText(inputField.id, event)
-                  }
-                />
-
-                <TextField
-                  name="answer3"
-                  label="Third Answer"
-                  variant="outlined"
-                  style={{ width: "25%" }}
-                  value={inputField.question}
-                  onChange={(event) =>
-                    handleChangeInputText(inputField.id, event)
-                  }
-                />
-                <TextField
-                  name="answer4"
-                  label="Fourth Answer"
-                  variant="outlined"
-                  style={{ width: "25%" }}
-                  value={inputField.question}
-                  onChange={(event) =>
-                    handleChangeInputText(inputField.id, event)
-                  }
-                />
-                <div style={{ width: "20%", display: "inline-block" }}>
-                  <Select
-                    options={options}
+                 <Select
+                    placeholder="Item"
+                    styles={selectStyles}
+                    options={itemsList.map((val, key) => {
+                      return { value: val.ItemID, label: val.ItemName };
+                    })}
                     onChange={(e) => {
-                      setCorrect(e.value);
+                      setWantedItem(e.value);
+                      inputField.itemId=(e.value)
+                    //   if (props.object != null) modifyInputFields(e.value);
                     }}
                   />
-                </div>
-                <TextField
-                  name="hint"
-                  label="Hint"
-                  variant="outlined"
-                  style={{ width: "75%" }}
-                  value={inputField.question}
-                  onChange={(event) =>
-                    handleChangeInputText(inputField.id, event)
-                  }
-                />
+                   <Select
+                   placeholder="Question"
+                    styles={selectStyles}
+                    options={questionsList.map((val, key) => {
+                        if (val.ObjectID == wantedItem) {
+                      return { value: val.ObjectID, label: val.Question } };
+                    })}
+                    onChange={(e) => {
+                        inputField.questionId=(e.value)
+                    }}
+                  />
+                  </div> 
+                 </div>
+                   
+                            <IconButton
+                              disabled={inputFields.length === 1}
+                              onClick={() => handleRemoveFields(inputFields.id)}
+                            >
+                              <RemoveIcon />
+                            </IconButton>
+                            <IconButton onClick={handleAddFields}>
+                              <AddIcon />
+                            </IconButton>
+                          </>
+                 ))}
+                 
+                  </form>
+           
+          </Card.Text>
+          </Card.Body>
+        </Card>
+      </Container>
+    </div>
+  )
+}
 
-                <IconButton
-                  disabled={inputFields.length === 1}
-                  onClick={() => handleRemoveFields(inputField.id)}
-                >
-                  <RemoveIcon />
-                </IconButton>
-                <IconButton onClick={handleAddFields}>
-                  <AddIcon />
-                </IconButton>
-              </div>
-            </div>
-          ))}
-          <Button
-            className={classes.button}
-            variant="contained"
-            color="primary"
-            type="submit"
-            onClick={handleSubmit}
-          >
-            Add Item
-          </Button>
-        </form> */}
-      </div>
-    </Container>
-  );
-};
-
-export default AddCourse;
+export default AddCourse

@@ -10,7 +10,7 @@ import { TextField } from "@material-ui/core";
 import { v4 as uuidv4 } from "uuid";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
-import { Container, CardGroup, Card } from "react-bootstrap";
+import { Container, Card } from "react-bootstrap";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -172,7 +172,6 @@ const AddQuestion = (props) => {
       return;
     }
     if (props.itemId) {
-      console.log(props.itemName);
       setWantedItem(props.itemId);
       setLabel(props.itemName);
     }

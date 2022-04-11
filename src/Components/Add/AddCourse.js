@@ -1,4 +1,4 @@
-// eslint-disable-next-line
+/* eslint-disable */
 import React from "react";
 import { useState, useEffect } from "react";
 import Axios from "axios";
@@ -12,94 +12,81 @@ import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import { Container, Card } from "react-bootstrap";
 
- 
+const cardShadow = {
+  boxShadow: "inset rgb(0 0 0) -2px -1px 14px 2px",
+  background: "#ffee9db3",
+};
 
+const styles = makeStyles((theme) => ({
+  root: {
+    "& .MuiOutlinedInput-root": {
+      boxShadow: " 1px 2px 5px rgb(255 203 43)",
 
-
-
- const cardShadow = {
-    boxShadow: "inset rgb(0 0 0) -2px -1px 14px 2px",
-    background: "#ffee9db3",
-  };
-
- const styles = makeStyles((theme) => ({
-    root: {
-      "& .MuiOutlinedInput-root": {
-        boxShadow: " 1px 2px 5px rgb(255 203 43)",
-
-        "&.Mui-focused fieldset": {
-          borderColor: "yellow",
-        },
-      },
-      "& label.Mui-focused": {
-        color: "white",
-      },
-      "& label": {
-        color: "rgb(255 225 132)",
-        marginLeft: "32%",
-      },
-      "& .MuiOutlinedInput-notchedOutline": {
-        background: "rgb(3 3 1 / 83%)",
-      },
-      "& .MuiOutlinedInput-input": {
-        zIndex: "1",
-        color: "white",
+      "&.Mui-focused fieldset": {
+        borderColor: "yellow",
       },
     },
-  }));
+    "& label.Mui-focused": {
+      color: "white",
+    },
+    "& label": {
+      color: "rgb(255 225 132)",
+      marginLeft: "32%",
+    },
+    "& .MuiOutlinedInput-notchedOutline": {
+      background: "rgb(3 3 1 / 83%)",
+    },
+    "& .MuiOutlinedInput-input": {
+      zIndex: "1",
+      color: "white",
+    },
+  },
+}));
 
-
- const selectStyles = {
+const selectStyles = {
   menu: (styles, isFocused) => ({
     ...styles,
     zIndex: 999,
     background: "black",
-        layout:"inline",
-
-
-    // "&:hover": {
-    //   color: isFocused ? "black" : "white",
-    // },
+    layout: "inline",
+    width: "150%",
   }),
   option: (provided, state) => ({
     ...provided,
-    layout:"inline",
+    layout: "inline",
     color: state.isFocused ? "black" : "white",
+  }),
+  control: (styles) => ({
+    ...styles,
+    marginLeft: "5%",
   }),
 };
 
-
-
-
 const AddCourse = (props) => {
-    const [questionsList, setQuestionsList] = useState([]);
-  const classstyle = styles();
+  const [questionsList, setQuestionsList] = useState([]);
 
-    const [itemsList, setItemsList] = useState([]);
-    const [wantedItem, setWantedItem] = useState("");
-    const [flag, setFlag] = useState(false);
-    const [courseName, setCourseName] = useState("");
-    const [inputFields, setInputFields] = useState(
+  const [itemsList, setItemsList] = useState([]);
+  const [wantedItem, setWantedItem] = useState("");
+  const [flag, setFlag] = useState(false);
+  const [courseName, setCourseName] = useState("");
+  const [inputFields, setInputFields] = useState(
     props.object == null
       ? [
           {
             id: uuidv4(),
-            courseName: "",
             itemId: "",
             questionId: "",
-         
           },
         ]
       : []
   );
 
+  const classstyle = styles();
   const handleAddFields = () => {
     setInputFields([
       ...inputFields,
       {
         id: uuidv4(),
-        id: uuidv4(),
-        courseName: "",
         itemId: "",
         questionId: "",
       },
@@ -117,17 +104,37 @@ const AddCourse = (props) => {
 
   const getQuestions = () => {
     Axios.get("http://34.65.174.141:3001/question").then((response) => {
-      setQuestionsList(response.data)
+      setQuestionsList(response.data);
     });
   };
 
-
-   const getItems = () => {
+  const getItems = () => {
     Axios.get("http://34.65.174.141:3001/Item").then((response) => {
       setItemsList(response.data);
     });
   };
-    useEffect(() => {
+
+  const postCourse = (e) => {
+    e.preventDefault();
+    const data = inputFields.map((x) =>
+      Object.keys(x)
+        .filter((key) => key == "questionId")
+        .map((key) => `${x[key]} `)
+        .join(" &&& ")
+    );
+    const data1 = data.map((temp) => temp + "^%^");
+    console.log(data1.toString());
+    console.log(data1.toString().split("^%^"));
+
+    Axios.post("http://34.65.174.141:3001/addCourse", {
+      courseName: courseName,
+      quest: data1.toString(),
+    }).then(() => {
+      alert("Success!");
+      window.location.reload(false);
+    });
+  };
+  useEffect(() => {
     getItems();
     getQuestions();
     // if (props.object != null) {
@@ -139,108 +146,98 @@ const AddCourse = (props) => {
     //   setLabel(props.itemName);
     // }
   }, [props]);
-      const handleChangeInput = (id, name, event) => {
-    const newInputFields = inputFields.map((i) => {
-      if (id === i.id) {
-        i[event.target.name] = event.target.value;
-      }
-      return i;
-    });
-
-    setInputFields(newInputFields);
-  };
-
-  const handleChangeInputText = (id, event) => {
-    const newInputFields = inputFields.map((i) => {
-      if (id === i.id) {
-        i[event.target.name] = event.target.value;
-      }
-      return i;
-    });
-
-    setInputFields(newInputFields);
-  };
 
   return (
     <div>
-         <Container>
+      <Container>
         <Card style={cardShadow}>
-          <Card.Title style={{color:"black"}}>
+          <Card.Title style={{ color: "black" }}>
             {props.object == null ? "Add Quest" : "Modify Quest"}
           </Card.Title>
           <Card.Body>
             <Card.Text>
-                   <div className="txtf">
-                  <TextField
-                      className={classstyle.root}
-                       name="Course Name"
-                          label="Course Name"
-                          variant="outlined"
-                          style={{ width: "25%" }}
-                          onChange={(e) =>
-                                setCourseName(e.target.value)
-                          }
+              <div className="txtf">
+                <TextField
+                  className={classstyle.root}
+                  value={courseName}
+                  name="Course Name"
+                  label="Course Name"
+                  variant="outlined"
+                  style={{ width: "25%" }}
+                  onChange={(e) => setCourseName(e.target.value)}
                 />
-               </div>
-                 <form className={classstyle.root}>
-                  {inputFields.map((inputField) => (
-                      <>
+              </div>
+              <form className={classstyle.root}>
+                {inputFields.map((inputField) => (
+                  <>
                     <div key={inputField.id}>
-               
-                <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  marginTop:"10px"
-                }}
-              >
-                 <Select
-                    placeholder="Item"
-                    styles={selectStyles}
-                    options={itemsList.map((val, key) => {
-                      return { value: val.ItemID, label: val.ItemName };
-                    })}
-                    onChange={(e) => {
-                      setWantedItem(e.value);
-                      inputField.itemId=(e.value)
-                    //   if (props.object != null) modifyInputFields(e.value);
-                    }}
-                  />
-                   <Select
-                   placeholder="Question"
-                    styles={selectStyles}
-                    options={questionsList.map((val, key) => {
-                        if (val.ObjectID == wantedItem) {
-                      return { value: val.ObjectID, label: val.Question } };
-                    })}
-                    onChange={(e) => {
-                        inputField.questionId=(e.value)
-                    }}
-                  />
-                  </div> 
-                 </div>
-                   
-                            <IconButton
-                              disabled={inputFields.length === 1}
-                              onClick={() => handleRemoveFields(inputFields.id)}
-                            >
-                              <RemoveIcon />
-                            </IconButton>
-                            <IconButton onClick={handleAddFields}>
-                              <AddIcon />
-                            </IconButton>
-                          </>
-                 ))}
-                 
-                  </form>
-           
-          </Card.Text>
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                          marginTop: "10px",
+                        }}
+                      >
+                        <Select
+                          placeholder="Item"
+                          styles={selectStyles}
+                          options={itemsList.map((val, key) => {
+                            return { value: val.ItemID, label: val.ItemName };
+                          })}
+                          onChange={(e) => {
+                            setWantedItem(e.value);
+                            inputField.itemId = e.value;
+                            //   if (props.object != null) modifyInputFields(e.value);
+                          }}
+                        />
+                        <Select
+                          placeholder="Question"
+                          styles={selectStyles}
+                          options={questionsList.map((val, key) => {
+                            if (val.ObjectID == wantedItem) {
+                              return {
+                                value: val.ObjectID,
+                                label: val.Question,
+                              };
+                            }
+                          })}
+                          onChange={(e) => {
+                            inputField.questionId = e.value;
+                          }}
+                        />
+                      </div>
+                    </div>
+
+                    <IconButton
+                      disabled={inputFields.length === 1}
+                      onClick={() => handleRemoveFields(inputFields.id)}
+                    >
+                      <RemoveIcon />
+                    </IconButton>
+                    <IconButton onClick={handleAddFields}>
+                      <AddIcon />
+                    </IconButton>
+                  </>
+                ))}
+                <br />
+                <br />
+                <Button
+                  className="bn30"
+                  variant="contained"
+                  color="primary"
+                  type="submit"
+                  onClick={postCourse}
+                >
+                  SUBMIT
+                </Button>
+              </form>
+            </Card.Text>
           </Card.Body>
         </Card>
       </Container>
     </div>
-  )
-}
+  );
+};
 
-export default AddCourse
+export default AddCourse;

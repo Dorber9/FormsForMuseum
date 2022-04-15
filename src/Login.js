@@ -23,8 +23,10 @@ export default function Login({ setToken }) {
     //   username,
     //   password
     // });
-    if(username=== "MophmAdmin" && password=== "j8$c~m38S484<nA)")
+    if(username=== "MophmAdmin" && password=== "j8$c~m38S484<nA)"){
         setToken("abc");
+        window.location.href="/"
+    }
     else{
         alert("Wrong details!")
         window.location.reload(false)

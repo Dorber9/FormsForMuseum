@@ -114,21 +114,32 @@ const AddCourse = (props) => {
     });
   };
 
+  const mapOptions= ()=> {
+    let temp=[]
+    questionsList.forEach((q)=> {
+        if(q.ObjectID==wantedItem){
+            temp.push({ value: q.QuestionID, label: q.Question })
+        }
+    })
+    return temp
+
+  }
+
   const postCourse = (e) => {
     e.preventDefault();
     const data = inputFields.map((x) =>
       Object.keys(x)
         .filter((key) => key == "questionId")
-        .map((key) => `${x[key]} `)
-        .join(" &&& ")
+        .map((key) => `${x[key]}`)
+        
     );
-    const data1 = data.map((temp) => temp + "^%^");
-    console.log(data1.toString());
-    console.log(data1.toString().split("^%^"));
-
-    Axios.post("http://34.65.174.141:3001/addCourse", {
-      courseName: courseName,
-      quest: data1.toString(),
+    let temp=""
+    data.forEach((element)=> {
+        temp+=`${element}-`
+    })
+    Axios.post("http://34.65.174.141:3001/addQuest", {
+      questName: courseName,
+      questions: temp,
     }).then(() => {
       alert("Success!");
       window.location.reload(false);
@@ -194,14 +205,17 @@ const AddCourse = (props) => {
                         <Select
                           placeholder="Question"
                           styles={selectStyles}
-                          options={questionsList.map((val, key) => {
-                            if (val.ObjectID == wantedItem) {
-                              return {
-                                value: val.ObjectID,
-                                label: val.Question,
-                              };
-                            }
-                          })}
+                          options={mapOptions()}
+                        //   options={questionsList.map((val, key) => {
+                        //       if(val.ObjectID==wantedItem )
+                        //         return { value: val.QuestionID, label: val.Question };
+                            // if (val.ObjectID == wantedItem) {
+                            //   return {
+                            //     value: val.QuestionID,
+                            //     label: val.Question
+                            //   };
+                            // }
+                        //   })}
                           onChange={(e) => {
                             inputField.questionId = e.value;
                           }}

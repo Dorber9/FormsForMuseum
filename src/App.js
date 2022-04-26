@@ -16,6 +16,7 @@ import ViewItemNewPage from "./Components/ViewItemNewPage";
 import AddQuestionNew from "./AddQuestionNew";
 import Login from "./Login";
 import useToken from "./useToken";
+import QuestionsQuiz from "./QuestionsQuiz";
 
 function App() {
   // useEffect(() => {
@@ -72,7 +73,6 @@ function App() {
               {token !== "abc" && (
                 <>
                               <Route exact path="/Login" element={<Login setToken={setToken} />}></Route>
-
                 <Route
                   exact
                   path="/"
@@ -80,6 +80,7 @@ function App() {
                 ></Route>
                 </>
               )}
+              <Route exact path="/Course/:id" element= {<QuestionsQuiz></QuestionsQuiz>} ></Route>
               <Route
                 exact
                 path="/ItemsList"

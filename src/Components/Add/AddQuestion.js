@@ -145,7 +145,7 @@ const AddQuestion = (props) => {
       questions: inputFields,
       itemID: wantedItem,
     }).then((response) => {
-      console.log(response);
+        alert("Success!")
       window.location.reload(false);
     });
   };

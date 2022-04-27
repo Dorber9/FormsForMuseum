@@ -16,7 +16,7 @@ const QuestionsQuiz = () => {
 
     
     useEffect(() => {
-    Axios.get(`http://34.65.174.141/quest/${params.id}`).then((response) => {
+    Axios.get(`http://34.65.174.141/Quest/${params.id}`).then((response) => {
     getQuestions(response.data[0].questions,response.data[0].questName);
      setTimeout(() => {
         setLoading(false);

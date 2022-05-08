@@ -1,7 +1,6 @@
 import React from "react";
 import "./App.css";
 import { Route, BrowserRouter, Routes } from "react-router-dom";
-import DemoPage from "./Components/DemoPage";
 import CourseWizard from "./Components/CourseWizard";
 import Footer from "./Components/Footer";
 import HomePage from "./Components/HomePage";
@@ -93,7 +92,7 @@ function App() {
               ></Route>
 
             </Routes>
-            {token=="abc" && (<Footer />)}
+            {token==="abc" && (<Footer />)}
           </BrowserRouter>
         </div>
       </Translator>

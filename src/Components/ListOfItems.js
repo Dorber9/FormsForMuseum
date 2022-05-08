@@ -1,11 +1,9 @@
 /* eslint-disable */
 import React from "react";
 import Select from "react-select";
-import { Link } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import { useState, useEffect } from "react";
 import Axios from "axios";
-import ViewItemWiki from "./ViewItemWiki ";
 import "../App.css";
 
 const ListOfItems = () => {
@@ -55,7 +53,6 @@ const ListOfItems = () => {
             Show Item
           </Button>
         </div>
-        {/* <ViewItemWiki itemId={itemID}> </ViewItemWiki> */}
       </div>
     </div>
   );

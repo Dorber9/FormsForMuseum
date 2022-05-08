@@ -6,6 +6,7 @@ import QRCode from "react-qr-code";
 
 import Axios from "axios";
 
+/* eslint-disable */
 
 
 const QuestionsQuiz = () => {

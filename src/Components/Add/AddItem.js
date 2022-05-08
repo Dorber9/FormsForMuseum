@@ -216,19 +216,24 @@ function AddItem(props) {
       setReferences(props.object.Refs);
       setInputFields([]);
       setPath(props.object.ImagePath);
-      const data = props.object.ItemData.split("^%^");
-      data.pop();
-      var temp = [];
+      
+      if(props.object.itemData){
+        const data = props.object.ItemData.split("^%^");
+        data.pop();
+        var temp = [];
 
-      data.forEach((element) => {
-        const d = element.split("=>");
-        temp.push({
-          id: uuidv4(),
-          category: d[1].split("&&&")[0],
-          categoryDescr: d[2],
+        data.forEach((element) => {
+          const d = element.split("=>");
+          temp.push({
+            id: uuidv4(),
+            category: d[1].split("&&&")[0],
+            categoryDescr: d[2],
+          });
         });
-      });
-      setInputFields(temp);
+        setInputFields(temp);
+      }
+      else
+        setInputFields([{ id: uuidv4(), category: "", categoryDescr: "" }])
     }
   }, [props.object != null ? props.object : ""]);
 
@@ -508,6 +513,7 @@ function AddItem(props) {
                       >
                         <Select
                           styles={selectStyles}
+                          placeholder="Select Display"
                           options={displayList.map((val, key) => {
                             return { value: val.idDisplay, label: val.Name };
                           })}
@@ -530,6 +536,8 @@ function AddItem(props) {
                       >
                         <Select
                           styles={selectStyles}
+                          placeholder="Select Exibition"
+
                           options={showcaseList.map((val, key) => {
                             return { value: val.idShowcase, label: val.Name };
                           })}

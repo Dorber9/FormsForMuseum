@@ -33,20 +33,21 @@ const ViewItemWiki = (props) => {
       setData(res.data[0]);
 
       setKeys(Object.keys(itemData));
+      if(res.data[0].ItemData){
+        const data = res.data[0].ItemData.split("^%^");
+        setPath(res.data[0].ImagePath);
+        data.pop();
+        var temp = [];
 
-      const data = res.data[0].ItemData.split("^%^");
-      setPath(res.data[0].ImagePath);
-      data.pop();
-      var temp = [];
-
-      data.forEach((element) => {
-        const d = element.split("=>");
-        temp.push({
-          category: d[1].split("&&&")[0],
-          categoryDescr: d[2],
+        data.forEach((element) => {
+          const d = element.split("=>");
+          temp.push({
+            category: d[1].split("&&&")[0],
+            categoryDescr: d[2],
+          });
         });
-      });
       setDataWiki(temp);
+      }
       setTimeout(() => {
         setLoading(false);
       }, 3000);

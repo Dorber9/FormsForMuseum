@@ -17,37 +17,37 @@ const Reports = () => {
   const [sectionList, setSectionList] = useState([]);
 
   const getDisplay = () => {
-    Axios.get("http://34.65.174.141:3001/Display").then((response) => {
+    Axios.get("http://35.240.85.175:3001/Display").then((response) => {
       setDisplayList(response.data);
     });
   };
 
   const getShowcase = () => {
-    Axios.get("http://34.65.174.141:3001/Showcase").then((response) => {
+    Axios.get("http://35.240.85.175:3001/Showcase").then((response) => {
       setShowcaseList(response.data);
     });
   };
 
   const getItems = () => {
-    Axios.get("http://34.65.174.141:3001/Item").then((response) => {
+    Axios.get("http://35.240.85.175:3001/Item").then((response) => {
       setItemsList(response.data);
     });
   };
 
   const getMuseum = () => {
-    Axios.get("http://34.65.174.141:3001/museum").then((response) => {
+    Axios.get("http://35.240.85.175:3001/museum").then((response) => {
       setMuseumList(response.data);
     });
   };
 
   const getBuilding = () => {
-    Axios.get("http://34.65.174.141:3001/building").then((response) => {
+    Axios.get("http://35.240.85.175:3001/building").then((response) => {
       setBuildingList(response.data);
     });
   };
 
   const getSection = () => {
-    Axios.get("http://34.65.174.141:3001/section").then((response) => {
+    Axios.get("http://35.240.85.175:3001/section").then((response) => {
       setSectionList(response.data);
     });
   };

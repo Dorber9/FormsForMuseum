@@ -58,7 +58,7 @@ const AddSection = (props) => {
     if (selectedValue === "") {
       alert("Please Select a Building");
     } else {
-      Axios.post("http://34.65.174.141:3001/addSection", {
+      Axios.post("http://35.240.85.175:3001/addSection", {
         Name: name,
         Description: description,
         BuildingID: selectedValue,
@@ -78,7 +78,7 @@ const AddSection = (props) => {
   };
 
   const updateSection = () => {
-    Axios.put("http://34.65.174.141:3001/updateSection", {
+    Axios.put("http://35.240.85.175:3001/updateSection", {
       idSection: props.object.idSection,
       Name: name,
       Description: description,
@@ -96,20 +96,20 @@ const AddSection = (props) => {
   };
 
   const getSection = () => {
-    Axios.get("http://34.65.174.141:3001/section").then((response) => {
+    Axios.get("http://35.240.85.175:3001/section").then((response) => {
       setSectionList(response.data);
     });
   };
 
   const getBuilding = () => {
-    Axios.get("http://34.65.174.141:3001/building").then((response) => {
+    Axios.get("http://35.240.85.175:3001/building").then((response) => {
       setBuildingList(response.data);
     });
   };
 
   const deleteSection = () => {
     Axios.delete(
-      `http://34.65.174.141:3001/deleteSection/${props.object.idSection}`,
+      `http://35.240.85.175:3001/deleteSection/${props.object.idSection}`,
       {}
     ).then(() => {
       window.location.reload(false);

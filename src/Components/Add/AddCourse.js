@@ -103,13 +103,13 @@ const AddCourse = (props) => {
   };
 
   const getQuestions = () => {
-    Axios.get("http://34.65.174.141:3001/question").then((response) => {
+    Axios.get("http://35.240.85.175:3001/question").then((response) => {
       setQuestionsList(response.data);
     });
   };
 
   const getItems = () => {
-    Axios.get("http://34.65.174.141:3001/Item").then((response) => {
+    Axios.get("http://35.240.85.175:3001/Item").then((response) => {
       setItemsList(response.data);
     });
   };

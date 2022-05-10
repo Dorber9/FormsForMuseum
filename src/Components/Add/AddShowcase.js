@@ -127,7 +127,7 @@ const AddShowcase = (props) => {
     if (selectedValue === "Please Select Display") {
       alert("Please Select a Display");
     } else {
-      Axios.post("http://34.65.174.141:3001/addShowcase", {
+      Axios.post("http://35.240.85.175:3001/addShowcase", {
         Number: number,
         Name: name,
         Desc: description,
@@ -157,7 +157,7 @@ const AddShowcase = (props) => {
   };
 
   const updateShowcase = (img) => {
-    Axios.put("http://34.65.174.141:3001/updateShowcase", {
+    Axios.put("http://35.240.85.175:3001/updateShowcase", {
       idShowcase: props.object.idShowcase,
       Number: number,
       Name: name,
@@ -186,7 +186,7 @@ const AddShowcase = (props) => {
 
   const deleteShowcase = () => {
     Axios.delete(
-      `http://34.65.174.141:3001/deleteShowcase/${props.object.idShowcase}`,
+      `http://35.240.85.175:3001/deleteShowcase/${props.object.idShowcase}`,
       {}
     ).then(() => {
       window.location.reload(false);
@@ -199,13 +199,13 @@ const AddShowcase = (props) => {
   ];
 
   const getShowcase = () => {
-    Axios.get("http://34.65.174.141:3001/Showcase").then((response) => {
+    Axios.get("http://35.240.85.175:3001/Showcase").then((response) => {
       setShowcaseList(response.data);
     });
   };
 
   const getDisplay = () => {
-    Axios.get("http://34.65.174.141:3001/Display").then((response) => {
+    Axios.get("http://35.240.85.175:3001/Display").then((response) => {
       setDisplayList(response.data);
     });
   };

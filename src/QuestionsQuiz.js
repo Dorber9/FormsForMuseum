@@ -17,7 +17,7 @@ const QuestionsQuiz = () => {
 
     
     useEffect(() => {
-    Axios.get(`http://34.65.174.141:3001/Quest/${params.id}`).then((response) => {
+    Axios.get(`http://35.240.85.175:3001/Quest/${params.id}`).then((response) => {
     getQuestions(response.data[0].questions,response.data[0].questName);
      setTimeout(() => {
         setLoading(false);
@@ -35,7 +35,7 @@ const QuestionsQuiz = () => {
     arr.pop()
     let questionslist=[]
     arr.forEach((element)=> {
-        Axios.get(`http://34.65.174.141:3001/question/${element}`).then((response) => {
+        Axios.get(`http://35.240.85.175:3001/question/${element}`).then((response) => {
             buildQuestion(response.data[0])
             questionslist.push(buildQuestion(response.data[0]))
             let quiz =  {

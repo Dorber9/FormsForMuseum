@@ -241,7 +241,7 @@ function AddItem(props) {
     if (storage === "0" && display === "") {
       alert("Please Select a Display");
     } else {
-      Axios.post("http://34.65.174.141:3001/addItem", {
+      Axios.post("http://35.240.85.175:3001/addItem", {
         ID: itemId,
         name: name,
         descr: descr,
@@ -285,7 +285,7 @@ function AddItem(props) {
   };
 
   const updateItem = (img) => {
-    Axios.put("http://34.65.174.141:3001/updateItem", {
+    Axios.put("http://35.240.85.175:3001/updateItem", {
       ID: itemId,
       name: name,
       descr: descr,
@@ -328,21 +328,21 @@ function AddItem(props) {
   };
 
   const getDisplay = () => {
-    Axios.get("http://34.65.174.141:3001/Display").then((response) => {
+    Axios.get("http://35.240.85.175:3001/Display").then((response) => {
       setDisplayList(response.data);
     });
     displayOptions();
   };
 
   const getShowcase = () => {
-    Axios.get("http://34.65.174.141:3001/Showcase").then((response) => {
+    Axios.get("http://35.240.85.175:3001/Showcase").then((response) => {
       setShowcaseList(response.data);
     });
     showcaseOptions();
   };
 
   const getItems = () => {
-    Axios.get("http://34.65.174.141:3001/Item").then((response) => {
+    Axios.get("http://35.240.85.175:3001/Item").then((response) => {
       setItemsList(response.data);
     });
   };
@@ -416,7 +416,7 @@ function AddItem(props) {
 
   const deleteItem = () => {
     Axios.delete(
-      `http://34.65.174.141:3001/deleteItem/${props.object.ItemID}`,
+      `http://35.240.85.175:3001/deleteItem/${props.object.ItemID}`,
       {}
     ).then(() => {
       window.location.reload(false);

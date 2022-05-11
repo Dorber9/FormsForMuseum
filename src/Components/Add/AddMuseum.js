@@ -50,7 +50,7 @@ const AddMuseum = (props) => {
   }, [props.object != null ? props.object : ""]);
 
   const postMuseum = () => {
-    Axios.post("http://34.65.174.141:3001/addMuseum", {
+    Axios.post("http://35.240.85.175:3001/addMuseum", {
       name: name,
     }).then(() => {
       setMuseumList([
@@ -63,7 +63,7 @@ const AddMuseum = (props) => {
   };
 
   const updateMuseum = () => {
-    Axios.put("http://34.65.174.141:3001/updateMuseum", {
+    Axios.put("http://35.240.85.175:3001/updateMuseum", {
       id: props.object.id,
       name: name,
     }).then(() => {
@@ -78,7 +78,7 @@ const AddMuseum = (props) => {
 
   const deleteMuseum = () => {
     Axios.delete(
-      `http://34.65.174.141:3001/deleteMuseum/${props.object.id}`,
+      `http://35.240.85.175:3001/deleteMuseum/${props.object.id}`,
       {}
     ).then(() => {
       window.location.reload(false);
@@ -86,7 +86,7 @@ const AddMuseum = (props) => {
   };
 
   const getMuseum = () => {
-    Axios.get("http://34.65.174.141:3001/museum").then((response) => {
+    Axios.get("http://35.240.85.175:3001/museum").then((response) => {
       setMuseumList(response.data);
     });
   };

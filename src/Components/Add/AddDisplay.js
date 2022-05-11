@@ -97,7 +97,7 @@ const AddDisplay = (props) => {
     if (selectedValue === "Please Select Section") {
       alert("Please Select a Section");
     } else {
-      Axios.post("http://34.65.174.141:3001/addDisplay", {
+      Axios.post("http://35.240.85.175:3001/addDisplay", {
         Name: name,
         Theme: theme,
         permanent: permanent,
@@ -131,7 +131,7 @@ const AddDisplay = (props) => {
   };
 
   const updateDisplay = () => {
-    Axios.put("http://34.65.174.141:3001/updateDisplay", {
+    Axios.put("http://35.240.85.175:3001/updateDisplay", {
       idDisplay: props.object.idDisplay,
       Name: name,
       Theme: theme,
@@ -164,7 +164,7 @@ const AddDisplay = (props) => {
 
   const deleteDisplay = () => {
     Axios.delete(
-      `http://34.65.174.141:3001/deleteDisplay/${props.object.idDisplay}`,
+      `http://35.240.85.175:3001/deleteDisplay/${props.object.idDisplay}`,
       {}
     ).then(() => {
       window.location.reload(false);
@@ -172,13 +172,13 @@ const AddDisplay = (props) => {
   };
 
   const getSection = () => {
-    Axios.get("http://34.65.174.141:3001/section").then((response) => {
+    Axios.get("http://35.240.85.175:3001/section").then((response) => {
       setSectionList(response.data);
     });
   };
 
   const getDisplay = () => {
-    Axios.get("http://34.65.174.141:3001/display").then((response) => {
+    Axios.get("http://35.240.85.175:3001/display").then((response) => {
       setDisplayList(response.data);
     });
   };

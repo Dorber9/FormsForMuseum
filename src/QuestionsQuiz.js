@@ -17,8 +17,9 @@ const QuestionsQuiz = () => {
 
     
     useEffect(() => {
-    Axios.get(`http://34.65.174.141:3001/Quest/${params.id}`).then((response) => {
-    getQuestions(response.data[0].questions,response.data[0].questName);
+    Axios.get(`http://35.240.85.175:3001/Quest/${params.id}`).then((response) => {
+    getQuestions(response.data[0].questions,response.data[0].questName,"Neanderthal-אבן יד-");
+    
      setTimeout(() => {
         setLoading(false);
       }, 3000);
@@ -29,19 +30,24 @@ const QuestionsQuiz = () => {
     
 
 
- const getQuestions = (course,title) => {
+ const getQuestions = (course,title,items) => {
     let arr=[]
     arr=course.split("-");
     arr.pop()
+    let itemsArr=[]
+    itemsArr=items.split("-");
+    itemsArr.pop()
     let questionslist=[]
+    let counter=1
+    let i=0
     arr.forEach((element)=> {
-        Axios.get(`http://34.65.174.141:3001/question/${element}`).then((response) => {
+        Axios.get(`http://35.240.85.175:3001/question/${element}`).then((response) => {
+        if(counter%2==0 || counter==arr.length){
+            questionslist.push(buildNextItem(itemsArr[i]))
+            i++
+        }
         questionslist.push(buildQuestion(response.data[0]))
-            Axios.get(`http://34.65.174.141:3001/Item/${response.data[0].ObjectID}`).then((response) => {
-            let correctOne=response.data[0].ItemName
-            console.log(correctOne)
-            questionslist.push(buildTemp(correctOne))
-        })
+        counter++
         
         });
             let quiz =  {
@@ -83,7 +89,7 @@ const QuestionsQuiz = () => {
   }
 
 
-  const buildTemp=(correctOne)=>{
+  const buildNextItem=(item)=>{
          let temp= {
             question: "abd",
       questionType: "text",
@@ -104,7 +110,7 @@ const QuestionsQuiz = () => {
         let answers=[]
         answers.push("פריט רנדומלי")
         answers.push("פריט רנדומלי")
-        answers.push(correctOne)
+        answers.push(item)
         answers.push("פריט רנדומלי")
         temp.answers=answers;
         return temp;

@@ -70,7 +70,7 @@ const AddBuilding = (props) => {
     if (selectedValue === "Please Select Museum") {
       alert("Please Select a Museum");
     } else {
-      Axios.post("http://34.65.174.141:3001/addBuilding", {
+      Axios.post("http://35.240.85.175:3001/addBuilding", {
         Name: name,
         City: city,
         Address: address,
@@ -92,7 +92,7 @@ const AddBuilding = (props) => {
   };
 
   const updateBuilding = () => {
-    Axios.put("http://34.65.174.141:3001/updateBuilding", {
+    Axios.put("http://35.240.85.175:3001/updateBuilding", {
       BuildingID: props.object.BuildingID,
       Name: name,
       City: city,
@@ -112,20 +112,20 @@ const AddBuilding = (props) => {
   };
 
   const getBuilding = () => {
-    Axios.get("http://34.65.174.141:3001/building").then((response) => {
+    Axios.get("http://35.240.85.175:3001/building").then((response) => {
       setBuildingList(response.data);
     });
   };
 
   const getMuseum = () => {
-    Axios.get("http://34.65.174.141:3001/museum").then((response) => {
+    Axios.get("http://35.240.85.175:3001/museum").then((response) => {
       setMuseumList(response.data);
     });
   };
 
   const deleteBuilding = () => {
     Axios.delete(
-      `http://34.65.174.141:3001/deleteBuilding/${props.object.BuildingID}`,
+      `http://35.240.85.175:3001/deleteBuilding/${props.object.BuildingID}`,
       {}
     ).then(() => {
       window.location.reload(false);

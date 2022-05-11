@@ -103,13 +103,13 @@ const AddCourse = (props) => {
   };
 
   const getQuestions = () => {
-    Axios.get("http://34.65.174.141:3001/question").then((response) => {
+    Axios.get("http://35.240.85.175:3001/question").then((response) => {
       setQuestionsList(response.data);
     });
   };
 
   const getItems = () => {
-    Axios.get("http://34.65.174.141:3001/Item").then((response) => {
+    Axios.get("http://35.240.85.175:3001/Item").then((response) => {
       setItemsList(response.data);
     });
   };
@@ -137,13 +137,25 @@ const AddCourse = (props) => {
     data.forEach((element)=> {
         temp+=`${element}-`
     })
-    Axios.post("http://34.65.174.141:3001/addQuest", {
-      questName: courseName,
-      questions: temp,
-    }).then(() => {
-      alert("Success!");
-      window.location.reload(false);
-    });
+    const itemNames = inputFields.map((x) =>
+      Object.keys(x)
+        .filter((key) => key == "itemId")
+        .map((key) => `${x[key]}`)
+        
+    );
+    itemNames.shift()
+    let itemstemp=""
+    itemNames.forEach((element)=> {
+        itemstemp+=`${element}-`
+    })
+    console.log(itemstemp)
+    // Axios.post("http://34.65.174.141:3001/addQuest", {
+    //   questName: courseName,
+    //   questions: temp,
+    // }).then(() => {
+    //   alert("Success!");
+    //   window.location.reload(false);
+    // });
   };
   useEffect(() => {
     getItems();
@@ -198,7 +210,7 @@ const AddCourse = (props) => {
                           })}
                           onChange={(e) => {
                             setWantedItem(e.value);
-                            inputField.itemId = e.value;
+                            inputField.itemId = e.label;
                           }}
                         />
                         <Select

@@ -31,6 +31,7 @@ const ViewItemWiki = (props) => {
       );
 
       setData(res.data[0]);
+      
 
       setKeys(Object.keys(itemData));
       if(res.data[0].ItemData){

@@ -277,6 +277,7 @@ const AddQuestion = (props) => {
                 {props.itemId != null ? (
                   <>
                     <Select
+                      placeholder="Please select Item"
                       value={{ value: props.itemId, label: props.itemName }}
                       styles={selectStyles}
                       options={itemsList.map((val, key) => {
@@ -290,6 +291,7 @@ const AddQuestion = (props) => {
                   </>
                 ) : (
                   <Select
+                    placeholder="Please select Item"
                     styles={selectStyles}
                     options={itemsList.map((val, key) => {
                       return { value: val.ItemID, label: val.ItemName };

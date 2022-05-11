@@ -191,7 +191,7 @@ const AddCourse = (props) => {
                         }}
                       >
                         <Select
-                          placeholder="Item"
+                          placeholder="Please select Item"
                           styles={selectStyles}
                           options={itemsList.map((val, key) => {
                             return { value: val.ItemID, label: val.ItemName };
@@ -199,23 +199,12 @@ const AddCourse = (props) => {
                           onChange={(e) => {
                             setWantedItem(e.value);
                             inputField.itemId = e.value;
-                            //   if (props.object != null) modifyInputFields(e.value);
                           }}
                         />
                         <Select
-                          placeholder="Question"
+                          placeholder="Please select Question"
                           styles={selectStyles}
                           options={mapOptions()}
-                        //   options={questionsList.map((val, key) => {
-                        //       if(val.ObjectID==wantedItem )
-                        //         return { value: val.QuestionID, label: val.Question };
-                            // if (val.ObjectID == wantedItem) {
-                            //   return {
-                            //     value: val.QuestionID,
-                            //     label: val.Question
-                            //   };
-                            // }
-                        //   })}
                           onChange={(e) => {
                             inputField.questionId = e.value;
                           }}

@@ -36,14 +36,19 @@ const QuestionsQuiz = () => {
     let questionslist=[]
     arr.forEach((element)=> {
         Axios.get(`http://34.65.174.141:3001/question/${element}`).then((response) => {
-            buildQuestion(response.data[0])
-            questionslist.push(buildQuestion(response.data[0]))
+        questionslist.push(buildQuestion(response.data[0]))
+            Axios.get(`http://34.65.174.141:3001/Item/${response.data[0].ObjectID}`).then((response) => {
+            let correctOne=response.data[0].ItemName
+            console.log(correctOne)
+            questionslist.push(buildTemp(correctOne))
+        })
+        
+        });
             let quiz =  {
             "quizTitle": title, // Change to the relevant one
             "quizSynopsis": "מסלול לדוגמא", // Change to the relevant one
             questions: questionslist}
             setQuiz(quiz)
-        });
     
     })
    
@@ -61,9 +66,9 @@ const QuestionsQuiz = () => {
         ""
       ],
       correctAnswer: "3",
-      messageForCorrectAnswer: "Correct answer. Good job.",
-      messageForIncorrectAnswer: "Incorrect answer. Please try again.",
-      explanation: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      messageForCorrectAnswer: `Correct answer. Good job. The hint for your next item is ${data.Clue}` ,
+      messageForIncorrectAnswer: `Incorrect answer. The hint for your next item is ${data.Clue}`,
+      explanation: data.Clue,
       point: "20"
     }
         temp.question=data.Question;
@@ -77,6 +82,35 @@ const QuestionsQuiz = () => {
         return temp;
   }
 
+
+  const buildTemp=(correctOne)=>{
+         let temp= {
+            question: "abd",
+      questionType: "text",
+      answerSelectionType: "single",
+      answers: [
+        "",
+        "",
+        "",
+        ""
+      ],
+      correctAnswer: "3",
+          messageForCorrectAnswer: `Correct answer. Good job. The hint for your next item is` ,
+      messageForIncorrectAnswer: `Incorrect answer. The hint for your next item is`,
+      explanation: "dwdw", 
+      point: "20"
+    }
+        temp.question="הפריט הבא הוא";
+        let answers=[]
+        answers.push("פריט רנדומלי")
+        answers.push("פריט רנדומלי")
+        answers.push(correctOne)
+        answers.push("פריט רנדומלי")
+        temp.answers=answers;
+        return temp;
+    };
+  
+
   return (
       <>
     { loading ?  <div style={{ position: "center" }} className="spinner-container">
@@ -84,7 +118,7 @@ const QuestionsQuiz = () => {
           
         </div> : (
             <>
-    <div className="pshDwn"><Quiz style={{ position: "center"}} quiz={quiz}/>
+    <div className="pshDwn"><Quiz style={{ position: "center"}} quiz={quiz} showInstantFeedback={true} />
        <div style={{ marginTop: "50px", textAlign: "center" }}>
             {token === "abc" ? (
               <QRCode value={`${window.location.href}`} size="150" />

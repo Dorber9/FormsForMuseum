@@ -9,6 +9,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import Select from "react-select";
 import { Container, Card } from "react-bootstrap";
 import Resizer from "react-image-file-resizer";
+import Popup from 'reactjs-popup';
+import 'reactjs-popup/dist/index.css';
 
 import { useState, useEffect } from "react";
 import Axios from "axios";
@@ -206,9 +208,10 @@ function AddItem(props) {
       setPeriod(props.object.Period);
       setSite(props.object.Site);
       setStorage("" + props.object.InStorage);
-      if (storage !== "1") {
+      if (props.object.InStorage !== "1") {
         setDisplay(props.object.DisplayID);
-        setShowcase(props.object.ShowcaeID);
+        setShowcase(props.object.ShowcaseID);
+
       }
       setAge(props.object.Age);
       setWebsite(props.object.Website);
@@ -346,6 +349,26 @@ function AddItem(props) {
       setItemsList(response.data);
     });
   };
+
+  const getDisplayLabel =(displayList)=>{
+    let result=displayList.filter(obj => {
+                            return obj.idDisplay == display
+      })
+      if(result.length)
+          return result[0].Name
+      else
+        return ""
+  }
+   const getShowCaseLabel =(showCaseList)=>{
+    let result=showCaseList.filter(obj => {
+                            return obj.idShowcase == showcase
+      })
+      if(result.length)
+          return result[0].Name
+      else
+        return ""
+  }
+
 
   const onFormSubmit = async () => {
     if (ImageFlag) {
@@ -513,6 +536,7 @@ function AddItem(props) {
                       >
                         <Select
                           styles={selectStyles}
+                          value={display? {value: display, label: getDisplayLabel(displayList) } :{value: "Select Display", label: "Please Select Display" }}
                           placeholder="Select Display"
                           options={displayList.map((val, key) => {
                             return { value: val.idDisplay, label: val.Name };
@@ -537,7 +561,7 @@ function AddItem(props) {
                         <Select
                           styles={selectStyles}
                           placeholder="Select Exibition"
-
+                          value={showcase? {value: showcase, label: getShowCaseLabel(showcaseList) } :{value: "Select Exibition", label: "Please Select Exibition" }}
                           options={showcaseList.map((val, key) => {
                             return { value: val.idShowcase, label: val.Name };
                           })}
@@ -732,7 +756,7 @@ function AddItem(props) {
                   {props.object == null ? (
                     ""
                   ) : (
-                    <Button
+                     <Popup modal trigger={  <Button
                       variant="contained"
                       style={{
                         color: "white",
@@ -740,10 +764,27 @@ function AddItem(props) {
                         marginLeft: "10px",
                       }}
                       type="submit"
-                      onClick={deleteItem}
                     >
+                      
                       Delete Item
-                    </Button>
+                    </Button>} position="center">
+                       {close => (
+                         <>
+              <div>Are you sure you want to delete?</div>
+              <Button  style={{
+                        color: "white",
+                        background: "green",
+                        marginLeft: "10px",
+                      }} onClick={deleteItem} variant="contained"> Yes</Button> <Button  style={{
+                        color: "white",
+                        background: "red",
+                        marginLeft: "10px",
+                      }} variant="contained" onClick={close}>
+          No
+        </Button>
+        </> )}
+            </Popup>
+                  
                   )}
                 </>
               ) : props.object == null ? (

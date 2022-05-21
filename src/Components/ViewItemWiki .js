@@ -11,6 +11,13 @@ import { Translate, Translator } from "react-auto-translate";
 const ViewItemWiki = (props) => {
   const [itemDataWiki, setDataWiki] = useState([]);
   const [itemData, setData] = useState([]);
+  const [name, setName] = useState("");
+      const [desc, setDesc] = useState("");
+      const [material, setMaterial] = useState("");
+      const [age, setAge] = useState("");
+      const [period, setPeriod] = useState("");
+       const [site, setSite] = useState("");
+
   const [itemKeys, setKeys] = useState([]);
   const [loading, setLoading] = useState(true);
   const [path, setPath] = useState("");
@@ -18,25 +25,21 @@ const ViewItemWiki = (props) => {
 
   useEffect(() => {
     setDataWiki([]);
-    getItem();
-
-    // eslint-disable-next-line
-  }, [props]);
-
-  // Get the relevant item data based on his Id
-  const getItem = async () => {
-    try {
-      let res = await Axios.get(
-        `http://34.140.118.51:3001/Item/${props.itemId}`
-      );
-
-      setData(res.data[0]);
-      
-
-      setKeys(Object.keys(itemData));
-      if(res.data[0].ItemData){
-        const data = res.data[0].ItemData.split("^%^");
-        setPath(res.data[0].ImagePath);
+    console.log(props.itemId)
+       Axios.get(`http://34.140.118.51:3001/Item/${props.itemId}`).then((response) => {
+           console.log(response.data[0])
+       setName(response.data[0].HebItemName)
+        setMaterial(response.data[0].HebMaterial)
+        setDesc(response.data[0].HebDescr)
+        setAge(response.data[0].Age)
+        setPeriod(response.data[0].HebPeriod)
+        setSite(response.data[0].HebSite)
+        if(response.data[0].ImagePath)
+            setPath(response.data[0].ImagePath);
+      if(response.data[0].ItemData){
+        
+        const data = response.data[0].ItemData.split("^%^");
+        
         data.pop();
         var temp = [];
 
@@ -49,15 +52,60 @@ const ViewItemWiki = (props) => {
         });
       setDataWiki(temp);
       }
+
+    });
+    
       setTimeout(() => {
         setLoading(false);
       }, 3000);
-      //   const itemResData = JSON.parse(JSON.stringify(res.data));
-      //   setItemData(itemResData);
-    } catch (error) {
-      console.log(error.data);
-    }
+    // eslint-disable-next-line
+  }, []);
+
+  // Get the relevant item data based on his Id
+  const getItem = () => {
+   
+    // try {
+    //   let res = await Axios.get(
+    //     `http://34.140.118.51:3001/Item/${props.itemId}`
+    //   );
+
+    //   setData(res.data[0]);
+      
+
+    //   setKeys(Object.keys(itemData));
+ 
+    
+
+    // } catch (error) {
+    //   console.log(error.data);
+    // }
   };
+
+  const buildData=(data)=>{
+      
+    //    setName(data.HebItemName)
+    //     setMaterial(data.HebMaterial)
+    //     setDesc(data.HebDescr)
+    //     setAge(data.Age)
+    //     setPeriod(data.HebPeriod)
+    //     setSite(data.HebSite)
+    //   if(data.ItemData){
+        
+    //     const data = data.ItemData.split("^%^");
+    //     setPath(data.ImagePath);
+    //     data.pop();
+    //     var temp = [];
+
+    //     data.forEach((element) => {
+    //       const d = element.split("=>");
+    //       temp.push({
+    //         category: d[1].split("&&&")[0],
+    //         categoryDescr: d[2],
+    //       });
+    //     });
+    //   setDataWiki(temp);
+    //   }
+  }
   return (
     <>
       {loading ? (
@@ -67,7 +115,7 @@ const ViewItemWiki = (props) => {
         </div>
       ) : (
         <div className="pshDwn">
-          <h1 style={{ textAlign: "center" }}>{itemData.ItemName}</h1>
+          <h1 style={{ textAlign: "center" }}>{name}</h1>
 
           <div style={{ textAlign: "center" }}>
             {path != "" ? (
@@ -87,11 +135,11 @@ const ViewItemWiki = (props) => {
 
           <div>
             <h2 style={{ textAlign: "center", direction: "rtl" }}>
-              <div>{itemData.Descr}</div>
-              &nbsp;מוצג זה נמצא ב {itemData.Site}. גילו הוא בערך&nbsp;
-              {itemData.Age}, ולפיכך הוא משתייך לתקופה ה&nbsp;{itemData.Period}{" "}
+              <div>{desc}</div>
+              &nbsp;מוצג זה נמצא ב {site}. גילו הוא בערך&nbsp;
+              {age}, ולפיכך הוא משתייך לתקופה ה&nbsp;{period}{" "}
               . חומרו של המוצג הוא&nbsp;
-              {itemData.Material}.
+              {material}.
             </h2>
           </div>
 

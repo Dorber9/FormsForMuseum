@@ -7,16 +7,15 @@ import ViewItemWiki from "./ViewItemWiki ";
 
 const ViewItemNewPage = (props) => {
   const params = useParams();
-  const [id, setId] = useState("");
-  useEffect(() => {
-    setId(params.id);
+  // useEffect(() => {
+  //   setId(params.id);
 
-    // eslint-disable-next-line
-  }, [id]);
+  //   // eslint-disable-next-line
+  // }, []);
   return (
     <div>
       <br></br>
-      <ViewItemWiki itemId={id}> </ViewItemWiki>
+      <ViewItemWiki itemId={params.id}> </ViewItemWiki>
     </div>
   );
 };

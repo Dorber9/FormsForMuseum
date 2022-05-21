@@ -148,14 +148,15 @@ const AddCourse = (props) => {
     itemNames.forEach((element)=> {
         itemstemp+=`${element}-`
     })
-    console.log(itemstemp)
-    // Axios.post("http://34.65.174.141:3001/addQuest", {
-    //   questName: courseName,
-    //   questions: temp,
-    // }).then(() => {
-    //   alert("Success!");
-    //   window.location.reload(false);
-    // });
+    
+    Axios.post("http://35.240.85.175:3001/addQuest", {
+      questName: courseName,
+      questions: temp,
+      itemNames: itemstemp 
+    }).then(() => {
+      alert("Success!");
+      window.location.reload(false);
+    });
   };
   useEffect(() => {
     getItems();

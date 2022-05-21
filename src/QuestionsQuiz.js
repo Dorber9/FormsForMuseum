@@ -18,7 +18,10 @@ const QuestionsQuiz = () => {
     
     useEffect(() => {
     Axios.get(`http://35.240.85.175:3001/Quest/${params.id}`).then((response) => {
-    getQuestions(response.data[0].questions,response.data[0].questName,"Neanderthal-אבן יד-");
+      if(response.data[0].questItems)
+        getQuestions(response.data[0].questions,response.data[0].questName,response.data[0].questItems);
+      else
+        getQuestions(response.data[0].questions,response.data[0].questName,"Neanderthal-אבן יד-");
     
      setTimeout(() => {
         setLoading(false);
@@ -124,7 +127,8 @@ const QuestionsQuiz = () => {
           
         </div> : (
             <>
-    <div className="pshDwn"><Quiz style={{ position: "center"}} quiz={quiz} showInstantFeedback={true} />
+    <div className="pshDwn">
+        <Quiz style={{ position: "center"}} quiz={quiz} showInstantFeedback={true} />
        <div style={{ marginTop: "50px", textAlign: "center" }}>
             {token === "abc" ? (
               <QRCode value={`${window.location.href}`} size="150" />

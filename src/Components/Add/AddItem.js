@@ -11,6 +11,8 @@ import { Container, Card } from "react-bootstrap";
 import Resizer from "react-image-file-resizer";
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
+import Logo from "../../logo_amnon.png"
+
 
 import { useState, useEffect } from "react";
 import Axios from "axios";
@@ -92,6 +94,7 @@ function AddItem(props) {
     option: (provided, state) => ({
       ...provided,
       color: state.isFocused ? "black" : "white",
+      
     }),
   };
 
@@ -455,6 +458,22 @@ function AddItem(props) {
 
   return (
     <>
+    {props.object!=null?   
+               <div style={{ textAlign: "center" }}>
+            {props.object.ImagePath ? (
+              <img
+                src={props.object.ImagePath}
+                style={{ height: "250px" }}
+                alt="Oops! Something went wrong"
+              />
+            ) : (
+              <img
+                src={Logo}
+                style={{ height: "150px" }}
+                alt="Something is wrong"
+              />
+            )}
+          </div> : " "}
       <Container>
         <Card style={cardShadow}>
           <Card.Body>
@@ -488,6 +507,7 @@ function AddItem(props) {
                       type="text"
                       name="name"
                       label="name"
+                      
                     />
 
                     <TextField
@@ -521,6 +541,7 @@ function AddItem(props) {
                         onChange={(e) => {
                           setStorage(e.value);
                         }}
+                    
                       />
                     </div>
 

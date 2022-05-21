@@ -25,7 +25,6 @@ const ModifyData = () => {
   const [buildingList, setBuildingList] = useState([]);
   const [sectionList, setSectionList] = useState([]);
   const [questionsList, setQuestionsList] = useState([]);
-
   const [objectName, setObjectName] = useState("");
 
   const getDisplay = () => {
@@ -125,10 +124,14 @@ const ModifyData = () => {
         wantedItem = itemsList.map((i) => {
           if (id === i.ItemID) {
             wanted = i;
+            
           }
           return;
         });
         break;
+    }
+    if(wanted.ImagePath){
+      console.log("a")
     }
     return wanted;
   };
@@ -181,6 +184,7 @@ const ModifyData = () => {
     { value: "Question", label: "Question" }
   ];
   return (
+    
     <div className="tb" style={{ minHeight: `calc(100vh - 80px)`, textAlign: "center" }}>
       <h5 style={{color:"white", marginTop:"10px"}}>Hello, what would you like to modify?</h5>
       <div
@@ -246,7 +250,10 @@ const ModifyData = () => {
           ) : selectedObject === "Showcase" ? (
             <AddShowcase object={getWantedList(wantedObject, "Showcase")} />
           ) : (
+          
             <AddItem object={getWantedList(wantedObject, "Item")} />
+           
+            
           )}
         </div>
       )}

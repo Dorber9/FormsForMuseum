@@ -103,13 +103,13 @@ const AddCourse = (props) => {
   };
 
   const getQuestions = () => {
-    Axios.get("http://35.240.85.175:3001/question").then((response) => {
+    Axios.get("http://34.140.118.51:3001/question").then((response) => {
       setQuestionsList(response.data);
     });
   };
 
   const getItems = () => {
-    Axios.get("http://35.240.85.175:3001/Item").then((response) => {
+    Axios.get("http://34.140.118.51:3001/Item").then((response) => {
       setItemsList(response.data);
     });
   };
@@ -149,7 +149,7 @@ const AddCourse = (props) => {
         itemstemp+=`${element}-`
     })
     
-    Axios.post("http://35.240.85.175:3001/addQuest", {
+    Axios.post("http://34.140.118.51:3001/addQuest", {
       questName: courseName,
       questions: temp,
       itemNames: itemstemp 

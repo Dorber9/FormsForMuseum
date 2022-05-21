@@ -9,224 +9,242 @@ import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 
 const cardShadow = {
-  boxShadow: "inset rgb(0 0 0) -2px -1px 14px 2px",
-  background: "#ffee9db3",
+    boxShadow: "inset rgb(0 0 0) -2px -1px 14px 2px",
+    background: "#ffee9db3",
 };
 
 const styles = makeStyles((theme) => ({
-  root: {
-    "& .MuiOutlinedInput-root": {
-      boxShadow: " 1px 2px 5px rgb(255 203 43)",
-      "&.Mui-focused fieldset": {
-        borderColor: "yellow",
-      },
+    root: {
+        "& .MuiOutlinedInput-root": {
+            boxShadow: " 1px 2px 5px rgb(255 203 43)",
+            "&.Mui-focused fieldset": {
+                borderColor: "yellow",
+            },
+        },
+        "& label.Mui-focused": {
+            color: "white",
+        },
+        "& label": {
+            color: "rgb(255 225 132)",
+            marginLeft: "32%",
+        },
+        "& .MuiOutlinedInput-notchedOutline": {
+            background: "rgb(3 3 1 / 83%)",
+        },
+        "& .MuiOutlinedInput-input": {
+            zIndex: "1",
+            color: "white",
+        },
     },
-    "& label.Mui-focused": {
-      color: "white",
-    },
-    "& label": {
-      color: "rgb(255 225 132)",
-      marginLeft: "32%",
-    },
-    "& .MuiOutlinedInput-notchedOutline": {
-      background: "rgb(3 3 1 / 83%)",
-    },
-    "& .MuiOutlinedInput-input": {
-      zIndex: "1",
-      color: "white",
-    },
-  },
 }));
 
 const AddSection = (props) => {
-  const [description, setDescription] = useState("");
-  const [name, setName] = useState("");
-  const [selectedValue, setSelectedValue] = useState("");
-  const [sectionList, setSectionList] = useState([]);
-  const [buildingList, setBuildingList] = useState([]);
-  useEffect(() => {
-    getBuilding();
+    const [description, setDescription] = useState("");
+    const [name, setName] = useState("");
+    const [selectedValue, setSelectedValue] = useState("");
+    const [sectionList, setSectionList] = useState([]);
+    const [buildingList, setBuildingList] = useState([]);
+    useEffect(() => {
+        getBuilding();
 
-    if (props.object != null) {
-      setName(props.object.Name);
-      setDescription(props.object.Description);
-      setSelectedValue(props.object.BuildingID);
-    }
-  }, [props.object != null ? props.object : ""]);
+        if (props.object != null) {
+            setName(props.object.Name);
+            setDescription(props.object.Description);
+            setSelectedValue(props.object.BuildingID);
+        }
+    }, [props.object != null ? props.object : ""]);
 
-  const postSection = () => {
-    if (selectedValue === "") {
-      alert("Please Select a Building");
-    } else {
-      Axios.post("http://35.240.85.175:3001/addSection", {
-        Name: name,
-        Description: description,
-        BuildingID: selectedValue,
-      }).then(() => {
-        setSectionList([
-          ...sectionList,
-          {
+    const postSection = () => {
+        if (selectedValue === "") {
+            alert("Please Select a Building");
+        } else {
+            Axios.post("http://34.140.118.51:3001/addSection", {
+                Name: name,
+                Description: description,
+                BuildingID: selectedValue,
+            }).then(() => {
+                setSectionList([
+                    ...sectionList,
+                    {
+                        Name: name,
+                        Description: description,
+                        BuildingID: selectedValue,
+                    },
+                ]);
+                alert("Success!");
+                window.location.reload(false);
+            });
+        }
+    };
+
+    const updateSection = () => {
+        Axios.put("http://34.140.118.51:3001/updateSection", {
+            idSection: props.object.idSection,
             Name: name,
             Description: description,
             BuildingID: selectedValue,
-          },
-        ]);
-        alert("Success!");
-        window.location.reload(false);
-      });
-    }
-  };
+        }).then(() => {
+            setSectionList([
+                ...sectionList,
+                {
+                    Name: name,
+                    Description: description,
+                    BuildingID: selectedValue,
+                },
+            ]);
+        });
+    };
 
-  const updateSection = () => {
-    Axios.put("http://35.240.85.175:3001/updateSection", {
-      idSection: props.object.idSection,
-      Name: name,
-      Description: description,
-      BuildingID: selectedValue,
-    }).then(() => {
-      setSectionList([
-        ...sectionList,
+    const getSection = () => {
+        Axios.get("http://34.140.118.51:3001/section").then((response) => {
+            setSectionList(response.data);
+        });
+    };
+
+    const getBuilding = () => {
+        Axios.get("http://34.140.118.51:3001/building").then((response) => {
+            setBuildingList(response.data);
+        });
+    };
+
+    const deleteSection = () => {
+        Axios.delete(
+            `http://34.140.118.51:3001/deleteSection/${props.object.idSection}`, {}
+        ).then(() => {
+            window.location.reload(false);
+        });
+    };
+
+    const classes = styles();
+
+    return ( <
+        Container >
+        <
+        Card style = { cardShadow } >
+        <
+        Card.Body >
+        <
+        Card.Text >
+        <
+        div className = "txtf" >
+        <
+        TextField className = { classes.root }
+        value = { name }
+        onChange = {
+            (event) => {
+                setName(event.target.value);
+            }
+        }
+        variant = "outlined"
+        type = "text"
+        name = "name"
+        label = "Name" /
+        >
+        <
+        br / >
+        <
+        br / >
+        <
+        TextField className = { classes.root }
+        value = { description }
+        onChange = {
+            (event) => {
+                setDescription(event.target.value);
+            }
+        }
+        variant = "outlined"
+        type = "text"
+        name = "Description"
+        label = "Description"
+        style = {
+            { width: "75%" } }
+        fullWidth multiline rows = "3" /
+        >
+        <
+        br / >
+        <
+        br / >
+        <
+        div >
+        <
+        label >
+        Building:
+        <
+        select onChange = {
+            (event) => {
+                setSelectedValue(event.target.value);
+            }
+        } >
         {
-          Name: name,
-          Description: description,
-          BuildingID: selectedValue,
-        },
-      ]);
-    });
-  };
-
-  const getSection = () => {
-    Axios.get("http://35.240.85.175:3001/section").then((response) => {
-      setSectionList(response.data);
-    });
-  };
-
-  const getBuilding = () => {
-    Axios.get("http://35.240.85.175:3001/building").then((response) => {
-      setBuildingList(response.data);
-    });
-  };
-
-  const deleteSection = () => {
-    Axios.delete(
-      `http://35.240.85.175:3001/deleteSection/${props.object.idSection}`,
-      {}
-    ).then(() => {
-      window.location.reload(false);
-    });
-  };
-
-  const classes = styles();
-
-  return (
-    <Container>
-      <Card style={cardShadow}>
-        <Card.Body>
-          <Card.Text>
-            <div className="txtf">
-              <TextField
-                className={classes.root}
-                value={name}
-                onChange={(event) => {
-                  setName(event.target.value);
-                }}
-                variant="outlined"
-                type="text"
-                name="name"
-                label="Name"
-              />
-              <br />
-              <br />
-              <TextField
-                className={classes.root}
-                value={description}
-                onChange={(event) => {
-                  setDescription(event.target.value);
-                }}
-                variant="outlined"
-                type="text"
-                name="Description"
-                label="Description"
-                style={{ width: "75%" }}
-                fullWidth
-                multiline
-                rows="3"
-              />
-              <br />
-              <br />
-              <div>
-                <label>
-                  Building:
-                  <select
-                    onChange={(event) => {
-                      setSelectedValue(event.target.value);
-                    }}
-                  >
-                    {props.object == null ? (
-                      <option disabled selected value>
-                        Please Select Building
-                      </option>
-                    ) : (
-                      ""
-                    )}
-
-                    {buildingList.map((val, key) => {
-                      return (
-                        <option
-                          selected={
-                            (props.object != null &&
-                              val.BuildingID == props.object.BuildingID) ||
-                            val.BuildingID ==
-                              buildingList[buildingList.length - 1].BuildingID
-                          }
-                          className="building"
-                          value={val.BuildingID}
-                        >
-                          {val.Name}
-                        </option>
-                      );
-                    })}
-                  </select>
-                </label>
-              </div>
-              <br />
-              <br />
-              <Button
-                className="bn30"
-                variant="contained"
-                color="primary"
-                type="submit"
-                onClick={props.object == null ? postSection : updateSection}
-              >
-                SUBMIT
-              </Button>
-              {props.object == null ? (
+            props.object == null ? ( <
+                option disabled selected value >
+                Please Select Building <
+                /option>
+            ) : (
                 ""
-              ) : (
-                <Button
-                  variant="contained"
-                  color="primary"
-                  type="submit"
-                  style={{
-                    color: "white",
-                    background: "red",
-                    marginLeft: "10px",
-                  }}
-                  onClick={deleteSection}
-                >
-                  Delete Section
-                </Button>
-              )}
+            )
+        }
 
-              {/* <button id="check" onClick={getSection}>
-          Show Sections
-        </button> */}
-            </div>
-          </Card.Text>
-        </Card.Body>
-      </Card>
-    </Container>
-  );
+        {
+            buildingList.map((val, key) => {
+                return ( <
+                    option selected = {
+                        (props.object != null &&
+                            val.BuildingID == props.object.BuildingID) ||
+                        val.BuildingID ==
+                        buildingList[buildingList.length - 1].BuildingID
+                    }
+                    className = "building"
+                    value = { val.BuildingID } >
+                    { val.Name } <
+                    /option>
+                );
+            })
+        } <
+        /select> <
+        /label> <
+        /div> <
+        br / >
+        <
+        br / >
+        <
+        Button className = "bn30"
+        variant = "contained"
+        color = "primary"
+        type = "submit"
+        onClick = { props.object == null ? postSection : updateSection } >
+        SUBMIT <
+        /Button> {
+            props.object == null ? (
+                ""
+            ) : ( <
+                Button variant = "contained"
+                color = "primary"
+                type = "submit"
+                style = {
+                    {
+                        color: "white",
+                        background: "red",
+                        marginLeft: "10px",
+                    }
+                }
+                onClick = { deleteSection } >
+                Delete Section <
+                /Button>
+            )
+        }
+
+        {
+            /* <button id="check" onClick={getSection}>
+                      Show Sections
+                    </button> */
+        } <
+        /div> <
+        /Card.Text> <
+        /Card.Body> <
+        /Card> <
+        /Container>
+    );
 };
 
 export default AddSection;

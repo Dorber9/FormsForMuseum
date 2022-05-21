@@ -134,14 +134,14 @@ const AddQuestion = (props) => {
 
   const deleteQuestion = (id) => {
     console.log(id);
-    Axios.delete(`http://35.240.85.175:3001/deleteQuestion/${id}`).then(() => {
+    Axios.delete(`http://34.140.118.51:3001/deleteQuestion/${id}`).then(() => {
       window.location.reload(false);
     });
   };
 
   /* change to relevant url */
   const postQuestion = () => {
-    Axios.post("http://35.240.85.175:3001/addQuestion", {
+    Axios.post("http://34.140.118.51:3001/addQuestion", {
       questions: inputFields,
       itemID: wantedItem,
     }).then((response) => {
@@ -150,7 +150,7 @@ const AddQuestion = (props) => {
     });
   };
   const updateQuestion = () => {
-    Axios.put("http://35.240.85.175:3001/updateQuestion", {
+    Axios.put("http://34.140.118.51:3001/updateQuestion", {
       questions: inputFields,
       itemID: wantedItem,
     }).then((response) => {
@@ -160,7 +160,7 @@ const AddQuestion = (props) => {
   };
 
   const getItems = () => {
-    Axios.get("http://35.240.85.175:3001/Item").then((response) => {
+    Axios.get("http://34.140.118.51:3001/Item").then((response) => {
       setItemsList(response.data);
     });
   };

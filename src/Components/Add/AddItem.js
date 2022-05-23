@@ -222,9 +222,11 @@ function AddItem(props) {
       setReferences(props.object.Refs);
       setInputFields([]);
       setPath(props.object.ImagePath);
-      
-      if(props.object.itemData){
+      if(props.object.ItemData){
+        
+
         const data = props.object.ItemData.split("^%^");
+        console.log(data)
         data.pop();
         var temp = [];
 

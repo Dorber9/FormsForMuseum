@@ -24,7 +24,7 @@ const AddMuseumBuildingSection = (props) => {
 
             <Card.Body>
               <Card.Text>
-                <AddMuseum></AddMuseum>
+                  <AddMuseum></AddMuseum>
               </Card.Text>
             </Card.Body>
           </Card>

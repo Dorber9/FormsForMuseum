@@ -16,6 +16,7 @@ import AddQuestionNew from "./AddQuestionNew";
 import Login from "./Login";
 import useToken from "./useToken";
 import QuestionsQuiz from "./QuestionsQuiz";
+import SearchItem from "./Components/SearchItem";
 
 function App() {
   // useEffect(() => {
@@ -50,6 +51,7 @@ function App() {
 
           <BrowserRouter>
             <Routes>
+              <Route exact path="/Search" element={<SearchItem />}></Route>
               {token === "abc" && (
                 <>
                 <Route exact path="/Add" element={<Add />}></Route>

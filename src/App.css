@@ -322,8 +322,8 @@
     
     .loading-spinner {
         text-align: center;
-        width: 200px;
-        height: 200px;
+        width: 100px;
+        height: 100px;
         border: 10px solid #f3f3f3;
         border-top: 10px solid #383636;
         border-radius: 50%;

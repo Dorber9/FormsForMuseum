@@ -21,6 +21,9 @@ import AddQuestion from "./AddQuestion";
 import Collapse from "./Collapse";
 import ReactUploadImage from "../ReactUploadImage";
 
+
+const server_ip = "34.79.201.254"
+
 const useStyles = makeStyles((theme) => ({
   root: {
     "& .MuiTextField-root": {
@@ -249,7 +252,7 @@ function AddItem(props) {
     if (storage === "0" && display === "") {
       alert("Please Select a Display");
     } else {
-      Axios.post("http://34.140.118.51:3001/addItem", {
+      Axios.post(`http://${server_ip}:3001/addItem`, {
         ID: itemId,
         name: name,
         descr: descr,
@@ -293,7 +296,7 @@ function AddItem(props) {
   };
 
   const updateItem = (img) => {
-    Axios.put("http://34.140.118.51:3001/updateItem", {
+    Axios.put(`http://${server_ip}:3001/updateItem`, {
       ID: itemId,
       name: name,
       descr: descr,
@@ -336,21 +339,21 @@ function AddItem(props) {
   };
 
   const getDisplay = () => {
-    Axios.get("http://34.140.118.51:3001/Display").then((response) => {
+    Axios.get(`http://${server_ip}:3001/Display`).then((response) => {
       setDisplayList(response.data);
     });
     displayOptions();
   };
 
   const getShowcase = () => {
-    Axios.get("http://34.140.118.51:3001/Showcase").then((response) => {
+    Axios.get(`http://${server_ip}:3001/Showcase`).then((response) => {
       setShowcaseList(response.data);
     });
     showcaseOptions();
   };
 
   const getItems = () => {
-    Axios.get("http://34.140.118.51:3001/Item").then((response) => {
+    Axios.get(`http://${server_ip}:3001/Item`).then((response) => {
       setItemsList(response.data);
     });
   };
@@ -444,7 +447,7 @@ function AddItem(props) {
 
   const deleteItem = () => {
     Axios.delete(
-      `http://34.140.118.51:3001/deleteItem/${props.object.ItemID}`,
+      `http://${server_ip}:3001/deleteItem/${props.object.ItemID}`,
       {}
     ).then(() => {
       window.location.reload(false);

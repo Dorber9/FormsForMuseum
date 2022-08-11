@@ -12,6 +12,9 @@ import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import { Container, Card } from "react-bootstrap";
 
+
+const server_ip = "34.79.201.254"
+
 const useStyles = makeStyles((theme) => ({
   root: {
     "& .MuiTextField-root": {
@@ -134,14 +137,14 @@ const AddQuestion = (props) => {
 
   const deleteQuestion = (id) => {
     console.log(id);
-    Axios.delete(`http://34.140.118.51:3001/deleteQuestion/${id}`).then(() => {
+    Axios.delete(`http://${server_ip}:3001/deleteQuestion/${id}`).then(() => {
       window.location.reload(false);
     });
   };
 
   /* change to relevant url */
   const postQuestion = () => {
-    Axios.post("http://34.140.118.51:3001/addQuestion", {
+    Axios.post(`http://${server_ip}:3001/addQuestion`, {
       questions: inputFields,
       itemID: wantedItem,
     }).then((response) => {
@@ -150,7 +153,7 @@ const AddQuestion = (props) => {
     });
   };
   const updateQuestion = () => {
-    Axios.put("http://34.140.118.51:3001/updateQuestion", {
+    Axios.put(`http://${server_ip}:3001/updateQuestion`, {
       questions: inputFields,
       itemID: wantedItem,
     }).then((response) => {
@@ -160,7 +163,7 @@ const AddQuestion = (props) => {
   };
 
   const getItems = () => {
-    Axios.get("http://34.140.118.51:3001/Item").then((response) => {
+    Axios.get(`http://${server_ip}:3001/Item`).then((response) => {
       setItemsList(response.data);
     });
   };

@@ -21,7 +21,7 @@ const AddQuestionNew = (props) => {
  const getItem = async () => {
     try {
       let res = await Axios.get(
-        `http://34.140.118.51:3001/Item/${params.id}`
+        `http://34.79.201.254:3001/Item/${params.id}`
       );
      setItemName(res.data[0].ItemName)
     } catch (error) {

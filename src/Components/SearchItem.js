@@ -37,7 +37,7 @@ const SearchItem = () => {
 
 
   const getItems = () => {
-    Axios.get("http://34.140.118.51:3001/Item").then((response) => {
+    Axios.get("http://34.79.201.254:3001/Item").then((response) => {
         setItemsList(response.data)
        const unique= [...new Set(response.data.map(item => item.ItemName))]
       setCategories(unique);

@@ -21,7 +21,7 @@ app.use(
 
 const db = mysql.createPool({
     user: "root",
-    host: "34.140.118.51",
+    host: "34.79.201.254",
     password: "MophM2022!",
     database: "museum",
 });

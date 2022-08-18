@@ -8,6 +8,9 @@ import { Container, Card } from "react-bootstrap";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 
+
+const server_ip = "34.79.201.254"
+
 const cardShadow = {
   boxShadow: "inset rgb(0 0 0) -2px -1px 14px 2px",
   background: "#ffee9db3",
@@ -58,7 +61,7 @@ const AddSection = (props) => {
     if (selectedValue === "") {
       alert("Please Select a Building");
     } else {
-      Axios.post("http://34.140.118.51:3001/addSection", {
+      Axios.post(`http://${server_ip}:3001/addSection`, {
         Name: name,
         Description: description,
         BuildingID: selectedValue,
@@ -78,7 +81,7 @@ const AddSection = (props) => {
   };
 
   const updateSection = () => {
-    Axios.put("http://34.140.118.51:3001/updateSection", {
+    Axios.put(`http://${server_ip}:3001/updateSection`, {
       idSection: props.object.idSection,
       Name: name,
       Description: description,
@@ -96,20 +99,20 @@ const AddSection = (props) => {
   };
 
   const getSection = () => {
-    Axios.get("http://34.140.118.51:3001/section").then((response) => {
+    Axios.get(`http://${server_ip}:3001/section`).then((response) => {
       setSectionList(response.data);
     });
   };
 
   const getBuilding = () => {
-    Axios.get("http://34.140.118.51:3001/building").then((response) => {
+    Axios.get(`http://${server_ip}:3001/building`).then((response) => {
       setBuildingList(response.data);
     });
   };
 
   const deleteSection = () => {
     Axios.delete(
-      `http://34.140.118.51:3001/deleteSection/${props.object.idSection}`,
+      `http://${server_ip}:3001/deleteSection/${props.object.idSection}`,
       {}
     ).then(() => {
       window.location.reload(false);

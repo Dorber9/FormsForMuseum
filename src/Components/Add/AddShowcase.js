@@ -11,6 +11,9 @@ import Resizer from "react-image-file-resizer";
 
 import ReactUploadImage from "../ReactUploadImage";
 
+
+const server_ip = "34.79.201.254"
+
 const AddShowcase = (props) => {
   const [number, setNumber] = useState("");
   const [name, setName] = useState("");
@@ -127,7 +130,7 @@ const AddShowcase = (props) => {
     if (selectedValue === "Please Select Display") {
       alert("Please Select a Display");
     } else {
-      Axios.post("http://34.140.118.51:3001/addShowcase", {
+      Axios.post(`http://${server_ip}:3001/addShowcase`, {
         Number: number,
         Name: name,
         Desc: description,
@@ -157,7 +160,7 @@ const AddShowcase = (props) => {
   };
 
   const updateShowcase = (img) => {
-    Axios.put("http://34.140.118.51:3001/updateShowcase", {
+    Axios.put(`http://${server_ip}:3001/updateShowcase`, {
       idShowcase: props.object.idShowcase,
       Number: number,
       Name: name,
@@ -186,7 +189,7 @@ const AddShowcase = (props) => {
 
   const deleteShowcase = () => {
     Axios.delete(
-      `http://34.140.118.51:3001/deleteShowcase/${props.object.idShowcase}`,
+      `http://${server_ip}:3001/deleteShowcase/${props.object.idShowcase}`,
       {}
     ).then(() => {
       window.location.reload(false);
@@ -199,13 +202,13 @@ const AddShowcase = (props) => {
   ];
 
   const getShowcase = () => {
-    Axios.get("http://34.140.118.51:3001/Showcase").then((response) => {
+    Axios.get(`http://${server_ip}:3001/Showcase`).then((response) => {
       setShowcaseList(response.data);
     });
   };
 
   const getDisplay = () => {
-    Axios.get("http://34.140.118.51:3001/Display").then((response) => {
+    Axios.get(`http://${server_ip}:3001/Display`).then((response) => {
       setDisplayList(response.data);
     });
   };

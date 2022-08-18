@@ -26,7 +26,7 @@ const ViewItemWiki = (props) => {
   useEffect(() => {
     setDataWiki([]);
     console.log(props.itemId)
-       Axios.get(`http://34.140.118.51:3001/Item/${props.itemId}`).then((response) => {
+       Axios.get(`http://34.79.201.254:3001/Item/${props.itemId}`).then((response) => {
            console.log(response.data[0])
        setName(response.data[0].HebItemName)
         setMaterial(response.data[0].HebMaterial)

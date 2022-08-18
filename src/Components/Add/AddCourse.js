@@ -12,6 +12,9 @@ import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import { Container, Card } from "react-bootstrap";
 
+
+const server_ip = "34.79.201.254"
+
 const cardShadow = {
   boxShadow: "inset rgb(0 0 0) -2px -1px 14px 2px",
   background: "#ffee9db3",
@@ -103,13 +106,13 @@ const AddCourse = (props) => {
   };
 
   const getQuestions = () => {
-    Axios.get("http://34.140.118.51:3001/question").then((response) => {
+    Axios.get(`http://${server_ip}:3001/question`).then((response) => {
       setQuestionsList(response.data);
     });
   };
 
   const getItems = () => {
-    Axios.get("http://34.140.118.51:3001/Item").then((response) => {
+    Axios.get(`http://${server_ip}:3001/Item`).then((response) => {
       setItemsList(response.data);
     });
   };
@@ -149,7 +152,7 @@ const AddCourse = (props) => {
         itemstemp+=`${element}-`
     })
     
-    Axios.post("http://34.140.118.51:3001/addQuest", {
+    Axios.post(`http://${server_ip}:3001/addQuest`, {
       questName: courseName,
       questions: temp,
       itemNames: itemstemp 

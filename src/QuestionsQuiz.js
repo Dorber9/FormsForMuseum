@@ -17,7 +17,7 @@ const QuestionsQuiz = () => {
 
     
     useEffect(() => {
-    Axios.get(`http://34.140.118.51:3001/Quest/${params.id}`).then((response) => {
+    Axios.get(`http://34.79.201.254:3001/Quest/${params.id}`).then((response) => {
       if(response.data[0].questItems)
         getQuestions(response.data[0].questions,response.data[0].questName,response.data[0].questItems);
       else
@@ -44,7 +44,7 @@ const QuestionsQuiz = () => {
     let counter=1
     let i=0
     arr.forEach((element)=> {
-        Axios.get(`http://34.140.118.51:3001/question/${element}`).then((response) => {
+        Axios.get(`http://34.79.201.254:3001/question/${element}`).then((response) => {
         if(counter%2==0 || counter==arr.length){
             questionslist.push(buildNextItem(itemsArr[i]))
             i++

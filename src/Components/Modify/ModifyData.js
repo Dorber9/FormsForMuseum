@@ -13,6 +13,9 @@ import AddQuestion from "../Add/AddQuestion";
 
 import { render } from "react-dom";
 
+
+const server_ip = "34.79.201.254"
+
 const selectStyles = { menu: (styles) => ({ ...styles, zIndex: 999,background:"black" }) };
 
 const ModifyData = () => {
@@ -28,43 +31,43 @@ const ModifyData = () => {
   const [objectName, setObjectName] = useState("");
 
   const getDisplay = () => {
-    Axios.get("http://34.140.118.51:3001/Display").then((response) => {
+    Axios.get(`http://${server_ip}:3001/Display`).then((response) => {
       setDisplayList(response.data);
     });
   };
 
   const getShowcase = () => {
-    Axios.get("http://34.140.118.51:3001/Showcase").then((response) => {
+    Axios.get(`http://${server_ip}:3001/Showcase`).then((response) => {
       setShowcaseList(response.data);
     });
   };
 
   const getItems = () => {
-    Axios.get("http://34.140.118.51:3001/Item").then((response) => {
+    Axios.get(`http://${server_ip}:3001/Item`).then((response) => {
       setItemsList(response.data);
     });
   };
 
   const getMuseum = () => {
-    Axios.get("http://34.140.118.51:3001/museum").then((response) => {
+    Axios.get(`http://${server_ip}:3001/museum`).then((response) => {
       setMuseumList(response.data);
     });
   };
 
   const getBuilding = () => {
-    Axios.get("http://34.140.118.51:3001/building").then((response) => {
+    Axios.get(`http://${server_ip}:3001/building`).then((response) => {
       setBuildingList(response.data);
     });
   };
 
   const getSection = () => {
-    Axios.get("http://34.140.118.51:3001/section").then((response) => {
+    Axios.get(`http://${server_ip}:3001/section`).then((response) => {
       setSectionList(response.data);
     });
   };
 
    const getQuestions = () => {
-    Axios.get("http://34.140.118.51:3001/question").then((response) => {
+    Axios.get(`http://${server_ip}:3001/question`).then((response) => {
       setQuestionsList(response.data)
     });
   };

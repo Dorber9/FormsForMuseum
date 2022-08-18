@@ -16,7 +16,7 @@ const ListOfCourses = () => {
   }, []);
 
   const getQuests = () => {
-    Axios.get("http://34.140.118.51:3001/quest").then((response) => {
+    Axios.get("http://34.79.201.254:3001/quest").then((response) => {
       setquestsList(response.data);
     });
   };

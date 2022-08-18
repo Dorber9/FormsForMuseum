@@ -7,6 +7,8 @@ import Button from "@material-ui/core/Button";
 import { Container, Card } from "react-bootstrap";
 
 
+const server_ip = "34.79.201.254"
+
 const cardShadow={boxShadow:"inset rgb(0 0 0) -2px -1px 14px 2px" , background:"#ffee9db3"};
 
 
@@ -50,7 +52,7 @@ const AddMuseum = (props) => {
   }, [props.object != null ? props.object : ""]);
 
   const postMuseum = () => {
-    Axios.post("http://34.140.118.51:3001/addMuseum", {
+    Axios.post(`http://${server_ip}:3001/addMuseum`, {
       name: name,
     }).then(() => {
       setMuseumList([
@@ -63,7 +65,7 @@ const AddMuseum = (props) => {
   };
 
   const updateMuseum = () => {
-    Axios.put("http://34.140.118.51:3001/updateMuseum", {
+    Axios.put(`http://${server_ip}:3001/updateMuseum`, {
       id: props.object.id,
       name: name,
     }).then(() => {
@@ -78,7 +80,7 @@ const AddMuseum = (props) => {
 
   const deleteMuseum = () => {
     Axios.delete(
-      `http://34.140.118.51:3001/deleteMuseum/${props.object.id}`,
+      `http://${server_ip}:3001/deleteMuseum/${props.object.id}`,
       {}
     ).then(() => {
       window.location.reload(false);
@@ -86,7 +88,7 @@ const AddMuseum = (props) => {
   };
 
   const getMuseum = () => {
-    Axios.get("http://34.140.118.51:3001/museum").then((response) => {
+    Axios.get(`http://${server_ip}:3001/museum`).then((response) => {
       setMuseumList(response.data);
     });
   };

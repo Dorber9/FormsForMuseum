@@ -21,6 +21,9 @@ import AddQuestion from "./AddQuestion";
 import Collapse from "./Collapse";
 import ReactUploadImage from "../ReactUploadImage";
 
+
+const server_ip = "34.79.201.254";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     "& .MuiTextField-root": {
@@ -210,8 +213,12 @@ function AddItem(props) {
       setMaterial(props.object.Material);
       setPeriod(props.object.Period);
       setSite(props.object.Site);
-      setStorage("" + props.object.InStorage);
-      if (props.object.InStorage !== "1") {
+      console.log("us effect");
+      if(props.object.InStorage!= null)
+        setStorage(props.object.InStorage)
+ 
+
+      if (storage !== "1") {
         setDisplay(props.object.DisplayID);
         setShowcase(props.object.ShowcaseID);
 
@@ -249,7 +256,7 @@ function AddItem(props) {
     if (storage === "0" && display === "") {
       alert("Please Select a Display");
     } else {
-      Axios.post("http://34.140.118.51:3001/addItem", {
+      Axios.post(`http://${server_ip}:3001/addItem`, {
         ID: itemId,
         name: name,
         descr: descr,
@@ -293,9 +300,8 @@ function AddItem(props) {
   };
 
   const updateItem = (img) => {
-    console.log("image is")
-    console.log(img)
-    Axios.put("http://localhost:3001/updateItem", {
+ 
+    Axios.put(`http://${server_ip}:3001/updateItem`, {
       ID: itemId,
       name: name,
       descr: descr,
@@ -338,21 +344,21 @@ function AddItem(props) {
   };
 
   const getDisplay = () => {
-    Axios.get("http://34.140.118.51:3001/Display").then((response) => {
+    Axios.get(`http://${server_ip}:3001/Display`).then((response) => {
       setDisplayList(response.data);
     });
     displayOptions();
   };
 
   const getShowcase = () => {
-    Axios.get("http://34.140.118.51:3001/Showcase").then((response) => {
+    Axios.get(`http://${server_ip}:3001/Showcase`).then((response) => {
       setShowcaseList(response.data);
     });
     showcaseOptions();
   };
 
   const getItems = () => {
-    Axios.get("http://34.140.118.51:3001/Item").then((response) => {
+    Axios.get(`http://${server_ip}:3001/Item`).then((response) => {
       setItemsList(response.data);
     });
   };
@@ -445,7 +451,7 @@ function AddItem(props) {
 
   const deleteItem = () => {
     Axios.delete(
-      `http://34.140.118.51:3001/deleteItem/${props.object.ItemID}`,
+      `http://${server_ip}:3001/deleteItem/${props.object.ItemID}`,
       {}
     ).then(() => {
       window.location.reload(false);
@@ -543,6 +549,7 @@ function AddItem(props) {
                         options={options}
                         onChange={(e) => {
                           setStorage(e.value);
+                          console.log("changd the value")
                         }}
                     
                       />

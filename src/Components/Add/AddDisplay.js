@@ -10,6 +10,9 @@ import { Container, Card } from "react-bootstrap";
 import { makeStyles } from "@material-ui/core/styles";
 
 import "../../App.css";
+
+const server_ip  = "34.79.201.254"
+
 const options = [
   { value: "1", label: "Permanent" },
   { value: "0", label: "Non permanent" },
@@ -97,7 +100,7 @@ const AddDisplay = (props) => {
     if (selectedValue === "Please Select Section") {
       alert("Please Select a Section");
     } else {
-      Axios.post("http://34.140.118.51:3001/addDisplay", {
+      Axios.post(`http://${server_ip}:3001/addDisplay`, {
         Name: name,
         Theme: theme,
         permanent: permanent,
@@ -131,7 +134,7 @@ const AddDisplay = (props) => {
   };
 
   const updateDisplay = () => {
-    Axios.put("http://34.140.118.51:3001/updateDisplay", {
+    Axios.put(`http://${server_ip}:3001/updateDisplay`, {
       idDisplay: props.object.idDisplay,
       Name: name,
       Theme: theme,
@@ -164,7 +167,7 @@ const AddDisplay = (props) => {
 
   const deleteDisplay = () => {
     Axios.delete(
-      `http://34.140.118.51:3001/deleteDisplay/${props.object.idDisplay}`,
+      `http://${server_ip}:3001/deleteDisplay/${props.object.idDisplay}`,
       {}
     ).then(() => {
       window.location.reload(false);
@@ -172,13 +175,13 @@ const AddDisplay = (props) => {
   };
 
   const getSection = () => {
-    Axios.get("http://34.140.118.51:3001/section").then((response) => {
+    Axios.get(`http://${server_ip}:3001/section`).then((response) => {
       setSectionList(response.data);
     });
   };
 
   const getDisplay = () => {
-    Axios.get("http://34.140.118.51:3001/display").then((response) => {
+    Axios.get(`http://${server_ip}:3001/display`).then((response) => {
       setDisplayList(response.data);
     });
   };

@@ -221,7 +221,7 @@ function AddItem(props) {
       setSize(props.object.Size);
       setReferences(props.object.Refs);
       setInputFields([]);
-      setPath(props.object.ImagePath);
+      setPath(props.object.ImagePath!= null ? props.object.ImagePath : "");
       if(props.object.ItemData){
         
 
@@ -293,7 +293,9 @@ function AddItem(props) {
   };
 
   const updateItem = (img) => {
-    Axios.put("http://34.140.118.51:3001/updateItem", {
+    console.log("image is")
+    console.log(img)
+    Axios.put("http://localhost:3001/updateItem", {
       ID: itemId,
       name: name,
       descr: descr,
@@ -379,6 +381,7 @@ function AddItem(props) {
     if (ImageFlag) {
       try {
         const image = await resizeFile(file);
+        
         props.object == null ? postItem(image) : updateItem(image);
       } catch (error) {
         console.log(error.data);
@@ -412,9 +415,7 @@ function AddItem(props) {
   //         updateItem(path)
   // };
 
-  const tryFunction = (param) => {
-    setPath(param);
-  };
+ 
 
   const fileChange = (e) => {
     setImageFlag(true);

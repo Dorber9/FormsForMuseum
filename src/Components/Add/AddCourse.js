@@ -12,8 +12,7 @@ import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import { Container, Card } from "react-bootstrap";
 
-
-const server_ip = "34.79.201.254"
+const server_ip = "34.79.201.254";
 
 const cardShadow = {
   boxShadow: "inset rgb(0 0 0) -2px -1px 14px 2px",
@@ -67,7 +66,6 @@ const selectStyles = {
 
 const AddCourse = (props) => {
   const [questionsList, setQuestionsList] = useState([]);
-
   const [itemsList, setItemsList] = useState([]);
   const [wantedItem, setWantedItem] = useState("");
   const [flag, setFlag] = useState(false);
@@ -117,16 +115,15 @@ const AddCourse = (props) => {
     });
   };
 
-  const mapOptions= ()=> {
-    let temp=[]
-    questionsList.forEach((q)=> {
-        if(q.ObjectID==wantedItem){
-            temp.push({ value: q.QuestionID, label: q.Question })
-        }
-    })
-    return temp
-
-  }
+  const mapOptions = () => {
+    let temp = [];
+    questionsList.forEach((q) => {
+      if (q.ObjectID == wantedItem) {
+        temp.push({ value: q.QuestionID, label: q.Question });
+      }
+    });
+    return temp;
+  };
 
   const postCourse = (e) => {
     e.preventDefault();
@@ -134,28 +131,26 @@ const AddCourse = (props) => {
       Object.keys(x)
         .filter((key) => key == "questionId")
         .map((key) => `${x[key]}`)
-        
     );
-    let temp=""
-    data.forEach((element)=> {
-        temp+=`${element}-`
-    })
+    let temp = "";
+    data.forEach((element) => {
+      temp += `${element}-`;
+    });
     const itemNames = inputFields.map((x) =>
       Object.keys(x)
         .filter((key) => key == "itemId")
         .map((key) => `${x[key]}`)
-        
     );
-    itemNames.shift()
-    let itemstemp=""
-    itemNames.forEach((element)=> {
-        itemstemp+=`${element}-`
-    })
-    
+    itemNames.shift();
+    let itemstemp = "";
+    itemNames.forEach((element) => {
+      itemstemp += `${element}-`;
+    });
+
     Axios.post(`http://${server_ip}:3001/addQuest`, {
       questName: courseName,
       questions: temp,
-      itemNames: itemstemp 
+      itemNames: itemstemp,
     }).then(() => {
       alert("Success!");
       window.location.reload(false);
@@ -164,6 +159,9 @@ const AddCourse = (props) => {
   useEffect(() => {
     getItems();
     getQuestions();
+    if (props.object != null) {
+      setCourseName(props.object.questName);
+    }
     // if (props.object != null) {
     //   modifyInputFields("");
     //   return;
@@ -188,7 +186,7 @@ const AddCourse = (props) => {
                   className={classstyle.root}
                   value={courseName}
                   name="Course Name"
-                  label="Course Name"
+                  label="Quest's Name"
                   variant="outlined"
                   style={{ width: "25%" }}
                   onChange={(e) => setCourseName(e.target.value)}

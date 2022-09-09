@@ -4,10 +4,9 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import Button from "@material-ui/core/Button";
 import AddCourse from "./Add/AddCourse";
 import ModifyCourse from "./Modify/ModifyCourse";
-import ListOfCourses from "./ListOfCourses"
+import ListOfCourses from "./ListOfCourses";
 
-const tabStyle= {color: "white"}
-
+const tabStyle = { color: "white" };
 
 const CourseWizard = () => {
   return (
@@ -21,11 +20,10 @@ const CourseWizard = () => {
         </TabList>
 
         <TabPanel>
-          
           <AddCourse />
         </TabPanel>
         <TabPanel>
-          <h2 style={{ textAlign: "center" }}>Modify Quest</h2>
+          <h2 style={{ textAlign: "center", color: "white" }}>Modify Quest</h2>
           <ModifyCourse />
         </TabPanel>
         <TabPanel>

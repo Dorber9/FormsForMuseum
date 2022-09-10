@@ -5,6 +5,7 @@ import Button from "@material-ui/core/Button";
 import AddCourse from "./Add/AddCourse";
 import ModifyCourse from "./Modify/ModifyCourse";
 import ListOfCourses from "./ListOfCourses";
+import { Link } from "react-router-dom";
 
 const tabStyle = { color: "white" };
 
@@ -24,6 +25,7 @@ const CourseWizard = () => {
         </TabPanel>
         <TabPanel>
           <h2 style={{ textAlign: "center", color: "white" }}>Modify Quest</h2>
+
           <ModifyCourse />
         </TabPanel>
         <TabPanel>

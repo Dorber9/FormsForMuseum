@@ -17,6 +17,7 @@ import Login from "./Login";
 import useToken from "./useToken";
 import QuestionsQuiz from "./QuestionsQuiz";
 import SearchItem from "./Components/SearchItem";
+import ModifyCourse from "./Components/Modify/ModifyCourse";
 
 function App() {
   // useEffect(() => {
@@ -54,34 +55,47 @@ function App() {
               <Route exact path="/Search" element={<SearchItem />}></Route>
               {token === "abc" && (
                 <>
-                <Route exact path="/Add" element={<Add />}></Route>
-                <Route exact path="/" element={<HomePage />}></Route>
-                <Route
-                exact
-                path="/AddQuestion/:id"
-                element={<AddQuestionNew></AddQuestionNew>}
-              ></Route>
+                  <Route exact path="/Add" element={<Add />}></Route>
+                  <Route exact path="/" element={<HomePage />}></Route>
+                  <Route
+                    exact
+                    path="/AddQuestion/:id"
+                    element={<AddQuestionNew></AddQuestionNew>}
+                  ></Route>
 
-              <Route
-                exact
-                path="/CourseWizard"
-                element={<CourseWizard />}
-              ></Route>
-              <Route exact path="/ModifyData" element={<ModifyData />}></Route>
-              <Route exact path="/Reports" element={<Reports />}></Route>
-              </>
+                  <Route
+                    exact
+                    path="/CourseWizard"
+                    element={<CourseWizard />}
+                  ></Route>
+                  <Route
+                    exact
+                    path="/ModifyData"
+                    element={<ModifyData />}
+                  ></Route>
+
+                  <Route exact path="/Reports" element={<Reports />}></Route>
+                </>
               )}
               {token !== "abc" && (
                 <>
-                              <Route exact path="/Login" element={<Login setToken={setToken} />}></Route>
-                <Route
-                  exact
-                  path="/"
-                  element={<ListOfItems></ListOfItems>}
-                ></Route>
+                  <Route
+                    exact
+                    path="/Login"
+                    element={<Login setToken={setToken} />}
+                  ></Route>
+                  <Route
+                    exact
+                    path="/"
+                    element={<ListOfItems></ListOfItems>}
+                  ></Route>
                 </>
               )}
-              <Route exact path="/Course/:id" element= {<QuestionsQuiz></QuestionsQuiz>} ></Route>
+              <Route
+                exact
+                path="/Course/:id"
+                element={<QuestionsQuiz></QuestionsQuiz>}
+              ></Route>
               <Route
                 exact
                 path="/ItemsList"
@@ -92,9 +106,8 @@ function App() {
                 path="/Item/:id"
                 element={<ViewItemNewPage />}
               ></Route>
-
             </Routes>
-            {token==="abc" && (<Footer />)}
+            {token === "abc" && <Footer />}
           </BrowserRouter>
         </div>
       </Translator>

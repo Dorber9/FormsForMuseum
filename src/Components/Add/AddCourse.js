@@ -11,6 +11,7 @@ import { v4 as uuidv4 } from "uuid";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import { Container, Card } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const server_ip = "34.79.201.254";
 
@@ -65,6 +66,7 @@ const selectStyles = {
 };
 
 const AddCourse = (props) => {
+  console.log(props.object);
   const [questionsList, setQuestionsList] = useState([]);
   const [itemsList, setItemsList] = useState([]);
   const [wantedItem, setWantedItem] = useState("");
@@ -156,20 +158,40 @@ const AddCourse = (props) => {
       window.location.reload(false);
     });
   };
+
+  const deleteQuest = () => {
+    Axios.delete(
+      `http://${server_ip}:3001/deleteQuest/${props.object.qid}`,
+      {}
+    ).then(() => {
+      alert("Quest Deleted");
+      window.location.reload(false);
+    });
+  };
+
   useEffect(() => {
     getItems();
     getQuestions();
     if (props.object != null) {
+      console.log(props.object);
       setCourseName(props.object.questName);
+
+      if (props.object.questItems != null) {
+        const questions = props.object.questions.split("-");
+        const questItems = props.object.questItems.split("-");
+        var temp = [];
+        var i = 0;
+        questions.forEach((e) => {
+          temp.push({
+            id: uuidv4(),
+            itemId: e,
+            questionId: questions[i],
+          });
+          i += 1;
+        });
+        setInputFields(temp);
+      }
     }
-    // if (props.object != null) {
-    //   modifyInputFields("");
-    //   return;
-    // }
-    // if (props.itemId) {
-    //   setWantedItem(props.itemId);
-    //   setLabel(props.itemName);
-    // }
   }, [props]);
 
   return (
@@ -181,6 +203,7 @@ const AddCourse = (props) => {
           </Card.Title>
           <Card.Body>
             <Card.Text>
+              <div style={{ marginBottom: "20px" }}></div>
               <div className="txtf">
                 <TextField
                   className={classstyle.root}
@@ -249,6 +272,22 @@ const AddCourse = (props) => {
                   SUBMIT
                 </Button>
               </form>
+              {props.object == null ? (
+                ""
+              ) : (
+                <Button
+                  variant="contained"
+                  style={{
+                    color: "white",
+                    background: "red",
+                    marginLeft: "10px",
+                  }}
+                  type="submit"
+                  onClick={deleteQuest}
+                >
+                  Delete Museum
+                </Button>
+              )}
             </Card.Text>
           </Card.Body>
         </Card>

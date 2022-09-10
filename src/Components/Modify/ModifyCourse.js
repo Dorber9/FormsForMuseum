@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import Select from "react-select";
 import Axios from "axios";
+import AddCourse from "../Add/AddCourse";
 
 const server_ip = "34.79.201.254";
 
@@ -24,21 +25,35 @@ const selectStyles = {
 const ModifyCourse = () => {
   const [questsList, setQuestsList] = useState([]);
   const [wantedQuest, setWantedQuest] = useState("");
-
-  const getQuests = () => {
-    Axios.get(`http://${server_ip}:3001/quest`).then((response) => {
-      setQuestsList(response.data);
-    });
-    console.log(questsList);
-    return questsList.map((val, key) => {
-      return { value: val.qid, label: val.questName };
-    });
-  };
+  const [questAsObject, setQuestAsObject] = useState([]);
 
   useEffect(() => {
     getQuests();
     // eslint-disable-next-line
   }, [wantedQuest]);
+
+  const getQuests = () => {
+    Axios.get(`http://${server_ip}:3001/quest`).then((response) => {
+      setQuestsList(response.data);
+    });
+  };
+
+  const mapOptions = () => {
+    return questsList.map((val, key) => {
+      return { value: val.qid, label: val.questName };
+    });
+  };
+
+  const getWantedQuest = (id) => {
+    var wanted = "";
+    var wantedItem = {};
+    wantedItem = questsList.map((i) => {
+      if (id == i.qid) {
+        wanted = i;
+      }
+    });
+    return wanted;
+  };
 
   return (
     <div
@@ -52,8 +67,19 @@ const ModifyCourse = () => {
           alignItems: "center",
         }}
       >
-        <Select styles={selectStyles} options={getQuests()}></Select>
+        <Select
+          styles={selectStyles}
+          options={mapOptions()}
+          onChange={(e) => setWantedQuest(e.value)}
+        ></Select>
       </div>
+      {wantedQuest == "" ? (
+        ""
+      ) : (
+        <div className="tc">
+          <AddCourse object={getWantedQuest(wantedQuest)} />
+        </div>
+      )}
     </div>
   );
 };

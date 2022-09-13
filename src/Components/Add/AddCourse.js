@@ -66,7 +66,7 @@ const selectStyles = {
 };
 
 const AddCourse = (props) => {
-  console.log(props.object);
+  console.log(props);
   const [questionsList, setQuestionsList] = useState([]);
   const [itemsList, setItemsList] = useState([]);
   const [wantedItem, setWantedItem] = useState("");
@@ -83,7 +83,7 @@ const AddCourse = (props) => {
         ]
       : []
   );
-
+  console.log(itemsList);
   const classstyle = styles();
   const handleAddFields = () => {
     setInputFields([
@@ -135,18 +135,26 @@ const AddCourse = (props) => {
         .map((key) => `${x[key]}`)
     );
     let temp = "";
-    data.forEach((element) => {
-      temp += `${element}-`;
+    data.forEach((element, index) => {
+      if (index < data.length - 1) {
+        temp += `${element}-`;
+      } else {
+        temp += `${element}`;
+      }
     });
     const itemNames = inputFields.map((x) =>
       Object.keys(x)
         .filter((key) => key == "itemId")
         .map((key) => `${x[key]}`)
     );
-    itemNames.shift();
+    // itemNames.shift();
     let itemstemp = "";
-    itemNames.forEach((element) => {
-      itemstemp += `${element}-`;
+    itemNames.forEach((element, index) => {
+      if (index < itemNames.length - 1) {
+        itemstemp += `${element}%^%`;
+      } else {
+        itemstemp += `${element}`;
+      }
     });
 
     Axios.post(`http://${server_ip}:3001/addQuest`, {
@@ -173,19 +181,18 @@ const AddCourse = (props) => {
     getItems();
     getQuestions();
     if (props.object != null) {
-      console.log(props.object);
       setCourseName(props.object.questName);
-
-      if (props.object.questItems != null) {
+      if (props.object.questItems != "") {
         const questions = props.object.questions.split("-");
-        const questItems = props.object.questItems.split("-");
+        const questItems = props.object.questItems.split("%^%");
+        console.log(questItems);
         var temp = [];
         var i = 0;
         questions.forEach((e) => {
           temp.push({
             id: uuidv4(),
-            itemId: e,
-            questionId: questions[i],
+            itemId: questItems[i],
+            questionId: e,
           });
           i += 1;
         });
@@ -231,11 +238,16 @@ const AddCourse = (props) => {
                           placeholder="Please select Item"
                           styles={selectStyles}
                           options={itemsList.map((val, key) => {
-                            return { value: val.ItemID, label: val.ItemName };
+                            return {
+                              value: val.ItemID,
+                              label: val.ItemName,
+                              selected:
+                                val.ItemID == inputField.itemId.split("@#@")[1],
+                            };
                           })}
                           onChange={(e) => {
                             setWantedItem(e.value);
-                            inputField.itemId = e.label;
+                            inputField.itemId = `${e.label}@#@${e.value}`;
                           }}
                         />
                         <Select

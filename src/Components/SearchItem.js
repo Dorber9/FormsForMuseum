@@ -143,9 +143,9 @@ const SearchItem = () => {
                     {itemsListImg.map((item) => (
                       <>
                         {" "}
-                        <li style={{ float: "left" }}>
+                        <li style={{ float: "left" , marginLeft:"10px" }}>
                           {" "}
-                          {item.ItemName}
+                          {/* {item.ItemName} */}
                           <img
                             onClick={() => imgClicked(item)}
                             style={{ height: "50px", width: "50px" }}
@@ -244,6 +244,21 @@ const SearchItem = () => {
                       // setMaterial(e.value)
                     }}
                   />
+
+                       <Button
+            variant="contained"
+            style={{
+              color: "white",
+              background: "blue",
+              marginLeft: "38%",
+              marginTop:"10px"
+            }}
+            onClick={() => setQueryFlag(false)}
+          >
+            Choose Item
+          </Button>
+
+
                 </div>
               </>
             )}

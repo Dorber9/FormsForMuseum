@@ -12,6 +12,7 @@ import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import { Container, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { getByLabelText } from "@testing-library/react";
 
 const server_ip = "34.79.201.254";
 
@@ -61,12 +62,10 @@ const selectStyles = {
   }),
   control: (styles) => ({
     ...styles,
-    marginLeft: "5%",
   }),
 };
 
 const AddCourse = (props) => {
-  console.log(props);
   const [questionsList, setQuestionsList] = useState([]);
   const [itemsList, setItemsList] = useState([]);
   const [wantedItem, setWantedItem] = useState("");
@@ -83,7 +82,6 @@ const AddCourse = (props) => {
         ]
       : []
   );
-  console.log(itemsList);
   const classstyle = styles();
   const handleAddFields = () => {
     setInputFields([
@@ -117,7 +115,14 @@ const AddCourse = (props) => {
     });
   };
 
-  const mapOptions = () => {
+const handleItemChange= (e)=> {
+  setWantedItem(e.value);
+  setFlag(true);
+
+}
+
+const mapOptions = () => {
+  console.log(" im here mapping the options")
     let temp = [];
     questionsList.forEach((q) => {
       if (q.ObjectID == wantedItem) {
@@ -126,6 +131,32 @@ const AddCourse = (props) => {
     });
     return temp;
   };
+
+const mapOptionSelected = (id) => {
+    console.log("im here")
+    console.log("flag is " + flag)
+
+    let temp = [];
+    questionsList.forEach((q) => {
+      if (q.ObjectID == id) {
+        temp.push({ value: q.QuestionID, label: q.Question });
+      }
+    });
+    return temp;
+  };
+
+const mapItemsTry = (wantedId) => {
+    let temp = [];
+    itemsList.forEach((item) => {
+      if (wantedId == item.ItemID) {
+        temp.push({ value: wantedId, label: item.ItemName , selected : item.ItemName });
+      }
+    });
+    return temp;
+
+}
+
+
 
   const postCourse = (e) => {
     e.preventDefault();
@@ -157,14 +188,28 @@ const AddCourse = (props) => {
       }
     });
 
-    Axios.post(`http://${server_ip}:3001/addQuest`, {
-      questName: courseName,
-      questions: temp,
-      itemNames: itemstemp,
-    }).then(() => {
-      alert("Success!");
-      window.location.reload(false);
-    });
+    if(props.object==null ){
+      Axios.post(`http://${server_ip}:3001/addQuest`, {
+        questName: courseName,
+        questions: temp,
+        itemNames: itemstemp,
+      }).then(() => {
+        alert("Success!");
+        window.location.reload(false);
+      });
+    }
+    else
+    {
+        Axios.put(`http://${server_ip}:3001/updateQuest`, {
+        id: props.object.qid,
+        questName: courseName,
+        questions: temp,
+        itemNames: itemstemp,
+      }).then(() => {
+        alert("Success!");
+        window.location.reload(false);
+      });
+    }
   };
 
   const deleteQuest = () => {
@@ -182,22 +227,22 @@ const AddCourse = (props) => {
     getQuestions();
     if (props.object != null) {
       setCourseName(props.object.questName);
-      if (props.object.questItems != "") {
-        const questions = props.object.questions.split("-");
-        const questItems = props.object.questItems.split("%^%");
-        console.log(questItems);
+      let questions=[]
+      questions = props.object.questions.split("-");
+      let relevantQuestions=questionsList.filter(question => questions.includes(question.QuestionID.toString()))
+
+      if (relevantQuestions.length>0) {
         var temp = [];
-        var i = 0;
-        questions.forEach((e) => {
+        relevantQuestions.forEach((e) => {
           temp.push({
             id: uuidv4(),
-            itemId: questItems[i],
-            questionId: e,
+            itemId: e.ObjectID,
+            questionId: e.QuestionID,
           });
-          i += 1;
         });
         setInputFields(temp);
       }
+
     }
   }, [props]);
 
@@ -237,23 +282,23 @@ const AddCourse = (props) => {
                         <Select
                           placeholder="Please select Item"
                           styles={selectStyles}
+                          defaultValue= {props.object==null ? {value:"" ,label: "Select Item"}:{value: inputField.itemId, label: itemsList.filter(item=>item.ItemID == inputField.itemId).map(item=>item.ItemName)[0] }}
                           options={itemsList.map((val, key) => {
                             return {
                               value: val.ItemID,
                               label: val.ItemName,
-                              selected:
-                                val.ItemID == inputField.itemId.split("@#@")[1],
+
                             };
                           })}
                           onChange={(e) => {
-                            setWantedItem(e.value);
-                            inputField.itemId = `${e.label}@#@${e.value}`;
+                            handleItemChange(e,inputField);
                           }}
                         />
                         <Select
                           placeholder="Please select Question"
                           styles={selectStyles}
-                          options={mapOptions()}
+                          defaultValue= {props.object==null ? {value:"" ,label: "Please Select Question"}:{value: inputField.questionId, label: questionsList.filter(question=>question.QuestionID == inputField.questionId).map(question=>question.Question)[0] }}
+                          options={ props.object==null || flag==true ? mapOptions() : mapOptionSelected(inputField.itemId)}
                           onChange={(e) => {
                             inputField.questionId = e.value;
                           }}
@@ -281,7 +326,7 @@ const AddCourse = (props) => {
                   type="submit"
                   onClick={postCourse}
                 >
-                  SUBMIT
+                  {props.object==null ? "SUBMIT" : "UPDATE" }
                 </Button>
               </form>
               {props.object == null ? (

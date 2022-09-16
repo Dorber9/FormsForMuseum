@@ -282,7 +282,7 @@ const mapItemsTry = (wantedId) => {
                         <Select
                           placeholder="Please select Item"
                           styles={selectStyles}
-                          defaultValue= {props.object==null ? {value:"" ,label: "Select Item"}:{value: inputField.itemId, label: itemsList.filter(item=>item.ItemID == inputField.itemId).map(item=>item.ItemName)[0] }}
+                          defaultValue= {props.object==null || inputField.itemId=="" ? {value:"" ,label: "Please Select Item"}:{value: inputField.itemId, label: itemsList.filter(item=>item.ItemID == inputField.itemId).map(item=>item.ItemName)[0] }}
                           options={itemsList.map((val, key) => {
                             return {
                               value: val.ItemID,
@@ -297,7 +297,7 @@ const mapItemsTry = (wantedId) => {
                         <Select
                           placeholder="Please select Question"
                           styles={selectStyles}
-                          defaultValue= {props.object==null ? {value:"" ,label: "Please Select Question"}:{value: inputField.questionId, label: questionsList.filter(question=>question.QuestionID == inputField.questionId).map(question=>question.Question)[0] }}
+                          defaultValue= {props.object==null || inputField.questionId=="" ? {value:"" ,label: "Please Select Question"}:{value: inputField.questionId, label: questionsList.filter(question=>question.QuestionID == inputField.questionId).map(question=>question.Question)[0] }}
                           options={ props.object==null || flag==true ? mapOptions() : mapOptionSelected(inputField.itemId)}
                           onChange={(e) => {
                             inputField.questionId = e.value;

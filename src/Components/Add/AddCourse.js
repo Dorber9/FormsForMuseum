@@ -13,6 +13,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Container, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { getByLabelText } from "@testing-library/react";
+import SearchItem from "../SearchItem";
 
 const server_ip = "34.79.201.254";
 
@@ -82,6 +83,9 @@ const AddCourse = (props) => {
         ]
       : []
   );
+  const handleItem = (e) => {
+    setWantedItem(e);
+  };
   const classstyle = styles();
   const handleAddFields = () => {
     setInputFields([
@@ -115,14 +119,13 @@ const AddCourse = (props) => {
     });
   };
 
-const handleItemChange= (e)=> {
-  setWantedItem(e.value);
-  setFlag(true);
+  const handleItemChange = (e) => {
+    setWantedItem(e.value);
+    setFlag(true);
+  };
 
-}
-
-const mapOptions = () => {
-  console.log(" im here mapping the options")
+  const mapOptions = () => {
+    console.log(" im here mapping the options");
     let temp = [];
     questionsList.forEach((q) => {
       if (q.ObjectID == wantedItem) {
@@ -132,9 +135,9 @@ const mapOptions = () => {
     return temp;
   };
 
-const mapOptionSelected = (id) => {
-    console.log("im here")
-    console.log("flag is " + flag)
+  const mapOptionSelected = (id) => {
+    console.log("im here");
+    console.log("flag is " + flag);
 
     let temp = [];
     questionsList.forEach((q) => {
@@ -145,18 +148,19 @@ const mapOptionSelected = (id) => {
     return temp;
   };
 
-const mapItemsTry = (wantedId) => {
+  const mapItemsTry = (wantedId) => {
     let temp = [];
     itemsList.forEach((item) => {
       if (wantedId == item.ItemID) {
-        temp.push({ value: wantedId, label: item.ItemName , selected : item.ItemName });
+        temp.push({
+          value: wantedId,
+          label: item.ItemName,
+          selected: item.ItemName,
+        });
       }
     });
     return temp;
-
-}
-
-
+  };
 
   const postCourse = (e) => {
     e.preventDefault();
@@ -188,7 +192,7 @@ const mapItemsTry = (wantedId) => {
       }
     });
 
-    if(props.object==null ){
+    if (props.object == null) {
       Axios.post(`http://${server_ip}:3001/addQuest`, {
         questName: courseName,
         questions: temp,
@@ -197,10 +201,8 @@ const mapItemsTry = (wantedId) => {
         alert("Success!");
         window.location.reload(false);
       });
-    }
-    else
-    {
-        Axios.put(`http://${server_ip}:3001/updateQuest`, {
+    } else {
+      Axios.put(`http://${server_ip}:3001/updateQuest`, {
         id: props.object.qid,
         questName: courseName,
         questions: temp,
@@ -227,11 +229,13 @@ const mapItemsTry = (wantedId) => {
     getQuestions();
     if (props.object != null) {
       setCourseName(props.object.questName);
-      let questions=[]
+      let questions = [];
       questions = props.object.questions.split("-");
-      let relevantQuestions=questionsList.filter(question => questions.includes(question.QuestionID.toString()))
+      let relevantQuestions = questionsList.filter((question) =>
+        questions.includes(question.QuestionID.toString())
+      );
 
-      if (relevantQuestions.length>0) {
+      if (relevantQuestions.length > 0) {
         var temp = [];
         relevantQuestions.forEach((e) => {
           temp.push({
@@ -242,7 +246,6 @@ const mapItemsTry = (wantedId) => {
         });
         setInputFields(temp);
       }
-
     }
   }, [props]);
 
@@ -279,26 +282,57 @@ const mapItemsTry = (wantedId) => {
                           marginTop: "10px",
                         }}
                       >
-                        <Select
+                        {/* <Select
                           placeholder="Please select Item"
                           styles={selectStyles}
-                          defaultValue= {props.object==null || inputField.itemId=="" ? {value:"" ,label: "Please Select Item"}:{value: inputField.itemId, label: itemsList.filter(item=>item.ItemID == inputField.itemId).map(item=>item.ItemName)[0] }}
+                          defaultValue={
+                            props.object == null || inputField.itemId == ""
+                              ? { value: "", label: "Please Select Item" }
+                              : {
+                                  value: inputField.itemId,
+                                  label: itemsList
+                                    .filter(
+                                      (item) => item.ItemID == inputField.itemId
+                                    )
+                                    .map((item) => item.ItemName)[0],
+                                }
+                          }
                           options={itemsList.map((val, key) => {
                             return {
                               value: val.ItemID,
                               label: val.ItemName,
-
                             };
                           })}
                           onChange={(e) => {
-                            handleItemChange(e,inputField);
+                            handleItemChange(e, inputField);
                           }}
+                        /> */}
+                        <SearchItem
+                          handleClick={handleItem}
+                          currentItem={props.object != null ? inputField : null}
                         />
                         <Select
                           placeholder="Please select Question"
                           styles={selectStyles}
-                          defaultValue= {props.object==null || inputField.questionId=="" ? {value:"" ,label: "Please Select Question"}:{value: inputField.questionId, label: questionsList.filter(question=>question.QuestionID == inputField.questionId).map(question=>question.Question)[0] }}
-                          options={ props.object==null || flag==true ? mapOptions() : mapOptionSelected(inputField.itemId)}
+                          defaultValue={
+                            props.object == null || inputField.questionId == ""
+                              ? { value: "", label: "Please Select Question" }
+                              : {
+                                  value: inputField.questionId,
+                                  label: questionsList
+                                    .filter(
+                                      (question) =>
+                                        question.QuestionID ==
+                                        inputField.questionId
+                                    )
+                                    .map((question) => question.Question)[0],
+                                }
+                          }
+                          options={
+                            props.object == null || flag == true
+                              ? mapOptions()
+                              : mapOptionSelected(inputField.itemId)
+                          }
                           onChange={(e) => {
                             inputField.questionId = e.value;
                           }}
@@ -326,7 +360,7 @@ const mapItemsTry = (wantedId) => {
                   type="submit"
                   onClick={postCourse}
                 >
-                  {props.object==null ? "SUBMIT" : "UPDATE" }
+                  {props.object == null ? "SUBMIT" : "UPDATE"}
                 </Button>
               </form>
               {props.object == null ? (

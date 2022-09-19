@@ -9,7 +9,25 @@ import Logo from "../logo_amnon.png";
 
 import "../App.css";
 
-const SearchItem = () => {
+const selectStyles = {
+  menu: (styles, isFocused) => ({
+    ...styles,
+    zIndex: 999,
+    background: "black",
+    layout: "inline",
+    width: "150%",
+  }),
+  option: (provided, state) => ({
+    ...provided,
+    layout: "inline",
+    color: state.isFocused ? "black" : "white",
+  }),
+  control: (styles) => ({
+    ...styles,
+  }),
+};
+
+const SearchItem = ({ handleClick, currentItem }) => {
   const [itemsList, setItemsList] = useState([]);
   const [showFlag, setShowFlag] = useState(false);
   const [tryit, setTry] = useState(false);
@@ -25,6 +43,7 @@ const SearchItem = () => {
   const [category, setCategory] = useState("");
   const [categories, setCategories] = useState([]);
   const [itemsListImg, setItemListImg] = useState([]);
+  const [currItemName, setCurrItemName] = useState("");
 
   useEffect(() => {
     getItems();
@@ -106,11 +125,18 @@ const SearchItem = () => {
 
   const imgClicked = (item) => {
     setTry(false);
+    handleClick(item.ItemID);
+  };
+
+  const getWantedItemName = (id) => {
+    Axios.get(`http://34.79.201.254:3001/Item/${id}`).then((response) => {
+      setCurrItemName(response.data[0].ItemName);
+    });
   };
 
   return (
     <div className="txtF">
-      <div className="pshDwn">
+      <div>
         <div
           style={{
             display: "flex",
@@ -120,6 +146,15 @@ const SearchItem = () => {
         >
           <Select
             name="itemsList"
+            styles={selectStyles}
+            defaultValue={
+              currentItem == null
+                ? { value: "", label: "Please Select Item" }
+                : {
+                    value: currentItem.itemId,
+                    label: getWantedItemName(currentItem.itemId),
+                  }
+            }
             options={categories.map((val, key) => {
               return { value: val, label: val };
             })}
@@ -127,7 +162,6 @@ const SearchItem = () => {
               buildSub(e.label);
             }}
           />
-          <div></div>
 
           <Popup
             open={tryit}
@@ -143,7 +177,7 @@ const SearchItem = () => {
                     {itemsListImg.map((item) => (
                       <>
                         {" "}
-                        <li style={{ float: "left" , marginLeft:"10px" }}>
+                        <li style={{ float: "left", marginLeft: "10px" }}>
                           {" "}
                           {/* {item.ItemName} */}
                           <img
@@ -187,6 +221,7 @@ const SearchItem = () => {
                   <div>Site:</div>
                   <Select
                     name="sitesList"
+                    styles={selectStyles}
                     textFieldProps={{
                       label: "Label",
                       InputLabelProps: {
@@ -203,6 +238,7 @@ const SearchItem = () => {
                   <div>Period:</div>
                   <Select
                     name="periodsList"
+                    styles={selectStyles}
                     options={itemPeriod.map((val, key) => {
                       return { value: val.value, label: val.label };
                     })}
@@ -213,6 +249,7 @@ const SearchItem = () => {
                   <div>Age:</div>
                   <Select
                     name="ageList"
+                    styles={selectStyles}
                     options={itemAge.map((val, key) => {
                       return { value: val.value, label: val.label };
                     })}
@@ -223,6 +260,7 @@ const SearchItem = () => {
                   <div>Material:</div>
                   <Select
                     name="materialsList"
+                    styles={selectStyles}
                     options={itemMaterial.map((val, key) => {
                       return { value: val.value, label: val.label };
                     })}
@@ -233,6 +271,7 @@ const SearchItem = () => {
                   <div>Item:</div>
                   <Select
                     name="allItemsList"
+                    styles={selectStyles}
                     options={itemsList
                       .filter((item) =>
                         category != "" ? item.ItemName == category : item
@@ -244,21 +283,18 @@ const SearchItem = () => {
                       // setMaterial(e.value)
                     }}
                   />
-
-                       <Button
-            variant="contained"
-            style={{
-              color: "white",
-              background: "blue",
-              marginLeft: "38%",
-              marginTop:"10px"
-            }}
-            onClick={() => setQueryFlag(false)}
-          >
-            Choose Item
-          </Button>
-
-
+                  <Button
+                    variant="contained"
+                    style={{
+                      color: "white",
+                      background: "blue",
+                      marginLeft: "38%",
+                      marginTop: "10px",
+                    }}
+                    onClick={() => setQueryFlag(false)}
+                  >
+                    Choose Item
+                  </Button>
                 </div>
               </>
             )}

@@ -27,7 +27,7 @@ const selectStyles = {
   }),
 };
 
-const SearchItem = ({ handleClick, currentItem }) => {
+const SearchItem = ({ handleClick, currentItem, itemName }) => {
   const [itemsList, setItemsList] = useState([]);
   const [showFlag, setShowFlag] = useState(false);
   const [tryit, setTry] = useState(false);
@@ -43,13 +43,11 @@ const SearchItem = ({ handleClick, currentItem }) => {
   const [category, setCategory] = useState("");
   const [categories, setCategories] = useState([]);
   const [itemsListImg, setItemListImg] = useState([]);
-  const [currItemName, setCurrItemName] = useState("");
 
   useEffect(() => {
     getItems();
-
     // eslint-disable-next-line
-  }, [material, queryFlag, period, site]);
+  }, [material, queryFlag, period, site, itemName]);
 
   const getItems = () => {
     Axios.get("http://34.79.201.254:3001/Item").then((response) => {
@@ -128,12 +126,6 @@ const SearchItem = ({ handleClick, currentItem }) => {
     handleClick(item.ItemID);
   };
 
-  const getWantedItemName = (id) => {
-    Axios.get(`http://34.79.201.254:3001/Item/${id}`).then((response) => {
-      setCurrItemName(response.data[0].ItemName);
-    });
-  };
-
   return (
     <div className="txtF">
       <div>
@@ -148,12 +140,9 @@ const SearchItem = ({ handleClick, currentItem }) => {
             name="itemsList"
             styles={selectStyles}
             defaultValue={
-              currentItem == null
-                ? { value: "", label: "Please Select Item" }
-                : {
-                    value: currentItem.itemId,
-                    label: getWantedItemName(currentItem.itemId),
-                  }
+              itemName != ""
+                ? { value: itemName, label: itemName }
+                : { value: "", label: "Select..." }
             }
             options={categories.map((val, key) => {
               return { value: val, label: val };
@@ -272,6 +261,14 @@ const SearchItem = ({ handleClick, currentItem }) => {
                   <Select
                     name="allItemsList"
                     styles={selectStyles}
+                    defaultValue={
+                      currentItem == null
+                        ? { value: "", label: "Please Select Item" }
+                        : {
+                            value: currentItem.itemId,
+                            label: category,
+                          }
+                    }
                     options={itemsList
                       .filter((item) =>
                         category != "" ? item.ItemName == category : item
@@ -280,7 +277,7 @@ const SearchItem = ({ handleClick, currentItem }) => {
                         return { value: val.ItemID, label: val.ItemName };
                       })}
                     onChange={(e) => {
-                      // setMaterial(e.value)
+                      handleClick(e.value);
                     }}
                   />
                   <Button

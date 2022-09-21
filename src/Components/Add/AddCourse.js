@@ -309,7 +309,18 @@ const AddCourse = (props) => {
                         /> */}
                         <SearchItem
                           handleClick={handleItem}
-                          currentItem={props.object != null ? inputField : null}
+                          itemID={
+                            props.object != null ? inputField.itemId : null
+                          }
+                          itemName={
+                            props.object == null || inputField.itemId == ""
+                              ? ""
+                              : itemsList
+                                  .filter(
+                                    (item) => item.ItemID == inputField.itemId
+                                  )
+                                  .map((item) => item.ItemName)[0]
+                          }
                         />
                         <Select
                           placeholder="Please select Question"

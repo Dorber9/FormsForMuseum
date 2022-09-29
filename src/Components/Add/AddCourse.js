@@ -191,7 +191,6 @@ const AddCourse = (props) => {
         itemstemp += `${element}`;
       }
     });
-
     if (props.object == null) {
       Axios.post(`http://${server_ip}:3001/addQuest`, {
         questName: courseName,
@@ -282,31 +281,6 @@ const AddCourse = (props) => {
                           marginTop: "10px",
                         }}
                       >
-                        {/* <Select
-                          placeholder="Please select Item"
-                          styles={selectStyles}
-                          defaultValue={
-                            props.object == null || inputField.itemId == ""
-                              ? { value: "", label: "Please Select Item" }
-                              : {
-                                  value: inputField.itemId,
-                                  label: itemsList
-                                    .filter(
-                                      (item) => item.ItemID == inputField.itemId
-                                    )
-                                    .map((item) => item.ItemName)[0],
-                                }
-                          }
-                          options={itemsList.map((val, key) => {
-                            return {
-                              value: val.ItemID,
-                              label: val.ItemName,
-                            };
-                          })}
-                          onChange={(e) => {
-                            handleItemChange(e, inputField);
-                          }}
-                        /> */}
                         <SearchItem
                           handleClick={handleItem}
                           itemID={
@@ -346,6 +320,12 @@ const AddCourse = (props) => {
                           }
                           onChange={(e) => {
                             inputField.questionId = e.value;
+                            inputField.itemId =
+                              itemsList
+                                .filter((item) => item.ItemID == wantedItem)
+                                .map((item) => item.ItemName)[0] +
+                              "@#@" +
+                              wantedItem;
                           }}
                         />
                       </div>

@@ -17,18 +17,20 @@ const QuestionsQuiz = () => {
   useEffect(() => {
     Axios.get(`http://34.79.201.254:3001/Quest/${params.id}`).then(
       (response) => {
-        if (response.data[0].questItems)
-          getQuestions(
-            response.data[0].questions,
-            response.data[0].questName,
-            response.data[0].questItems
-          );
-        else
-          getQuestions(
-            response.data[0].questions,
-            response.data[0].questName,
-            "Neanderthal-אבן יד-"
-          );
+        console.log()
+        getQuestions(response.data[0].questions,response.data[0].questName, response.data[0].questItems ? response.data[0].questItems : "Neanderthal-אבן יד-" )
+        // if (response.data[0].questItems) {
+        //   getQuestions(
+        //     response.data[0].questions,
+        //     response.data[0].questName,
+        //     response.data[0].questItems
+        //   )};
+        // else
+        //   getQuestions(
+        //     response.data[0].questions,
+        //     response.data[0].questName,
+        //     "Neanderthal-אבן יד-"
+        //   );
 
         setTimeout(() => {
           setLoading(false);
@@ -41,16 +43,21 @@ const QuestionsQuiz = () => {
     let arr = [];
     arr = course.split("-");
     let itemsArr = [];
-    itemsArr = items.split("%^%");
+    let itemsArrTemp = [];
+    itemsArrTemp = items.split("%^%");
+    itemsArrTemp.forEach(item=>{
+        itemsArr.push(item.split("@#@")[0].trim())
+    })
     let questionslist = [];
     let counter = 1;
     let i = 0;
-
+    console.log(itemsArr)
     arr.forEach((element) => {
       Axios.get(`http://34.79.201.254:3001/question/${element}`).then(
         (response) => {
           if (counter % 2 == 0 || counter == arr.length) {
-            questionslist.push(buildNextItem(itemsArr[i].split("@#@")[0]));
+            if(itemsArr[i])
+              questionslist.push(buildNextItem(itemsArr[i].split("@#@")[0]));
             i++;
           }
           questionslist.push(buildQuestion(response.data[0]));

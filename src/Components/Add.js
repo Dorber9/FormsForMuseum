@@ -1,6 +1,7 @@
 /* eslint-disable */
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+
 import "react-tabs/style/react-tabs.css";
 
 import AddDisplay from "./Add/AddDisplay";
@@ -19,17 +20,12 @@ import AddQuestion from "./Add/AddQuestion";
   ></link>
 </head>;
 
-const tabStyle= {color: "white"}
-
-  
+const tabStyle = { color: "white" };
 
 const Add = () => {
-
   return (
-    
     <div className="tb">
-     
-      <h3 style={{color:"white", marginTop:"10px"}}>Manage Museum Data</h3>
+      <h3 style={{ color: "white", marginTop: "10px" }}>Manage Museum Data</h3>
       <Tabs>
         <TabList>
           <Tab style={tabStyle}>Museum/Building/Section</Tab>
@@ -55,8 +51,8 @@ const Add = () => {
         <TabPanel>
           <AddQuestion object={null} />
         </TabPanel>
-      </Tabs> 
-    </div> 
+      </Tabs>
+    </div>
   );
 };
 

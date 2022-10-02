@@ -49,7 +49,6 @@ function App() {
           }}
         >
           {token === "abc" ? <Header /> : ""}
-
           <BrowserRouter>
             <Routes>
               <Route exact path="/Search" element={<SearchItem />}></Route>
@@ -107,8 +106,8 @@ function App() {
                 element={<ViewItemNewPage />}
               ></Route>
             </Routes>
-            {token === "abc" && <Footer />}
           </BrowserRouter>
+          {token === "abc" && <Footer />}
         </div>
       </Translator>
     </>

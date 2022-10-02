@@ -300,7 +300,7 @@ const AddCourse = (props) => {
                           placeholder="Please select Question"
                           styles={selectStyles}
                           defaultValue={
-                            props.object == null || inputField.questionId == ""
+                            inputField.questionId == ""
                               ? { value: "", label: "Please Select Question" }
                               : {
                                   value: inputField.questionId,
@@ -314,7 +314,7 @@ const AddCourse = (props) => {
                                 }
                           }
                           options={
-                            props.object == null || flag == true
+                            inputField.itemId == "" || flag == true
                               ? mapOptions()
                               : mapOptionSelected(inputField.itemId)
                           }

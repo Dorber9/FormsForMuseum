@@ -164,6 +164,15 @@ const AddCourse = (props) => {
 
   const postCourse = (e) => {
     e.preventDefault();
+    if (
+      courseName == "" ||
+      inputFields.length == 0 ||
+      (inputFields.length == 1 && inputFields[0].itemId == "")
+    ) {
+      console.log(inputFields.length);
+      alert("Please fill all fields!");
+      return;
+    }
     const data = inputFields.map((x) =>
       Object.keys(x)
         .filter((key) => key == "questionId")
@@ -262,6 +271,7 @@ const AddCourse = (props) => {
                 <TextField
                   className={classstyle.root}
                   value={courseName}
+                  required
                   name="Course Name"
                   label="Quest's Name"
                   variant="outlined"

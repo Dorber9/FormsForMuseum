@@ -109,7 +109,7 @@ app.delete("/deleteQuest/:id", (req, res) => {
 app.get("/ItemShowcase/:id", (req, res) => {
   const id = req.params.id;
   db.query(
-    "SELECT ShowcaseID FROM item WHERE ItemID = ?",
+    "SELECT * FROM item WHERE ItemID = ?",
     id,
     (err, result) => {
       if (err) {

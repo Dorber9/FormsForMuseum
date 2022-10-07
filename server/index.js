@@ -104,6 +104,23 @@ app.delete("/deleteQuest/:id", (req, res) => {
     });
 });
 
+
+// get showcase by item
+app.get("/ItemShowcase/:id", (req, res) => {
+  const id = req.params.id;
+  db.query(
+    "SELECT ShowcaseID FROM item WHERE ItemID = ?",
+    id,
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(result);
+      }
+    }
+  );
+});
+
 // add, update, get Museums
 app.post("/addMuseum", (req, res) => {
     const name = req.body.name;

@@ -122,13 +122,13 @@ const QuestionsQuiz = () => {
     let numberFour = 0;
 
     do {
-      numberTwo = Math.floor(Math.random() * 4);
+      numberTwo = Math.floor(Math.random() * 20);
     } while (numberTwo === ShowcaseID);
     do {
-      numberThree = Math.floor(Math.random() * 4);
+      numberThree = Math.floor(Math.random() * 20);
     } while (numberTwo === numberThree || numberThree === ShowcaseID);
     do {
-      numberFour = Math.floor(Math.random() * 4);
+      numberFour = Math.floor(Math.random() * 20);
     } while (
       numberTwo === numberFour ||
       numberThree === numberFour ||

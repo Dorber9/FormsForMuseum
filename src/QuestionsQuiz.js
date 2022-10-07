@@ -17,8 +17,13 @@ const QuestionsQuiz = () => {
   useEffect(() => {
     Axios.get(`http://34.79.201.254:3001/Quest/${params.id}`).then(
       (response) => {
-        console.log()
-        getQuestions(response.data[0].questions,response.data[0].questName, response.data[0].questItems ? response.data[0].questItems : "Neanderthal-אבן יד-" )
+        getQuestions(
+          response.data[0].questions,
+          response.data[0].questName,
+          response.data[0].questItems
+            ? response.data[0].questItems
+            : "Neanderthal-אבן יד-"
+        );
         // if (response.data[0].questItems) {
         //   getQuestions(
         //     response.data[0].questions,
@@ -45,25 +50,31 @@ const QuestionsQuiz = () => {
     let itemsArr = [];
     let itemsArrTemp = [];
     itemsArrTemp = items.split("%^%");
-    itemsArrTemp.forEach(item=>{
-        itemsArr.push(item.split("@#@")[0].trim())
-    })
+    console.log(itemsArrTemp);
+    itemsArrTemp.forEach((item) => {
+      itemsArr.push(item.split("@#@")[1].trim());
+    });
     let questionslist = [];
     let counter = 1;
     let i = 0;
-    console.log(itemsArr)
+
     arr.forEach((element) => {
-      Axios.get(`http://34.79.201.254:3001/question/${element}`).then(
-        (response) => {
-          if (counter % 2 == 0 || counter == arr.length) {
-            if(itemsArr[i])
-              questionslist.push(buildNextItem(itemsArr[i].split("@#@")[0]));
-            i++;
-          }
+      var showcase;
+      Axios.get(`http://34.79.201.254:3001/question/${element}`)
+        .then((response) => {
           questionslist.push(buildQuestion(response.data[0]));
           counter++;
-        }
-      );
+          showcase = response.data[0].ItemID;
+        })
+        .then(
+          Axios.get(
+            `http://34.79.201.254:3001/ItemShowcase/${itemsArr[i]}`
+          ).then((response2) => {
+            console.log(response2.data[0].ShowcaseID);
+            questionslist.push(buildNextItem(response2.data[0].ShowcaseID));
+          })
+        );
+      i++;
     });
     let quiz = {
       quizTitle: title, // Change to the relevant one
@@ -97,6 +108,33 @@ const QuestionsQuiz = () => {
   };
 
   const buildNextItem = (item) => {
+    let ShowcaseID = item;
+    // Axios.get(`http://34.79.201.254:3001/ItemShowcase/${item}`).then(
+    //   (response) => {
+    //     console.log(response.data[0].ShowcaseID);
+    //     ShowcaseID = response.data[0].ShowcaseID;
+    //   }
+    // );
+    console.log(ShowcaseID);
+
+    let numberTwo = 0;
+    let numberThree = 0;
+    let numberFour = 0;
+
+    do {
+      numberTwo = Math.floor(Math.random() * 4);
+    } while (numberTwo === ShowcaseID);
+    do {
+      numberThree = Math.floor(Math.random() * 4);
+    } while (numberTwo === numberThree || numberThree === ShowcaseID);
+    do {
+      numberFour = Math.floor(Math.random() * 4);
+    } while (
+      numberTwo === numberFour ||
+      numberThree === numberFour ||
+      numberFour === ShowcaseID
+    );
+
     let temp = {
       question: "abd",
       questionType: "text",
@@ -110,20 +148,18 @@ const QuestionsQuiz = () => {
     };
     temp.question = "הפריט הבא הוא";
     let answers = [];
-    answers.push("פריט רנדומלי");
-    answers.push("פריט רנדומלי");
-    answers.push(item);
-    answers.push("פריט רנדומלי");
+    answers.push(numberTwo);
+    answers.push(numberThree);
+    answers.push(ShowcaseID);
+    answers.push(numberFour);
     temp.answers = answers.sort(() => Math.random() - 0.5);
     let curr = 1;
     answers.forEach((e, i) => {
-      console.log(e);
       if (e == item) {
         curr = i + 1;
-        console.log(curr);
       }
     });
-    console.log(curr);
+
     temp.correctAnswer = curr.toString();
     return temp;
   };
@@ -140,7 +176,9 @@ const QuestionsQuiz = () => {
             <Quiz
               style={{ position: "center" }}
               quiz={quiz}
+              continueTillCorrect={true}
               showInstantFeedback={true}
+              shuffle={false}
             />
             <div style={{ marginTop: "50px", textAlign: "center" }}>
               {token === "abc" ? (

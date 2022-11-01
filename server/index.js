@@ -20,9 +20,9 @@ app.use(
 );
 
 const db = mysql.createPool({
-    user: "root",
-    host: "34.79.201.254",
-    password: "MophM2022!",
+    user: "yuval",
+    host: "34.165.154.8",
+    password: "r119p7",
     database: "museum",
 });
 

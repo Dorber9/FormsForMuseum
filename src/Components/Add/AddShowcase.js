@@ -11,8 +11,7 @@ import Resizer from "react-image-file-resizer";
 
 import ReactUploadImage from "../ReactUploadImage";
 
-
-const server_ip = "34.79.201.254"
+const server_ip = "127.0.0.1";
 
 const AddShowcase = (props) => {
   const [number, setNumber] = useState("");
@@ -27,7 +26,6 @@ const AddShowcase = (props) => {
   const [path, setPath] = useState("");
   const [ImageFlag, setImageFlag] = useState(false);
   const [file, setFile] = useState(null);
-
 
   const cardShadow = {
     boxShadow: "inset rgb(0 0 0) -2px -1px 14px 2px",
@@ -49,7 +47,7 @@ const AddShowcase = (props) => {
     }),
   };
 
-    const fileChange = (e) => {
+  const fileChange = (e) => {
     setImageFlag(true);
     setFile(e.target.files[0]);
   };
@@ -93,7 +91,7 @@ const AddShowcase = (props) => {
     }
   }, [props.object != null ? props.object : ""]);
 
-    const handleSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     onFormSubmit();
   };
@@ -110,7 +108,7 @@ const AddShowcase = (props) => {
       props.object == null ? postShowcase("") : updateShowcase(path);
     }
   };
-    const resizeFile = (file) =>
+  const resizeFile = (file) =>
     new Promise((resolve) => {
       Resizer.imageFileResizer(
         file,
@@ -223,7 +221,13 @@ const AddShowcase = (props) => {
         <Card style={cardShadow}>
           <Card.Body>
             <Card.Text>
-              <h4 style={{ textAlign: "center", marginBottom: "2%", color:"black" }}>
+              <h4
+                style={{
+                  textAlign: "center",
+                  marginBottom: "2%",
+                  color: "black",
+                }}
+              >
                 Add Exibition
               </h4>
               <div className="txtf">
@@ -285,18 +289,20 @@ const AddShowcase = (props) => {
                   rows="3"
                 />
                 <br />
-                    <div style={{ margin: "2%" }}>
-                      <h6 style={{ color: "black" }}>Upload Image</h6>
+                <div style={{ margin: "2%" }}>
+                  <h6 style={{ color: "black" }}>Upload Image</h6>
 
-                      <input
-                        accept="image/png, image/gif, image/jpeg"
-                        type="file"
-                        name="myImage"
-                        style={{ color: "black" }}
-                        onChange={fileChange}
-                      />
-                    </div>
-                <label style={{color:"black"}} htmlFor="">Special Care </label>
+                  <input
+                    accept="image/png, image/gif, image/jpeg"
+                    type="file"
+                    name="myImage"
+                    style={{ color: "black" }}
+                    onChange={fileChange}
+                  />
+                </div>
+                <label style={{ color: "black" }} htmlFor="">
+                  Special Care{" "}
+                </label>
                 <br />
                 <div
                   style={{

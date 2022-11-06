@@ -12,11 +12,11 @@ const ViewItemWiki = (props) => {
   const [itemDataWiki, setDataWiki] = useState([]);
   const [itemData, setData] = useState([]);
   const [name, setName] = useState("");
-      const [desc, setDesc] = useState("");
-      const [material, setMaterial] = useState("");
-      const [age, setAge] = useState("");
-      const [period, setPeriod] = useState("");
-       const [site, setSite] = useState("");
+  const [desc, setDesc] = useState("");
+  const [material, setMaterial] = useState("");
+  const [age, setAge] = useState("");
+  const [period, setPeriod] = useState("");
+  const [site, setSite] = useState("");
 
   const [itemKeys, setKeys] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -25,21 +25,19 @@ const ViewItemWiki = (props) => {
 
   useEffect(() => {
     setDataWiki([]);
-    console.log(props.itemId)
-       Axios.get(`http://34.79.201.254:3001/Item/${props.itemId}`).then((response) => {
-           console.log(response.data[0])
-       setName(response.data[0].HebItemName)
-        setMaterial(response.data[0].HebMaterial)
-        setDesc(response.data[0].HebDescr)
-        setAge(response.data[0].Age)
-        setPeriod(response.data[0].HebPeriod)
-        setSite(response.data[0].HebSite)
-        if(response.data[0].ImagePath)
-            setPath(response.data[0].ImagePath);
-      if(response.data[0].ItemData){
-        
+    console.log(props.itemId);
+    Axios.get(`http://127.0.0.1:3001/Item/${props.itemId}`).then((response) => {
+      console.log(response.data[0]);
+      setName(response.data[0].HebItemName);
+      setMaterial(response.data[0].HebMaterial);
+      setDesc(response.data[0].HebDescr);
+      setAge(response.data[0].Age);
+      setPeriod(response.data[0].HebPeriod);
+      setSite(response.data[0].HebSite);
+      if (response.data[0].ImagePath) setPath(response.data[0].ImagePath);
+      if (response.data[0].ItemData) {
         const data = response.data[0].ItemData.split("^%^");
-        
+
         data.pop();
         var temp = [];
 
@@ -50,39 +48,30 @@ const ViewItemWiki = (props) => {
             categoryDescr: d[2],
           });
         });
-      setDataWiki(temp);
+        setDataWiki(temp);
       }
-
     });
-    
-      setTimeout(() => {
-        setLoading(false);
-      }, 3000);
+
+    setTimeout(() => {
+      setLoading(false);
+    }, 3000);
     // eslint-disable-next-line
   }, []);
 
   // Get the relevant item data based on his Id
   const getItem = () => {
-   
     // try {
     //   let res = await Axios.get(
     //     `http://34.140.118.51:3001/Item/${props.itemId}`
     //   );
-
     //   setData(res.data[0]);
-      
-
     //   setKeys(Object.keys(itemData));
- 
-    
-
     // } catch (error) {
     //   console.log(error.data);
     // }
   };
 
-  const buildData=(data)=>{
-      
+  const buildData = (data) => {
     //    setName(data.HebItemName)
     //     setMaterial(data.HebMaterial)
     //     setDesc(data.HebDescr)
@@ -90,12 +79,10 @@ const ViewItemWiki = (props) => {
     //     setPeriod(data.HebPeriod)
     //     setSite(data.HebSite)
     //   if(data.ItemData){
-        
     //     const data = data.ItemData.split("^%^");
     //     setPath(data.ImagePath);
     //     data.pop();
     //     var temp = [];
-
     //     data.forEach((element) => {
     //       const d = element.split("=>");
     //       temp.push({
@@ -105,13 +92,12 @@ const ViewItemWiki = (props) => {
     //     });
     //   setDataWiki(temp);
     //   }
-  }
+  };
   return (
     <>
       {loading ? (
         <div style={{ position: "center" }} className="spinner-container">
           <div className="loading-spinner"> Loading...</div>
-          
         </div>
       ) : (
         <div className="pshDwn">
@@ -137,8 +123,8 @@ const ViewItemWiki = (props) => {
             <h2 style={{ textAlign: "center", direction: "rtl" }}>
               <div>{desc}</div>
               &nbsp;מוצג זה נמצא ב {site}. גילו הוא בערך&nbsp;
-              {age}, ולפיכך הוא משתייך לתקופה ה&nbsp;{period}{" "}
-              . חומרו של המוצג הוא&nbsp;
+              {age}, ולפיכך הוא משתייך לתקופה ה&nbsp;{period} . חומרו של המוצג
+              הוא&nbsp;
               {material}.
             </h2>
           </div>

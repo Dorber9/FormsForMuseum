@@ -5,7 +5,6 @@ import { useState, useEffect } from "react";
 import Axios from "axios";
 import "../App.css";
 
-
 const ListOfCourses = () => {
   const [questsList, setquestsList] = useState([]);
   const [questID, setquestID] = useState("");
@@ -16,7 +15,7 @@ const ListOfCourses = () => {
   }, []);
 
   const getQuests = () => {
-    Axios.get("http://34.79.201.254:3001/quest").then((response) => {
+    Axios.get("http://127.0.0.1:3001/quest").then((response) => {
       setquestsList(response.data);
     });
   };
@@ -55,6 +54,6 @@ const ListOfCourses = () => {
       </div>
     </div>
   );
-}
+};
 
-export default ListOfCourses
+export default ListOfCourses;

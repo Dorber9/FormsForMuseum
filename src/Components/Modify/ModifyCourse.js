@@ -4,7 +4,7 @@ import Select from "react-select";
 import Axios from "axios";
 import AddCourse from "../Add/AddCourse";
 
-const server_ip = "34.79.201.254";
+const server_ip = "127.0.0.1";
 
 const selectStyles = {
   menu: (styles, isFocused) => ({

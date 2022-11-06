@@ -12,8 +12,7 @@ import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import { Container, Card } from "react-bootstrap";
 
-
-const server_ip = "34.79.201.254"
+const server_ip = "127.0.0.1";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -148,7 +147,7 @@ const AddQuestion = (props) => {
       questions: inputFields,
       itemID: wantedItem,
     }).then((response) => {
-        alert("Success!")
+      alert("Success!");
       window.location.reload(false);
     });
   };
@@ -265,7 +264,7 @@ const AddQuestion = (props) => {
     <div>
       <Container>
         <Card style={cardShadow}>
-          <Card.Title style={{color:"black"}}>
+          <Card.Title style={{ color: "black" }}>
             {props.object == null ? "Add Questions" : "Modify Questions"}
           </Card.Title>
           <Card.Body>

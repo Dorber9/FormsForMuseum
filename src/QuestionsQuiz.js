@@ -15,33 +15,31 @@ const QuestionsQuiz = () => {
   const [quiz, setQuiz] = useState();
 
   useEffect(() => {
-    Axios.get(`http://34.79.201.254:3001/Quest/${params.id}`).then(
-      (response) => {
-        getQuestions(
-          response.data[0].questions,
-          response.data[0].questName,
-          response.data[0].questItems
-            ? response.data[0].questItems
-            : "Neanderthal-אבן יד-"
-        );
-        // if (response.data[0].questItems) {
-        //   getQuestions(
-        //     response.data[0].questions,
-        //     response.data[0].questName,
-        //     response.data[0].questItems
-        //   )};
-        // else
-        //   getQuestions(
-        //     response.data[0].questions,
-        //     response.data[0].questName,
-        //     "Neanderthal-אבן יד-"
-        //   );
+    Axios.get(`http://127.0.0.1:3001/Quest/${params.id}`).then((response) => {
+      getQuestions(
+        response.data[0].questions,
+        response.data[0].questName,
+        response.data[0].questItems
+          ? response.data[0].questItems
+          : "Neanderthal-אבן יד-"
+      );
+      // if (response.data[0].questItems) {
+      //   getQuestions(
+      //     response.data[0].questions,
+      //     response.data[0].questName,
+      //     response.data[0].questItems
+      //   )};
+      // else
+      //   getQuestions(
+      //     response.data[0].questions,
+      //     response.data[0].questName,
+      //     "Neanderthal-אבן יד-"
+      //   );
 
-        setTimeout(() => {
-          setLoading(false);
-        }, 3000);
-      }
-    );
+      setTimeout(() => {
+        setLoading(false);
+      }, 3000);
+    });
   }, []);
 
   const getQuestions = (course, title, items) => {
@@ -60,19 +58,19 @@ const QuestionsQuiz = () => {
 
     arr.forEach((element) => {
       var showcase;
-      Axios.get(`http://34.79.201.254:3001/question/${element}`)
+      Axios.get(`http://127.0.0.1:3001/question/${element}`)
         .then((response) => {
           questionslist.push(buildQuestion(response.data[0]));
           counter++;
           showcase = response.data[0].ItemID;
         })
         .then(
-          Axios.get(
-            `http://34.79.201.254:3001/ItemShowcase/${itemsArr[i]}`
-          ).then((response2) => {
-            console.log(response2.data[0].ShowcaseID);
-            questionslist.push(buildNextItem(response2.data[0].ShowcaseID));
-          })
+          Axios.get(`http://127.0.0.1:3001/ItemShowcase/${itemsArr[i]}`).then(
+            (response2) => {
+              console.log(response2.data[0].ShowcaseID);
+              questionslist.push(buildNextItem(response2.data[0].ShowcaseID));
+            }
+          )
         );
       i++;
     });
@@ -109,7 +107,7 @@ const QuestionsQuiz = () => {
 
   const buildNextItem = (item) => {
     let ShowcaseID = item;
-    // Axios.get(`http://34.79.201.254:3001/ItemShowcase/${item}`).then(
+    // Axios.get(`http://127.0.0.1:3001/ItemShowcase/${item}`).then(
     //   (response) => {
     //     console.log(response.data[0].ShowcaseID);
     //     ShowcaseID = response.data[0].ShowcaseID;

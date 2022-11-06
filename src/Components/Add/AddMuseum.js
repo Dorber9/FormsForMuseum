@@ -6,37 +6,36 @@ import Axios from "axios";
 import Button from "@material-ui/core/Button";
 import { Container, Card } from "react-bootstrap";
 
+const server_ip = "127.0.0.1";
 
-const server_ip = "34.79.201.254"
+const cardShadow = {
+  boxShadow: "inset rgb(0 0 0) -2px -1px 14px 2px",
+  background: "#ffee9db3",
+};
 
-const cardShadow={boxShadow:"inset rgb(0 0 0) -2px -1px 14px 2px" , background:"#ffee9db3"};
-
-
- const styles = makeStyles((theme) => ({
+const styles = makeStyles((theme) => ({
   root: {
     "& .MuiOutlinedInput-root": {
       boxShadow: " 1px 2px 5px rgb(255 203 43)",
-      '&.Mui-focused fieldset': {
-        borderColor: 'yellow',
+      "&.Mui-focused fieldset": {
+        borderColor: "yellow",
       },
     },
-    '& label.Mui-focused': {
-      color: 'white',
+    "& label.Mui-focused": {
+      color: "white",
     },
-    '& label': {
+    "& label": {
       color: "rgb(255 225 132)",
-	  marginLeft: "32%",
+      marginLeft: "32%",
     },
-    "& .MuiOutlinedInput-notchedOutline":{
-    background: "rgb(3 3 1 / 83%)"
+    "& .MuiOutlinedInput-notchedOutline": {
+      background: "rgb(3 3 1 / 83%)",
     },
     "& .MuiOutlinedInput-input": {
-    zIndex:"1",
-    color: "white"
-    }
-  
-  }
-
+      zIndex: "1",
+      color: "white",
+    },
+  },
 }));
 
 const AddMuseum = (props) => {
@@ -95,12 +94,9 @@ const AddMuseum = (props) => {
 
   const classes = styles();
 
-
   return (
     <Container>
-      <Card
-        style={cardShadow}
-      >
+      <Card style={cardShadow}>
         <Card.Body>
           <Card.Text>
             {museumList.map((val, key) => {
@@ -118,7 +114,7 @@ const AddMuseum = (props) => {
               {/* <InputLabel>Museum Name</InputLabel> <br /> */}
 
               <TextField
-              className={classes.root}
+                className={classes.root}
                 disabled
                 value={name}
                 required
@@ -134,8 +130,7 @@ const AddMuseum = (props) => {
               <br></br>
               <br></br>
               <Button
-                              className="bn30"
-
+                className="bn30"
                 variant="contained"
                 color="primary"
                 type="submit"
@@ -147,7 +142,6 @@ const AddMuseum = (props) => {
                 ""
               ) : (
                 <Button
-                
                   variant="contained"
                   style={{
                     color: "white",

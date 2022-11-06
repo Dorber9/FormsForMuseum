@@ -13,7 +13,7 @@ import AddQuestion from "../Add/AddQuestion";
 
 import { render } from "react-dom";
 
-const server_ip = "34.79.201.254";
+const server_ip = "127.0.0.1";
 
 const selectStyles = {
   menu: (styles, isFocused) => ({

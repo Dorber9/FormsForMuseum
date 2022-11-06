@@ -1,40 +1,35 @@
-import React from 'react'
-import AddQuestion from './Components/Add/AddQuestion'
+import React from "react";
+import AddQuestion from "./Components/Add/AddQuestion";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Axios from "axios";
 
 const AddQuestionNew = (props) => {
-      const params = useParams();
-        const[itemName,setItemName]=useState("")
+  const params = useParams();
+  const [itemName, setItemName] = useState("");
   const [id, setId] = useState("");
   useEffect(() => {
-      
     setId(params.id);
-    
-   getItem()
-    
+
+    getItem();
 
     // eslint-disable-next-line
   }, [props]);
 
- const getItem = async () => {
+  const getItem = async () => {
     try {
-      let res = await Axios.get(
-        `http://34.79.201.254:3001/Item/${params.id}`
-      );
-     setItemName(res.data[0].ItemName)
+      let res = await Axios.get(`http://127.0.0.1:3001/Item/${params.id}`);
+      setItemName(res.data[0].ItemName);
     } catch (error) {
       console.log(error.data);
     }
   };
-    
-  
-  return (
-    <div className="pshDwn" style={{textAlign: "center"}}>
-        <AddQuestion itemName={itemName} itemId={id}></AddQuestion>
-    </div>
-  )
-}
 
-export default AddQuestionNew
+  return (
+    <div className="pshDwn" style={{ textAlign: "center" }}>
+      <AddQuestion itemName={itemName} itemId={id}></AddQuestion>
+    </div>
+  );
+};
+
+export default AddQuestionNew;

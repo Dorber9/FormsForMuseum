@@ -16,7 +16,7 @@ const ListOfItems = () => {
   }, []);
 
   const getItems = () => {
-    Axios.get("http://34.79.201.254:3001/Item").then((response) => {
+    Axios.get("http://127.0.0.1:3001/Item").then((response) => {
       setItemsList(response.data);
     });
   };

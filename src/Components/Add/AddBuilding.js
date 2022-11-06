@@ -7,7 +7,7 @@ import { Container, Card } from "react-bootstrap";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 
-const server_ip = "34.79.201.254"
+const server_ip = "127.0.0.1";
 
 const contentContainerStyle = {
   display: "block",

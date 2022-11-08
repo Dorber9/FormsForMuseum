@@ -18,7 +18,7 @@ const AddQuestionNew = (props) => {
 
   const getItem = async () => {
     try {
-      let res = await Axios.get(`http://127.0.0.1:3001/Item/${params.id}`);
+      let res = await Axios.get(`http://34.165.154.8:3001/Item/${params.id}`);
       setItemName(res.data[0].ItemName);
     } catch (error) {
       console.log(error.data);

@@ -20,7 +20,7 @@ import AddQuestion from "./AddQuestion";
 import Collapse from "./Collapse";
 import ReactUploadImage from "../ReactUploadImage";
 
-const server_ip = "127.0.0.1";
+const server_ip = "34.165.154.8";
 
 const useStyles = makeStyles((theme) => ({
   root: {

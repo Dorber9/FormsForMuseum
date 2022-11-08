@@ -7,7 +7,7 @@ import "../App.css";
 import QRCode from "react-qr-code";
 import ReactUploadImage from "./ReactUploadImage";
 
-const server_ip = "127.0.0.1";
+const server_ip = "34.165.154.8";
 
 const Reports = () => {
   const [selectedObject, setSelectedObject] = useState("");

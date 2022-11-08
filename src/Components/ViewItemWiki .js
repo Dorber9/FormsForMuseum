@@ -26,31 +26,33 @@ const ViewItemWiki = (props) => {
   useEffect(() => {
     setDataWiki([]);
     console.log(props.itemId);
-    Axios.get(`http://127.0.0.1:3001/Item/${props.itemId}`).then((response) => {
-      console.log(response.data[0]);
-      setName(response.data[0].HebItemName);
-      setMaterial(response.data[0].HebMaterial);
-      setDesc(response.data[0].HebDescr);
-      setAge(response.data[0].Age);
-      setPeriod(response.data[0].HebPeriod);
-      setSite(response.data[0].HebSite);
-      if (response.data[0].ImagePath) setPath(response.data[0].ImagePath);
-      if (response.data[0].ItemData) {
-        const data = response.data[0].ItemData.split("^%^");
+    Axios.get(`http://34.165.154.8:3001/Item/${props.itemId}`).then(
+      (response) => {
+        console.log(response.data[0]);
+        setName(response.data[0].HebItemName);
+        setMaterial(response.data[0].HebMaterial);
+        setDesc(response.data[0].HebDescr);
+        setAge(response.data[0].Age);
+        setPeriod(response.data[0].HebPeriod);
+        setSite(response.data[0].HebSite);
+        if (response.data[0].ImagePath) setPath(response.data[0].ImagePath);
+        if (response.data[0].ItemData) {
+          const data = response.data[0].ItemData.split("^%^");
 
-        data.pop();
-        var temp = [];
+          data.pop();
+          var temp = [];
 
-        data.forEach((element) => {
-          const d = element.split("=>");
-          temp.push({
-            category: d[1].split("&&&")[0],
-            categoryDescr: d[2],
+          data.forEach((element) => {
+            const d = element.split("=>");
+            temp.push({
+              category: d[1].split("&&&")[0],
+              categoryDescr: d[2],
+            });
           });
-        });
-        setDataWiki(temp);
+          setDataWiki(temp);
+        }
       }
-    });
+    );
 
     setTimeout(() => {
       setLoading(false);

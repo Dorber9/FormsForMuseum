@@ -12,7 +12,7 @@ import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import { Container, Card } from "react-bootstrap";
 
-const server_ip = "127.0.0.1";
+const server_ip = "34.165.154.8";
 
 const useStyles = makeStyles((theme) => ({
   root: {

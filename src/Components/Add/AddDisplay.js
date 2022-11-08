@@ -11,7 +11,7 @@ import { makeStyles } from "@material-ui/core/styles";
 
 import "../../App.css";
 
-const server_ip = "127.0.0.1";
+const server_ip = "34.165.154.8";
 
 const options = [
   { value: "1", label: "Permanent" },

@@ -11,7 +11,7 @@ import Resizer from "react-image-file-resizer";
 
 import ReactUploadImage from "../ReactUploadImage";
 
-const server_ip = "127.0.0.1";
+const server_ip = "34.165.154.8";
 
 const AddShowcase = (props) => {
   const [number, setNumber] = useState("");

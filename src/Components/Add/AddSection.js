@@ -8,7 +8,7 @@ import { Container, Card } from "react-bootstrap";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 
-const server_ip = "127.0.0.1";
+const server_ip = "34.165.154.8";
 
 const cardShadow = {
   boxShadow: "inset rgb(0 0 0) -2px -1px 14px 2px",

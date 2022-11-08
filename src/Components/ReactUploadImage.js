@@ -24,7 +24,7 @@ class ReactUploadImage extends React.Component {
       },
     };
     axios
-      .post("http://127.0.0.1:3001/upload", formData, config)
+      .post("http://34.165.154.8:3001/upload", formData, config)
       .then((response) => {
         this.setState({ path: response.data });
         this.props.parentCallback(this.state.path);

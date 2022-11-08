@@ -50,7 +50,7 @@ const SearchItem = ({ handleClick, currentItem, itemName }) => {
   }, [material, queryFlag, period, site, itemName]);
 
   const getItems = () => {
-    Axios.get("http://127.0.0.1:3001/Item").then((response) => {
+    Axios.get("http://34.165.154.8:3001/Item").then((response) => {
       setItemsList(response.data);
       const unique = [...new Set(response.data.map((item) => item.ItemName))];
       setCategories(unique);

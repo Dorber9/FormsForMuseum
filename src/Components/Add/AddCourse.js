@@ -15,7 +15,7 @@ import { Link } from "react-router-dom";
 import { getByLabelText } from "@testing-library/react";
 import SearchItem from "../SearchItem";
 
-const server_ip = "127.0.0.1";
+const server_ip = "34.165.154.8";
 
 const cardShadow = {
   boxShadow: "inset rgb(0 0 0) -2px -1px 14px 2px",

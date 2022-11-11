@@ -377,7 +377,7 @@ const AddCourse = (props) => {
                   type="submit"
                   onClick={deleteQuest}
                 >
-                  Delete Museum
+                  Delete Quest
                 </Button>
               )}
             </Card.Text>

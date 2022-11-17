@@ -9,10 +9,9 @@ import { makeStyles } from "@material-ui/core/styles";
 import Select from "react-select";
 import { Container, Card } from "react-bootstrap";
 import Resizer from "react-image-file-resizer";
-import Popup from 'reactjs-popup';
-import 'reactjs-popup/dist/index.css';
-import Logo from "../../logo_amnon.png"
-
+import Popup from "reactjs-popup";
+import "reactjs-popup/dist/index.css";
+import Logo from "../../logo_amnon.png";
 
 import { useState, useEffect } from "react";
 import Axios from "axios";
@@ -21,8 +20,7 @@ import AddQuestion from "./AddQuestion";
 import Collapse from "./Collapse";
 import ReactUploadImage from "../ReactUploadImage";
 
-
-const server_ip = "34.79.201.254";
+const server_ip = "127.0.01";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -97,7 +95,6 @@ function AddItem(props) {
     option: (provided, state) => ({
       ...provided,
       color: state.isFocused ? "black" : "white",
-      
     }),
   };
 
@@ -214,26 +211,21 @@ function AddItem(props) {
       setPeriod(props.object.Period);
       setSite(props.object.Site);
       console.log("us effect");
-      if(props.object.InStorage!= null)
-        setStorage(props.object.InStorage)
- 
+      if (props.object.InStorage != null) setStorage(props.object.InStorage);
 
       if (storage !== "1") {
         setDisplay(props.object.DisplayID);
         setShowcase(props.object.ShowcaseID);
-
       }
       setAge(props.object.Age);
       setWebsite(props.object.Website);
       setSize(props.object.Size);
       setReferences(props.object.Refs);
       setInputFields([]);
-      setPath(props.object.ImagePath!= null ? props.object.ImagePath : "");
-      if(props.object.ItemData){
-        
-
+      setPath(props.object.ImagePath != null ? props.object.ImagePath : "");
+      if (props.object.ItemData) {
         const data = props.object.ItemData.split("^%^");
-        console.log(data)
+        console.log(data);
         data.pop();
         var temp = [];
 
@@ -246,9 +238,8 @@ function AddItem(props) {
           });
         });
         setInputFields(temp);
-      }
-      else
-        setInputFields([{ id: uuidv4(), category: "", categoryDescr: "" }])
+      } else
+        setInputFields([{ id: uuidv4(), category: "", categoryDescr: "" }]);
     }
   }, [props.object != null ? props.object : ""]);
 
@@ -300,7 +291,6 @@ function AddItem(props) {
   };
 
   const updateItem = (img) => {
- 
     Axios.put(`http://${server_ip}:3001/updateItem`, {
       ID: itemId,
       name: name,
@@ -363,31 +353,26 @@ function AddItem(props) {
     });
   };
 
-  const getDisplayLabel =(displayList)=>{
-    let result=displayList.filter(obj => {
-                            return obj.idDisplay == display
-      })
-      if(result.length)
-          return result[0].Name
-      else
-        return ""
-  }
-   const getShowCaseLabel =(showCaseList)=>{
-    let result=showCaseList.filter(obj => {
-                            return obj.idShowcase == showcase
-      })
-      if(result.length)
-          return result[0].Name
-      else
-        return ""
-  }
-
+  const getDisplayLabel = (displayList) => {
+    let result = displayList.filter((obj) => {
+      return obj.idDisplay == display;
+    });
+    if (result.length) return result[0].Name;
+    else return "";
+  };
+  const getShowCaseLabel = (showCaseList) => {
+    let result = showCaseList.filter((obj) => {
+      return obj.idShowcase == showcase;
+    });
+    if (result.length) return result[0].Name;
+    else return "";
+  };
 
   const onFormSubmit = async () => {
     if (ImageFlag) {
       try {
         const image = await resizeFile(file);
-        
+
         props.object == null ? postItem(image) : updateItem(image);
       } catch (error) {
         console.log(error.data);
@@ -420,8 +405,6 @@ function AddItem(props) {
   //     else
   //         updateItem(path)
   // };
-
- 
 
   const fileChange = (e) => {
     setImageFlag(true);
@@ -467,31 +450,43 @@ function AddItem(props) {
 
   return (
     <>
-    {props.object!=null?   
-               <div style={{ textAlign: "center" }}>
-            {props.object.ImagePath ? (
-              <img
-                src={props.object.ImagePath}
-                style={{ height: "250px" }}
-                alt="Oops! Something went wrong"
-              />
-            ) : (
-              <img
-                src={Logo}
-                style={{ height: "150px" }}
-                alt="Something is wrong"
-              />
-            )}
-          </div> : " "}
+      {" "}
+      {props.object != null ? (
+        <div style={{ textAlign: "center" }}>
+          {" "}
+          {props.object.ImagePath ? (
+            <img
+              src={props.object.ImagePath}
+              style={{ height: "250px" }}
+              alt="Oops! Something went wrong"
+            />
+          ) : (
+            <img
+              src={Logo}
+              style={{ height: "150px" }}
+              alt="Something is wrong"
+            />
+          )}{" "}
+        </div>
+      ) : (
+        " "
+      )}{" "}
       <Container>
         <Card style={cardShadow}>
           <Card.Body>
             <Card.Text>
+              {" "}
               {questionsFlag == false ? (
                 <>
-                  <h4 style={{ textAlign: "center", marginBottom: "2%" , color:"black" }}>
-                    Add Item
-                  </h4>
+                  <h4
+                    style={{
+                      textAlign: "center",
+                      marginBottom: "2%",
+                      color: "black",
+                    }}
+                  >
+                    Add Item{" "}
+                  </h4>{" "}
                   <div className="txtf">
                     <TextField
                       className={classstyle.root}
@@ -504,7 +499,6 @@ function AddItem(props) {
                       name="itemId"
                       label="ID"
                     />
-
                     <TextField
                       className={classstyle.root}
                       style={{ marginLeft: "5px" }}
@@ -516,9 +510,7 @@ function AddItem(props) {
                       type="text"
                       name="name"
                       label="name"
-                      
                     />
-
                     <TextField
                       className={classstyle.root}
                       value={site}
@@ -549,12 +541,10 @@ function AddItem(props) {
                         options={options}
                         onChange={(e) => {
                           setStorage(e.value);
-                          console.log("changd the value")
+                          console.log("changd the value");
                         }}
-                    
-                      />
+                      />{" "}
                     </div>
-
                     {storage === "1" ? (
                       ""
                     ) : (
@@ -567,7 +557,17 @@ function AddItem(props) {
                       >
                         <Select
                           styles={selectStyles}
-                          value={display? {value: display, label: getDisplayLabel(displayList) } :{value: "Select Display", label: "Please Select Display" }}
+                          value={
+                            display
+                              ? {
+                                  value: display,
+                                  label: getDisplayLabel(displayList),
+                                }
+                              : {
+                                  value: "Select Display",
+                                  label: "Please Select Display",
+                                }
+                          }
                           placeholder="Select Display"
                           options={displayList.map((val, key) => {
                             return { value: val.idDisplay, label: val.Name };
@@ -575,10 +575,9 @@ function AddItem(props) {
                           onChange={(e) => {
                             setDisplay(e.value);
                           }}
-                        />
+                        />{" "}
                       </div>
                     )}
-
                     {storage == "1" ? (
                       ""
                     ) : (
@@ -592,19 +591,28 @@ function AddItem(props) {
                         <Select
                           styles={selectStyles}
                           placeholder="Select Exibition"
-                          value={showcase? {value: showcase, label: getShowCaseLabel(showcaseList) } :{value: "Select Exibition", label: "Please Select Exibition" }}
+                          value={
+                            showcase
+                              ? {
+                                  value: showcase,
+                                  label: getShowCaseLabel(showcaseList),
+                                }
+                              : {
+                                  value: "Select Exibition",
+                                  label: "Please Select Exibition",
+                                }
+                          }
                           options={showcaseList.map((val, key) => {
                             return { value: val.idShowcase, label: val.Name };
                           })}
                           onChange={(e) => {
                             setShowcase(e.value);
                           }}
-                        />
+                        />{" "}
                       </div>
-                    )}
+                    )}{" "}
                     <br />
                     <br />
-
                     <TextField
                       className={classstyle.root}
                       value={period}
@@ -616,7 +624,6 @@ function AddItem(props) {
                       name="Period"
                       label="Period"
                     />
-
                     <TextField
                       className={classstyle.root}
                       value={age}
@@ -629,7 +636,6 @@ function AddItem(props) {
                       name="Age"
                       label="Age"
                     />
-
                     <TextField
                       className={classstyle.root}
                       value={material}
@@ -655,7 +661,6 @@ function AddItem(props) {
                       name="Size"
                       label="Size(l X w X t )"
                     />
-
                     <TextField
                       className={classstyle.root}
                       value={website}
@@ -717,18 +722,17 @@ function AddItem(props) {
                     <br />
                     <br />
                     <div style={{ margin: "2%" }}>
-                      <h6 style={{ color: "black" }}>Upload Image</h6>
-
+                      <h6 style={{ color: "black" }}> Upload Image </h6>
                       <input
                         accept="image/png, image/gif, image/jpeg"
                         type="file"
                         name="myImage"
                         style={{ color: "black" }}
                         onChange={fileChange}
-                      />
+                      />{" "}
                     </div>
-
                     <form className={classes.root} onSubmit={handleSubmit}>
+                      {" "}
                       {inputFields.map((inputField) => (
                         <div key={inputField.id}>
                           <TextField
@@ -740,7 +744,7 @@ function AddItem(props) {
                             onChange={(event) =>
                               handleChangeInput(inputField.id, event)
                             }
-                          />
+                          />{" "}
                           <div
                             style={{ marginRight: "10%", marginLeft: "10%" }}
                           >
@@ -762,13 +766,13 @@ function AddItem(props) {
                               onClick={() => handleRemoveFields(inputField.id)}
                             >
                               <RemoveIcon />
-                            </IconButton>
+                            </IconButton>{" "}
                             <IconButton onClick={handleAddFields}>
                               <AddIcon />
-                            </IconButton>
-                          </div>
+                            </IconButton>{" "}
+                          </div>{" "}
                         </div>
-                      ))}
+                      ))}{" "}
                       <Button
                         id="bn30"
                         className={classes.button}
@@ -779,44 +783,62 @@ function AddItem(props) {
                           props.object == null ? handleSubmit : handleUpdateItem
                         }
                       >
-                        SUBMIT
-                      </Button>
-                      {/* <button onClick={getItems}>Show Items</button> */}
-                    </form>
-                  </div>
+                        SUBMIT{" "}
+                      </Button>{" "}
+                      {/* <button onClick={getItems}>Show Items</button> */}{" "}
+                    </form>{" "}
+                  </div>{" "}
                   {props.object == null ? (
                     ""
                   ) : (
-                     <Popup modal trigger={  <Button
-                      variant="contained"
-                      style={{
-                        color: "white",
-                        background: "red",
-                        marginLeft: "10px",
-                      }}
-                      type="submit"
+                    <Popup
+                      modal
+                      trigger={
+                        <Button
+                          variant="contained"
+                          style={{
+                            color: "white",
+                            background: "red",
+                            marginLeft: "10px",
+                          }}
+                          type="submit"
+                        >
+                          Delete Item{" "}
+                        </Button>
+                      }
+                      position="center"
                     >
-                      
-                      Delete Item
-                    </Button>} position="center">
-                       {close => (
-                         <>
-              <div>Are you sure you want to delete?</div>
-              <Button  style={{
-                        color: "white",
-                        background: "green",
-                        marginLeft: "10px",
-                      }} onClick={deleteItem} variant="contained"> Yes</Button> <Button  style={{
-                        color: "white",
-                        background: "red",
-                        marginLeft: "10px",
-                      }} variant="contained" onClick={close}>
-          No
-        </Button>
-        </> )}
-            </Popup>
-                  
-                  )}
+                      {" "}
+                      {(close) => (
+                        <>
+                          <div> Are you sure you want to delete ? </div>{" "}
+                          <Button
+                            style={{
+                              color: "white",
+                              background: "green",
+                              marginLeft: "10px",
+                            }}
+                            onClick={deleteItem}
+                            variant="contained"
+                          >
+                            {" "}
+                            Yes{" "}
+                          </Button>{" "}
+                          <Button
+                            style={{
+                              color: "white",
+                              background: "red",
+                              marginLeft: "10px",
+                            }}
+                            variant="contained"
+                            onClick={close}
+                          >
+                            No{" "}
+                          </Button>{" "}
+                        </>
+                      )}{" "}
+                    </Popup>
+                  )}{" "}
                 </>
               ) : props.object == null ? (
                 <div>
@@ -834,12 +856,12 @@ function AddItem(props) {
                   </Button>{" "}
                 </div>
               ) : (
-                <div style={{ color: "black" }}>Modified Successfully!</div>
-              )}
-            </Card.Text>
-          </Card.Body>
-        </Card>
-      </Container>
+                <div style={{ color: "black" }}> Modified Successfully! </div>
+              )}{" "}
+            </Card.Text>{" "}
+          </Card.Body>{" "}
+        </Card>{" "}
+      </Container>{" "}
     </>
   );
 }

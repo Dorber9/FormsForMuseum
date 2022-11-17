@@ -42,7 +42,7 @@ const HomePage = () => {
               </Button>
             </Card.Body>
           </Card>
-          <Card className="card" style={cardShadow}>
+          {/* <Card className="card" style={cardShadow}>
             <Card.Img className="cardImage" variant="top" src={Reports} />
             <Card.Body>
               <Card.Title>Reports</Card.Title>
@@ -52,7 +52,7 @@ const HomePage = () => {
                 Reports
               </Button>
             </Card.Body>
-          </Card>
+          </Card> */}
           <Card className="card" style={cardShadow}>
             <Card.Img className="cardImage" variant="top" src={Course} />
             <Card.Body>

@@ -15,7 +15,7 @@ import { Link } from "react-router-dom";
 import { getByLabelText } from "@testing-library/react";
 import SearchItem from "../SearchItem";
 
-const server_ip = "34.79.201.254";
+const server_ip = "127.0.01";
 
 const cardShadow = {
   boxShadow: "inset rgb(0 0 0) -2px -1px 14px 2px",
@@ -262,11 +262,12 @@ const AddCourse = (props) => {
       <Container>
         <Card style={cardShadow}>
           <Card.Title style={{ color: "black" }}>
-            {props.object == null ? "Add Quest" : "Modify Quest"}
-          </Card.Title>
+            {" "}
+            {props.object == null ? "Add Quest" : "Modify Quest"}{" "}
+          </Card.Title>{" "}
           <Card.Body>
             <Card.Text>
-              <div style={{ marginBottom: "20px" }}></div>
+              <div style={{ marginBottom: "20px" }}> </div>{" "}
               <div className="txtf">
                 <TextField
                   className={classstyle.root}
@@ -277,9 +278,10 @@ const AddCourse = (props) => {
                   variant="outlined"
                   style={{ width: "25%" }}
                   onChange={(e) => setCourseName(e.target.value)}
-                />
-              </div>
+                />{" "}
+              </div>{" "}
               <form className={classstyle.root}>
+                {" "}
                 {inputFields.map((inputField) => (
                   <>
                     <div key={inputField.id}>
@@ -305,7 +307,7 @@ const AddCourse = (props) => {
                                   )
                                   .map((item) => item.ItemName)[0]
                           }
-                        />
+                        />{" "}
                         <Select
                           placeholder="Please select Question"
                           styles={selectStyles}
@@ -337,21 +339,20 @@ const AddCourse = (props) => {
                               "@#@" +
                               wantedItem;
                           }}
-                        />
-                      </div>
+                        />{" "}
+                      </div>{" "}
                     </div>
-
                     <IconButton
                       disabled={inputFields.length === 1}
                       onClick={() => handleRemoveFields(inputFields.id)}
                     >
                       <RemoveIcon />
-                    </IconButton>
+                    </IconButton>{" "}
                     <IconButton onClick={handleAddFields}>
                       <AddIcon />
-                    </IconButton>
+                    </IconButton>{" "}
                   </>
-                ))}
+                ))}{" "}
                 <br />
                 <br />
                 <Button
@@ -361,9 +362,9 @@ const AddCourse = (props) => {
                   type="submit"
                   onClick={postCourse}
                 >
-                  {props.object == null ? "SUBMIT" : "UPDATE"}
-                </Button>
-              </form>
+                  {props.object == null ? "SUBMIT" : "UPDATE"}{" "}
+                </Button>{" "}
+              </form>{" "}
               {props.object == null ? (
                 ""
               ) : (
@@ -377,13 +378,13 @@ const AddCourse = (props) => {
                   type="submit"
                   onClick={deleteQuest}
                 >
-                  Delete Museum
+                  Delete Museum{" "}
                 </Button>
-              )}
-            </Card.Text>
-          </Card.Body>
-        </Card>
-      </Container>
+              )}{" "}
+            </Card.Text>{" "}
+          </Card.Body>{" "}
+        </Card>{" "}
+      </Container>{" "}
     </div>
   );
 };

@@ -4,7 +4,7 @@ import Select from "react-select";
 import Axios from "axios";
 import AddCourse from "../Add/AddCourse";
 
-const server_ip = "34.79.201.254";
+const server_ip = "127.0.01";
 
 const selectStyles = {
   menu: (styles, isFocused) => ({
@@ -71,15 +71,15 @@ const ModifyCourse = () => {
           styles={selectStyles}
           options={mapOptions()}
           onChange={(e) => setWantedQuest(e.value)}
-        ></Select>
-      </div>
+        ></Select>{" "}
+      </div>{" "}
       {wantedQuest == "" ? (
         ""
       ) : (
         <div className="tc">
-          <AddCourse object={getWantedQuest(wantedQuest)} />
+          <AddCourse object={getWantedQuest(wantedQuest)} />{" "}
         </div>
-      )}
+      )}{" "}
     </div>
   );
 };

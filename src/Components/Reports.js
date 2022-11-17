@@ -7,8 +7,7 @@ import "../App.css";
 import QRCode from "react-qr-code";
 import ReactUploadImage from "./ReactUploadImage";
 
-
-const server_ip = "34.79.201.254"
+const server_ip = "127.0.01";
 
 const Reports = () => {
   const [selectedObject, setSelectedObject] = useState("");
@@ -83,12 +82,12 @@ const Reports = () => {
           width: "100%",
           height: "100%",
         }}
-      ></div>
+      ></div>{" "}
       <div
         className="pshDwn"
         style={{ textAlign: "center", alignItems: "center" }}
       >
-        <h2>Reports</h2>
+        <h2> Reports </h2>{" "}
         <div
           style={{
             display: "flex",
@@ -101,20 +100,21 @@ const Reports = () => {
             onChange={(e) => {
               setSelectedObject(e.value);
             }}
-          />
-        </div>
+          />{" "}
+        </div>{" "}
         <div>
+          {" "}
           {selectedObject === ""
             ? ""
             : selectedObject === "Museum"
             ? museumList.map((m) => {
-                return <h4>{m.name}</h4>;
+                return <h4> {m.name} </h4>;
               })
-            : ""}
-        </div>
-        <br></br>
-      </div>
-      <div></div>
+            : ""}{" "}
+        </div>{" "}
+        <br> </br>{" "}
+      </div>{" "}
+      <div> </div>{" "}
     </>
   );
 };

@@ -5,33 +5,27 @@ import Button from "@material-ui/core/Button";
 import { useState, useEffect } from "react";
 import Axios from "axios";
 import "../App.css";
+import SearchItem from "./SearchItem";
 
 const ListOfItems = () => {
-  const [itemsList, setItemsList] = useState([]);
   const [itemID, setItemId] = useState("");
 
-  useEffect(() => {
-    getItems();
-    // eslint-disable-next-line
-  }, []);
-
-  const getItems = () => {
-    Axios.get("http://34.79.201.254:3001/Item").then((response) => {
-      setItemsList(response.data);
-    });
+  const handleItem = (e) => {
+    setItemId(e);
   };
 
   return (
-    <div className="txtF">
-      <div className="pshDwn">
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <Select
+    <>
+      <div className="txtF">
+        <div className="pshDwn">
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            {/* <Select
             name="itemsList"
             options={itemsList.map((val, key) => {
               return { value: val.ItemID, label: val.ItemName };
@@ -39,22 +33,23 @@ const ListOfItems = () => {
             onChange={(e) => {
               setItemId(e.value);
             }}
-          />
-        </div>
-        <br></br>
-        <div className="txtf">
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={() => {
-              window.location.href = `/Item/${itemID}`;
-            }}
-          >
-            Show Item
-          </Button>
-        </div>
+          />{" "} */}
+            <SearchItem handleClick={handleItem} itemID={null} itemName={""} />
+          </div>{" "}
+          <div className="txtf">
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => {
+                window.location.href = `/Item/${itemID}`;
+              }}
+            >
+              Show Item{" "}
+            </Button>{" "}
+          </div>{" "}
+        </div>{" "}
       </div>
-    </div>
+    </>
   );
 };
 

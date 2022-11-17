@@ -24,7 +24,7 @@ class ReactUploadImage extends React.Component {
             },
         };
         axios
-            .post("http://34.79.201.254:3001/upload", formData, config)
+            .post("http://127.0.01:3001/upload", formData, config)
             .then((response) => {
                 this.setState({ path: response.data });
                 this.props.parentCallback(this.state.path);
@@ -41,10 +41,12 @@ class ReactUploadImage extends React.Component {
     render() {
         return ( <
             div style = {
-                { margin: "2%" } } >
+                { margin: "2%" }
+            } >
             <
             h6 style = {
-                { color: "black" } } > Upload Image < /h6>
+                { color: "black" }
+            } > Upload Image < /h6>
 
             <
             input accept = "image/png, image/gif, image/jpeg"
@@ -64,8 +66,8 @@ class ReactUploadImage extends React.Component {
                 }
             } >
             Upload <
-            /Button> <
-            /div>
+            /Button> < /
+            div >
         );
     }
 }

@@ -92,17 +92,6 @@ const Header = () => {
               </NavDropdown>
               <Nav.Link
                 style={
-                  window.location.pathname == "/Reports"
-                    ? selectedStyle
-                    : navStyle
-                }
-                href="../Reports"
-              >
-                Reports <FaWpforms />
-              </Nav.Link>
-
-              <Nav.Link
-                style={
                   window.location.pathname == "/ItemsList"
                     ? selectedStyle
                     : navStyle

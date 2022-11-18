@@ -43,17 +43,6 @@ const HomePage = () => {
             </Card.Body>
           </Card>
           <Card className="card" style={cardShadow}>
-            <Card.Img className="cardImage" variant="top" src={Reports} />
-            <Card.Body>
-              <Card.Title>Reports</Card.Title>
-              <Card.Text>Generate Reports from the museum database</Card.Text>
-
-              <Button className="bn30" href="/Reports">
-                Reports
-              </Button>
-            </Card.Body>
-          </Card>
-          <Card className="card" style={cardShadow}>
             <Card.Img className="cardImage" variant="top" src={Course} />
             <Card.Body>
               <Card.Title>Manage Quests</Card.Title>

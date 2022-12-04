@@ -143,7 +143,7 @@ function AddItem(props) {
   const [file, setFile] = useState(null);
   const [questionsFlag, setFlag] = useState(false);
   const [ImageFlag, setImageFlag] = useState(false);
-  const [ImageTry, setTry] = useState("");
+  const [newItemFlag, setNewItemFlag] = useState(false);
   const [itemData, setItemData] = useState([
     { id: uuidv4(), category: "", categoryDescr: "" },
   ]);
@@ -200,6 +200,7 @@ function AddItem(props) {
   }));
 
   useEffect(() => {
+    console.log("rendring");
     getDisplay();
     getShowcase();
     if (props.object != null) {
@@ -241,7 +242,7 @@ function AddItem(props) {
       } else
         setInputFields([{ id: uuidv4(), category: "", categoryDescr: "" }]);
     }
-  }, [props.object != null ? props.object : ""]);
+  }, [props.object != null ? props.object : "", newItemFlag]);
 
   const postItem = (img) => {
     if (storage === "0" && display === "") {
@@ -382,6 +383,11 @@ function AddItem(props) {
     }
   };
 
+  const reRender = () => {
+    setNewItemFlag(true);
+    setFlag(false);
+  };
+
   // else
   //     if(ImageFlag){
   //       try {
@@ -450,8 +456,10 @@ function AddItem(props) {
 
   return (
     <>
+      {" "}
       {props.object != null ? (
         <div style={{ textAlign: "center" }}>
+          {" "}
           {props.object.ImagePath ? (
             <img
               src={props.object.ImagePath}
@@ -464,15 +472,16 @@ function AddItem(props) {
               style={{ height: "150px" }}
               alt="Something is wrong"
             />
-          )}
+          )}{" "}
         </div>
       ) : (
         " "
-      )}
+      )}{" "}
       <Container>
         <Card style={cardShadow}>
           <Card.Body>
             <Card.Text>
+              {" "}
               {questionsFlag == false ? (
                 <>
                   <h4
@@ -482,8 +491,8 @@ function AddItem(props) {
                       color: "black",
                     }}
                   >
-                    Add Item
-                  </h4>
+                    Add Item{" "}
+                  </h4>{" "}
                   <div className="txtf">
                     <TextField
                       className={classstyle.root}
@@ -496,7 +505,6 @@ function AddItem(props) {
                       name="itemId"
                       label="ID"
                     />
-
                     <TextField
                       className={classstyle.root}
                       style={{ marginLeft: "5px" }}
@@ -509,7 +517,6 @@ function AddItem(props) {
                       name="name"
                       label="name"
                     />
-
                     <TextField
                       className={classstyle.root}
                       value={site}
@@ -542,9 +549,8 @@ function AddItem(props) {
                           setStorage(e.value);
                           console.log("changd the value");
                         }}
-                      />
+                      />{" "}
                     </div>
-
                     {storage === "1" ? (
                       ""
                     ) : (
@@ -575,10 +581,9 @@ function AddItem(props) {
                           onChange={(e) => {
                             setDisplay(e.value);
                           }}
-                        />
+                        />{" "}
                       </div>
                     )}
-
                     {storage == "1" ? (
                       ""
                     ) : (
@@ -609,12 +614,11 @@ function AddItem(props) {
                           onChange={(e) => {
                             setShowcase(e.value);
                           }}
-                        />
+                        />{" "}
                       </div>
-                    )}
+                    )}{" "}
                     <br />
                     <br />
-
                     <TextField
                       className={classstyle.root}
                       value={period}
@@ -626,7 +630,6 @@ function AddItem(props) {
                       name="Period"
                       label="Period"
                     />
-
                     <TextField
                       className={classstyle.root}
                       value={age}
@@ -639,7 +642,6 @@ function AddItem(props) {
                       name="Age"
                       label="Age"
                     />
-
                     <TextField
                       className={classstyle.root}
                       value={material}
@@ -665,7 +667,6 @@ function AddItem(props) {
                       name="Size"
                       label="Size(l X w X t )"
                     />
-
                     <TextField
                       className={classstyle.root}
                       value={website}
@@ -727,18 +728,17 @@ function AddItem(props) {
                     <br />
                     <br />
                     <div style={{ margin: "2%" }}>
-                      <h6 style={{ color: "black" }}>Upload Image</h6>
-
+                      <h6 style={{ color: "black" }}> Upload Image </h6>
                       <input
                         accept="image/png, image/gif, image/jpeg"
                         type="file"
                         name="myImage"
                         style={{ color: "black" }}
                         onChange={fileChange}
-                      />
+                      />{" "}
                     </div>
-
                     <form className={classes.root} onSubmit={handleSubmit}>
+                      {" "}
                       {inputFields.map((inputField) => (
                         <div key={inputField.id}>
                           <TextField
@@ -750,7 +750,7 @@ function AddItem(props) {
                             onChange={(event) =>
                               handleChangeInput(inputField.id, event)
                             }
-                          />
+                          />{" "}
                           <div
                             style={{ marginRight: "10%", marginLeft: "10%" }}
                           >
@@ -772,13 +772,13 @@ function AddItem(props) {
                               onClick={() => handleRemoveFields(inputField.id)}
                             >
                               <RemoveIcon />
-                            </IconButton>
+                            </IconButton>{" "}
                             <IconButton onClick={handleAddFields}>
                               <AddIcon />
-                            </IconButton>
-                          </div>
+                            </IconButton>{" "}
+                          </div>{" "}
                         </div>
-                      ))}
+                      ))}{" "}
                       <Button
                         id="bn30"
                         className={classes.button}
@@ -789,11 +789,11 @@ function AddItem(props) {
                           props.object == null ? handleSubmit : handleUpdateItem
                         }
                       >
-                        SUBMIT
-                      </Button>
-                      {/* <button onClick={getItems}>Show Items</button> */}
-                    </form>
-                  </div>
+                        SUBMIT{" "}
+                      </Button>{" "}
+                      {/* <button onClick={getItems}>Show Items</button> */}{" "}
+                    </form>{" "}
+                  </div>{" "}
                   {props.object == null ? (
                     ""
                   ) : (
@@ -809,14 +809,14 @@ function AddItem(props) {
                           }}
                           type="submit"
                         >
-                          Delete Item
+                          Delete Item{" "}
                         </Button>
                       }
                       position="center"
                     >
                       {(close) => (
                         <>
-                          <div>Are you sure you want to delete?</div>
+                          <div> Are you sure you want to delete ? </div>{" "}
                           <Button
                             style={{
                               color: "white",
@@ -827,7 +827,7 @@ function AddItem(props) {
                             variant="contained"
                           >
                             {" "}
-                            Yes
+                            Yes{" "}
                           </Button>{" "}
                           <Button
                             style={{
@@ -838,12 +838,12 @@ function AddItem(props) {
                             variant="contained"
                             onClick={close}
                           >
-                            No
-                          </Button>
+                            No{" "}
+                          </Button>{" "}
                         </>
-                      )}
+                      )}{" "}
                     </Popup>
-                  )}
+                  )}{" "}
                 </>
               ) : props.object == null ? (
                 <div>
@@ -859,14 +859,23 @@ function AddItem(props) {
                   >
                     Add Questions to {name}{" "}
                   </Button>{" "}
+                  <Button
+                    id="bn30"
+                    className={classes.button}
+                    variant="contained"
+                    color="primary"
+                    onClick={reRender}
+                  >
+                    Add another item
+                  </Button>{" "}
                 </div>
               ) : (
-                <div style={{ color: "black" }}>Modified Successfully!</div>
-              )}
-            </Card.Text>
-          </Card.Body>
-        </Card>
-      </Container>
+                <div style={{ color: "black" }}> Modified Successfully! </div>
+              )}{" "}
+            </Card.Text>{" "}
+          </Card.Body>{" "}
+        </Card>{" "}
+      </Container>{" "}
     </>
   );
 }

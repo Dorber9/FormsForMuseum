@@ -140,6 +140,9 @@ const AddBuilding = (props) => {
     <>
       <Container>
         <Card style={cardShadow}>
+          <Card.Title style={{ color: "black" }}>
+            {props.object == null ? "Add Building" : "Modify Building"}
+          </Card.Title>
           <Card.Body>
             <Card.Text>
               <div className="txtf">

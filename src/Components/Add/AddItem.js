@@ -19,6 +19,7 @@ import "../../App.css";
 import AddQuestion from "./AddQuestion";
 import Collapse from "./Collapse";
 import ReactUploadImage from "../ReactUploadImage";
+import { CardTravel } from "@material-ui/icons";
 
 const server_ip = "34.165.154.8";
 
@@ -480,19 +481,13 @@ function AddItem(props) {
       <Container>
         <Card style={cardShadow}>
           <Card.Body>
+            <Card.Title style={{ color: "black" }}>
+              {props.object == null ? "Add Item" : "Modify Item"}
+            </Card.Title>
             <Card.Text>
               {" "}
               {questionsFlag == false ? (
                 <>
-                  <h4
-                    style={{
-                      textAlign: "center",
-                      marginBottom: "2%",
-                      color: "black",
-                    }}
-                  >
-                    Add Item{" "}
-                  </h4>{" "}
                   <div className="txtf">
                     <TextField
                       className={classstyle.root}

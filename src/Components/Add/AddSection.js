@@ -123,6 +123,9 @@ const AddSection = (props) => {
   return (
     <Container>
       <Card style={cardShadow}>
+        <Card.Title style={{ color: "black" }}>
+          {props.object == null ? "Add Section" : "Modify Section"}
+        </Card.Title>
         <Card.Body>
           <Card.Text>
             <div className="txtf">

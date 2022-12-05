@@ -191,17 +191,11 @@ const AddDisplay = (props) => {
     <>
       <Container style={{ width: "65%" }}>
         <Card style={cardShadow}>
+          <Card.Title style={{ color: "black" }}>
+            {props.object == null ? "Add Display" : "Modify Display"}
+          </Card.Title>
           <Card.Body>
             <Card.Text>
-              <h4
-                style={{
-                  textAlign: "center",
-                  marginBottom: "2%",
-                  color: "black",
-                }}
-              >
-                Add Display
-              </h4>
               <div className="txtf">
                 <TextField
                   className={classes.root}

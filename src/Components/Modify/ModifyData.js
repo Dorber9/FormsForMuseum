@@ -10,6 +10,7 @@ import AddDisplay from "../Add/AddDisplay";
 import AddShowcase from "../Add/AddShowcase";
 import AddItem from "../Add/AddItem";
 import AddQuestion from "../Add/AddQuestion";
+import SearchItem from "../SearchItem";
 
 import { render } from "react-dom";
 
@@ -82,6 +83,10 @@ const ModifyData = () => {
     Axios.get(`http://${server_ip}:3001/question`).then((response) => {
       setQuestionsList(response.data);
     });
+  };
+
+  const handleItem = (e) => {
+    setWantedObject(e);
   };
 
   const getWantedList = (id, type) => {
@@ -231,7 +236,11 @@ const ModifyData = () => {
             alignItems: "center",
           }}
         >
-          {" "}
+          {selectedObject == "Item" ? (
+            <SearchItem handleClick={handleItem} itemID={null} itemName={""} />
+          ) : (
+            ""
+          )}
           {selectedObject == "" || selectedObject == "Question" ? (
             ""
           ) : (
@@ -240,7 +249,12 @@ const ModifyData = () => {
               value={{
                 value: wantedObject,
                 label:
-                  objectName === "" ? "Select " + selectedObject : objectName,
+                  objectName === ""
+                    ? "Select " +
+                      (selectedObject == "Showcase"
+                        ? "Exhibition"
+                        : selectedObject)
+                    : objectName,
               }}
               maxMenuHeight={180}
               options={mapOptions()}
@@ -257,7 +271,6 @@ const ModifyData = () => {
         ""
       ) : (
         <div className="tc">
-          {" "}
           {selectedObject === "Museum" ? (
             <AddMuseum object={getWantedList(wantedObject, "Museum")} />
           ) : selectedObject === "Building" ? (

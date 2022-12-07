@@ -97,6 +97,9 @@ const AddMuseum = (props) => {
   return (
     <Container>
       <Card style={cardShadow}>
+        <Card.Title style={{ color: "black" }}>
+          {props.object == null ? "Add Museum" : "Modify Museum"}
+        </Card.Title>
         <Card.Body>
           <Card.Text>
             {museumList.map((val, key) => {
@@ -135,6 +138,7 @@ const AddMuseum = (props) => {
                 color="primary"
                 type="submit"
                 onClick={props.object == null ? postMuseum : updateMuseum}
+                disabled
               >
                 Submit
               </Button>

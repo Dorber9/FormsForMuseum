@@ -219,17 +219,11 @@ const AddShowcase = (props) => {
     <>
       <Container>
         <Card style={cardShadow}>
+          <Card.Title style={{ color: "black" }}>
+            {props.object == null ? "Add Exibition" : "Modify Exibition"}
+          </Card.Title>
           <Card.Body>
             <Card.Text>
-              <h4
-                style={{
-                  textAlign: "center",
-                  marginBottom: "2%",
-                  color: "black",
-                }}
-              >
-                Add Exibition
-              </h4>
               <div className="txtf">
                 {props.object == null ? (
                   ""

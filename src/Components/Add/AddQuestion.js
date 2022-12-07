@@ -11,6 +11,7 @@ import { v4 as uuidv4 } from "uuid";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import { Container, Card } from "react-bootstrap";
+import SearchItem from "../SearchItem";
 
 const server_ip = "34.165.154.8";
 
@@ -167,6 +168,13 @@ const AddQuestion = (props) => {
     });
   };
 
+  const handleItem = (e) => {
+    setWantedItem(e);
+    if (props.object != null) {
+      modifyInputFields(e);
+    }
+  };
+
   useEffect(() => {
     getItems();
     if (props.object != null) {
@@ -278,7 +286,13 @@ const AddQuestion = (props) => {
               >
                 {props.itemId != null ? (
                   <>
-                    <Select
+                    <SearchItem
+                      handleClick={handleItem}
+                      itemID={null}
+                      itemName={""}
+                    />
+
+                    {/* <Select
                       placeholder="Please select Item"
                       value={{ value: props.itemId, label: props.itemName }}
                       styles={selectStyles}
@@ -289,22 +303,28 @@ const AddQuestion = (props) => {
                         setWantedItem(e.value);
                         modifyInputFields(e.value);
                       }}
-                    />
+                    /> */}
                   </>
                 ) : (
-                  <Select
-                    placeholder="Please select Item"
-                    styles={selectStyles}
-                    options={itemsList.map((val, key) => {
-                      return { value: val.ItemID, label: val.ItemName };
-                    })}
-                    onChange={(e) => {
-                      setItemName(e.label);
-                      setWantedItem(e.value);
-
-                      if (props.object != null) modifyInputFields(e.value);
-                    }}
+                  <SearchItem
+                    handleClick={handleItem}
+                    itemID={null}
+                    itemName={""}
                   />
+
+                  // <Select
+                  //   placeholder="Please select Item"
+                  //   styles={selectStyles}
+                  //   options={itemsList.map((val, key) => {
+                  //     return { value: val.ItemID, label: val.ItemName };
+                  //   })}
+                  //   onChange={(e) => {
+                  //     setItemName(e.label);
+                  //     setWantedItem(e.value);
+
+                  //     if (props.object != null) modifyInputFields(e.value);
+                  //   }}
+                  // />
                 )}
               </div>
               {wantedItem === "" && props.object == null ? (

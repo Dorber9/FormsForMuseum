@@ -152,7 +152,6 @@ const AddShowcase = (props) => {
           },
         ]);
         alert("Success!");
-        window.location.reload(false);
       });
     }
   };
@@ -190,6 +189,7 @@ const AddShowcase = (props) => {
       `http://${server_ip}:3001/deleteShowcase/${props.object.idShowcase}`,
       {}
     ).then(() => {
+      alert("Success");
       window.location.reload(false);
     });
   };

@@ -81,7 +81,6 @@ const AddDisplay = (props) => {
   }));
 
   useEffect(() => {
-    console.log("im here");
     getSection();
     if (props.object != null) {
       setName(props.object.Name);
@@ -96,47 +95,43 @@ const AddDisplay = (props) => {
       setDescription(props.object.ShortDesc);
       setReason(props.object.Reason);
       setSelectedValue(props.object.SectionID);
-    }
+    } else setSelectedValue(sectionList[0]);
   }, [props.object != null ? props.object : "", reRenderFlag]);
 
   const postDisplay = () => {
-    setreRenderFlag(true);
-    alert("success");
-
-    // if (selectedValue === "Please Select Section") {
-    //   alert("Please Select a Section");
-    // } else {
-    //   Axios.post(`http://${server_ip}:3001/addDisplay`, {
-    //     Name: name,
-    //     Theme: theme,
-    //     permanent: permanent,
-    //     StartDate: startDate,
-    //     EndDate: endDate,
-    //     Curator: curator,
-    //     Designer: designer,
-    //     ShortDesc: description,
-    //     Reason: reason,
-    //     SectionID: selectedValue,
-    //   }).then(() => {
-    //     setDisplayList([
-    //       ...displayList,
-    //       {
-    //         Name: name,
-    //         Theme: theme,
-    //         permanent: permanent,
-    //         StartDate: startDate,
-    //         EndDate: endDate,
-    //         Curator: curator,
-    //         Designer: designer,
-    //         ShortDesc: description,
-    //         Reason: reason,
-    //         SectionID: selectedValue,
-    //       },
-    //     ]);
-    //     alert("Success!");
-    //     window.location.reload(false);
-    //   });
-    // }
+    if (selectedValue === "Please Select Section") {
+      alert("Please Select a Section");
+    } else {
+      Axios.post(`http://${server_ip}:3001/addDisplay`, {
+        Name: name,
+        Theme: theme,
+        permanent: permanent,
+        StartDate: startDate,
+        EndDate: endDate,
+        Curator: curator,
+        Designer: designer,
+        ShortDesc: description,
+        Reason: reason,
+        SectionID: selectedValue,
+      }).then(() => {
+        setDisplayList([
+          ...displayList,
+          {
+            Name: name,
+            Theme: theme,
+            permanent: permanent,
+            StartDate: startDate,
+            EndDate: endDate,
+            Curator: curator,
+            Designer: designer,
+            ShortDesc: description,
+            Reason: reason,
+            SectionID: selectedValue,
+          },
+        ]);
+        alert("Success!");
+      });
+    }
   };
 
   const updateDisplay = () => {

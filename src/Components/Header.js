@@ -13,7 +13,7 @@ import { useState, useEffect } from "react";
 const navStyle = { color: "white" };
 const selectedStyle = { borderBottom: "1px solid white", color: "#e9c363" };
 
-const Header = () => {
+const Header = ({ setToken }) => {
   const [show, setShow] = useState(false);
   const [loading, setLoading] = useState(true);
 
@@ -24,6 +24,7 @@ const Header = () => {
   }, []);
   return (
     <>
+      {" "}
       {loading ? (
         ""
       ) : (
@@ -39,7 +40,7 @@ const Header = () => {
           <Container style={{ marginLeft: "33%" }}>
             <Navbar.Brand href="/">
               Museum <FaArchway />{" "}
-            </Navbar.Brand>
+            </Navbar.Brand>{" "}
             <Nav className="me-auto">
               <Nav.Link
                 style={
@@ -48,7 +49,7 @@ const Header = () => {
                 href="/"
               >
                 Home <FaHome />
-              </Nav.Link>
+              </Nav.Link>{" "}
               {window.location.pathname == "/Add" ||
               window.location.pathname == "/ModifyData" ? (
                 <span
@@ -60,7 +61,7 @@ const Header = () => {
                     position: "absolute",
                   }}
                 >
-                  Data
+                  Data{" "}
                 </span>
               ) : (
                 <span
@@ -71,9 +72,9 @@ const Header = () => {
                     position: "absolute",
                   }}
                 >
-                  Data
+                  Data{" "}
                 </span>
-              )}
+              )}{" "}
               <NavDropdown
                 title={
                   window.location.pathname == "/Add" ||
@@ -82,14 +83,13 @@ const Header = () => {
                     : "Data"
                 }
               >
-                <NavDropdown.Item href="/Add">Add</NavDropdown.Item>
-                <NavDropdown.Item href="/ModifyData">Modify</NavDropdown.Item>
-
+                <NavDropdown.Item href="/Add"> Add </NavDropdown.Item>{" "}
+                <NavDropdown.Item href="/ModifyData"> Modify </NavDropdown.Item>
                 <NavDropdown.Divider />
                 <NavDropdown.Item href="/CourseWizard">
-                  Manage Quests
-                </NavDropdown.Item>
-              </NavDropdown>
+                  Manage Quests{" "}
+                </NavDropdown.Item>{" "}
+              </NavDropdown>{" "}
               <Nav.Link
                 style={
                   window.location.pathname == "/ItemsList"
@@ -99,11 +99,21 @@ const Header = () => {
                 href="../ItemsList"
               >
                 Items <FaTable />
-              </Nav.Link>
-            </Nav>
-          </Container>
+              </Nav.Link>{" "}
+              <Nav.Link
+                style={{
+                  color: "white",
+                  marginLeft: "550px",
+                  fontSize: "12px",
+                }}
+                onClick={() => setToken("")}
+              >
+                Log Out
+              </Nav.Link>{" "}
+            </Nav>{" "}
+          </Container>{" "}
         </Navbar>
-      )}
+      )}{" "}
     </>
   );
 };

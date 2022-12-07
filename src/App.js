@@ -48,7 +48,7 @@ function App() {
             // height: "100%",
           }}
         >
-          {token === "abc" ? <Header /> : ""}
+          {token === "abc" ? <Header setToken={setToken} /> : ""}
           <BrowserRouter>
             <Routes>
               <Route exact path="/Search" element={<SearchItem />}></Route>

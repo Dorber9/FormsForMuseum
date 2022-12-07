@@ -74,7 +74,6 @@ const AddSection = (props) => {
           },
         ]);
         alert("Success!");
-        window.location.reload(false);
       });
     }
   };
@@ -114,6 +113,8 @@ const AddSection = (props) => {
       `http://${server_ip}:3001/deleteSection/${props.object.idSection}`,
       {}
     ).then(() => {
+      alert("Success");
+
       window.location.reload(false);
     });
   };

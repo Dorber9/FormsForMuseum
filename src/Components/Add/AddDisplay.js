@@ -50,6 +50,8 @@ const AddDisplay = (props) => {
   const [description, setDescription] = useState("");
   const [reason, setReason] = useState("");
   const [sectionList, setSectionList] = useState([]);
+  const [reRenderFlag, setreRenderFlag] = useState(false);
+
   const [displayList, setDisplayList] = useState([]);
   const [selectedValue, setSelectedValue] = useState("Please Select Section");
   const [curatorLabel, setCuratorLabel] = useState("Curator");
@@ -79,6 +81,7 @@ const AddDisplay = (props) => {
   }));
 
   useEffect(() => {
+    console.log("im here");
     getSection();
     if (props.object != null) {
       setName(props.object.Name);
@@ -94,43 +97,46 @@ const AddDisplay = (props) => {
       setReason(props.object.Reason);
       setSelectedValue(props.object.SectionID);
     }
-  }, [props.object != null ? props.object : ""]);
+  }, [props.object != null ? props.object : "", reRenderFlag]);
 
   const postDisplay = () => {
-    if (selectedValue === "Please Select Section") {
-      alert("Please Select a Section");
-    } else {
-      Axios.post(`http://${server_ip}:3001/addDisplay`, {
-        Name: name,
-        Theme: theme,
-        permanent: permanent,
-        StartDate: startDate,
-        EndDate: endDate,
-        Curator: curator,
-        Designer: designer,
-        ShortDesc: description,
-        Reason: reason,
-        SectionID: selectedValue,
-      }).then(() => {
-        setDisplayList([
-          ...displayList,
-          {
-            Name: name,
-            Theme: theme,
-            permanent: permanent,
-            StartDate: startDate,
-            EndDate: endDate,
-            Curator: curator,
-            Designer: designer,
-            ShortDesc: description,
-            Reason: reason,
-            SectionID: selectedValue,
-          },
-        ]);
-        alert("Success!");
-        window.location.reload(false);
-      });
-    }
+    setreRenderFlag(true);
+    alert("success");
+
+    // if (selectedValue === "Please Select Section") {
+    //   alert("Please Select a Section");
+    // } else {
+    //   Axios.post(`http://${server_ip}:3001/addDisplay`, {
+    //     Name: name,
+    //     Theme: theme,
+    //     permanent: permanent,
+    //     StartDate: startDate,
+    //     EndDate: endDate,
+    //     Curator: curator,
+    //     Designer: designer,
+    //     ShortDesc: description,
+    //     Reason: reason,
+    //     SectionID: selectedValue,
+    //   }).then(() => {
+    //     setDisplayList([
+    //       ...displayList,
+    //       {
+    //         Name: name,
+    //         Theme: theme,
+    //         permanent: permanent,
+    //         StartDate: startDate,
+    //         EndDate: endDate,
+    //         Curator: curator,
+    //         Designer: designer,
+    //         ShortDesc: description,
+    //         Reason: reason,
+    //         SectionID: selectedValue,
+    //       },
+    //     ]);
+    //     alert("Success!");
+    //     window.location.reload(false);
+    //   });
+    // }
   };
 
   const updateDisplay = () => {

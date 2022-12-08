@@ -12,7 +12,8 @@ import Resizer from "react-image-file-resizer";
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
 import Logo from "../../logo_amnon.png";
-
+import { confirmAlert } from "react-confirm-alert"; // Import
+import "react-confirm-alert/src/react-confirm-alert.css"; // Import css
 import { useState, useEffect } from "react";
 import Axios from "axios";
 import "../../App.css";
@@ -70,7 +71,23 @@ function AddItem(props) {
     setItemData(inputFields);
 
     onFormSubmit();
-    setFlag(true);
+    // setFlag(true);
+  };
+
+  const confirm_delete = () => {
+    confirmAlert({
+      title: "Confirm delete",
+      message: "Are you sure you want to delete this item?",
+      buttons: [
+        {
+          label: "Yes",
+          onClick: () => deleteItem(""),
+        },
+        {
+          label: "No",
+        },
+      ],
+    });
   };
 
   const handleUpdateItem = (e) => {
@@ -80,7 +97,7 @@ function AddItem(props) {
 
     onFormSubmit();
 
-    setFlag(true);
+    // setFlag(true);
   };
 
   const selectStyles = {
@@ -204,6 +221,7 @@ function AddItem(props) {
     console.log("rendring");
     getDisplay();
     getShowcase();
+    getItems();
     if (props.object != null) {
       setItemId(props.object.ItemID);
       setName(props.object.ItemName);
@@ -371,6 +389,12 @@ function AddItem(props) {
   };
 
   const onFormSubmit = async () => {
+    console.log(itemsList.map((e) => e.ItemID));
+    const id_list = itemsList.map((e) => e.ItemID);
+    if (id_list.includes(itemId)) {
+      alert("Item's ID is already in the system!");
+      return;
+    }
     if (ImageFlag) {
       try {
         const image = await resizeFile(file);
@@ -382,6 +406,7 @@ function AddItem(props) {
     } else {
       props.object == null ? postItem("") : updateItem(path);
     }
+    setFlag(true);
   };
 
   const reRender = () => {
@@ -768,52 +793,17 @@ function AddItem(props) {
                   {props.object == null ? (
                     ""
                   ) : (
-                    <Popup
-                      modal
-                      trigger={
-                        <Button
-                          variant="contained"
-                          style={{
-                            color: "white",
-                            background: "red",
-                            marginLeft: "10px",
-                          }}
-                          type="submit"
-                        >
-                          Delete Item{" "}
-                        </Button>
-                      }
-                      position="center"
+                    <Button
+                      variant="contained"
+                      style={{
+                        color: "white",
+                        background: "red",
+                        marginLeft: "10px",
+                      }}
+                      onClick={confirm_delete}
                     >
-                      {(close) => (
-                        <>
-                          <div> Are you sure you want to delete ? </div>{" "}
-                          <Button
-                            style={{
-                              color: "white",
-                              background: "green",
-                              marginLeft: "10px",
-                            }}
-                            onClick={deleteItem}
-                            variant="contained"
-                          >
-                            {" "}
-                            Yes{" "}
-                          </Button>{" "}
-                          <Button
-                            style={{
-                              color: "white",
-                              background: "red",
-                              marginLeft: "10px",
-                            }}
-                            variant="contained"
-                            onClick={close}
-                          >
-                            No{" "}
-                          </Button>{" "}
-                        </>
-                      )}{" "}
-                    </Popup>
+                      Delete Item{" "}
+                    </Button>
                   )}{" "}
                 </>
               ) : props.object == null ? (

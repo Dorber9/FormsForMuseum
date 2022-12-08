@@ -183,18 +183,21 @@ const SearchItem = ({ handleClick, currentItem, itemName }) => {
               </>
             )}
           </Popup>
-
-          <Button
-            variant="contained"
-            style={{
-              color: "white",
-              background: "blue",
-              marginLeft: "10px",
-            }}
-            onClick={() => setTry(true)}
-          >
-            Choose by Photo
-          </Button>
+          {category == "" ? (
+            ""
+          ) : (
+            <Button
+              variant="contained"
+              style={{
+                color: "white",
+                background: "blue",
+                marginLeft: "10px",
+              }}
+              onClick={() => setTry(true)}
+            >
+              Choose by Photo
+            </Button>
+          )}
 
           <Popup
             open={queryFlag}
@@ -296,18 +299,21 @@ const SearchItem = ({ handleClick, currentItem, itemName }) => {
               </>
             )}
           </Popup>
-
-          <Button
-            variant="contained"
-            style={{
-              color: "white",
-              background: "blue",
-              marginLeft: "10px",
-            }}
-            onClick={() => setQueryFlag(true)}
-          >
-            Choose by Query
-          </Button>
+          {category == "" ? (
+            ""
+          ) : (
+            <Button
+              variant="contained"
+              style={{
+                color: "white",
+                background: "blue",
+                marginLeft: "10px",
+              }}
+              onClick={() => setQueryFlag(true)}
+            >
+              Choose by Query
+            </Button>
+          )}
         </div>
       </div>
     </div>

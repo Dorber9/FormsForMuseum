@@ -389,30 +389,6 @@ function AddItem(props) {
     setFlag(false);
   };
 
-  // else
-  //     if(ImageFlag){
-  //       try {
-  //         const formData = new FormData();
-  //         formData.append("myImage", file);
-  //         const config = {
-  //           headers: {
-  //             "content-type": "multipart/form-data",
-  //           },
-  //         };
-  //         let res = await Axios.post(
-  //           "http://34.65.174.141:3001/upload",
-  //           formData,
-  //           config
-  //         );
-  //         updateItem(res.data)
-  //         } catch (error) {
-  //           console.log(error.data);
-  //         }
-  //     }
-  //     else
-  //         updateItem(path)
-  // };
-
   const fileChange = (e) => {
     setImageFlag(true);
     setFile(e.target.files[0]);

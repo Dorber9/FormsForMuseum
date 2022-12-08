@@ -241,30 +241,6 @@ const ModifyData = () => {
           ) : (
             ""
           )}
-          {selectedObject == "" || selectedObject == "Question" ? (
-            ""
-          ) : (
-            <Select
-              styles={selectStyles}
-              value={{
-                value: wantedObject,
-                label:
-                  objectName === ""
-                    ? "Select " +
-                      (selectedObject == "Showcase"
-                        ? "Exhibition"
-                        : selectedObject)
-                    : objectName,
-              }}
-              maxMenuHeight={180}
-              options={mapOptions()}
-              onChange={(e) => {
-                setWantedObject(e.value);
-                setObjectName(e.label);
-                getWantedList(wantedObject, selectedObject);
-              }}
-            />
-          )}{" "}
         </div>
       )}{" "}
       {wantedObject == "" ? (

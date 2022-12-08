@@ -9,6 +9,8 @@ import {
 } from "react-bootstrap";
 import { FaHome, FaArchway, FaWpforms, FaTable } from "react-icons/fa";
 import { useState, useEffect } from "react";
+import { confirmAlert } from "react-confirm-alert"; // Import
+import "react-confirm-alert/src/react-confirm-alert.css"; // Import css
 
 const navStyle = { color: "white" };
 const selectedStyle = { borderBottom: "1px solid white", color: "#e9c363" };
@@ -22,6 +24,23 @@ const Header = ({ setToken }) => {
       setLoading(false);
     }, 500);
   }, []);
+
+  const submit = () => {
+    confirmAlert({
+      title: "Confirm logout",
+      message: "Are you sure you want to logout?",
+      buttons: [
+        {
+          label: "Yes",
+          onClick: () => setToken(""),
+        },
+        {
+          label: "No",
+        },
+      ],
+    });
+  };
+
   return (
     <>
       {" "}
@@ -102,11 +121,9 @@ const Header = ({ setToken }) => {
               </Nav.Link>{" "}
               <Nav.Link
                 style={{
-                  color: "white",
-                  marginLeft: "550px",
-                  fontSize: "12px",
+                  color: "red",
                 }}
-                onClick={() => setToken("")}
+                onClick={() => submit()}
               >
                 Log Out
               </Nav.Link>{" "}

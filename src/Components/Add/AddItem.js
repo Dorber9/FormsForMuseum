@@ -391,7 +391,7 @@ function AddItem(props) {
   const onFormSubmit = async () => {
     console.log(itemsList.map((e) => e.ItemID));
     const id_list = itemsList.map((e) => e.ItemID);
-    if (id_list.includes(itemId)) {
+    if (props.object == null && id_list.includes(itemId)) {
       alert("Item's ID is already in the system!");
       return;
     }

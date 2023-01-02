@@ -185,7 +185,6 @@ function AddItem(props) {
         0,
         (uri) => {
           resolve(uri);
-          setTry(uri);
         },
         "base64"
       );

@@ -3,6 +3,7 @@ import Quiz from "react-quiz-component";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import QRCode from "react-qr-code";
+import { Container, Row, Col } from "react-grid-system";
 
 import Axios from "axios";
 
@@ -166,30 +167,44 @@ const QuestionsQuiz = () => {
 
   return (
     <>
-      {loading ? (
-        <div style={{ position: "center" }} className="spinner-container">
-          <div className="loading-spinner"> Loading...</div>
-        </div>
-      ) : (
-        <>
-          <div className="pshDwn">
-            <Quiz
-              style={{ position: "center" }}
-              quiz={quiz}
-              continueTillCorrect={true}
-              showInstantFeedback={true}
-              shuffle={false}
-            />
-            <div style={{ marginTop: "50px", textAlign: "center" }}>
-              {token === "abc" ? (
-                <QRCode value={`${window.location.href}`} size="150" />
-              ) : (
-                ""
-              )}
-            </div>
-          </div>
-        </>
-      )}
+      <Container>
+        {loading ? (
+          <Row>
+            <Col xs={12}>
+              <div style={{ position: "center" }} className="spinner-container">
+                <div className="loading-spinner"> Loading...</div>
+              </div>
+            </Col>
+          </Row>
+        ) : (
+          <>
+            <Row>
+              <Col xs={12}>
+                <div className="pshDwn">
+                  <Quiz
+                    style={{ position: "center" }}
+                    quiz={quiz}
+                    continueTillCorrect={true}
+                    showInstantFeedback={true}
+                    shuffle={false}
+                  />
+                </div>
+              </Col>
+            </Row>
+            <Row>
+              <Col xs={12}>
+                <div style={{ marginTop: "50px", textAlign: "center" }}>
+                  {token === "abc" ? (
+                    <QRCode value={`${window.location.href}`} size="150" />
+                  ) : (
+                    ""
+                  )}
+                </div>
+              </Col>
+            </Row>
+          </>
+        )}
+      </Container>
     </>
   );
 };

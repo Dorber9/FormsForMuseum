@@ -30,11 +30,11 @@ const ViewItemWiki = (props) => {
       (response) => {
         console.log(response.data[0]);
         setName(response.data[0].HebItemName);
-        setMaterial(response.data[0].HebMaterial);
-        setDesc(response.data[0].HebDescr);
-        setAge(response.data[0].Age);
-        setPeriod(response.data[0].HebPeriod);
-        setSite(response.data[0].HebSite);
+        setMaterial(response.data[0].HebMaterial|| "");
+        setDesc(response.data[0].HebDescr|| "");
+        setAge(response.data[0].Age|| "");
+        setPeriod(response.data[0].HebPeriod|| "");
+        setSite(response.data[0].HebSite|| "");
         if (response.data[0].ImagePath) setPath(response.data[0].ImagePath);
         if (response.data[0].ItemData) {
           const data = response.data[0].ItemData.split("^%^");

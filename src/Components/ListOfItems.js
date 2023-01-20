@@ -33,19 +33,23 @@ const ListOfItems = () => {
             }}
           />{" "} */}
             <SearchItem handleClick={handleItem} itemID={null} itemName={""} />
-          </div>{" "}
+          </div>
           <div className="txtf">
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={() => {
-                window.location.href = `/Item/${itemID}`;
-              }}
-            >
-              Show Item{" "}
-            </Button>{" "}
-          </div>{" "}
-        </div>{" "}
+            {itemID == "" ? (
+              ""
+            ) : (
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={() => {
+                  window.location.href = `/Item/${itemID}`;
+                }}
+              >
+                Show Item
+              </Button>
+            )}
+          </div>
+        </div>
       </div>
     </>
   );

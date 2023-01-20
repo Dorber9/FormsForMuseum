@@ -32,6 +32,7 @@ const SearchItem = ({ handleClick, currentItem, itemName }) => {
   const [showFlag, setShowFlag] = useState(false);
   const [tryit, setTry] = useState(false);
   const [queryFlag, setQueryFlag] = useState(false);
+  const [byID, setById] = useState(false);
   const [itemPeriod, setItemPeriod] = useState([]);
   const [period, setPeriod] = useState("");
   const [itemMaterial, setItemMaterial] = useState([]);
@@ -72,6 +73,13 @@ const SearchItem = ({ handleClick, currentItem, itemName }) => {
       }
     });
   };
+
+  const getItemsID = () => {
+    Axios.get("http://34.165.154.8:3001/Item").then((response) => {
+      setItemsList(response.data);
+    });
+  };
+
   const queryModalClose = () => {
     setQueryFlag(false);
     setMaterial("");
@@ -136,21 +144,65 @@ const SearchItem = ({ handleClick, currentItem, itemName }) => {
             alignItems: "center",
           }}
         >
-          <Select
-            name="itemsList"
-            styles={selectStyles}
-            defaultValue={
-              itemName != ""
-                ? { value: itemName, label: itemName }
-                : { value: "", label: "Select..." }
-            }
-            options={categories.map((val, key) => {
-              return { value: val, label: val };
-            })}
-            onChange={(e) => {
-              buildSub(e.label);
-            }}
-          />
+          {byID ? (
+            <Button
+              variant="contained"
+              style={{
+                color: "white",
+                background: "blue",
+                marginLeft: "10px",
+              }}
+              onClick={() => setById(false)}
+            >
+              Choose by Photo/Query
+            </Button>
+          ) : (
+            <Button
+              variant="contained"
+              style={{
+                color: "white",
+                background: "blue",
+                marginLeft: "10px",
+              }}
+              onClick={() => setById(true)}
+            >
+              Choose by ID
+            </Button>
+          )}
+
+          {byID ? (
+            <Select
+              name="itemsList"
+              styles={selectStyles}
+              defaultValue={
+                itemName != ""
+                  ? { value: itemName, label: itemName }
+                  : { value: "", label: "Select..." }
+              }
+              options={itemsList.map((e) => {
+                return { value: e.ItemID, label: e.ItemName };
+              })}
+              onChange={(e) => {
+                handleClick(e.value);
+              }}
+            />
+          ) : (
+            <Select
+              name="itemsList"
+              styles={selectStyles}
+              defaultValue={
+                itemName != ""
+                  ? { value: itemName, label: itemName }
+                  : { value: "", label: "Select..." }
+              }
+              options={categories.map((val, key) => {
+                return { value: val, label: val };
+              })}
+              onChange={(e) => {
+                buildSub(e.label);
+              }}
+            />
+          )}
 
           <Popup
             open={tryit}

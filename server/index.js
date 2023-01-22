@@ -592,11 +592,12 @@ app.post("/addItem", (req, res) => {
         .join(" &&& ")
     );
     const data1 = data.map((temp) => temp + "^%^");
+    const rfid_id = req.body.rfid_id;
     console.log(data1.toString());
     console.log(data1.toString().split("^%^"));
 
     db.query(
-        "INSERT INTO item (ItemID, ItemName, Descr, ShortDescr, InStorage, DisplayID, ShowcaseID, Site, Period, Age, Material, Website, Size, Refs, ImagePath, ItemData) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", [
+        "INSERT INTO item (ItemID, ItemName, Descr, ShortDescr, InStorage, DisplayID, ShowcaseID, Site, Period, Age, Material, Website, Size, Refs, ImagePath, ItemData, rfid_id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", [
             ID,
             name,
             descr,
@@ -613,6 +614,7 @@ app.post("/addItem", (req, res) => {
             references,
             ImagePath,
             data1.toString(),
+            rfid_id,
         ],
         (err, result) => {
             if (err) {
@@ -647,9 +649,10 @@ app.put("/updateItem", (req, res) => {
         .join(" &&& ")
     );
     const data1 = data.map((temp) => temp + "^%^");
+    const rfid_id = req.body.rfid_id;
 
     db.query(
-        "UPDATE item SET ItemName = ?, Descr = ?, Material = ?, Period = ?, Site = ?, ShortDescr = ?, Age = ?, Website = ?, Size = ?, InStorage = ?, DisplayID = ?, ShowcaseID = ?, Refs = ?, ImagePath = ?, ItemData = ? WHERE ItemID = ?", [
+        "UPDATE item SET ItemName = ?, Descr = ?, Material = ?, Period = ?, Site = ?, ShortDescr = ?, Age = ?, Website = ?, Size = ?, InStorage = ?, DisplayID = ?, ShowcaseID = ?, Refs = ?, ImagePath = ?, ItemData = ?, rfid_id = ? WHERE ItemID = ?", [
             name,
             descr,
             material,
@@ -665,6 +668,7 @@ app.put("/updateItem", (req, res) => {
             references,
             ImagePath,
             data1.toString(),
+            rfid_id
             ID,
         ],
         (err, result) => {

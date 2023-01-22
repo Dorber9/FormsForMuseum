@@ -668,7 +668,7 @@ app.put("/updateItem", (req, res) => {
             references,
             ImagePath,
             data1.toString(),
-            rfid_id
+            rfid_id,
             ID,
         ],
         (err, result) => {

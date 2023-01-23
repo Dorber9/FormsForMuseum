@@ -167,10 +167,17 @@ const QuestionsQuiz = () => {
 
   return (
     <>
-      <Container>
+      <Container
+        grid={{
+          sm: 1,
+          md: 3,
+          lg: 5,
+          xl: 6,
+        }}
+      >
         {loading ? (
           <Row>
-            <Col xs={12}>
+            <Col>
               <div style={{ position: "center" }} className="spinner-container">
                 <div className="loading-spinner"> Loading...</div>
               </div>
@@ -179,7 +186,7 @@ const QuestionsQuiz = () => {
         ) : (
           <>
             <Row>
-              <Col xs={12}>
+              <Col>
                 <div className="pshDwn">
                   <Quiz
                     style={{ position: "center" }}
@@ -192,7 +199,7 @@ const QuestionsQuiz = () => {
               </Col>
             </Row>
             <Row>
-              <Col xs={12}>
+              <Col>
                 <div style={{ marginTop: "50px", textAlign: "center" }}>
                   {token === "abc" ? (
                     <QRCode value={`${window.location.href}`} size="150" />

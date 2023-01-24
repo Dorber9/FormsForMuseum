@@ -43,7 +43,6 @@ const Header = ({ setToken }) => {
 
   return (
     <>
-      {" "}
       {loading ? (
         ""
       ) : (
@@ -56,10 +55,7 @@ const Header = ({ setToken }) => {
           bg="dark"
           variant="dark"
         >
-          <Container style={{ marginLeft: "33%" }}>
-            <Navbar.Brand href="/">
-              Museum <FaArchway />{" "}
-            </Navbar.Brand>{" "}
+          <Container>
             <Nav className="me-auto">
               <Nav.Link
                 style={
@@ -68,32 +64,7 @@ const Header = ({ setToken }) => {
                 href="/"
               >
                 Home <FaHome />
-              </Nav.Link>{" "}
-              {window.location.pathname == "/Add" ||
-              window.location.pathname == "/ModifyData" ? (
-                <span
-                  style={{
-                    borderBottom: "1px solid white",
-                    color: "#e9c363",
-                    marginTop: "8px",
-                    marginLeft: "96px",
-                    position: "absolute",
-                  }}
-                >
-                  Data{" "}
-                </span>
-              ) : (
-                <span
-                  style={{
-                    color: "white",
-                    marginTop: "8px",
-                    marginLeft: "96px",
-                    position: "absolute",
-                  }}
-                >
-                  Data{" "}
-                </span>
-              )}{" "}
+              </Nav.Link>
               <NavDropdown
                 title={
                   window.location.pathname == "/Add" ||
@@ -130,7 +101,7 @@ const Header = ({ setToken }) => {
             </Nav>{" "}
           </Container>{" "}
         </Navbar>
-      )}{" "}
+      )}
     </>
   );
 };

@@ -336,3 +336,9 @@ main {
 .link {
   color: rgb(0, 0, 0);
 }
+
+@media (max-width: 600px) {
+  .quiz {
+    max-width: 35%;
+  }
+}

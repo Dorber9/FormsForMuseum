@@ -167,14 +167,7 @@ const QuestionsQuiz = () => {
 
   return (
     <>
-      <Container
-        grid={{
-          sm: 1,
-          md: 3,
-          lg: 5,
-          xl: 6,
-        }}
-      >
+      <Container>
         {loading ? (
           <Row>
             <Col>
@@ -185,19 +178,16 @@ const QuestionsQuiz = () => {
           </Row>
         ) : (
           <>
-            <Row>
-              <Col>
-                <div className="pshDwn">
-                  <Quiz
-                    style={{ position: "center" }}
-                    quiz={quiz}
-                    continueTillCorrect={true}
-                    showInstantFeedback={true}
-                    shuffle={false}
-                  />
-                </div>
-              </Col>
-            </Row>
+            <div className="quiz">
+              <Row>
+                <Quiz
+                  quiz={quiz}
+                  continueTillCorrect={true}
+                  showInstantFeedback={true}
+                  shuffle={false}
+                />
+              </Row>
+            </div>
             <Row>
               <Col>
                 <div style={{ marginTop: "50px", textAlign: "center" }}>

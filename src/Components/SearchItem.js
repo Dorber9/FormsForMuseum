@@ -32,7 +32,7 @@ const SearchItem = ({ handleClick, currentItem, itemName }) => {
   const [showFlag, setShowFlag] = useState(false);
   const [tryit, setTry] = useState(false);
   const [queryFlag, setQueryFlag] = useState(false);
-  const [byID, setById] = useState(false);
+  const [byWhat, setByWhat] = useState("ID");
   const [itemPeriod, setItemPeriod] = useState([]);
   const [period, setPeriod] = useState("");
   const [itemMaterial, setItemMaterial] = useState([]);
@@ -134,6 +134,10 @@ const SearchItem = ({ handleClick, currentItem, itemName }) => {
     handleClick(item.ItemID);
   };
 
+  const changBy = (e) => {
+    setByWhat(e.target.value);
+  };
+
   return (
     <div className="txtF">
       <div>
@@ -142,66 +146,90 @@ const SearchItem = ({ handleClick, currentItem, itemName }) => {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
+            flexDirection: "column",
           }}
         >
-          {byID ? (
-            <Button
-              variant="contained"
-              style={{
-                color: "white",
-                background: "blue",
-                marginLeft: "10px",
-              }}
-              onClick={() => setById(false)}
-            >
-              Choose by Photo/Query
-            </Button>
-          ) : (
-            <Button
-              variant="contained"
-              style={{
-                color: "white",
-                background: "blue",
-                marginLeft: "10px",
-              }}
-              onClick={() => setById(true)}
-            >
-              Choose by ID
-            </Button>
-          )}
-
-          {byID ? (
-            <Select
-              name="itemsList"
-              styles={selectStyles}
-              defaultValue={
-                itemName != ""
-                  ? { value: itemName, label: itemName }
-                  : { value: "", label: "Select..." }
-              }
-              options={itemsList.map((e) => {
-                return { value: e.ItemID, label: e.ItemName };
-              })}
-              onChange={(e) => {
-                handleClick(e.value);
-              }}
+          <div
+            style={{
+              padding: 15,
+              color:
+                window.location.pathname == "/ModifyData" ? "white" : "black",
+            }}
+            onChange={changBy}
+          >
+            <input type="radio" value="ID" name="byWhat" onChange={changBy} />
+            By ID
+            <input
+              style={{ marginLeft: 6 }}
+              type="radio"
+              value="pq"
+              name="byWhat"
+              onChange={changBy}
             />
-          ) : (
-            <Select
-              name="itemsList"
-              styles={selectStyles}
-              defaultValue={
-                itemName != ""
-                  ? { value: itemName, label: itemName }
-                  : { value: "", label: "Select..." }
-              }
-              options={categories.map((val, key) => {
-                return { value: val, label: val };
-              })}
-              onChange={(e) => {
-                buildSub(e.label);
-              }}
+            By Photo/Query
+            <input
+              style={{ marginLeft: 6 }}
+              type="radio"
+              value="rfid"
+              name="byWhat"
+              onChange={changBy}
             />
+            By RFID
+          </div>
+          {byWhat == "ID" ? (
+            <div>
+              <Select
+                name="itemsList"
+                styles={selectStyles}
+                defaultValue={
+                  itemName != ""
+                    ? { value: itemName, label: itemName }
+                    : { value: "", label: "Select..." }
+                }
+                options={itemsList.map((e) => {
+                  return { value: e.ItemID, label: e.ItemName };
+                })}
+                onChange={(e) => {
+                  handleClick(e.value);
+                }}
+              />
+            </div>
+          ) : byWhat == "pq" ? (
+            <div>
+              <Select
+                name="itemsList"
+                styles={selectStyles}
+                defaultValue={
+                  itemName != ""
+                    ? { value: itemName, label: itemName }
+                    : { value: "", label: "Select..." }
+                }
+                options={categories.map((val, key) => {
+                  return { value: val, label: val };
+                })}
+                onChange={(e) => {
+                  buildSub(e.label);
+                }}
+              />
+            </div>
+          ) : (
+            <div>
+              <Select
+                name="itemsList"
+                styles={selectStyles}
+                defaultValue={
+                  itemName != ""
+                    ? { value: itemName, label: itemName }
+                    : { value: "", label: "Select..." }
+                }
+                options={itemsList.map((e) => {
+                  return { value: e.rfid_id, label: e.ItemName };
+                })}
+                onChange={(e) => {
+                  buildSub(e.label);
+                }}
+              />
+            </div>
           )}
 
           <Popup
@@ -235,7 +263,7 @@ const SearchItem = ({ handleClick, currentItem, itemName }) => {
               </>
             )}
           </Popup>
-          {category == "" ? (
+          {category == "" || byID != "pq" ? (
             ""
           ) : (
             <Button
@@ -243,7 +271,7 @@ const SearchItem = ({ handleClick, currentItem, itemName }) => {
               style={{
                 color: "white",
                 background: "blue",
-                marginLeft: "10px",
+                marginTop: "10px",
               }}
               onClick={() => setTry(true)}
             >
@@ -351,7 +379,7 @@ const SearchItem = ({ handleClick, currentItem, itemName }) => {
               </>
             )}
           </Popup>
-          {category == "" ? (
+          {category == "" || byID != "pq" ? (
             ""
           ) : (
             <Button
@@ -359,7 +387,7 @@ const SearchItem = ({ handleClick, currentItem, itemName }) => {
               style={{
                 color: "white",
                 background: "blue",
-                marginLeft: "10px",
+                marginTop: "10px",
               }}
               onClick={() => setQueryFlag(true)}
             >

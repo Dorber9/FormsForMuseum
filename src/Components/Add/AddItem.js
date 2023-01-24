@@ -144,6 +144,7 @@ function AddItem(props) {
   };
 
   const [itemId, setItemId] = useState("");
+  const [rfid_id, setRfID] = useState("");
   const [name, setName] = useState("");
   const [descr, setDescr] = useState("");
   const [shortDescr, setShortDescr] = useState("");
@@ -229,7 +230,7 @@ function AddItem(props) {
       setMaterial(props.object.Material);
       setPeriod(props.object.Period);
       setSite(props.object.Site);
-      console.log("us effect");
+      if (props.object.rfid_id != null) setRfID(props.object.rfid_id);
       if (props.object.InStorage != null) setStorage(props.object.InStorage);
 
       if (storage !== "1") {
@@ -268,6 +269,7 @@ function AddItem(props) {
     } else {
       Axios.post(`http://${server_ip}:3001/addItem`, {
         ID: itemId,
+        rfid_id: rfid_id,
         name: name,
         descr: descr,
         shortDescr: shortDescr,
@@ -288,6 +290,7 @@ function AddItem(props) {
           ...itemsList,
           {
             ID: itemId,
+            rfid_id: rfid_id,
             name: name,
             descr: descr,
             shortDescr: shortDescr,
@@ -312,6 +315,7 @@ function AddItem(props) {
   const updateItem = (img) => {
     Axios.put(`http://${server_ip}:3001/updateItem`, {
       ID: itemId,
+      rfid_id: rfid_id,
       name: name,
       descr: descr,
       shortDescr: shortDescr,
@@ -332,6 +336,7 @@ function AddItem(props) {
         ...itemsList,
         {
           ID: itemId,
+          rfid_id: rfid_id,
           name: name,
           descr: descr,
           shortDescr: shortDescr,
@@ -499,6 +504,18 @@ function AddItem(props) {
                       type="text"
                       name="itemId"
                       label="ID"
+                    />
+                    <TextField
+                      className={classstyle.root}
+                      style={{ marginLeft: "5px" }}
+                      value={rfid_id}
+                      onChange={(e) => {
+                        setRfID(e.target.value);
+                      }}
+                      variant="outlined"
+                      type="text"
+                      name="rfID"
+                      label="rfid_id"
                     />
                     <TextField
                       className={classstyle.root}

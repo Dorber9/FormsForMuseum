@@ -55,51 +55,49 @@ const Header = ({ setToken }) => {
           bg="dark"
           variant="dark"
         >
-          <Container>
-            <Nav className="me-auto">
-              <Nav.Link
-                style={
-                  window.location.pathname == "/" ? selectedStyle : navStyle
-                }
-                href="/"
-              >
-                Home <FaHome />
-              </Nav.Link>
-              <NavDropdown
-                title={
-                  window.location.pathname == "/Add" ||
-                  window.location.pathname == "/ModifyData"
-                    ? "Data"
-                    : "Data"
-                }
-              >
-                <NavDropdown.Item href="/Add"> Add </NavDropdown.Item>{" "}
-                <NavDropdown.Item href="/ModifyData"> Modify </NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item href="/CourseWizard">
-                  Manage Quests{" "}
-                </NavDropdown.Item>{" "}
-              </NavDropdown>{" "}
-              <Nav.Link
-                style={
-                  window.location.pathname == "/ItemsList"
-                    ? selectedStyle
-                    : navStyle
-                }
-                href="../ItemsList"
-              >
-                Items <FaTable />
-              </Nav.Link>{" "}
-              <Nav.Link
-                style={{
-                  color: "red",
-                }}
-                onClick={() => submit()}
-              >
-                Log Out
-              </Nav.Link>{" "}
-            </Nav>{" "}
-          </Container>{" "}
+          <Nav className="me-auto">
+            <Nav.Link
+              style={window.location.pathname == "/" ? selectedStyle : navStyle}
+              href="/"
+            >
+              Home <FaHome />
+            </Nav.Link>
+            <NavDropdown
+              title={
+                window.location.pathname == "/Add" ||
+                window.location.pathname == "/ModifyData"
+                  ? "Data"
+                  : "Data"
+              }
+            >
+              <NavDropdown.Item href="/Add"> Add </NavDropdown.Item>{" "}
+              <NavDropdown.Item href="/ModifyData"> Modify </NavDropdown.Item>
+              <NavDropdown.Divider />
+              <NavDropdown.Item href="/CourseWizard">
+                Manage Quests{" "}
+              </NavDropdown.Item>{" "}
+            </NavDropdown>{" "}
+            <Nav.Link
+              style={
+                window.location.pathname == "/ItemsList"
+                  ? selectedStyle
+                  : navStyle
+              }
+              href="../ItemsList"
+            >
+              Items <FaTable />
+            </Nav.Link>{" "}
+            <Nav.Link
+              style={{
+                color: "red",
+                position: "absolute",
+                right: 0,
+              }}
+              onClick={() => submit()}
+            >
+              Log Out
+            </Nav.Link>{" "}
+          </Nav>{" "}
         </Navbar>
       )}
     </>

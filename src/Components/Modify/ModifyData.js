@@ -238,11 +238,27 @@ const ModifyData = () => {
         >
           {selectedObject == "Item" ? (
             <SearchItem handleClick={handleItem} itemID={null} itemName={""} />
+          ) : selectedObject == "Question" ? (
+            <AddQuestion object={questionsList} />
           ) : (
-            ""
+            <Select
+              styles={selectStyles}
+              value={{
+                value: wantedObject,
+                label:
+                  objectName === "" ? "Select " + selectedObject : objectName,
+              }}
+              maxMenuHeight={180}
+              options={mapOptions()}
+              onChange={(e) => {
+                setWantedObject(e.value);
+                setObjectName(e.label);
+                getWantedList(wantedObject, selectedObject);
+              }}
+            />
           )}
         </div>
-      )}{" "}
+      )}
       {wantedObject == "" ? (
         ""
       ) : (
@@ -261,14 +277,7 @@ const ModifyData = () => {
             <AddItem object={getWantedList(wantedObject, "Item")} />
           )}{" "}
         </div>
-      )}{" "}
-      {selectedObject === "Question" ? (
-        <div style={{ marginTop: "10px" }}>
-          <AddQuestion object={questionsList}> </AddQuestion>{" "}
-        </div>
-      ) : (
-        ""
-      )}{" "}
+      )}
     </div>
   );
 };

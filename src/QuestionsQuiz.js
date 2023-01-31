@@ -14,8 +14,10 @@ const QuestionsQuiz = () => {
   const [token, setToken] = useState(JSON.parse(localStorage.getItem("token")));
   const [loading, setLoading] = useState(true);
   const [quiz, setQuiz] = useState();
+  const [itemsList, setItemsList] = useState([]);
 
   useEffect(() => {
+    getItems();
     Axios.get(`http://34.165.154.8:3001/Quest/${params.id}`).then(
       (response) => {
         getQuestions(
@@ -25,18 +27,6 @@ const QuestionsQuiz = () => {
             ? response.data[0].questItems
             : "Neanderthal-אבן יד-"
         );
-        // if (response.data[0].questItems) {
-        //   getQuestions(
-        //     response.data[0].questions,
-        //     response.data[0].questName,
-        //     response.data[0].questItems
-        //   )};
-        // else
-        //   getQuestions(
-        //     response.data[0].questions,
-        //     response.data[0].questName,
-        //     "Neanderthal-אבן יד-"
-        //   );
 
         setTimeout(() => {
           setLoading(false);
@@ -45,37 +35,54 @@ const QuestionsQuiz = () => {
     );
   }, []);
 
+  const getItems = () => {
+    Axios.get("http://34.165.154.8:3001/Item").then((response) => {
+      setItemsList(response.data);
+      Axios.get(`http://34.165.154.8:3001/Quest/${params.id}`).then(
+        (response) => {
+          getQuestions(
+            response.data[0].questions,
+            response.data[0].questName,
+            response.data[0].questItems
+              ? response.data[0].questItems
+              : "Neanderthal-אבן יד-"
+          );
+
+          setTimeout(() => {
+            setLoading(false);
+          }, 3000);
+        }
+      );
+    });
+  };
+
   const getQuestions = (course, title, items) => {
     let arr = [];
     arr = course.split("-");
-    let itemsArr = [];
+    console.log(arr);
+    let showCasesIds = [];
     let itemsArrTemp = [];
     itemsArrTemp = items.split("%^%");
-    console.log(itemsArrTemp);
     itemsArrTemp.forEach((item) => {
-      itemsArr.push(item.split("@#@")[1].trim());
+      let itemId = item.split("@#@")[1].trim();
+      let showId = itemsList.filter((item) => item.ItemID === itemId)[0]
+        ?.ShowcaseID;
+      showCasesIds.push(showId ? showId : "5");
     });
     let questionslist = [];
-    let counter = 1;
-    let i = 0;
+    let counter = 0;
 
     arr.forEach((element) => {
-      var showcase;
-      Axios.get(`http://34.165.154.8:3001/question/${element}`)
-        .then((response) => {
+      console.log(element);
+      Axios.get(`http://34.165.154.8:3001/question/${element}`).then(
+        (response) => {
           questionslist.push(buildQuestion(response.data[0]));
+          counter != showCasesIds.length - 1
+            ? questionslist.push(buildNextItem(showCasesIds[counter]))
+            : "";
           counter++;
-          showcase = response.data[0].ItemID;
-        })
-        .then(
-          Axios.get(
-            `http://34.165.154.8:3001/ItemShowcase/${itemsArr[i]}`
-          ).then((response2) => {
-            console.log(response2.data[0].ShowcaseID);
-            questionslist.push(buildNextItem(response2.data[0].ShowcaseID));
-          })
-        );
-      i++;
+        }
+      );
     });
     let quiz = {
       quizTitle: title, // Change to the relevant one
@@ -116,7 +123,6 @@ const QuestionsQuiz = () => {
     //     ShowcaseID = response.data[0].ShowcaseID;
     //   }
     // );
-    console.log(ShowcaseID);
 
     let numberTwo = 0;
     let numberThree = 0;

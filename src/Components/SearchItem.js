@@ -263,7 +263,7 @@ const SearchItem = ({ handleClick, currentItem, itemName }) => {
               </>
             )}
           </Popup>
-          {category == "" || byID != "pq" ? (
+          {category == "" || byWhat != "pq" ? (
             ""
           ) : (
             <Button
@@ -379,7 +379,7 @@ const SearchItem = ({ handleClick, currentItem, itemName }) => {
               </>
             )}
           </Popup>
-          {category == "" || byID != "pq" ? (
+          {category == "" || byWhat != "pq" ? (
             ""
           ) : (
             <Button

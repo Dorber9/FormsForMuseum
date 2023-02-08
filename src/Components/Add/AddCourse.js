@@ -305,6 +305,7 @@ const AddCourse = (props) => {
                                   )
                                   .map((item) => item.ItemName)[0]
                           }
+                          quizFlag={true}
                         />
                         <Select
                           placeholder="Please select Question"

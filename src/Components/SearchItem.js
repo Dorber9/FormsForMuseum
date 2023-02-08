@@ -27,7 +27,7 @@ const selectStyles = {
   }),
 };
 
-const SearchItem = ({ handleClick, currentItem, itemName }) => {
+const SearchItem = ({ handleClick, currentItem, itemName, quizFlag }) => {
   const [itemsList, setItemsList] = useState([]);
   const [showFlag, setShowFlag] = useState(false);
   const [tryit, setTry] = useState(false);
@@ -52,9 +52,24 @@ const SearchItem = ({ handleClick, currentItem, itemName }) => {
 
   const getItems = () => {
     Axios.get("http://34.165.154.8:3001/Item").then((response) => {
-      setItemsList(response.data);
-      const unique = [...new Set(response.data.map((item) => item.ItemName))];
-      setCategories(unique);
+      let itemsList = response.data;
+      if (quizFlag) {
+        Axios.get("http://34.165.154.8:3001/question").then((response) => {
+          let questionsIds = response.data.map((element) => element.ObjectID);
+          let itemsFiltered = itemsList.filter((element) =>
+            questionsIds.includes(element.ItemID)
+          );
+          setItemsList(itemsFiltered);
+          const unique = [
+            ...new Set(itemsFiltered.map((item) => item.ItemName)),
+          ];
+          setCategories(unique);
+        });
+      } else {
+        const unique = [...new Set(response.data.map((item) => item.ItemName))];
+        setCategories(unique);
+        setItemsList(response.data);
+      }
       if (material != "") {
         let res = itemsList.filter((mzab) => mzab.Material == material);
         setItemsList(res);

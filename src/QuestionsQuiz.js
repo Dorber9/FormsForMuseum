@@ -85,8 +85,8 @@ const QuestionsQuiz = () => {
       answers: ["", "", "", ""],
       correctAnswer: "3",
       questionPic: image ? image : Logo,
-      messageForCorrectAnswer: `Correct answer. Good job. The hint for your next item is ${data.Clue}`,
-      messageForIncorrectAnswer: `Incorrect answer. The hint for your next item is ${data.Clue}`,
+      messageForCorrectAnswer: `:תשובה נכונה כל הכבוד! הרמז לפריט הבא הוא`,
+      messageForIncorrectAnswer: `תשובה לא נכונה, נסו שוב`,
       explanation: data.Clue,
       point: "20",
     };
@@ -129,9 +129,8 @@ const QuestionsQuiz = () => {
       answerSelectionType: "single",
       answers: ["", "", "", ""],
       correctAnswer: "3",
-      messageForCorrectAnswer: `Correct answer. Good job. The hint for your next item is`,
-      messageForIncorrectAnswer: `Incorrect answer. The hint for your next item is`,
-      explanation: "dwdw",
+      messageForCorrectAnswer: `תשובה נכונה כל הכבוד!`,
+      messageForIncorrectAnswer: `תשובה לא נכונה, נסו שוב!`,
       point: "20",
     };
     temp.question = "הויטרינה של הפריט הבא היא: "

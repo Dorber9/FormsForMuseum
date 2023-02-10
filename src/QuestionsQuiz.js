@@ -4,101 +4,87 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import QRCode from "react-qr-code";
 import { Container, Row, Col } from "react-grid-system";
+import Logo from "./logo_amnon.png";
+
 
 import Axios from "axios";
-
-/* eslint-disable */
 
 const QuestionsQuiz = () => {
   const params = useParams();
   const [token, setToken] = useState(JSON.parse(localStorage.getItem("token")));
   const [loading, setLoading] = useState(true);
   const [quiz, setQuiz] = useState();
-  const [itemsList, setItemsList] = useState([]);
 
   useEffect(() => {
     getItems();
-    Axios.get(`http://34.165.154.8:3001/Quest/${params.id}`).then(
-      (response) => {
-        getQuestions(
-          response.data[0].questions,
-          response.data[0].questName,
-          response.data[0].questItems
-            ? response.data[0].questItems
-            : "Neanderthal-אבן יד-"
-        );
-
-        setTimeout(() => {
-          setLoading(false);
-        }, 3000);
-      }
-    );
   }, []);
 
-  const getItems = () => {
-    Axios.get("http://34.165.154.8:3001/Item").then((response) => {
-      setItemsList(response.data);
-      Axios.get(`http://34.165.154.8:3001/Quest/${params.id}`).then(
-        (response) => {
-          getQuestions(
-            response.data[0].questions,
-            response.data[0].questName,
-            response.data[0].questItems
-              ? response.data[0].questItems
-              : "Neanderthal-אבן יד-"
-          );
-
-          setTimeout(() => {
-            setLoading(false);
-          }, 3000);
-        }
+  const getItems = async () => {
+    try {
+      const response = await Axios.get("http://34.165.154.8:3001/Item");
+      const response2 = await Axios.get(`http://34.165.154.8:3001/Quest/${params.id}`);
+      getQuestions(
+        response2.data[0].questions,
+        response2.data[0].questName,
+        response2.data[0].questItems
+          ? response2.data[0].questItems
+          : "Neanderthal-אבן יד-",
+      response.data
       );
-    });
+      setTimeout(() => {
+        setLoading(false);
+      }, 3000);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
-  const getQuestions = (course, title, items) => {
-    let arr = [];
-    arr = course.split("-");
-    console.log(arr);
-    let showCasesIds = [];
-    let itemsArrTemp = [];
-    itemsArrTemp = items.split("%^%");
-    itemsArrTemp.forEach((item) => {
-      let itemId = item.split("@#@")[1].trim();
-      let showId = itemsList.filter((item) => item.ItemID === itemId)[0]
-        ?.ShowcaseID;
-      showCasesIds.push(showId ? showId : "5");
-    });
-    let questionslist = [];
-    let counter = 0;
-
-    arr.forEach((element) => {
-      console.log(element);
-      Axios.get(`http://34.165.154.8:3001/question/${element}`).then(
-        (response) => {
-          questionslist.push(buildQuestion(response.data[0]));
-          counter != showCasesIds.length - 1
-            ? questionslist.push(buildNextItem(showCasesIds[counter]))
-            : "";
-          counter++;
+  const getQuestions = async (course, title, items,data) => {
+    try {
+      let arr = [];
+      arr = course.split("-");
+      let showCasesIds = [];
+      let images = [];
+      let itemsArrTemp = [];
+      itemsArrTemp = items.split("%^%");
+      itemsArrTemp.forEach((item) => {
+        let itemId = item.split("@#@")[1].trim();
+        let showId = data.filter((item) => item.ItemID === itemId)[0]
+          ?.ShowcaseID;
+        showCasesIds.push(showId ? showId : "5");
+        images.push(data.filter((item) => item.ItemID === itemId)[0]
+        ?.ImagePath)
+      });
+      let questionslist = [];
+      let counter = 1;
+      for (const element of arr) {
+        const response = await Axios.get(`http://34.165.154.8:3001/question/${element}`);
+        questionslist.push(buildQuestion(response.data[0],images[counter-1]));
+        if (counter !== showCasesIds.length) {
+          questionslist.push(buildNextItem(showCasesIds[counter]));
         }
-      );
-    });
-    let quiz = {
-      quizTitle: title, // Change to the relevant one
-      quizSynopsis: "", // Change to the relevant one
-      questions: questionslist,
-    };
-    setQuiz(quiz);
+        counter++;
+      }
+      let quiz = {
+        quizTitle: title, // Change to the relevant one
+        quizSynopsis: "", // Change to the relevant one
+        questions: questionslist,
+      };
+      setQuiz(quiz);
+    }
+      catch(error){
+        console.log(error)
+      }
   };
 
-  const buildQuestion = (data) => {
+  const buildQuestion = (data,image) => {
     let temp = {
       question: "abd",
       questionType: "text",
       answerSelectionType: "single",
       answers: ["", "", "", ""],
       correctAnswer: "3",
+      questionPic: image ? image : Logo,
       messageForCorrectAnswer: `Correct answer. Good job. The hint for your next item is ${data.Clue}`,
       messageForIncorrectAnswer: `Incorrect answer. The hint for your next item is ${data.Clue}`,
       explanation: data.Clue,
@@ -117,12 +103,7 @@ const QuestionsQuiz = () => {
 
   const buildNextItem = (item) => {
     let ShowcaseID = item;
-    // Axios.get(`http://34.165.154.8:3001/ItemShowcase/${item}`).then(
-    //   (response) => {
-    //     console.log(response.data[0].ShowcaseID);
-    //     ShowcaseID = response.data[0].ShowcaseID;
-    //   }
-    // );
+
 
     let numberTwo = 0;
     let numberThree = 0;
@@ -153,7 +134,7 @@ const QuestionsQuiz = () => {
       explanation: "dwdw",
       point: "20",
     };
-    temp.question = "הפריט הבא הוא";
+    temp.question = "הויטרינה של הפריט הבא היא: "
     let answers = [];
     answers.push(numberTwo);
     answers.push(numberThree);

@@ -1,4 +1,8 @@
 /* eslint-disable */
+
+/**
+ * Add showcase to the database
+ */
 import React from "react";
 import { TextField, makeStyles } from "@material-ui/core";
 import { useState, useEffect } from "react";
@@ -12,7 +16,11 @@ import Resizer from "react-image-file-resizer";
 import ReactUploadImage from "../ReactUploadImage";
 
 const server_ip = "34.165.154.8";
-
+/**
+ * All parameters to create showcase.
+ * @param {*} props
+ * @returns
+ */
 const AddShowcase = (props) => {
   const [number, setNumber] = useState("");
   const [name, setName] = useState("");
@@ -46,7 +54,10 @@ const AddShowcase = (props) => {
       color: state.isFocused ? "black" : "white",
     }),
   };
-
+  /**
+   * Image for showcase
+   * @param {*} e
+   */
   const fileChange = (e) => {
     setImageFlag(true);
     setFile(e.target.files[0]);
@@ -95,7 +106,9 @@ const AddShowcase = (props) => {
     e.preventDefault();
     onFormSubmit();
   };
-
+  /**
+   * Resize image.
+   */
   const onFormSubmit = async () => {
     if (ImageFlag) {
       try {

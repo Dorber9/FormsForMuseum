@@ -1,13 +1,13 @@
 /* eslint-disable */
+/**
+ * Imports
+ */
 import React, { useState, useEffect } from "react";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
-
 import "react-tabs/style/react-tabs.css";
-
 import AddDisplay from "./Add/AddDisplay";
 import AddItem from "./Add/AddItem";
 import AddShowcase from "./Add/AddShowcase";
-
 import "../App.css";
 import AddMuseumBuildingSection from "./Add/AddMuseumBuildingSection";
 import AddQuestion from "./Add/AddQuestion";
@@ -22,6 +22,10 @@ import AddQuestion from "./Add/AddQuestion";
 
 const tabStyle = { color: "white" };
 
+/**
+ * Main add components managing all add do database
+ * @returns
+ */
 const Add = () => {
   return (
     <div className="tb">
@@ -34,11 +38,9 @@ const Add = () => {
           <Tab style={tabStyle}>Item</Tab>
           <Tab style={tabStyle}>Question</Tab>
         </TabList>
-
         <TabPanel>
           <AddMuseumBuildingSection object={null} />
         </TabPanel>
-
         <TabPanel>
           <AddDisplay object={null} />
         </TabPanel>

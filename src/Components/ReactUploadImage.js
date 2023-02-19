@@ -1,3 +1,8 @@
+/**
+ * React image upload component
+ * formatting the picture into data and sending to database.
+ */
+
 import React from "react";
 import { Button } from "react-bootstrap";
 

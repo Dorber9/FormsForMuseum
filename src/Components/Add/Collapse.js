@@ -1,3 +1,7 @@
+/**
+ * Component to make Wikipedia like page.
+ */
+
 import React from "react";
 import useCollapse from "react-collapsed";
 

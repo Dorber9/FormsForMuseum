@@ -1,3 +1,9 @@
+/**
+ * Modify quests.
+ * Loads the AddCourse component and complete the wanted quests data.
+ * Loads the AddCourse component with the delete button.
+ */
+
 import React from "react";
 import { useState, useEffect } from "react";
 import Select from "react-select";
@@ -31,19 +37,30 @@ const ModifyCourse = () => {
     getQuests();
     // eslint-disable-next-line
   }, [wantedQuest]);
-
+  /**
+   * Get all quests
+   */
   const getQuests = () => {
     Axios.get(`http://${server_ip}:3001/quest`).then((response) => {
       setQuestsList(response.data);
     });
   };
 
+  /**
+   * Map the options into value -> label variable.
+   * @returns
+   */
   const mapOptions = () => {
     return questsList.map((val, key) => {
       return { value: val.qid, label: val.questName };
     });
   };
 
+  /**
+   * Get quiz by id
+   * @param {*} id
+   * @returns
+   */
   const getWantedQuest = (id) => {
     var wanted = "";
     var wantedItem = {};

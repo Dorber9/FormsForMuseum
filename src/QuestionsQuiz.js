@@ -1,3 +1,11 @@
+/*
+React component to create quizes.
+Gets questions from database and create question for the quiz.
+Create next question based on next item.
+Returns the quiz.
+*/
+
+/* Imports */
 import React from "react";
 import Quiz from "react-quiz-component";
 import { useParams } from "react-router-dom";
@@ -5,8 +13,6 @@ import { useState, useEffect } from "react";
 import QRCode from "react-qr-code";
 import { Container, Row, Col } from "react-grid-system";
 import Logo from "./logo_amnon.png";
-
-
 import Axios from "axios";
 
 const QuestionsQuiz = () => {
@@ -19,17 +25,22 @@ const QuestionsQuiz = () => {
     getItems();
   }, []);
 
+  /* Get all items and questions
+   * Get items and quests from database.
+   */
   const getItems = async () => {
     try {
       const response = await Axios.get("http://34.165.154.8:3001/Item");
-      const response2 = await Axios.get(`http://34.165.154.8:3001/Quest/${params.id}`);
+      const response2 = await Axios.get(
+        `http://34.165.154.8:3001/Quest/${params.id}`
+      );
       getQuestions(
         response2.data[0].questions,
         response2.data[0].questName,
         response2.data[0].questItems
           ? response2.data[0].questItems
           : "Neanderthal-אבן יד-",
-      response.data
+        response.data
       );
       setTimeout(() => {
         setLoading(false);
@@ -39,7 +50,15 @@ const QuestionsQuiz = () => {
     }
   };
 
-  const getQuestions = async (course, title, items,data) => {
+  /**
+   * Create question from questions list.
+   * create items questions from list.
+   * @param {*} course
+   * @param {*} title
+   * @param {*} items
+   * @param {*} data
+   */
+  const getQuestions = async (course, title, items, data) => {
     try {
       let arr = [];
       arr = course.split("-");
@@ -52,14 +71,19 @@ const QuestionsQuiz = () => {
         let showId = data.filter((item) => item.ItemID === itemId)[0]
           ?.ShowcaseID;
         showCasesIds.push(showId ? showId : "5");
-        images.push(data.filter((item) => item.ItemID === itemId)[0]
-        ?.ImagePath)
+        images.push(
+          data.filter((item) => item.ItemID === itemId)[0]?.ImagePath
+        );
       });
       let questionslist = [];
       let counter = 1;
       for (const element of arr) {
-        const response = await Axios.get(`http://34.165.154.8:3001/question/${element}`);
-        questionslist.push(buildQuestion(response.data[0],images[counter-1]));
+        const response = await Axios.get(
+          `http://34.165.154.8:3001/question/${element}`
+        );
+        questionslist.push(
+          buildQuestion(response.data[0], images[counter - 1])
+        );
         if (counter !== showCasesIds.length) {
           questionslist.push(buildNextItem(showCasesIds[counter]));
         }
@@ -71,13 +95,18 @@ const QuestionsQuiz = () => {
         questions: questionslist,
       };
       setQuiz(quiz);
+    } catch (error) {
+      console.log(error);
     }
-      catch(error){
-        console.log(error)
-      }
   };
 
-  const buildQuestion = (data,image) => {
+  /**
+   * Build questions body, hint and correct answer.
+   * @param {*} data
+   * @param {*} image
+   * @returns
+   */
+  const buildQuestion = (data, image) => {
     let temp = {
       question: "abd",
       questionType: "text",
@@ -103,7 +132,6 @@ const QuestionsQuiz = () => {
 
   const buildNextItem = (item) => {
     let ShowcaseID = item;
-
 
     let numberTwo = 0;
     let numberThree = 0;
@@ -133,7 +161,7 @@ const QuestionsQuiz = () => {
       messageForIncorrectAnswer: `תשובה לא נכונה, נסו שוב!`,
       point: "20",
     };
-    temp.question = "הויטרינה של הפריט הבא היא: "
+    temp.question = "הויטרינה של הפריט הבא היא: ";
     let answers = [];
     answers.push(numberTwo);
     answers.push(numberThree);
@@ -151,6 +179,9 @@ const QuestionsQuiz = () => {
     return temp;
   };
 
+  /**
+   * Component's front side
+   */
   return (
     <>
       <Container>

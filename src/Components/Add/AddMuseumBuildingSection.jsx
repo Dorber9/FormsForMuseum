@@ -8,7 +8,12 @@ import "../../App.css";
 const cardShadow={boxShadow:"0px 0 2px rgb(255 225 140)"};
 const headStyle= {color: "white"}
 
-
+/**
+ * Manage 3 tabs - AddMuseum, AddBuilding and Add section. 
+ * Displays all 3 tabs together.
+ * @param {*} props 
+ * @returns 
+ */
 const AddMuseumBuildingSection = (props) => {
   return (
     <div>

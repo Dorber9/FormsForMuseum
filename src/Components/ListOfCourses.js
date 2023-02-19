@@ -1,3 +1,7 @@
+/**
+ * Quests list.
+ */
+
 import React from "react";
 import Select from "react-select";
 import Button from "@material-ui/core/Button";

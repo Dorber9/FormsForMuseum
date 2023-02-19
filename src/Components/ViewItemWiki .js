@@ -60,41 +60,6 @@ const ViewItemWiki = (props) => {
     // eslint-disable-next-line
   }, []);
 
-  // Get the relevant item data based on his Id
-  const getItem = () => {
-    // try {
-    //   let res = await Axios.get(
-    //     `http://34.140.118.51:3001/Item/${props.itemId}`
-    //   );
-    //   setData(res.data[0]);
-    //   setKeys(Object.keys(itemData));
-    // } catch (error) {
-    //   console.log(error.data);
-    // }
-  };
-
-  const buildData = (data) => {
-    //    setName(data.HebItemName)
-    //     setMaterial(data.HebMaterial)
-    //     setDesc(data.HebDescr)
-    //     setAge(data.Age)
-    //     setPeriod(data.HebPeriod)
-    //     setSite(data.HebSite)
-    //   if(data.ItemData){
-    //     const data = data.ItemData.split("^%^");
-    //     setPath(data.ImagePath);
-    //     data.pop();
-    //     var temp = [];
-    //     data.forEach((element) => {
-    //       const d = element.split("=>");
-    //       temp.push({
-    //         category: d[1].split("&&&")[0],
-    //         categoryDescr: d[2],
-    //       });
-    //     });
-    //   setDataWiki(temp);
-    //   }
-  };
   return (
     <>
       {loading ? (

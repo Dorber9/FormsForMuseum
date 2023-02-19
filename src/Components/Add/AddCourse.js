@@ -1,4 +1,7 @@
 /* eslint-disable */
+/**
+ * Add new quest
+ */
 import React from "react";
 import { useState, useEffect } from "react";
 import Axios from "axios";
@@ -65,7 +68,11 @@ const selectStyles = {
     ...styles,
   }),
 };
-
+/**
+ * params for quest creation
+ * @param {*} props
+ * @returns
+ */
 const AddCourse = (props) => {
   const [questionsList, setQuestionsList] = useState([]);
   const [itemsList, setItemsList] = useState([]);

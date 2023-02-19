@@ -1,3 +1,7 @@
+/**
+ * Form for quest creation.
+ */
+
 import React from "react";
 import Container from "@material-ui/core/Container";
 import TextField from "@material-ui/core/TextField";
@@ -14,6 +18,9 @@ import reactDom from "react-dom";
 import { itemsList } from "../Items/Info";
 import { useState, useEffect } from "react";
 
+/**
+ * style
+ */
 const customStyles = {
   content: {
     top: "50%",
@@ -39,6 +46,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+/**
+ * Use states to manage live changes.
+ * filter results for relevant results.
+ * Open and close modal functions.
+ * @returns
+ */
 const GameForm = () => {
   let subtitle;
   const [modalIsOpen, setIsOpen] = React.useState(false);
@@ -48,35 +61,9 @@ const GameForm = () => {
   const [selectedFirstItem, setFirstItem] = useState("");
   const [spanId, setSpanId] = useState("");
 
-  // const getData=()=>{
-  //   require('/Items/Info.json'
-  //   ,{
-  //     headers : {
-  //       'Content-Type': 'application/json',
-  //       'Accept': 'application/json'
-  //      }
-  //   }
-  //   )
-  //     .then(function(response){
-  //       console.log(response)
-  //       return response.json();
-  //     })
-  //     .then(function(myJson) {
-  //       console.log(myJson);
-  //       setContacts(myJson)
-  //     });
-  // }
   useEffect(() => {
     setContacts(itemsList);
   }, []);
-
-  // useEffect(() => {
-  //   const API_URL = <itemsInfo />
-  //   axios.get(API_URL).then((res) => {
-  //     const contacts = res.data;
-  //     setContacts(contacts);
-  //   });
-  // }, []);
 
   const filteredContacts =
     search.length === 0

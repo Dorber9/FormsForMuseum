@@ -1,4 +1,10 @@
 /* eslint-disable */
+
+/**
+ * Updated name - QuestWizard.
+ * Adding, editing and deleting quests from database..
+ * Managed by tabs.
+ */
 import React from "react";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import Button from "@material-ui/core/Button";

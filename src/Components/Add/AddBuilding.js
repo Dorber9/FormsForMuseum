@@ -1,4 +1,7 @@
 /* eslint-disable */
+/**
+ * Add new building to the database(Currently main and storage)
+ */
 import React from "react";
 import { TextField, makeStyles } from "@material-ui/core";
 import { useState, useEffect } from "react";
@@ -48,7 +51,11 @@ const styles = makeStyles((theme) => ({
     },
   },
 }));
-
+/**
+ * Already defined Maayan Baruch's address
+ * @param {*} props
+ * @returns
+ */
 const AddBuilding = (props) => {
   const [address, setAddress] = useState("1222000");
   const [city, setCity] = useState("מעיין ברוך");

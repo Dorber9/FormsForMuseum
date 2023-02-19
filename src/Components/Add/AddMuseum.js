@@ -1,4 +1,9 @@
 /* eslint-disable */
+/**
+ * Add new musuem to the database.
+ * This component is blocked at the moment, users cannot use it.
+ * Request only museum's name
+ */
 import React from "react";
 import { TextField, InputLabel, makeStyles } from "@material-ui/core";
 import { useState, useEffect } from "react";

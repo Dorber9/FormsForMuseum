@@ -1,4 +1,8 @@
 /* eslint-disable */
+/**
+ * Add item to the database.
+ * Database's lowest level.
+ */
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
@@ -115,7 +119,11 @@ function AddItem(props) {
       color: state.isFocused ? "black" : "white",
     }),
   };
-
+  /**
+   * Handle changes in the free text section of the form.
+   * @param {*} id
+   * @param {*} event
+   */
   const handleChangeInput = (id, event) => {
     const newInputFields = inputFields.map((i) => {
       if (id === i.id) {
@@ -142,7 +150,9 @@ function AddItem(props) {
     );
     setInputFields(values);
   };
-
+  /**
+   * Varaiables needed to create an item.
+   */
   const [itemId, setItemId] = useState("");
   const [rfid_id, setRfID] = useState("");
   const [name, setName] = useState("");
@@ -174,7 +184,11 @@ function AddItem(props) {
     boxShadow: "inset rgb(0 0 0) -2px -1px 14px 2px",
     background: "#ffee9db3",
   };
-
+  /**
+   * Resize image file and convert to data(text)
+   * @param {*} file
+   * @returns
+   */
   const resizeFile = (file) =>
     new Promise((resolve) => {
       Resizer.imageFileResizer(
@@ -216,7 +230,9 @@ function AddItem(props) {
       },
     },
   }));
-
+  /**
+   * Load information if needed(if editing)
+   */
   useEffect(() => {
     console.log("rendring");
     getDisplay();
@@ -356,7 +372,9 @@ function AddItem(props) {
       ]);
     });
   };
-
+  /**
+   * Get needed lists for item creation.
+   */
   const getDisplay = () => {
     Axios.get(`http://${server_ip}:3001/Display`).then((response) => {
       setDisplayList(response.data);

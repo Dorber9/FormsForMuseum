@@ -38,7 +38,11 @@ const cardShadow = {
   boxShadow: "inset rgb(0 0 0) -2px -1px 14px 2px",
   background: "#ffee9db3",
 };
-
+/**
+ * Variables needed to create display.
+ * @param {*} props
+ * @returns
+ */
 const AddDisplay = (props) => {
   const [name, setName] = useState("");
   const [theme, setTheme] = useState("");

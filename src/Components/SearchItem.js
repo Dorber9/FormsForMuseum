@@ -1,4 +1,11 @@
 /* eslint-disable */
+/**
+ * Component for item's search
+ * Search by query
+ * Serach by ID
+ * Search by photo
+ */
+
 import React from "react";
 import Select from "react-select";
 import Button from "@material-ui/core/Button";
@@ -6,7 +13,6 @@ import { useState, useEffect } from "react";
 import Axios from "axios";
 import Popup from "reactjs-popup";
 import Logo from "../logo_amnon.png";
-
 import "../App.css";
 
 const selectStyles = {
@@ -27,6 +33,12 @@ const selectStyles = {
   }),
 };
 
+/**
+ * Get all items.
+ * Filter by users request.
+ * @param {*} param0 
+ * @returns 
+ */
 const SearchItem = ({ handleClick, currentItem, itemName, quizFlag }) => {
   const [itemsList, setItemsList] = useState([]);
   const [showFlag, setShowFlag] = useState(false);

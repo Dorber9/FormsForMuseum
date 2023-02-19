@@ -1,4 +1,9 @@
 /* eslint-disable */
+
+/**
+ * Modify whole data apart from quests.
+ */
+
 import React from "react";
 import { useState, useEffect } from "react";
 import Select from "react-select";
@@ -43,6 +48,9 @@ const ModifyData = () => {
   const [questionsList, setQuestionsList] = useState([]);
   const [objectName, setObjectName] = useState("");
 
+  /**
+   * Get all database lists by table
+   */
   const getDisplay = () => {
     Axios.get(`http://${server_ip}:3001/Display`).then((response) => {
       setDisplayList(response.data);
@@ -89,6 +97,12 @@ const ModifyData = () => {
     setWantedObject(e);
   };
 
+  /**
+   * Get the specific wanted list based on what the user want to modify
+   * @param {*} id
+   * @param {*} type
+   * @returns
+   */
   const getWantedList = (id, type) => {
     var wanted = "";
     var wantedItem = {};
@@ -163,7 +177,10 @@ const ModifyData = () => {
     getQuestions();
     // eslint-disable-next-line
   }, [selectedObject]);
-
+  /**
+   * Map list into value->label for the Select component
+   * @returns
+   */
   const mapOptions = () => {
     return selectedObject === "Museum"
       ? museumList.map((val, key) => {

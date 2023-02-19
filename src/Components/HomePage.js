@@ -1,8 +1,11 @@
+/**
+ * Web's main window.
+ */
+
 import React from "react";
 import "../App.css";
 import { Container, CardGroup, Card, Button } from "react-bootstrap";
 import Data from "../Images/Data.jpg";
-import Reports from "../Images/Reports.jpg";
 import Course from "../Images/Course.jpg";
 
 const cardShadow = { boxShadow: "0px 0 2px rgb(255 225 140)" };

@@ -179,34 +179,35 @@ const QuestionsQuiz = () => {
     return temp;
   };
 
+  const nextButtonText = "שאלה הבאה"; // set the text for the next button
+
   /**
    * Component's front side
    */
   return (
     <>
-      <Container>
-        {loading ? (
-          <Row>
-            <Col>
+      <div className="quizComp">
+        <Container>
+          {loading ? (
+            <Row>
               <div style={{ position: "center" }} className="spinner-container">
                 <div className="loading-spinner"> Loading...</div>
               </div>
-            </Col>
-          </Row>
-        ) : (
-          <>
-            <div className="quiz">
+            </Row>
+          ) : (
+            <>
+              <div className="quiz">
+                <Row>
+                  <Quiz
+                    quiz={quiz}
+                    continueTillCorrect={true}
+                    showInstantFeedback={true}
+                    shuffle={false}
+                    nextQuestionBtn={nextButtonText} // pass the next button text as a prop
+                  />
+                </Row>
+              </div>
               <Row>
-                <Quiz
-                  quiz={quiz}
-                  continueTillCorrect={true}
-                  showInstantFeedback={true}
-                  shuffle={false}
-                />
-              </Row>
-            </div>
-            <Row>
-              <Col>
                 <div style={{ marginTop: "50px", textAlign: "center" }}>
                   {token === "abc" ? (
                     <QRCode value={`${window.location.href}`} size="150" />
@@ -214,11 +215,11 @@ const QuestionsQuiz = () => {
                     ""
                   )}
                 </div>
-              </Col>
-            </Row>
-          </>
-        )}
-      </Container>
+              </Row>
+            </>
+          )}
+        </Container>
+      </div>
     </>
   );
 };

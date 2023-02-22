@@ -337,8 +337,19 @@ main {
   color: rgb(0, 0, 0);
 }
 
-@media (max-width: 600px) {
-  .quiz {
-    max-width: 35%;
-  }
+.quiz {
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+}
+
+.questionBtnContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.questionBtnContainer button {
+  color: green;
+  width: 100%;
 }

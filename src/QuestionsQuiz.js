@@ -90,9 +90,22 @@ const QuestionsQuiz = () => {
         counter++;
       }
       let quiz = {
-        quizTitle: title, // Change to the relevant one
+        quizTitle: title,
         quizSynopsis: "", // Change to the relevant one
         questions: questionslist,
+        appLocale: {
+          question: "שאלה",
+          startQuizBtn: "התחל מסלול",
+          resultFilterAll: "הכול",
+          resultFilterCorrect: "נכון",
+          resultFilterIncorrect: "לא נכון",
+          prevQuestionBtn: "Prev",
+          nextQuestionBtn: "הבא",
+          resultPageHeaderText:
+            "You have completed the quiz. You got <correctIndexLength> out of <questionLength> questions.",
+          singleSelectionTagText: "",
+          pickNumberOfSelection: "",
+        },
       };
       setQuiz(quiz);
     } catch (error) {

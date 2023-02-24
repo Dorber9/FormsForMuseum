@@ -353,3 +353,7 @@ main {
   color: green;
   width: 100%;
 }
+
+.tag-container {
+  display: none;
+}

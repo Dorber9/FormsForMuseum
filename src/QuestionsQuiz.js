@@ -85,7 +85,9 @@ const QuestionsQuiz = () => {
           buildQuestion(response.data[0], images[counter - 1])
         );
         if (counter !== showCasesIds.length) {
-          questionslist.push(buildNextItem(showCasesIds[counter]));
+          questionslist.push(
+            buildNextItem(showCasesIds[counter], response.data[0].Clue)
+          );
         }
         counter++;
       }
@@ -127,7 +129,7 @@ const QuestionsQuiz = () => {
       answers: ["", "", "", ""],
       correctAnswer: "3",
       questionPic: image ? image : Logo,
-      messageForCorrectAnswer: `:תשובה נכונה כל הכבוד! הרמז לפריט הבא הוא`,
+      messageForCorrectAnswer: `תשובה נכונה כל הכבוד!\n הרמז לפריט הבא הוא:`,
       messageForIncorrectAnswer: `תשובה לא נכונה, נסו שוב`,
       explanation: data.Clue,
       point: "20",
@@ -143,7 +145,7 @@ const QuestionsQuiz = () => {
     return temp;
   };
 
-  const buildNextItem = (item) => {
+  const buildNextItem = (item, clue) => {
     let ShowcaseID = item;
 
     let numberTwo = 0;
@@ -174,7 +176,7 @@ const QuestionsQuiz = () => {
       messageForIncorrectAnswer: `תשובה לא נכונה, נסו שוב!`,
       point: "20",
     };
-    temp.question = "הויטרינה של הפריט הבא היא: ";
+    temp.question = ` \nבהתבסס על הרמז \n${clue}הויטרינה של הפריט הבא היא: `;
     let answers = [];
     answers.push(numberTwo);
     answers.push(numberThree);

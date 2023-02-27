@@ -103,10 +103,11 @@ const QuestionsQuiz = () => {
           resultFilterIncorrect: "לא נכון",
           prevQuestionBtn: "Prev",
           nextQuestionBtn: "הבא",
-          resultPageHeaderText:
-            "You have completed the quiz. You got <correctIndexLength> out of <questionLength> questions.",
+          resultPageHeaderText: `השלמת את המסלול! \n ענית נכון על <correctIndexLength>/<questionLength>`,
           singleSelectionTagText: "",
           pickNumberOfSelection: "",
+          landingHeaderText: `מסלול זה מכיל <questionLength> שאלות`,
+          resultPagePoint: "סך הנקודות שלך הוא <correctPoints>/<totalPoints>",
         },
       };
       setQuiz(quiz);
